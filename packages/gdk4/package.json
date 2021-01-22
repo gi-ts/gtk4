@@ -1,0 +1,46 @@
+{
+    "name": "@gi-types/gdk",
+    "publishConfig": {
+        "access": "public",
+        "tag": "latest"
+    },
+    "version": "4.0.6",
+    "description": "TypeScript definitions for Gdk",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Evan Welsh",
+            "url": "https://gitlab.gnome.org/ewlsh/",
+            "githubUsername": "ewlsh"
+        }
+    ],
+    "main": "",
+    "files": [
+        "index.d.ts",
+        "doc.json",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
+        "directory": "packages/gdk4"
+    },
+    "scripts": {},
+    "contentHash": "93a77e0eb5dc4936bebe0c26f41744c0",
+    "dependencies": {
+        "@gi-types/graphene": "^1.0.0"
+    },
+    "peerDependencies": {
+        "@gi-types/cairo": "*",
+        "@gi-types/gdkpixbuf": "*",
+        "@gi-types/gio": "*",
+        "@gi-types/glib": "*",
+        "@gi-types/gobject": "*",
+        "@gi-types/pango": "*"
+    },
+    "typeScriptVersion": "4.1",
+    "gitHead": null
+}
