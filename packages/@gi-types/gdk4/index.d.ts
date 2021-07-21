@@ -4,13 +4,12 @@
  * Generated from 4.0
  */
 
-import * as GdkPixbuf from "@gi-types/gdkpixbuf";
-import * as Gio from "@gi-types/gio";
-import * as Graphene from "@gi-types/graphene";
-import * as Pango from "@gi-types/pango";
-import * as cairo from "@gi-types/cairo";
-import * as GObject from "@gi-types/gobject";
-import * as GLib from "@gi-types/glib";
+import * as GObject from "@gi-types/gobject2";
+import * as Gio from "@gi-types/gio2";
+import * as cairo from "@gi-types/cairo1";
+import * as GdkPixbuf from "@gi-types/gdkpixbuf2";
+import * as GLib from "@gi-types/glib2";
+import * as Pango from "@gi-types/pango1";
 
 export const ACTION_ALL: number;
 export const BUTTON_MIDDLE: number;
@@ -2343,7 +2342,7 @@ export function content_deserialize_async(
     cancellable?: Gio.Cancellable | null,
     callback?: Gio.AsyncReadyCallback<Gio.InputStream> | null
 ): Promise<boolean> | void;
-export function content_deserialize_finish(result: Gio.AsyncResult, value: any): boolean;
+export function content_deserialize_finish(result: Gio.AsyncResult, value: GObject.Value | any): boolean;
 export function content_register_deserializer(
     mime_type: string,
     type: GObject.GType,
@@ -2357,14 +2356,14 @@ export function content_register_serializer(
 export function content_serialize_async(
     stream: Gio.OutputStream,
     mime_type: string,
-    value: any,
+    value: GObject.Value | any,
     io_priority: number,
     cancellable?: Gio.Cancellable | null
 ): Promise<boolean>;
 export function content_serialize_async(
     stream: Gio.OutputStream,
     mime_type: string,
-    value: any,
+    value: GObject.Value | any,
     io_priority: number,
     cancellable: Gio.Cancellable | null,
     callback: Gio.AsyncReadyCallback<Gio.OutputStream> | null
@@ -2372,7 +2371,7 @@ export function content_serialize_async(
 export function content_serialize_async(
     stream: Gio.OutputStream,
     mime_type: string,
-    value: any,
+    value: GObject.Value | any,
     io_priority: number,
     cancellable?: Gio.Cancellable | null,
     callback?: Gio.AsyncReadyCallback<Gio.OutputStream> | null
@@ -2531,7 +2530,7 @@ export class GLError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: GLError);
 
-    // Properties
+    // Fields
     static NOT_AVAILABLE: number;
     static UNSUPPORTED_FORMAT: number;
     static UNSUPPORTED_PROFILE: number;
@@ -2670,7 +2669,7 @@ export class VulkanError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: VulkanError);
 
-    // Properties
+    // Fields
     static UNSUPPORTED: number;
     static NOT_AVAILABLE: number;
 
@@ -2816,12 +2815,13 @@ export class AppLaunchContext extends Gio.AppLaunchContext {
     _init(properties?: Partial<AppLaunchContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Display;
+    get display(): Display;
 
     // Members
 
     get_display(): Display;
-    get_display(...args: never[]): never;
+    // Conflicted with Gio.AppLaunchContext.get_display
+    get_display(...args: never[]): any;
     set_desktop(desktop: number): void;
     set_icon(icon?: Gio.Icon | null): void;
     set_icon_name(icon_name?: string | null): void;
@@ -2873,10 +2873,10 @@ export class Clipboard extends GObject.Object {
     _init(properties?: Partial<Clipboard.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    content: ContentProvider;
-    display: Display;
-    formats: ContentFormats;
-    local: boolean;
+    get content(): ContentProvider;
+    get display(): Display;
+    get formats(): ContentFormats;
+    get local(): boolean;
 
     // Signals
 
@@ -2944,8 +2944,9 @@ export class Clipboard extends GObject.Object {
     ): Promise<GObject.Value> | void;
     read_value_finish(result: Gio.AsyncResult): unknown;
     set_content(provider?: ContentProvider | null): boolean;
-    set(value: any): void;
-    set(...args: never[]): never;
+    set(value: GObject.Value | any): void;
+    // Conflicted with GObject.Object.set
+    set(...args: never[]): any;
     store_async(io_priority: number, cancellable?: Gio.Cancellable | null): Promise<boolean>;
     store_async(
         io_priority: number,
@@ -3008,9 +3009,9 @@ export class ContentProvider extends GObject.Object {
     _init(properties?: Partial<ContentProvider.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    formats: ContentFormats;
-    storable_formats: ContentFormats;
-    storableFormats: ContentFormats;
+    get formats(): ContentFormats;
+    get storable_formats(): ContentFormats;
+    get storableFormats(): ContentFormats;
 
     // Signals
 
@@ -3024,13 +3025,13 @@ export class ContentProvider extends GObject.Object {
     // Constructors
 
     static new_for_bytes(mime_type: string, bytes: GLib.Bytes | Uint8Array): ContentProvider;
-    static new_for_value(value: any): ContentProvider;
+    static new_for_value(value: GObject.Value | any): ContentProvider;
     static new_union(providers?: ContentProvider[] | null): ContentProvider;
 
     // Members
 
     content_changed(): void;
-    get_value(value: any): boolean;
+    get_value(value: GObject.Value | any): boolean;
     ref_formats(): ContentFormats;
     ref_storable_formats(): ContentFormats;
     write_mime_type_async(
@@ -3057,7 +3058,7 @@ export class ContentProvider extends GObject.Object {
     vfunc_attach_clipboard(clipboard: Clipboard): void;
     vfunc_content_changed(): void;
     vfunc_detach_clipboard(clipboard: Clipboard): void;
-    vfunc_get_value(value: any): boolean;
+    vfunc_get_value(value: GObject.Value | any): boolean;
     vfunc_ref_formats(): ContentFormats;
     vfunc_ref_storable_formats(): ContentFormats;
     vfunc_write_mime_type_async(
@@ -3152,13 +3153,13 @@ export class Cursor extends GObject.Object {
     _init(properties?: Partial<Cursor.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    fallback: Cursor;
-    hotspot_x: number;
-    hotspotX: number;
-    hotspot_y: number;
-    hotspotY: number;
-    name: string;
-    texture: Texture;
+    get fallback(): Cursor;
+    get hotspot_x(): number;
+    get hotspotX(): number;
+    get hotspot_y(): number;
+    get hotspotY(): number;
+    get name(): string;
+    get texture(): Texture;
 
     // Constructors
 
@@ -3237,32 +3238,33 @@ export abstract class Device extends GObject.Object {
     _init(properties?: Partial<Device.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    caps_lock_state: boolean;
-    capsLockState: boolean;
-    direction: Pango.Direction;
-    display: Display;
-    has_bidi_layouts: boolean;
-    hasBidiLayouts: boolean;
-    has_cursor: boolean;
-    hasCursor: boolean;
-    modifier_state: ModifierType;
-    modifierState: ModifierType;
-    n_axes: number;
-    nAxes: number;
-    name: string;
-    num_lock_state: boolean;
-    numLockState: boolean;
-    num_touches: number;
-    numTouches: number;
-    product_id: string;
-    productId: string;
-    scroll_lock_state: boolean;
-    scrollLockState: boolean;
-    seat: Seat;
-    source: InputSource;
-    tool: DeviceTool;
-    vendor_id: string;
-    vendorId: string;
+    get caps_lock_state(): boolean;
+    get capsLockState(): boolean;
+    get direction(): Pango.Direction;
+    get display(): Display;
+    get has_bidi_layouts(): boolean;
+    get hasBidiLayouts(): boolean;
+    get has_cursor(): boolean;
+    get hasCursor(): boolean;
+    get modifier_state(): ModifierType;
+    get modifierState(): ModifierType;
+    get n_axes(): number;
+    get nAxes(): number;
+    get name(): string;
+    get num_lock_state(): boolean;
+    get numLockState(): boolean;
+    get num_touches(): number;
+    get numTouches(): number;
+    get product_id(): string;
+    get productId(): string;
+    get scroll_lock_state(): boolean;
+    get scrollLockState(): boolean;
+    get seat(): Seat;
+    set seat(val: Seat);
+    get source(): InputSource;
+    get tool(): DeviceTool;
+    get vendor_id(): string;
+    get vendorId(): string;
 
     // Signals
 
@@ -3292,6 +3294,7 @@ export abstract class Device extends GObject.Object {
     get_seat(): Seat;
     get_source(): InputSource;
     get_surface_at_position(): [Surface | null, number | null, number | null];
+    get_timestamp(): number;
     get_vendor_id(): string | null;
 }
 export module DeviceTool {
@@ -3312,12 +3315,12 @@ export class DeviceTool extends GObject.Object {
     _init(properties?: Partial<DeviceTool.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    axes: AxisFlags;
-    hardware_id: number;
-    hardwareId: number;
-    serial: number;
-    tool_type: DeviceToolType;
-    toolType: DeviceToolType;
+    get axes(): AxisFlags;
+    get hardware_id(): number;
+    get hardwareId(): number;
+    get serial(): number;
+    get tool_type(): DeviceToolType;
+    get toolType(): DeviceToolType;
 
     // Members
 
@@ -3342,10 +3345,10 @@ export class Display extends GObject.Object {
     _init(properties?: Partial<Display.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    composited: boolean;
-    input_shapes: boolean;
-    inputShapes: boolean;
-    rgba: boolean;
+    get composited(): boolean;
+    get input_shapes(): boolean;
+    get inputShapes(): boolean;
+    get rgba(): boolean;
 
     // Signals
 
@@ -3381,7 +3384,7 @@ export class Display extends GObject.Object {
     get_monitors(): Gio.ListModel;
     get_name(): string;
     get_primary_clipboard(): Clipboard;
-    get_setting(name: string, value: any): boolean;
+    get_setting(name: string, value: GObject.Value | any): boolean;
     get_startup_notification_id(): string | null;
     is_closed(): boolean;
     is_composited(): boolean;
@@ -3415,8 +3418,10 @@ export class DisplayManager extends GObject.Object {
     _init(properties?: Partial<DisplayManager.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    default_display: Display;
-    defaultDisplay: Display;
+    get default_display(): Display;
+    set default_display(val: Display);
+    get defaultDisplay(): Display;
+    set defaultDisplay(val: Display);
 
     // Signals
 
@@ -3455,14 +3460,17 @@ export abstract class Drag extends GObject.Object {
     _init(properties?: Partial<Drag.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    actions: DragAction;
-    content: ContentProvider;
-    device: Device;
-    display: Display;
-    formats: ContentFormats;
-    selected_action: DragAction;
-    selectedAction: DragAction;
-    surface: Surface;
+    get actions(): DragAction;
+    set actions(val: DragAction);
+    get content(): ContentProvider;
+    get device(): Device;
+    get display(): Display;
+    get formats(): ContentFormats;
+    get selected_action(): DragAction;
+    set selected_action(val: DragAction);
+    get selectedAction(): DragAction;
+    set selectedAction(val: DragAction);
+    get surface(): Surface;
 
     // Signals
 
@@ -3514,8 +3522,8 @@ export abstract class DrawContext extends GObject.Object {
     _init(properties?: Partial<DrawContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Display;
-    surface: Surface;
+    get display(): Display;
+    get surface(): Surface;
 
     // Members
 
@@ -3544,12 +3552,12 @@ export abstract class Drop extends GObject.Object {
     _init(properties?: Partial<Drop.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    actions: DragAction;
-    device: Device;
-    display: Display;
-    drag: Drag;
-    formats: ContentFormats;
-    surface: Surface;
+    get actions(): DragAction;
+    get device(): Device;
+    get display(): Display;
+    get drag(): Drag;
+    get formats(): ContentFormats;
+    get surface(): Surface;
 
     // Members
 
@@ -3712,8 +3720,8 @@ export abstract class GLContext extends DrawContext {
     _init(properties?: Partial<GLContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    shared_context: GLContext;
-    sharedContext: GLContext;
+    get shared_context(): GLContext;
+    get sharedContext(): GLContext;
 
     // Members
 
@@ -3887,22 +3895,22 @@ export class Monitor extends GObject.Object {
     _init(properties?: Partial<Monitor.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    connector: string;
-    display: Display;
-    geometry: Rectangle;
-    height_mm: number;
-    heightMm: number;
-    manufacturer: string;
-    model: string;
-    refresh_rate: number;
-    refreshRate: number;
-    scale_factor: number;
-    scaleFactor: number;
-    subpixel_layout: SubpixelLayout;
-    subpixelLayout: SubpixelLayout;
-    valid: boolean;
-    width_mm: number;
-    widthMm: number;
+    get connector(): string;
+    get display(): Display;
+    get geometry(): Rectangle;
+    get height_mm(): number;
+    get heightMm(): number;
+    get manufacturer(): string;
+    get model(): string;
+    get refresh_rate(): number;
+    get refreshRate(): number;
+    get scale_factor(): number;
+    get scaleFactor(): number;
+    get subpixel_layout(): SubpixelLayout;
+    get subpixelLayout(): SubpixelLayout;
+    get valid(): boolean;
+    get width_mm(): number;
+    get widthMm(): number;
 
     // Signals
 
@@ -3996,7 +4004,7 @@ export abstract class Seat extends GObject.Object {
     _init(properties?: Partial<Seat.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Display;
+    get display(): Display;
 
     // Signals
 
@@ -4057,15 +4065,16 @@ export abstract class Surface extends GObject.Object {
     _init(properties?: Partial<Surface.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    cursor: Cursor;
-    display: Display;
-    frame_clock: FrameClock;
-    frameClock: FrameClock;
-    height: number;
-    mapped: boolean;
-    scale_factor: number;
-    scaleFactor: number;
-    width: number;
+    get cursor(): Cursor;
+    set cursor(val: Cursor);
+    get display(): Display;
+    get frame_clock(): FrameClock;
+    get frameClock(): FrameClock;
+    get height(): number;
+    get mapped(): boolean;
+    get scale_factor(): number;
+    get scaleFactor(): number;
+    get width(): number;
 
     // Signals
 
@@ -4118,7 +4127,7 @@ export abstract class Surface extends GObject.Object {
     set_device_cursor(device: Device, cursor: Cursor): void;
     set_input_region(region: cairo.Region): void;
     set_opaque_region(region?: cairo.Region | null): void;
-    translate_coordinates(to: Surface, x: number, y: number): boolean;
+    translate_coordinates(to: Surface, x: number, y: number): [boolean, number, number];
 }
 export module Texture {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -4134,8 +4143,8 @@ export abstract class Texture extends GObject.Object implements Paintable {
     _init(properties?: Partial<Texture.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    height: number;
-    width: number;
+    get height(): number;
+    get width(): number;
 
     // Constructors
 
@@ -4247,7 +4256,7 @@ export class ContentFormats {
     contain_gtype(type: GObject.GType): boolean;
     contain_mime_type(mime_type: string): boolean;
     get_gtypes(): GObject.GType[] | null;
-    get_mime_types(): [string[] | null, number | null];
+    get_mime_types(): string[] | null;
     match(second: ContentFormats): boolean;
     match_gtype(second: ContentFormats): GObject.GType;
     match_mime_type(second: ContentFormats): string | null;
@@ -4278,12 +4287,6 @@ export class ContentFormatsBuilder {
     ref(): ContentFormatsBuilder;
     to_formats(): ContentFormats;
     unref(): void;
-}
-
-export class DrawingContext {
-    static $gtype: GObject.GType<DrawingContext>;
-
-    constructor(copy: DrawingContext);
 }
 
 export class EventSequence {
@@ -4348,12 +4351,14 @@ export class PopupLayout {
     get_anchor_rect(): Rectangle;
     get_offset(): [number, number];
     get_rect_anchor(): Gravity;
+    get_shadow_width(): [number, number, number, number];
     get_surface_anchor(): Gravity;
     ref(): PopupLayout;
     set_anchor_hints(anchor_hints: AnchorHints): void;
     set_anchor_rect(anchor_rect: Rectangle): void;
     set_offset(dx: number, dy: number): void;
     set_rect_anchor(anchor: Gravity): void;
+    set_shadow_width(left: number, right: number, top: number, bottom: number): void;
     set_surface_anchor(anchor: Gravity): void;
     unref(): void;
 }
@@ -4422,7 +4427,6 @@ export class TimeCoord {
     // Fields
     time: number;
     flags: AxisFlags;
-    axes: number[];
 }
 
 export class ToplevelLayout {
@@ -4530,7 +4534,7 @@ export interface PopupNamespace {
 export type Popup = PopupPrototype;
 export interface PopupPrototype extends Surface {
     // Properties
-    autohide: boolean;
+    readonly autohide: boolean;
 
     // Members
 
@@ -4559,11 +4563,11 @@ export interface ToplevelPrototype extends Surface {
     icon_list: any;
     iconList: any;
     modal: boolean;
-    shortcuts_inhibited: boolean;
-    shortcutsInhibited: boolean;
+    readonly shortcuts_inhibited: boolean;
+    readonly shortcutsInhibited: boolean;
     startup_id: string;
     startupId: string;
-    state: ToplevelState;
+    readonly state: ToplevelState;
     title: string;
     transient_for: Surface;
     transientFor: Surface;

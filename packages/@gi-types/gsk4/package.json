@@ -1,16 +1,16 @@
 {
-    "name": "@gi-types/gsk",
+    "name": "@gi-types/gsk4",
     "publishConfig": {
         "access": "public",
         "tag": "latest"
     },
-    "version": "4.0.1",
+    "version": "4.0.0",
     "description": "TypeScript definitions for Gsk",
     "license": "MIT",
     "contributors": [
         {
             "name": "Evan Welsh",
-            "url": "https://gitlab.gnome.org/ewlsh/",
+            "url": "https://github.com/ewlsh/",
             "githubUsername": "ewlsh"
         }
     ],
@@ -25,20 +25,17 @@
     "types": "index.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.gnome.org/ewlsh/packages.gi.ts.git",
-        "directory": "packages/gsk4"
+        "url": "https://github.com/gi-ts/gtk4",
+        "directory": "packages/@gi-types/gsk4"
     },
     "scripts": {},
-    "contentHash": "c252e35fd1ba0be97d601758e64628ab",
     "dependencies": {
-        "@gi-types/gdk": "^4.0.6",
-        "@gi-types/graphene": "^1.0.0"
-    },
-    "peerDependencies": {
-        "@gi-types/cairo": "*",
-        "@gi-types/glib": "*",
-        "@gi-types/gobject": "*",
-        "@gi-types/pango": "*"
+        "@gi-types/cairo1": "^1.0.0",
+        "@gi-types/gdk4": "^4.0.0",
+        "@gi-types/glib2": "^2.68.0",
+        "@gi-types/gobject2": "^2.68.0",
+        "@gi-types/graphene1": "^1.0.0",
+        "@gi-types/pango1": "^1.0.0"
     },
     "typeScriptVersion": "4.1",
     "gitHead": null

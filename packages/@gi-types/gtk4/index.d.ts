@@ -1,18 +1,18 @@
 /**
  * Gtk 4.0
  *
- * Generated from 4.0.2
+ * Generated from 4.2.1
  */
 
-import * as Gdk from "@gi-types/gdk";
-import * as Gsk from "@gi-types/gsk";
-import * as Gio from "@gi-types/gio";
-import * as GObject from "@gi-types/gobject";
-import * as GLib from "@gi-types/glib";
-import * as Pango from "@gi-types/pango";
-import * as cairo from "@gi-types/cairo";
-import * as GdkPixbuf from "@gi-types/gdkpixbuf";
-import * as Graphene from "@gi-types/graphene";
+import * as Gio from "@gi-types/gio2";
+import * as GObject from "@gi-types/gobject2";
+import * as Gdk from "@gi-types/gdk4";
+import * as GLib from "@gi-types/glib2";
+import * as Pango from "@gi-types/pango1";
+import * as cairo from "@gi-types/cairo1";
+import * as Gsk from "@gi-types/gsk4";
+import * as GdkPixbuf from "@gi-types/gdkpixbuf2";
+import * as Graphene from "@gi-types/graphene1";
 
 export const ACCESSIBLE_VALUE_UNDEFINED: number;
 export const BINARY_AGE: number;
@@ -96,9 +96,9 @@ export function accelerator_parse_with_keycode(
     display?: Gdk.Display | null
 ): [boolean, number | null, number[] | null, Gdk.ModifierType | null];
 export function accelerator_valid(keyval: number, modifiers: Gdk.ModifierType): boolean;
-export function accessible_property_init_value(property: AccessibleProperty, value: any): void;
-export function accessible_relation_init_value(relation: AccessibleRelation, value: any): void;
-export function accessible_state_init_value(state: AccessibleState, value: any): void;
+export function accessible_property_init_value(property: AccessibleProperty, value: GObject.Value | any): void;
+export function accessible_relation_init_value(relation: AccessibleRelation, value: GObject.Value | any): void;
+export function accessible_state_init_value(state: AccessibleState, value: GObject.Value | any): void;
 export function bitset_iter_init_at(set: Bitset, target: number): [boolean, BitsetIter, number | null];
 export function bitset_iter_init_first(set: Bitset): [boolean, BitsetIter, number | null];
 export function bitset_iter_init_last(set: Bitset): [boolean, BitsetIter, number | null];
@@ -108,24 +108,21 @@ export function constraint_vfl_parser_error_quark(): GLib.Quark;
 export function css_parser_error_quark(): GLib.Quark;
 export function css_parser_warning_quark(): GLib.Quark;
 export function disable_setlocale(): void;
-export function distribute_natural_allocation(
-    extra_space: number,
-    n_requested_sizes: number,
-    sizes: RequestedSize
-): number;
+export function distribute_natural_allocation(extra_space: number, sizes: RequestedSize[]): number;
 export function editable_delegate_get_property(
     object: GObject.Object,
     prop_id: number,
-    value: any,
+    value: GObject.Value | any,
     pspec: GObject.ParamSpec
 ): boolean;
 export function editable_delegate_set_property(
     object: GObject.Object,
     prop_id: number,
-    value: any,
+    value: GObject.Value | any,
     pspec: GObject.ParamSpec
 ): boolean;
 export function editable_install_properties(object_class: GObject.Object, first_prop: number): number;
+export function enumerate_printers(func: PrinterFunc, wait: boolean): void;
 export function file_chooser_error_quark(): GLib.Quark;
 export function get_binary_age(): number;
 export function get_debug_flags(): DebugFlags;
@@ -137,11 +134,11 @@ export function get_micro_version(): number;
 export function get_minor_version(): number;
 export function hsv_to_rgb(h: number, s: number, v: number): [number, number, number];
 export function icon_theme_error_quark(): GLib.Quark;
-export function im_modules_init(): void;
 export function init(): void;
 export function init_check(): boolean;
 export function is_initialized(): boolean;
 export function native_get_for_surface(surface: Gdk.Surface): Native;
+export function ordering_from_cmpfunc(cmpfunc_result: number): Ordering;
 export function paper_size_get_default(): string;
 export function paper_size_get_paper_sizes(include_custom: boolean): PaperSize[];
 export function param_spec_expression(
@@ -279,13 +276,13 @@ export function test_list_all_types(): GObject.GType[];
 export function test_register_all_types(): void;
 export function test_widget_wait_for_draw(widget: Widget): void;
 export function tree_create_row_drag_content(tree_model: TreeModel, path: TreePath): Gdk.ContentProvider;
-export function tree_get_row_drag_data(value: any): [boolean, TreeModel | null, TreePath | null];
+export function tree_get_row_drag_data(value: GObject.Value | any): [boolean, TreeModel | null, TreePath | null];
 export function tree_row_reference_deleted(proxy: GObject.Object, path: TreePath): void;
 export function tree_row_reference_inserted(proxy: GObject.Object, path: TreePath): void;
-export function value_dup_expression(value: any): Expression | null;
-export function value_get_expression(value: any): Expression | null;
-export function value_set_expression(value: any, expression: Expression): void;
-export function value_take_expression(value: any, expression?: Expression | null): void;
+export function value_dup_expression(value: GObject.Value | any): Expression | null;
+export function value_get_expression(value: GObject.Value | any): Expression | null;
+export function value_set_expression(value: GObject.Value | any, expression: Expression): void;
+export function value_take_expression(value: GObject.Value | any, expression?: Expression | null): void;
 export type AssistantPageFunc = (current_page: number) => number;
 export type CellAllocCallback = (
     renderer: CellRenderer,
@@ -300,27 +297,29 @@ export type CellLayoutDataFunc = (
     iter: TreeIter
 ) => void;
 export type CustomAllocateFunc = (widget: Widget, width: number, height: number, baseline: number) => void;
-export type CustomFilterFunc = (item: A) => boolean;
+export type CustomFilterFunc<A = GObject.Object> = (item: A) => boolean;
 export type CustomMeasureFunc = (widget: Widget, orientation: Orientation, for_size: number) => void;
 export type CustomRequestModeFunc = (widget: Widget) => SizeRequestMode;
 export type DrawingAreaDrawFunc = (drawing_area: DrawingArea, cr: cairo.Context, width: number, height: number) => void;
 export type EntryCompletionMatchFunc = (completion: EntryCompletion, key: string, iter: TreeIter) => boolean;
 export type ExpressionNotify = () => void;
-export type FlowBoxCreateWidgetFunc = (item: A) => Widget;
+export type FlowBoxCreateWidgetFunc<A = GObject.Object> = (item: A) => Widget;
 export type FlowBoxFilterFunc = (child: FlowBoxChild) => boolean;
 export type FlowBoxForeachFunc = (box: FlowBox, child: FlowBoxChild) => void;
 export type FlowBoxSortFunc = (child1: FlowBoxChild, child2: FlowBoxChild) => number;
 export type FontFilterFunc = (family: Pango.FontFamily, face: Pango.FontFace) => boolean;
 export type IconViewForeachFunc = (icon_view: IconView, path: TreePath) => void;
-export type ListBoxCreateWidgetFunc = (item: A) => Widget;
+export type ListBoxCreateWidgetFunc<A = GObject.Object> = (item: A) => Widget;
 export type ListBoxFilterFunc = (row: ListBoxRow) => boolean;
 export type ListBoxForeachFunc = (box: ListBox, row: ListBoxRow) => void;
 export type ListBoxSortFunc = (row1: ListBoxRow, row2: ListBoxRow) => number;
 export type ListBoxUpdateHeaderFunc = (row: ListBoxRow, before?: ListBoxRow | null) => void;
-export type MapListModelMapFunc = (item: A) => GObject.Object;
+export type MapListModelMapFunc<A = GObject.Object> = (item: A) => GObject.Object;
 export type MenuButtonCreatePopupFunc = (menu_button: MenuButton) => void;
 export type PageSetupDoneFunc = (page_setup: PageSetup) => void;
+export type PrintJobCompleteFunc = (print_job: PrintJob, error: GLib.Error) => void;
 export type PrintSettingsFunc = (key: string, value: string) => void;
+export type PrinterFunc = (printer: Printer) => boolean;
 export type ScaleFormatValueFunc = (scale: Scale, value: number) => string;
 export type ShortcutFunc = (widget: Widget, args?: GLib.Variant | null) => boolean;
 export type TextCharPredicate = (ch: number) => boolean;
@@ -333,7 +332,7 @@ export type TreeCellDataFunc = (
     iter: TreeIter
 ) => void;
 export type TreeIterCompareFunc = (model: TreeModel, a: TreeIter, b: TreeIter) => number;
-export type TreeListModelCreateModelFunc = (item: A) => Gio.ListModel | null;
+export type TreeListModelCreateModelFunc<A = GObject.Object> = (item: A) => Gio.ListModel | null;
 export type TreeModelFilterModifyFunc = (model: TreeModel, iter: TreeIter, column: number) => void;
 export type TreeModelFilterVisibleFunc = (model: TreeModel, iter: TreeIter) => boolean;
 export type TreeModelForeachFunc = (model: TreeModel, path: TreePath, iter: TreeIter) => boolean;
@@ -620,7 +619,7 @@ export class BuilderError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: BuilderError);
 
-    // Properties
+    // Fields
     static INVALID_TYPE_FUNCTION: number;
     static UNHANDLED_TAG: number;
     static MISSING_ATTRIBUTE: number;
@@ -719,7 +718,7 @@ export class ConstraintVflParserError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: ConstraintVflParserError);
 
-    // Properties
+    // Fields
     static SYMBOL: number;
     static ATTRIBUTE: number;
     static VIEW: number;
@@ -748,7 +747,7 @@ export class CssParserError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: CssParserError);
 
-    // Properties
+    // Fields
     static FAILED: number;
     static SYNTAX: number;
     static IMPORT: number;
@@ -845,7 +844,7 @@ export class FileChooserError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: FileChooserError);
 
-    // Properties
+    // Fields
     static NONEXISTENT: number;
     static BAD_FILENAME: number;
     static ALREADY_EXISTS: number;
@@ -891,7 +890,7 @@ export class IconThemeError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: IconThemeError);
 
-    // Properties
+    // Fields
     static NOT_FOUND: number;
     static FAILED: number;
 
@@ -1156,7 +1155,7 @@ export class PrintError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: PrintError);
 
-    // Properties
+    // Fields
     static GENERAL: number;
     static INTERNAL_ERROR: number;
     static NOMEM: number;
@@ -1252,7 +1251,7 @@ export class RecentManagerError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: RecentManagerError);
 
-    // Properties
+    // Fields
     static NOT_FOUND: number;
     static INVALID_URI: number;
     static INVALID_ENCODING: number;
@@ -1670,6 +1669,7 @@ export enum DebugFlags {
     CONSTRAINTS = 32768,
     BUILDER_OBJECTS = 65536,
     A11Y = 131072,
+    ICONFALLBACK = 262144,
 }
 
 export namespace DialogFlags {
@@ -1755,6 +1755,23 @@ export enum PopoverMenuFlags {
     NESTED = 1,
 }
 
+export namespace PrintCapabilities {
+    export const $gtype: GObject.GType<PrintCapabilities>;
+}
+
+export enum PrintCapabilities {
+    PAGE_SET = 1,
+    COPIES = 2,
+    COLLATE = 4,
+    REVERSE = 8,
+    SCALE = 16,
+    GENERATE_PDF = 32,
+    GENERATE_PS = 64,
+    PREVIEW = 128,
+    NUMBER_UP = 256,
+    NUMBER_UP_LAYOUT = 512,
+}
+
 export namespace ShortcutActionFlags {
     export const $gtype: GObject.GType<ShortcutActionFlags>;
 }
@@ -1831,10 +1848,13 @@ export abstract class ATContext extends GObject.Object {
     _init(properties?: Partial<ATContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accessible: Accessible;
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    display: Gdk.Display;
+    get accessible(): Accessible;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get display(): Gdk.Display;
+    set display(val: Gdk.Display);
 
     // Signals
 
@@ -1884,36 +1904,60 @@ export module AboutDialog {
 }
 export class AboutDialog
     extends Window
-    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<AboutDialog>;
 
     constructor(properties?: Partial<AboutDialog.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<AboutDialog.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    artists: string[];
-    authors: string[];
-    comments: string;
-    copyright: string;
-    documenters: string[];
-    license: string;
-    license_type: License;
-    licenseType: License;
-    logo: Gdk.Paintable;
-    logo_icon_name: string;
-    logoIconName: string;
-    program_name: string;
-    programName: string;
-    system_information: string;
-    systemInformation: string;
-    translator_credits: string;
-    translatorCredits: string;
-    version: string;
-    website: string;
-    website_label: string;
-    websiteLabel: string;
-    wrap_license: boolean;
-    wrapLicense: boolean;
+    get artists(): string[];
+    set artists(val: string[]);
+    get authors(): string[];
+    set authors(val: string[]);
+    get comments(): string;
+    set comments(val: string);
+    get copyright(): string;
+    set copyright(val: string);
+    get documenters(): string[];
+    set documenters(val: string[]);
+    get license(): string;
+    set license(val: string);
+    get license_type(): License;
+    set license_type(val: License);
+    get licenseType(): License;
+    set licenseType(val: License);
+    get logo(): Gdk.Paintable;
+    set logo(val: Gdk.Paintable);
+    get logo_icon_name(): string;
+    set logo_icon_name(val: string);
+    get logoIconName(): string;
+    set logoIconName(val: string);
+    get program_name(): string;
+    set program_name(val: string);
+    get programName(): string;
+    set programName(val: string);
+    get system_information(): string;
+    set system_information(val: string);
+    get systemInformation(): string;
+    set systemInformation(val: string);
+    get translator_credits(): string;
+    set translator_credits(val: string);
+    get translatorCredits(): string;
+    set translatorCredits(val: string);
+    get version(): string;
+    set version(val: string);
+    get website(): string;
+    set website(val: string);
+    get website_label(): string;
+    set website_label(val: string);
+    get websiteLabel(): string;
+    set websiteLabel(val: string);
+    get wrap_license(): boolean;
+    set wrap_license(val: boolean);
+    get wrapLicense(): boolean;
+    set wrapLicense(val: boolean);
 
     // Signals
 
@@ -1923,11 +1967,6 @@ export class AboutDialog
     connect(signal: "activate-link", callback: (_source: this, uri: string) => boolean): number;
     connect_after(signal: "activate-link", callback: (_source: this, uri: string) => boolean): number;
     emit(signal: "activate-link", uri: string): void;
-
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
 
     // Constructors
 
@@ -1961,7 +2000,7 @@ export class AboutDialog
     set_license_type(license_type: License): void;
     set_logo(logo?: Gdk.Paintable | null): void;
     set_logo_icon_name(icon_name?: string | null): void;
-    set_program_name(name: string): void;
+    set_program_name(name?: string | null): void;
     set_system_information(system_information?: string | null): void;
     set_translator_credits(translator_credits?: string | null): void;
     set_version(version?: string | null): void;
@@ -1971,27 +2010,6 @@ export class AboutDialog
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -2016,12 +2034,15 @@ export class ActionBar extends Widget implements Accessible, Buildable, Constrai
     _init(properties?: Partial<ActionBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    revealed: boolean;
+    get revealed(): boolean;
+    set revealed(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -2058,7 +2079,7 @@ export class ActionBar extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ActivateAction {
@@ -2097,15 +2118,24 @@ export class Adjustment extends GObject.InitiallyUnowned {
     _init(properties?: Partial<Adjustment.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    lower: number;
-    page_increment: number;
-    pageIncrement: number;
-    page_size: number;
-    pageSize: number;
-    step_increment: number;
-    stepIncrement: number;
-    upper: number;
-    value: number;
+    get lower(): number;
+    set lower(val: number);
+    get page_increment(): number;
+    set page_increment(val: number);
+    get pageIncrement(): number;
+    set pageIncrement(val: number);
+    get page_size(): number;
+    set page_size(val: number);
+    get pageSize(): number;
+    set pageSize(val: number);
+    get step_increment(): number;
+    set step_increment(val: number);
+    get stepIncrement(): number;
+    set stepIncrement(val: number);
+    get upper(): number;
+    set upper(val: number);
+    get value(): number;
+    set value(val: number);
 
     // Signals
 
@@ -2171,8 +2201,8 @@ export class AlternativeTrigger extends ShortcutTrigger {
     _init(properties?: Partial<AlternativeTrigger.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    first: ShortcutTrigger;
-    second: ShortcutTrigger;
+    get first(): ShortcutTrigger;
+    get second(): ShortcutTrigger;
 
     // Constructors
 
@@ -2191,7 +2221,8 @@ export module AnyFilter {
 }
 export class AnyFilter<A extends GObject.Object = GObject.Object>
     extends MultiFilter<A>
-    implements Gio.ListModel<A>, Buildable {
+    implements Gio.ListModel<A>, Buildable
+{
     static $gtype: GObject.GType<AnyFilter>;
 
     constructor(properties?: Partial<AnyFilter.ConstructorProperties<A>>, ...args: any[]);
@@ -2222,7 +2253,7 @@ export class AnyFilter<A extends GObject.Object = GObject.Object>
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module AppChooserButton {
@@ -2243,12 +2274,18 @@ export class AppChooserButton extends Widget implements Accessible, AppChooser, 
     _init(properties?: Partial<AppChooserButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    heading: string;
-    modal: boolean;
-    show_default_item: boolean;
-    showDefaultItem: boolean;
-    show_dialog_item: boolean;
-    showDialogItem: boolean;
+    get heading(): string;
+    set heading(val: string);
+    get modal(): boolean;
+    set modal(val: boolean);
+    get show_default_item(): boolean;
+    set show_default_item(val: boolean);
+    get showDefaultItem(): boolean;
+    set showDefaultItem(val: boolean);
+    get show_dialog_item(): boolean;
+    set show_dialog_item(val: boolean);
+    get showDialogItem(): boolean;
+    set showDialogItem(val: boolean);
 
     // Signals
 
@@ -2264,10 +2301,12 @@ export class AppChooserButton extends Widget implements Accessible, AppChooser, 
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    content_type: string;
-    contentType: string;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get content_type(): string;
+    get contentType(): string;
 
     // Constructors
 
@@ -2311,7 +2350,7 @@ export class AppChooserButton extends Widget implements Accessible, AppChooser, 
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module AppChooserDialog {
@@ -2323,27 +2362,28 @@ export module AppChooserDialog {
 }
 export class AppChooserDialog
     extends Dialog
-    implements Accessible, AppChooser, Buildable, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Accessible, AppChooser, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<AppChooserDialog>;
 
     constructor(properties?: Partial<AppChooserDialog.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<AppChooserDialog.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    gfile: Gio.File;
-    heading: string;
+    get gfile(): Gio.File;
+    get heading(): string;
+    set heading(val: string);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    content_type: string;
-    contentType: string;
+    get content_type(): string;
+    get contentType(): string;
 
     // Constructors
 
     static ["new"](parent: Window | null, flags: DialogFlags, file: Gio.File): AppChooserDialog;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.Dialog.new
+    static ["new"](...args: never[]): any;
     static new_for_content_type(parent: Window | null, flags: DialogFlags, content_type: string): AppChooserDialog;
 
     // Members
@@ -2354,40 +2394,9 @@ export class AppChooserDialog
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
     get_app_info(): Gio.AppInfo | null;
     get_content_type(): string;
     refresh(): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
-    get_renderer(): Gsk.Renderer;
-    get_surface(): Gdk.Surface;
-    get_surface_transform(): [number, number];
-    realize(): void;
-    unrealize(): void;
-    get_display(): Gdk.Display;
-    get_focus(): Widget | null;
-    set_focus(focus?: Widget | null): void;
-    vfunc_add_controller(controller: ShortcutController): void;
-    vfunc_remove_controller(controller: ShortcutController): void;
 }
 export module AppChooserWidget {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -2411,16 +2420,26 @@ export class AppChooserWidget extends Widget implements Accessible, AppChooser, 
     _init(properties?: Partial<AppChooserWidget.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    default_text: string;
-    defaultText: string;
-    show_default: boolean;
-    showDefault: boolean;
-    show_fallback: boolean;
-    showFallback: boolean;
-    show_other: boolean;
-    showOther: boolean;
-    show_recommended: boolean;
-    showRecommended: boolean;
+    get default_text(): string;
+    set default_text(val: string);
+    get defaultText(): string;
+    set defaultText(val: string);
+    get show_default(): boolean;
+    set show_default(val: boolean);
+    get showDefault(): boolean;
+    set showDefault(val: boolean);
+    get show_fallback(): boolean;
+    set show_fallback(val: boolean);
+    get showFallback(): boolean;
+    set showFallback(val: boolean);
+    get show_other(): boolean;
+    set show_other(val: boolean);
+    get showOther(): boolean;
+    set showOther(val: boolean);
+    get show_recommended(): boolean;
+    set show_recommended(val: boolean);
+    get showRecommended(): boolean;
+    set showRecommended(val: boolean);
 
     // Signals
 
@@ -2436,10 +2455,12 @@ export class AppChooserWidget extends Widget implements Accessible, AppChooser, 
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    content_type: string;
-    contentType: string;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get content_type(): string;
+    get contentType(): string;
 
     // Constructors
 
@@ -2484,7 +2505,7 @@ export class AppChooserWidget extends Widget implements Accessible, AppChooser, 
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Application {
@@ -2506,13 +2527,16 @@ export class Application extends Gio.Application implements Gio.ActionGroup, Gio
     _init(properties?: Partial<Application.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active_window: Window;
-    activeWindow: Window;
-    menubar: Gio.MenuModel;
-    register_session: boolean;
-    registerSession: boolean;
-    screensaver_active: boolean;
-    screensaverActive: boolean;
+    get active_window(): Window;
+    get activeWindow(): Window;
+    get menubar(): Gio.MenuModel;
+    set menubar(val: Gio.MenuModel);
+    get register_session(): boolean;
+    set register_session(val: boolean);
+    get registerSession(): boolean;
+    set registerSession(val: boolean);
+    get screensaver_active(): boolean;
+    get screensaverActive(): boolean;
 
     // Signals
 
@@ -2588,10 +2612,10 @@ export class Application extends Gio.Application implements Gio.ActionGroup, Gio
     ): [boolean, boolean, GLib.VariantType | null, GLib.VariantType | null, GLib.Variant | null, GLib.Variant | null];
     add_action(action: Gio.Action): void;
     add_action_entries(entries: Gio.ActionEntry[], user_data?: any | null): void;
-    lookup_action(action_name: string): Gio.Action;
+    lookup_action(action_name: string): Gio.Action | null;
     remove_action(action_name: string): void;
     vfunc_add_action(action: Gio.Action): void;
-    vfunc_lookup_action(action_name: string): Gio.Action;
+    vfunc_lookup_action(action_name: string): Gio.Action | null;
     vfunc_remove_action(action_name: string): void;
 }
 export module ApplicationWindow {
@@ -2603,25 +2627,24 @@ export module ApplicationWindow {
 }
 export class ApplicationWindow
     extends Window
-    implements Gio.ActionGroup, Gio.ActionMap, Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Gio.ActionGroup, Gio.ActionMap, Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<ApplicationWindow>;
 
     constructor(properties?: Partial<ApplicationWindow.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<ApplicationWindow.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    show_menubar: boolean;
-    showMenubar: boolean;
-
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get show_menubar(): boolean;
+    set show_menubar(val: boolean);
+    get showMenubar(): boolean;
+    set showMenubar(val: boolean);
 
     // Constructors
 
     static ["new"](application: Application): ApplicationWindow;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.Window.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -2638,7 +2661,8 @@ export class ApplicationWindow
     action_removed(action_name: string): void;
     action_state_changed(action_name: string, state: GLib.Variant): void;
     activate_action(action_name: string, parameter?: GLib.Variant | null): void;
-    activate_action(...args: never[]): never;
+    // Conflicted with Gtk.Widget.activate_action
+    activate_action(...args: never[]): any;
     change_action_state(action_name: string, value: GLib.Variant): void;
     get_action_enabled(action_name: string): boolean;
     get_action_parameter_type(action_name: string): GLib.VariantType | null;
@@ -2668,32 +2692,11 @@ export class ApplicationWindow
     ): [boolean, boolean, GLib.VariantType | null, GLib.VariantType | null, GLib.Variant | null, GLib.Variant | null];
     add_action(action: Gio.Action): void;
     add_action_entries(entries: Gio.ActionEntry[], user_data?: any | null): void;
-    lookup_action(action_name: string): Gio.Action;
+    lookup_action(action_name: string): Gio.Action | null;
     remove_action(action_name: string): void;
     vfunc_add_action(action: Gio.Action): void;
-    vfunc_lookup_action(action_name: string): Gio.Action;
+    vfunc_lookup_action(action_name: string): Gio.Action | null;
     vfunc_remove_action(action_name: string): void;
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -2723,17 +2726,25 @@ export class AspectFrame extends Widget implements Accessible, Buildable, Constr
     _init(properties?: Partial<AspectFrame.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    obey_child: boolean;
-    obeyChild: boolean;
-    ratio: number;
-    xalign: number;
-    yalign: number;
+    get child(): Widget;
+    set child(val: Widget);
+    get obey_child(): boolean;
+    set obey_child(val: boolean);
+    get obeyChild(): boolean;
+    set obeyChild(val: boolean);
+    get ratio(): number;
+    set ratio(val: number);
+    get xalign(): number;
+    set xalign(val: number);
+    get yalign(): number;
+    set yalign(val: number);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -2773,7 +2784,7 @@ export class AspectFrame extends Widget implements Accessible, Buildable, Constr
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Assistant {
@@ -2786,16 +2797,17 @@ export module Assistant {
 }
 export class Assistant
     extends Window
-    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<Assistant>;
 
     constructor(properties?: Partial<Assistant.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<Assistant.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    pages: Gio.ListModel;
-    use_header_bar: number;
-    useHeaderBar: number;
+    get pages(): Gio.ListModel;
+    get use_header_bar(): number;
+    get useHeaderBar(): number;
 
     // Signals
 
@@ -2817,11 +2829,6 @@ export class Assistant
     connect(signal: "prepare", callback: (_source: this, page: Widget) => void): number;
     connect_after(signal: "prepare", callback: (_source: this, page: Widget) => void): number;
     emit(signal: "prepare", page: Widget): void;
-
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
 
     // Constructors
 
@@ -2855,27 +2862,6 @@ export class Assistant
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -2904,11 +2890,15 @@ export class AssistantPage extends GObject.Object {
     _init(properties?: Partial<AssistantPage.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    complete: boolean;
-    page_type: AssistantPageType;
-    pageType: AssistantPageType;
-    title: string;
+    get child(): Widget;
+    get complete(): boolean;
+    set complete(val: boolean);
+    get page_type(): AssistantPageType;
+    set page_type(val: AssistantPageType);
+    get pageType(): AssistantPageType;
+    set pageType(val: AssistantPageType);
+    get title(): string;
+    set title(val: string);
 
     // Members
 
@@ -2942,18 +2932,22 @@ export module BookmarkList {
 }
 export class BookmarkList<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<BookmarkList>;
 
     constructor(properties?: Partial<BookmarkList.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<BookmarkList.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    attributes: string;
-    filename: string;
-    io_priority: number;
-    ioPriority: number;
-    loading: boolean;
+    get attributes(): string;
+    set attributes(val: string);
+    get filename(): string;
+    get io_priority(): number;
+    set io_priority(val: number);
+    get ioPriority(): number;
+    set ioPriority(val: number);
+    get loading(): boolean;
 
     // Constructors
 
@@ -2992,8 +2986,10 @@ export class BoolFilter extends Filter {
     _init(properties?: Partial<BoolFilter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    expression: Expression;
-    invert: boolean;
+    get expression(): Expression;
+    set expression(val: Expression);
+    get invert(): boolean;
+    set invert(val: boolean);
 
     // Constructors
 
@@ -3001,9 +2997,9 @@ export class BoolFilter extends Filter {
 
     // Members
 
-    get_expression(): Expression;
+    get_expression(): Expression | null;
     get_invert(): boolean;
-    set_expression(expression: Expression): void;
+    set_expression(expression?: Expression | null): void;
     set_invert(invert: boolean): void;
 }
 export module Box {
@@ -3022,16 +3018,23 @@ export class Box extends Widget implements Accessible, Buildable, ConstraintTarg
     _init(properties?: Partial<Box.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    baseline_position: BaselinePosition;
-    baselinePosition: BaselinePosition;
-    homogeneous: boolean;
-    spacing: number;
+    get baseline_position(): BaselinePosition;
+    set baseline_position(val: BaselinePosition);
+    get baselinePosition(): BaselinePosition;
+    set baselinePosition(val: BaselinePosition);
+    get homogeneous(): boolean;
+    set homogeneous(val: boolean);
+    get spacing(): number;
+    set spacing(val: number);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -3072,7 +3075,7 @@ export class Box extends Widget implements Accessible, Buildable, ConstraintTarg
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -3093,14 +3096,19 @@ export class BoxLayout extends LayoutManager implements Orientable {
     _init(properties?: Partial<BoxLayout.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    baseline_position: BaselinePosition;
-    baselinePosition: BaselinePosition;
-    homogeneous: boolean;
-    spacing: number;
+    get baseline_position(): BaselinePosition;
+    set baseline_position(val: BaselinePosition);
+    get baselinePosition(): BaselinePosition;
+    set baselinePosition(val: BaselinePosition);
+    get homogeneous(): boolean;
+    set homogeneous(val: boolean);
+    get spacing(): number;
+    set spacing(val: number);
 
     // Implemented Properties
 
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -3137,11 +3145,16 @@ export class Builder extends GObject.Object {
     _init(properties?: Partial<Builder.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    current_object: GObject.Object;
-    currentObject: GObject.Object;
-    scope: BuilderScope;
-    translation_domain: string;
-    translationDomain: string;
+    get current_object(): GObject.Object;
+    set current_object(val: GObject.Object);
+    get currentObject(): GObject.Object;
+    set currentObject(val: GObject.Object);
+    get scope(): BuilderScope;
+    set scope(val: BuilderScope);
+    get translation_domain(): string;
+    set translation_domain(val: string);
+    get translationDomain(): string;
+    set translationDomain(val: string);
 
     // Constructors
 
@@ -3222,9 +3235,9 @@ export class BuilderListItemFactory extends ListItemFactory {
     _init(properties?: Partial<BuilderListItemFactory.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    bytes: GLib.Bytes;
-    resource: string;
-    scope: BuilderScope;
+    get bytes(): GLib.Bytes;
+    get resource(): string;
+    get scope(): BuilderScope;
 
     // Constructors
 
@@ -3257,14 +3270,22 @@ export class Button extends Widget implements Accessible, Actionable, Buildable,
     _init(properties?: Partial<Button.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    has_frame: boolean;
-    hasFrame: boolean;
-    icon_name: string;
-    iconName: string;
-    label: string;
-    use_underline: boolean;
-    useUnderline: boolean;
+    get child(): Widget;
+    set child(val: Widget);
+    get has_frame(): boolean;
+    set has_frame(val: boolean);
+    get hasFrame(): boolean;
+    set hasFrame(val: boolean);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get label(): string;
+    set label(val: string);
+    get use_underline(): boolean;
+    set use_underline(val: boolean);
+    get useUnderline(): boolean;
+    set useUnderline(val: boolean);
 
     // Signals
 
@@ -3280,12 +3301,18 @@ export class Button extends Widget implements Accessible, Actionable, Buildable,
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
@@ -3339,7 +3366,7 @@ export class Button extends Widget implements Accessible, Actionable, Buildable,
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module CClosureExpression {
@@ -3384,15 +3411,24 @@ export class Calendar extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<Calendar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    day: number;
-    month: number;
-    show_day_names: boolean;
-    showDayNames: boolean;
-    show_heading: boolean;
-    showHeading: boolean;
-    show_week_numbers: boolean;
-    showWeekNumbers: boolean;
-    year: number;
+    get day(): number;
+    set day(val: number);
+    get month(): number;
+    set month(val: number);
+    get show_day_names(): boolean;
+    set show_day_names(val: boolean);
+    get showDayNames(): boolean;
+    set showDayNames(val: boolean);
+    get show_heading(): boolean;
+    set show_heading(val: boolean);
+    get showHeading(): boolean;
+    set showHeading(val: boolean);
+    get show_week_numbers(): boolean;
+    set show_week_numbers(val: boolean);
+    get showWeekNumbers(): boolean;
+    set showWeekNumbers(val: boolean);
+    get year(): number;
+    set year(val: number);
 
     // Signals
 
@@ -3417,8 +3453,10 @@ export class Calendar extends Widget implements Accessible, Buildable, Constrain
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -3460,7 +3498,7 @@ export class Calendar extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module CallbackAction {
@@ -3496,12 +3534,14 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
     _init(properties?: Partial<CellArea.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    edit_widget: CellEditable;
-    editWidget: CellEditable;
-    edited_cell: CellRenderer;
-    editedCell: CellRenderer;
-    focus_cell: CellRenderer;
-    focusCell: CellRenderer;
+    get edit_widget(): CellEditable;
+    get editWidget(): CellEditable;
+    get edited_cell(): CellRenderer;
+    get editedCell(): CellRenderer;
+    get focus_cell(): CellRenderer;
+    set focus_cell(val: CellRenderer);
+    get focusCell(): CellRenderer;
+    set focusCell(val: CellRenderer);
 
     // Signals
 
@@ -3588,8 +3628,8 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
     attribute_connect(renderer: CellRenderer, attribute: string, column: number): void;
     attribute_disconnect(renderer: CellRenderer, attribute: string): void;
     attribute_get_column(renderer: CellRenderer, attribute: string): number;
-    cell_get_property(renderer: CellRenderer, property_name: string, value: any): void;
-    cell_set_property(renderer: CellRenderer, property_name: string, value: any): void;
+    cell_get_property(renderer: CellRenderer, property_name: string, value: GObject.Value | any): void;
+    cell_set_property(renderer: CellRenderer, property_name: string, value: GObject.Value | any): void;
     copy_context(context: CellAreaContext): CellAreaContext;
     create_context(): CellAreaContext;
     event(
@@ -3690,7 +3730,12 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
         background_area: Gdk.Rectangle,
         callback: CellAllocCallback
     ): void;
-    vfunc_get_cell_property(renderer: CellRenderer, property_id: number, value: any, pspec: GObject.ParamSpec): void;
+    vfunc_get_cell_property(
+        renderer: CellRenderer,
+        property_id: number,
+        value: GObject.Value | any,
+        pspec: GObject.ParamSpec
+    ): void;
     vfunc_get_preferred_height(context: CellAreaContext, widget: Widget): [number | null, number | null];
     vfunc_get_preferred_height_for_width(
         context: CellAreaContext,
@@ -3706,7 +3751,12 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
     vfunc_get_request_mode(): SizeRequestMode;
     vfunc_is_activatable(): boolean;
     vfunc_remove(renderer: CellRenderer): void;
-    vfunc_set_cell_property(renderer: CellRenderer, property_id: number, value: any, pspec: GObject.ParamSpec): void;
+    vfunc_set_cell_property(
+        renderer: CellRenderer,
+        property_id: number,
+        value: GObject.Value | any,
+        pspec: GObject.ParamSpec
+    ): void;
     vfunc_snapshot(
         context: CellAreaContext,
         widget: Widget,
@@ -3731,7 +3781,7 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_attribute(cell: CellRenderer, attribute: string, column: number): void;
     clear(): void;
@@ -3765,11 +3815,13 @@ export class CellAreaBox extends CellArea implements Buildable, CellLayout, Orie
     _init(properties?: Partial<CellAreaBox.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    spacing: number;
+    get spacing(): number;
+    set spacing(val: number);
 
     // Implemented Properties
 
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -3779,9 +3831,11 @@ export class CellAreaBox extends CellArea implements Buildable, CellLayout, Orie
 
     get_spacing(): number;
     pack_end(renderer: CellRenderer, expand: boolean, align: boolean, fixed: boolean): void;
-    pack_end(...args: never[]): never;
+    // Conflicted with Gtk.CellLayout.pack_end
+    pack_end(...args: never[]): any;
     pack_start(renderer: CellRenderer, expand: boolean, align: boolean, fixed: boolean): void;
-    pack_start(...args: never[]): never;
+    // Conflicted with Gtk.CellLayout.pack_start
+    pack_start(...args: never[]): any;
     set_spacing(spacing: number): void;
 
     // Implemented Members
@@ -3798,7 +3852,7 @@ export class CellAreaBox extends CellArea implements Buildable, CellLayout, Orie
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_attribute(cell: CellRenderer, attribute: string, column: number): void;
     clear(): void;
@@ -3840,15 +3894,15 @@ export class CellAreaContext extends GObject.Object {
     _init(properties?: Partial<CellAreaContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    area: CellArea;
-    minimum_height: number;
-    minimumHeight: number;
-    minimum_width: number;
-    minimumWidth: number;
-    natural_height: number;
-    naturalHeight: number;
-    natural_width: number;
-    naturalWidth: number;
+    get area(): CellArea;
+    get minimum_height(): number;
+    get minimumHeight(): number;
+    get minimum_width(): number;
+    get minimumWidth(): number;
+    get natural_height(): number;
+    get naturalHeight(): number;
+    get natural_width(): number;
+    get naturalWidth(): number;
 
     // Members
 
@@ -3899,26 +3953,43 @@ export abstract class CellRenderer extends GObject.InitiallyUnowned {
     _init(properties?: Partial<CellRenderer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    cell_background: string;
-    cellBackground: string;
-    cell_background_rgba: Gdk.RGBA;
-    cellBackgroundRgba: Gdk.RGBA;
-    cell_background_set: boolean;
-    cellBackgroundSet: boolean;
-    editing: boolean;
-    height: number;
-    is_expanded: boolean;
-    isExpanded: boolean;
-    is_expander: boolean;
-    isExpander: boolean;
-    mode: CellRendererMode;
-    sensitive: boolean;
-    visible: boolean;
-    width: number;
-    xalign: number;
-    xpad: number;
-    yalign: number;
-    ypad: number;
+    set cell_background(val: string);
+    set cellBackground(val: string);
+    get cell_background_rgba(): Gdk.RGBA;
+    set cell_background_rgba(val: Gdk.RGBA);
+    get cellBackgroundRgba(): Gdk.RGBA;
+    set cellBackgroundRgba(val: Gdk.RGBA);
+    get cell_background_set(): boolean;
+    set cell_background_set(val: boolean);
+    get cellBackgroundSet(): boolean;
+    set cellBackgroundSet(val: boolean);
+    get editing(): boolean;
+    get height(): number;
+    set height(val: number);
+    get is_expanded(): boolean;
+    set is_expanded(val: boolean);
+    get isExpanded(): boolean;
+    set isExpanded(val: boolean);
+    get is_expander(): boolean;
+    set is_expander(val: boolean);
+    get isExpander(): boolean;
+    set isExpander(val: boolean);
+    get mode(): CellRendererMode;
+    set mode(val: CellRendererMode);
+    get sensitive(): boolean;
+    set sensitive(val: boolean);
+    get visible(): boolean;
+    set visible(val: boolean);
+    get width(): number;
+    set width(val: number);
+    get xalign(): number;
+    set xalign(val: number);
+    get xpad(): number;
+    set xpad(val: number);
+    get yalign(): number;
+    set yalign(val: number);
+    get ypad(): number;
+    set ypad(val: number);
 
     // Signals
 
@@ -4035,13 +4106,20 @@ export class CellRendererAccel extends CellRendererText {
     _init(properties?: Partial<CellRendererAccel.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accel_key: number;
-    accelKey: number;
-    accel_mode: CellRendererAccelMode;
-    accelMode: CellRendererAccelMode;
-    accel_mods: Gdk.ModifierType;
-    accelMods: Gdk.ModifierType;
-    keycode: number;
+    get accel_key(): number;
+    set accel_key(val: number);
+    get accelKey(): number;
+    set accelKey(val: number);
+    get accel_mode(): CellRendererAccelMode;
+    set accel_mode(val: CellRendererAccelMode);
+    get accelMode(): CellRendererAccelMode;
+    set accelMode(val: CellRendererAccelMode);
+    get accel_mods(): Gdk.ModifierType;
+    set accel_mods(val: Gdk.ModifierType);
+    get accelMods(): Gdk.ModifierType;
+    set accelMods(val: Gdk.ModifierType);
+    get keycode(): number;
+    set keycode(val: number);
 
     // Signals
 
@@ -4100,11 +4178,16 @@ export class CellRendererCombo extends CellRendererText {
     _init(properties?: Partial<CellRendererCombo.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    has_entry: boolean;
-    hasEntry: boolean;
-    model: TreeModel;
-    text_column: number;
-    textColumn: number;
+    get has_entry(): boolean;
+    set has_entry(val: boolean);
+    get hasEntry(): boolean;
+    set hasEntry(val: boolean);
+    get model(): TreeModel;
+    set model(val: TreeModel);
+    get text_column(): number;
+    set text_column(val: number);
+    get textColumn(): number;
+    set textColumn(val: number);
 
     // Signals
 
@@ -4145,17 +4228,27 @@ export class CellRendererPixbuf extends CellRenderer {
     _init(properties?: Partial<CellRendererPixbuf.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    gicon: Gio.Icon;
-    icon_name: string;
-    iconName: string;
-    icon_size: IconSize;
-    iconSize: IconSize;
-    pixbuf: GdkPixbuf.Pixbuf;
-    pixbuf_expander_closed: GdkPixbuf.Pixbuf;
-    pixbufExpanderClosed: GdkPixbuf.Pixbuf;
-    pixbuf_expander_open: GdkPixbuf.Pixbuf;
-    pixbufExpanderOpen: GdkPixbuf.Pixbuf;
-    texture: Gdk.Texture;
+    get gicon(): Gio.Icon;
+    set gicon(val: Gio.Icon);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get icon_size(): IconSize;
+    set icon_size(val: IconSize);
+    get iconSize(): IconSize;
+    set iconSize(val: IconSize);
+    set pixbuf(val: GdkPixbuf.Pixbuf);
+    get pixbuf_expander_closed(): GdkPixbuf.Pixbuf;
+    set pixbuf_expander_closed(val: GdkPixbuf.Pixbuf);
+    get pixbufExpanderClosed(): GdkPixbuf.Pixbuf;
+    set pixbufExpanderClosed(val: GdkPixbuf.Pixbuf);
+    get pixbuf_expander_open(): GdkPixbuf.Pixbuf;
+    set pixbuf_expander_open(val: GdkPixbuf.Pixbuf);
+    get pixbufExpanderOpen(): GdkPixbuf.Pixbuf;
+    set pixbufExpanderOpen(val: GdkPixbuf.Pixbuf);
+    get texture(): Gdk.Texture;
+    set texture(val: Gdk.Texture);
 
     // Constructors
 
@@ -4181,18 +4274,27 @@ export class CellRendererProgress extends CellRenderer implements Orientable {
     _init(properties?: Partial<CellRendererProgress.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    inverted: boolean;
-    pulse: number;
-    text: string;
-    text_xalign: number;
-    textXalign: number;
-    text_yalign: number;
-    textYalign: number;
-    value: number;
+    get inverted(): boolean;
+    set inverted(val: boolean);
+    get pulse(): number;
+    set pulse(val: number);
+    get text(): string;
+    set text(val: string);
+    get text_xalign(): number;
+    set text_xalign(val: number);
+    get textXalign(): number;
+    set textXalign(val: number);
+    get text_yalign(): number;
+    set text_yalign(val: number);
+    get textYalign(): number;
+    set textYalign(val: number);
+    get value(): number;
+    set value(val: number);
 
     // Implemented Properties
 
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -4219,10 +4321,14 @@ export class CellRendererSpin extends CellRendererText {
     _init(properties?: Partial<CellRendererSpin.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    adjustment: Adjustment;
-    climb_rate: number;
-    climbRate: number;
-    digits: number;
+    get adjustment(): Adjustment;
+    set adjustment(val: Adjustment);
+    get climb_rate(): number;
+    set climb_rate(val: number);
+    get climbRate(): number;
+    set climbRate(val: number);
+    get digits(): number;
+    set digits(val: number);
 
     // Constructors
 
@@ -4243,9 +4349,12 @@ export class CellRendererSpinner extends CellRenderer {
     _init(properties?: Partial<CellRendererSpinner.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active: boolean;
-    pulse: number;
-    size: IconSize;
+    get active(): boolean;
+    set active(val: boolean);
+    get pulse(): number;
+    set pulse(val: number);
+    get size(): IconSize;
+    set size(val: IconSize);
 
     // Constructors
 
@@ -4335,78 +4444,147 @@ export class CellRendererText extends CellRenderer {
     _init(properties?: Partial<CellRendererText.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    align_set: boolean;
-    alignSet: boolean;
-    alignment: Pango.Alignment;
-    attributes: Pango.AttrList;
-    background: string;
-    background_rgba: Gdk.RGBA;
-    backgroundRgba: Gdk.RGBA;
-    background_set: boolean;
-    backgroundSet: boolean;
-    editable: boolean;
-    editable_set: boolean;
-    editableSet: boolean;
-    ellipsize: Pango.EllipsizeMode;
-    ellipsize_set: boolean;
-    ellipsizeSet: boolean;
-    family: string;
-    family_set: boolean;
-    familySet: boolean;
-    font: string;
-    font_desc: Pango.FontDescription;
-    fontDesc: Pango.FontDescription;
-    foreground: string;
-    foreground_rgba: Gdk.RGBA;
-    foregroundRgba: Gdk.RGBA;
-    foreground_set: boolean;
-    foregroundSet: boolean;
-    language: string;
-    language_set: boolean;
-    languageSet: boolean;
-    markup: string;
-    max_width_chars: number;
-    maxWidthChars: number;
-    placeholder_text: string;
-    placeholderText: string;
-    rise: number;
-    rise_set: boolean;
-    riseSet: boolean;
-    scale: number;
-    scale_set: boolean;
-    scaleSet: boolean;
-    single_paragraph_mode: boolean;
-    singleParagraphMode: boolean;
-    size: number;
-    size_points: number;
-    sizePoints: number;
-    size_set: boolean;
-    sizeSet: boolean;
-    stretch: Pango.Stretch;
-    stretch_set: boolean;
-    stretchSet: boolean;
-    strikethrough: boolean;
-    strikethrough_set: boolean;
-    strikethroughSet: boolean;
-    style: Pango.Style;
-    style_set: boolean;
-    styleSet: boolean;
-    text: string;
-    underline: Pango.Underline;
-    underline_set: boolean;
-    underlineSet: boolean;
-    variant: Pango.Variant;
-    variant_set: boolean;
-    variantSet: boolean;
-    weight: number;
-    weight_set: boolean;
-    weightSet: boolean;
-    width_chars: number;
-    widthChars: number;
-    wrap_mode: Pango.WrapMode;
-    wrapMode: Pango.WrapMode;
-    wrap_width: number;
-    wrapWidth: number;
+    get align_set(): boolean;
+    set align_set(val: boolean);
+    get alignSet(): boolean;
+    set alignSet(val: boolean);
+    get alignment(): Pango.Alignment;
+    set alignment(val: Pango.Alignment);
+    get attributes(): Pango.AttrList;
+    set attributes(val: Pango.AttrList);
+    set background(val: string);
+    get background_rgba(): Gdk.RGBA;
+    set background_rgba(val: Gdk.RGBA);
+    get backgroundRgba(): Gdk.RGBA;
+    set backgroundRgba(val: Gdk.RGBA);
+    get background_set(): boolean;
+    set background_set(val: boolean);
+    get backgroundSet(): boolean;
+    set backgroundSet(val: boolean);
+    get editable(): boolean;
+    set editable(val: boolean);
+    get editable_set(): boolean;
+    set editable_set(val: boolean);
+    get editableSet(): boolean;
+    set editableSet(val: boolean);
+    get ellipsize(): Pango.EllipsizeMode;
+    set ellipsize(val: Pango.EllipsizeMode);
+    get ellipsize_set(): boolean;
+    set ellipsize_set(val: boolean);
+    get ellipsizeSet(): boolean;
+    set ellipsizeSet(val: boolean);
+    get family(): string;
+    set family(val: string);
+    get family_set(): boolean;
+    set family_set(val: boolean);
+    get familySet(): boolean;
+    set familySet(val: boolean);
+    get font(): string;
+    set font(val: string);
+    get font_desc(): Pango.FontDescription;
+    set font_desc(val: Pango.FontDescription);
+    get fontDesc(): Pango.FontDescription;
+    set fontDesc(val: Pango.FontDescription);
+    set foreground(val: string);
+    get foreground_rgba(): Gdk.RGBA;
+    set foreground_rgba(val: Gdk.RGBA);
+    get foregroundRgba(): Gdk.RGBA;
+    set foregroundRgba(val: Gdk.RGBA);
+    get foreground_set(): boolean;
+    set foreground_set(val: boolean);
+    get foregroundSet(): boolean;
+    set foregroundSet(val: boolean);
+    get language(): string;
+    set language(val: string);
+    get language_set(): boolean;
+    set language_set(val: boolean);
+    get languageSet(): boolean;
+    set languageSet(val: boolean);
+    set markup(val: string);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get placeholder_text(): string;
+    set placeholder_text(val: string);
+    get placeholderText(): string;
+    set placeholderText(val: string);
+    get rise(): number;
+    set rise(val: number);
+    get rise_set(): boolean;
+    set rise_set(val: boolean);
+    get riseSet(): boolean;
+    set riseSet(val: boolean);
+    get scale(): number;
+    set scale(val: number);
+    get scale_set(): boolean;
+    set scale_set(val: boolean);
+    get scaleSet(): boolean;
+    set scaleSet(val: boolean);
+    get single_paragraph_mode(): boolean;
+    set single_paragraph_mode(val: boolean);
+    get singleParagraphMode(): boolean;
+    set singleParagraphMode(val: boolean);
+    get size(): number;
+    set size(val: number);
+    get size_points(): number;
+    set size_points(val: number);
+    get sizePoints(): number;
+    set sizePoints(val: number);
+    get size_set(): boolean;
+    set size_set(val: boolean);
+    get sizeSet(): boolean;
+    set sizeSet(val: boolean);
+    get stretch(): Pango.Stretch;
+    set stretch(val: Pango.Stretch);
+    get stretch_set(): boolean;
+    set stretch_set(val: boolean);
+    get stretchSet(): boolean;
+    set stretchSet(val: boolean);
+    get strikethrough(): boolean;
+    set strikethrough(val: boolean);
+    get strikethrough_set(): boolean;
+    set strikethrough_set(val: boolean);
+    get strikethroughSet(): boolean;
+    set strikethroughSet(val: boolean);
+    get style(): Pango.Style;
+    set style(val: Pango.Style);
+    get style_set(): boolean;
+    set style_set(val: boolean);
+    get styleSet(): boolean;
+    set styleSet(val: boolean);
+    get text(): string;
+    set text(val: string);
+    get underline(): Pango.Underline;
+    set underline(val: Pango.Underline);
+    get underline_set(): boolean;
+    set underline_set(val: boolean);
+    get underlineSet(): boolean;
+    set underlineSet(val: boolean);
+    get variant(): Pango.Variant;
+    set variant(val: Pango.Variant);
+    get variant_set(): boolean;
+    set variant_set(val: boolean);
+    get variantSet(): boolean;
+    set variantSet(val: boolean);
+    get weight(): number;
+    set weight(val: number);
+    get weight_set(): boolean;
+    set weight_set(val: boolean);
+    get weightSet(): boolean;
+    set weightSet(val: boolean);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get wrap_mode(): Pango.WrapMode;
+    set wrap_mode(val: Pango.WrapMode);
+    get wrapMode(): Pango.WrapMode;
+    set wrapMode(val: Pango.WrapMode);
+    get wrap_width(): number;
+    set wrap_width(val: number);
+    get wrapWidth(): number;
+    set wrapWidth(val: number);
 
     // Signals
 
@@ -4442,10 +4620,14 @@ export class CellRendererToggle extends CellRenderer {
     _init(properties?: Partial<CellRendererToggle.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activatable: boolean;
-    active: boolean;
-    inconsistent: boolean;
-    radio: boolean;
+    get activatable(): boolean;
+    set activatable(val: boolean);
+    get active(): boolean;
+    set active(val: boolean);
+    get inconsistent(): boolean;
+    set inconsistent(val: boolean);
+    get radio(): boolean;
+    set radio(val: boolean);
 
     // Signals
 
@@ -4490,21 +4672,29 @@ export class CellView extends Widget implements Accessible, Buildable, CellLayou
     _init(properties?: Partial<CellView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    cell_area: CellArea;
-    cellArea: CellArea;
-    cell_area_context: CellAreaContext;
-    cellAreaContext: CellAreaContext;
-    draw_sensitive: boolean;
-    drawSensitive: boolean;
-    fit_model: boolean;
-    fitModel: boolean;
-    model: TreeModel;
+    get cell_area(): CellArea;
+    get cellArea(): CellArea;
+    get cell_area_context(): CellAreaContext;
+    get cellAreaContext(): CellAreaContext;
+    get draw_sensitive(): boolean;
+    set draw_sensitive(val: boolean);
+    get drawSensitive(): boolean;
+    set drawSensitive(val: boolean);
+    get fit_model(): boolean;
+    set fit_model(val: boolean);
+    get fitModel(): boolean;
+    set fitModel(val: boolean);
+    get model(): TreeModel;
+    set model(val: TreeModel);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -4546,7 +4736,7 @@ export class CellView extends Widget implements Accessible, Buildable, CellLayou
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_attribute(cell: CellRenderer, attribute: string, column: number): void;
     clear(): void;
@@ -4583,14 +4773,19 @@ export class CenterBox extends Widget implements Accessible, Buildable, Constrai
     _init(properties?: Partial<CenterBox.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    baseline_position: BaselinePosition;
-    baselinePosition: BaselinePosition;
+    get baseline_position(): BaselinePosition;
+    set baseline_position(val: BaselinePosition);
+    get baselinePosition(): BaselinePosition;
+    set baselinePosition(val: BaselinePosition);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -4628,7 +4823,7 @@ export class CenterBox extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -4679,30 +4874,44 @@ export class CheckButton extends Widget implements Accessible, Actionable, Build
     _init(properties?: Partial<CheckButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active: boolean;
-    group: CheckButton;
-    inconsistent: boolean;
-    label: string;
-    use_underline: boolean;
-    useUnderline: boolean;
+    get active(): boolean;
+    set active(val: boolean);
+    set group(val: CheckButton);
+    get inconsistent(): boolean;
+    set inconsistent(val: boolean);
+    get label(): string;
+    set label(val: string);
+    get use_underline(): boolean;
+    set use_underline(val: boolean);
+    get useUnderline(): boolean;
+    set useUnderline(val: boolean);
 
     // Signals
 
     connect(id: string, callback: (...args: any[]) => any): number;
     connect_after(id: string, callback: (...args: any[]) => any): number;
     emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
     connect(signal: "toggled", callback: (_source: this) => void): number;
     connect_after(signal: "toggled", callback: (_source: this) => void): number;
     emit(signal: "toggled"): void;
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
@@ -4721,6 +4930,7 @@ export class CheckButton extends Widget implements Accessible, Actionable, Build
     set_inconsistent(inconsistent: boolean): void;
     set_label(label?: string | null): void;
     set_use_underline(setting: boolean): void;
+    vfunc_activate(): void;
     vfunc_toggled(): void;
 
     // Implemented Members
@@ -4753,7 +4963,7 @@ export class CheckButton extends Widget implements Accessible, Actionable, Build
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ClosureExpression {
@@ -4791,10 +5001,14 @@ export class ColorButton extends Widget implements Accessible, Buildable, ColorC
     _init(properties?: Partial<ColorButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    modal: boolean;
-    show_editor: boolean;
-    showEditor: boolean;
-    title: string;
+    get modal(): boolean;
+    set modal(val: boolean);
+    get show_editor(): boolean;
+    set show_editor(val: boolean);
+    get showEditor(): boolean;
+    set showEditor(val: boolean);
+    get title(): string;
+    set title(val: string);
 
     // Signals
 
@@ -4807,11 +5021,16 @@ export class ColorButton extends Widget implements Accessible, Buildable, ColorC
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    rgba: Gdk.RGBA;
-    use_alpha: boolean;
-    useAlpha: boolean;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get rgba(): Gdk.RGBA;
+    set rgba(val: Gdk.RGBA);
+    get use_alpha(): boolean;
+    set use_alpha(val: boolean);
+    get useAlpha(): boolean;
+    set useAlpha(val: boolean);
 
     // Constructors
 
@@ -4846,7 +5065,7 @@ export class ColorButton extends Widget implements Accessible, Buildable, ColorC
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_palette(orientation: Orientation, colors_per_line: number, colors?: Gdk.RGBA[] | null): void;
     get_rgba(): Gdk.RGBA;
@@ -4867,52 +5086,36 @@ export module ColorChooserDialog {
 }
 export class ColorChooserDialog
     extends Dialog
-    implements Accessible, Buildable, ColorChooser, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ColorChooser, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<ColorChooserDialog>;
 
     constructor(properties?: Partial<ColorChooserDialog.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<ColorChooserDialog.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    show_editor: boolean;
-    showEditor: boolean;
+    get show_editor(): boolean;
+    set show_editor(val: boolean);
+    get showEditor(): boolean;
+    set showEditor(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    rgba: Gdk.RGBA;
-    use_alpha: boolean;
-    useAlpha: boolean;
+    get rgba(): Gdk.RGBA;
+    set rgba(val: Gdk.RGBA);
+    get use_alpha(): boolean;
+    set use_alpha(val: boolean);
+    get useAlpha(): boolean;
+    set useAlpha(val: boolean);
 
     // Constructors
 
     static ["new"](title?: string | null, parent?: Window | null): ColorChooserDialog;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.Dialog.new
+    static ["new"](...args: never[]): any;
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     add_palette(orientation: Orientation, colors_per_line: number, colors?: Gdk.RGBA[] | null): void;
     get_rgba(): Gdk.RGBA;
     get_use_alpha(): boolean;
@@ -4922,16 +5125,6 @@ export class ColorChooserDialog
     vfunc_color_activated(color: Gdk.RGBA): void;
     vfunc_get_rgba(): Gdk.RGBA;
     vfunc_set_rgba(color: Gdk.RGBA): void;
-    get_renderer(): Gsk.Renderer;
-    get_surface(): Gdk.Surface;
-    get_surface_transform(): [number, number];
-    realize(): void;
-    unrealize(): void;
-    get_display(): Gdk.Display;
-    get_focus(): Widget | null;
-    set_focus(focus?: Widget | null): void;
-    vfunc_add_controller(controller: ShortcutController): void;
-    vfunc_remove_controller(controller: ShortcutController): void;
 }
 export module ColorChooserWidget {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -4947,16 +5140,23 @@ export class ColorChooserWidget extends Widget implements Accessible, Buildable,
     _init(properties?: Partial<ColorChooserWidget.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    show_editor: boolean;
-    showEditor: boolean;
+    get show_editor(): boolean;
+    set show_editor(val: boolean);
+    get showEditor(): boolean;
+    set showEditor(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    rgba: Gdk.RGBA;
-    use_alpha: boolean;
-    useAlpha: boolean;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get rgba(): Gdk.RGBA;
+    set rgba(val: Gdk.RGBA);
+    get use_alpha(): boolean;
+    set use_alpha(val: boolean);
+    get useAlpha(): boolean;
+    set useAlpha(val: boolean);
 
     // Constructors
 
@@ -4983,7 +5183,7 @@ export class ColorChooserWidget extends Widget implements Accessible, Buildable,
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_palette(orientation: Orientation, colors_per_line: number, colors?: Gdk.RGBA[] | null): void;
     get_rgba(): Gdk.RGBA;
@@ -5019,18 +5219,28 @@ export class ColumnView extends Widget implements Accessible, Buildable, Constra
     _init(properties?: Partial<ColumnView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    columns: Gio.ListModel;
-    enable_rubberband: boolean;
-    enableRubberband: boolean;
-    model: SelectionModel;
-    reorderable: boolean;
-    show_column_separators: boolean;
-    showColumnSeparators: boolean;
-    show_row_separators: boolean;
-    showRowSeparators: boolean;
-    single_click_activate: boolean;
-    singleClickActivate: boolean;
-    sorter: Sorter;
+    get columns(): Gio.ListModel;
+    get enable_rubberband(): boolean;
+    set enable_rubberband(val: boolean);
+    get enableRubberband(): boolean;
+    set enableRubberband(val: boolean);
+    get model(): SelectionModel;
+    set model(val: SelectionModel);
+    get reorderable(): boolean;
+    set reorderable(val: boolean);
+    get show_column_separators(): boolean;
+    set show_column_separators(val: boolean);
+    get showColumnSeparators(): boolean;
+    set showColumnSeparators(val: boolean);
+    get show_row_separators(): boolean;
+    set show_row_separators(val: boolean);
+    get showRowSeparators(): boolean;
+    set showRowSeparators(val: boolean);
+    get single_click_activate(): boolean;
+    set single_click_activate(val: boolean);
+    get singleClickActivate(): boolean;
+    set singleClickActivate(val: boolean);
+    get sorter(): Sorter;
 
     // Signals
 
@@ -5043,14 +5253,22 @@ export class ColumnView extends Widget implements Accessible, Buildable, Constra
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -5098,7 +5316,7 @@ export class ColumnView extends Widget implements Accessible, Buildable, Constra
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
     get_hadjustment(): Adjustment;
@@ -5135,18 +5353,28 @@ export class ColumnViewColumn extends GObject.Object {
     _init(properties?: Partial<ColumnViewColumn.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    column_view: ColumnView;
-    columnView: ColumnView;
-    expand: boolean;
-    factory: ListItemFactory;
-    fixed_width: number;
-    fixedWidth: number;
-    header_menu: Gio.MenuModel;
-    headerMenu: Gio.MenuModel;
-    resizable: boolean;
-    sorter: Sorter;
-    title: string;
-    visible: boolean;
+    get column_view(): ColumnView;
+    get columnView(): ColumnView;
+    get expand(): boolean;
+    set expand(val: boolean);
+    get factory(): ListItemFactory;
+    set factory(val: ListItemFactory);
+    get fixed_width(): number;
+    set fixed_width(val: number);
+    get fixedWidth(): number;
+    set fixedWidth(val: number);
+    get header_menu(): Gio.MenuModel;
+    set header_menu(val: Gio.MenuModel);
+    get headerMenu(): Gio.MenuModel;
+    set headerMenu(val: Gio.MenuModel);
+    get resizable(): boolean;
+    set resizable(val: boolean);
+    get sorter(): Sorter;
+    set sorter(val: Sorter);
+    get title(): string;
+    set title(val: string);
+    get visible(): boolean;
+    set visible(val: boolean);
 
     // Constructors
 
@@ -5203,25 +5431,40 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
     _init(properties?: Partial<ComboBox.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active: number;
-    active_id: string;
-    activeId: string;
-    button_sensitivity: SensitivityType;
-    buttonSensitivity: SensitivityType;
-    child: Widget;
-    entry_text_column: number;
-    entryTextColumn: number;
-    has_entry: boolean;
-    hasEntry: boolean;
-    has_frame: boolean;
-    hasFrame: boolean;
-    id_column: number;
-    idColumn: number;
-    model: TreeModel;
-    popup_fixed_width: boolean;
-    popupFixedWidth: boolean;
-    popup_shown: boolean;
-    popupShown: boolean;
+    get active(): number;
+    set active(val: number);
+    get active_id(): string;
+    set active_id(val: string);
+    get activeId(): string;
+    set activeId(val: string);
+    get button_sensitivity(): SensitivityType;
+    set button_sensitivity(val: SensitivityType);
+    get buttonSensitivity(): SensitivityType;
+    set buttonSensitivity(val: SensitivityType);
+    get child(): Widget;
+    set child(val: Widget);
+    get entry_text_column(): number;
+    set entry_text_column(val: number);
+    get entryTextColumn(): number;
+    set entryTextColumn(val: number);
+    get has_entry(): boolean;
+    get hasEntry(): boolean;
+    get has_frame(): boolean;
+    set has_frame(val: boolean);
+    get hasFrame(): boolean;
+    set hasFrame(val: boolean);
+    get id_column(): number;
+    set id_column(val: number);
+    get idColumn(): number;
+    set idColumn(val: number);
+    get model(): TreeModel;
+    set model(val: TreeModel);
+    get popup_fixed_width(): boolean;
+    set popup_fixed_width(val: boolean);
+    get popupFixedWidth(): boolean;
+    set popupFixedWidth(val: boolean);
+    get popup_shown(): boolean;
+    get popupShown(): boolean;
 
     // Signals
 
@@ -5246,10 +5489,14 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    editing_canceled: boolean;
-    editingCanceled: boolean;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get editing_canceled(): boolean;
+    set editing_canceled(val: boolean);
+    get editingCanceled(): boolean;
+    set editingCanceled(val: boolean);
 
     // Constructors
 
@@ -5307,7 +5554,7 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     editing_done(): void;
     remove_widget(): void;
@@ -5341,7 +5588,8 @@ export module ComboBoxText {
 }
 export class ComboBoxText
     extends ComboBox
-    implements Accessible, Buildable, CellEditable, CellLayout, ConstraintTarget {
+    implements Accessible, Buildable, CellEditable, CellLayout, ConstraintTarget
+{
     static $gtype: GObject.GType<ComboBoxText>;
 
     constructor(properties?: Partial<ComboBoxText.ConstructorProperties>, ...args: any[]);
@@ -5349,10 +5597,10 @@ export class ComboBoxText
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    editing_canceled: boolean;
-    editingCanceled: boolean;
+    get editing_canceled(): boolean;
+    set editing_canceled(val: boolean);
+    get editingCanceled(): boolean;
+    set editingCanceled(val: boolean);
 
     // Constructors
 
@@ -5373,27 +5621,6 @@ export class ComboBoxText
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     editing_done(): void;
     remove_widget(): void;
     start_editing(event?: Gdk.Event | null): void;
@@ -5432,7 +5659,7 @@ export class ConstantExpression extends Expression {
 
     // Constructors
 
-    static new_for_value(value: any): ConstantExpression;
+    static new_for_value(value: GObject.Value | any): ConstantExpression;
 
     // Members
 
@@ -5460,16 +5687,16 @@ export class Constraint extends GObject.Object {
     _init(properties?: Partial<Constraint.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    constant: number;
-    multiplier: number;
-    relation: ConstraintRelation;
-    source: ConstraintTarget;
-    source_attribute: ConstraintAttribute;
-    sourceAttribute: ConstraintAttribute;
-    strength: number;
-    target: ConstraintTarget;
-    target_attribute: ConstraintAttribute;
-    targetAttribute: ConstraintAttribute;
+    get constant(): number;
+    get multiplier(): number;
+    get relation(): ConstraintRelation;
+    get source(): ConstraintTarget;
+    get source_attribute(): ConstraintAttribute;
+    get sourceAttribute(): ConstraintAttribute;
+    get strength(): number;
+    get target(): ConstraintTarget;
+    get target_attribute(): ConstraintAttribute;
+    get targetAttribute(): ConstraintAttribute;
 
     // Constructors
 
@@ -5531,20 +5758,34 @@ export class ConstraintGuide extends GObject.Object implements ConstraintTarget 
     _init(properties?: Partial<ConstraintGuide.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    max_height: number;
-    maxHeight: number;
-    max_width: number;
-    maxWidth: number;
-    min_height: number;
-    minHeight: number;
-    min_width: number;
-    minWidth: number;
-    name: string;
-    nat_height: number;
-    natHeight: number;
-    nat_width: number;
-    natWidth: number;
-    strength: ConstraintStrength;
+    get max_height(): number;
+    set max_height(val: number);
+    get maxHeight(): number;
+    set maxHeight(val: number);
+    get max_width(): number;
+    set max_width(val: number);
+    get maxWidth(): number;
+    set maxWidth(val: number);
+    get min_height(): number;
+    set min_height(val: number);
+    get minHeight(): number;
+    set minHeight(val: number);
+    get min_width(): number;
+    set min_width(val: number);
+    get minWidth(): number;
+    set minWidth(val: number);
+    get name(): string;
+    set name(val: string);
+    get nat_height(): number;
+    set nat_height(val: number);
+    get natHeight(): number;
+    set natHeight(val: number);
+    get nat_width(): number;
+    set nat_width(val: number);
+    get natWidth(): number;
+    set natWidth(val: number);
+    get strength(): ConstraintStrength;
+    set strength(val: ConstraintStrength);
 
     // Constructors
 
@@ -5608,7 +5849,7 @@ export class ConstraintLayout extends LayoutManager implements Buildable {
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ConstraintLayoutChild {
@@ -5729,8 +5970,8 @@ export class Dialog extends Window implements Accessible, Buildable, ConstraintT
     _init(properties?: Partial<Dialog.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    use_header_bar: number;
-    useHeaderBar: number;
+    get use_header_bar(): number;
+    get useHeaderBar(): number;
 
     // Signals
 
@@ -5743,11 +5984,6 @@ export class Dialog extends Window implements Accessible, Buildable, ConstraintT
     connect(signal: "response", callback: (_source: this, response_id: number) => void): number;
     connect_after(signal: "response", callback: (_source: this, response_id: number) => void): number;
     emit(signal: "response", response_id: number): void;
-
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
 
     // Constructors
 
@@ -5769,27 +6005,6 @@ export class Dialog extends Window implements Accessible, Buildable, ConstraintT
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -5816,20 +6031,26 @@ export module DirectoryList {
 }
 export class DirectoryList<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<DirectoryList>;
 
     constructor(properties?: Partial<DirectoryList.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<DirectoryList.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    attributes: string;
-    error: GLib.Error;
-    file: Gio.File;
-    io_priority: number;
-    ioPriority: number;
-    loading: boolean;
-    monitored: boolean;
+    get attributes(): string;
+    set attributes(val: string);
+    get error(): GLib.Error;
+    get file(): Gio.File;
+    set file(val: Gio.File);
+    get io_priority(): number;
+    set io_priority(val: number);
+    get ioPriority(): number;
+    set ioPriority(val: number);
+    get loading(): boolean;
+    get monitored(): boolean;
+    set monitored(val: boolean);
 
     // Constructors
 
@@ -5871,18 +6092,21 @@ export class DragIcon extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<DragIcon.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
+    get child(): Widget;
+    set child(val: Widget);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Members
 
     get_child(): Widget | null;
     set_child(child?: Widget | null): void;
-    static create_widget_for_value(value: any): Widget | null;
+    static create_widget_for_value(value: GObject.Value | any): Widget | null;
     static get_for_drag(drag: Gdk.Drag): Widget;
     static set_from_paintable(drag: Gdk.Drag, paintable: Gdk.Paintable, hot_x: number, hot_y: number): void;
 
@@ -5907,7 +6131,7 @@ export class DragIcon extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
@@ -5932,8 +6156,10 @@ export class DragSource extends GestureSingle {
     _init(properties?: Partial<DragSource.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    actions: Gdk.DragAction;
-    content: Gdk.ContentProvider;
+    get actions(): Gdk.DragAction;
+    set actions(val: Gdk.DragAction);
+    get content(): Gdk.ContentProvider;
+    set content(val: Gdk.ContentProvider);
 
     // Signals
 
@@ -5992,13 +6218,14 @@ export class DrawingArea extends Widget implements Accessible, Buildable, Constr
     _init(properties?: Partial<DrawingArea.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    content_height: number;
-    contentHeight: number;
-    content_width: number;
-    contentWidth: number;
-
-    // Fields
-    widget: Widget;
+    get content_height(): number;
+    set content_height(val: number);
+    get contentHeight(): number;
+    set contentHeight(val: number);
+    get content_width(): number;
+    set content_width(val: number);
+    get contentWidth(): number;
+    set contentWidth(val: number);
 
     // Signals
 
@@ -6011,8 +6238,10 @@ export class DrawingArea extends Widget implements Accessible, Buildable, Constr
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -6048,7 +6277,7 @@ export class DrawingArea extends Widget implements Accessible, Buildable, Constr
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module DropControllerMotion {
@@ -6068,11 +6297,11 @@ export class DropControllerMotion extends EventController {
     _init(properties?: Partial<DropControllerMotion.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    contains_pointer: boolean;
-    containsPointer: boolean;
-    drop: Gdk.Drop;
-    is_pointer: boolean;
-    isPointer: boolean;
+    get contains_pointer(): boolean;
+    get containsPointer(): boolean;
+    get drop(): Gdk.Drop;
+    get is_pointer(): boolean;
+    get isPointer(): boolean;
 
     // Signals
 
@@ -6119,21 +6348,31 @@ export class DropDown extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<DropDown.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    enable_search: boolean;
-    enableSearch: boolean;
-    expression: Expression;
-    factory: ListItemFactory;
-    list_factory: ListItemFactory;
-    listFactory: ListItemFactory;
-    model: Gio.ListModel;
-    selected: number;
-    selected_item: GObject.Object;
-    selectedItem: GObject.Object;
+    get enable_search(): boolean;
+    set enable_search(val: boolean);
+    get enableSearch(): boolean;
+    set enableSearch(val: boolean);
+    get expression(): Expression;
+    set expression(val: Expression);
+    get factory(): ListItemFactory;
+    set factory(val: ListItemFactory);
+    get list_factory(): ListItemFactory;
+    set list_factory(val: ListItemFactory);
+    get listFactory(): ListItemFactory;
+    set listFactory(val: ListItemFactory);
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
+    get selected(): number;
+    set selected(val: number);
+    get selected_item(): GObject.Object;
+    get selectedItem(): GObject.Object;
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -6177,7 +6416,7 @@ export class DropDown extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module DropTarget {
@@ -6197,11 +6436,13 @@ export class DropTarget extends EventController {
     _init(properties?: Partial<DropTarget.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    actions: Gdk.DragAction;
-    drop: Gdk.Drop;
-    formats: Gdk.ContentFormats;
-    preload: boolean;
-    value: GObject.Value;
+    get actions(): Gdk.DragAction;
+    set actions(val: Gdk.DragAction);
+    get drop(): Gdk.Drop;
+    get formats(): Gdk.ContentFormats;
+    get preload(): boolean;
+    set preload(val: boolean);
+    get value(): GObject.Value;
 
     // Signals
 
@@ -6216,7 +6457,7 @@ export class DropTarget extends EventController {
         signal: "drop",
         callback: (_source: this, value: GObject.Value, x: number, y: number) => boolean
     ): number;
-    emit(signal: "drop", value: any, x: number, y: number): void;
+    emit(signal: "drop", value: GObject.Value | any, x: number, y: number): void;
     connect(signal: "enter", callback: (_source: this, x: number, y: number) => Gdk.DragAction): number;
     connect_after(signal: "enter", callback: (_source: this, x: number, y: number) => Gdk.DragAction): number;
     emit(signal: "enter", x: number, y: number): void;
@@ -6258,8 +6499,10 @@ export class DropTargetAsync extends EventController {
     _init(properties?: Partial<DropTargetAsync.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    actions: Gdk.DragAction;
-    formats: Gdk.ContentFormats;
+    get actions(): Gdk.DragAction;
+    set actions(val: Gdk.DragAction);
+    get formats(): Gdk.ContentFormats;
+    set formats(val: Gdk.ContentFormats);
 
     // Signals
 
@@ -6319,25 +6562,36 @@ export class EditableLabel extends Widget implements Accessible, Buildable, Cons
     _init(properties?: Partial<EditableLabel.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    editing: boolean;
+    get editing(): boolean;
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    cursor_position: number;
-    cursorPosition: number;
-    editable: boolean;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    max_width_chars: number;
-    maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
-    text: string;
-    width_chars: number;
-    widthChars: number;
-    xalign: number;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get editable(): boolean;
+    set editable(val: boolean);
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get selection_bound(): number;
+    get selectionBound(): number;
+    get text(): string;
+    set text(val: string);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get xalign(): number;
+    set xalign(val: number);
 
     // Constructors
 
@@ -6370,7 +6624,7 @@ export class EditableLabel extends Widget implements Accessible, Buildable, Cons
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     delete_selection(): void;
     delete_text(start_pos: number, end_pos: number): void;
@@ -6425,38 +6679,12 @@ export class EmojiChooser extends Popover implements Accessible, Buildable, Cons
     connect_after(signal: "emoji-picked", callback: (_source: this, text: string) => void): number;
     emit(signal: "emoji-picked", text: string): void;
 
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-
     // Constructors
 
     static ["new"](): EmojiChooser;
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -6550,79 +6778,144 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
     _init(properties?: Partial<Entry.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activates_default: boolean;
-    activatesDefault: boolean;
-    attributes: Pango.AttrList;
-    buffer: EntryBuffer;
-    completion: EntryCompletion;
-    enable_emoji_completion: boolean;
-    enableEmojiCompletion: boolean;
-    extra_menu: Gio.MenuModel;
-    extraMenu: Gio.MenuModel;
-    has_frame: boolean;
-    hasFrame: boolean;
-    im_module: string;
-    imModule: string;
-    input_hints: InputHints;
-    inputHints: InputHints;
-    input_purpose: InputPurpose;
-    inputPurpose: InputPurpose;
-    invisible_char: number;
-    invisibleChar: number;
-    invisible_char_set: boolean;
-    invisibleCharSet: boolean;
-    max_length: number;
-    maxLength: number;
-    overwrite_mode: boolean;
-    overwriteMode: boolean;
-    placeholder_text: string;
-    placeholderText: string;
-    primary_icon_activatable: boolean;
-    primaryIconActivatable: boolean;
-    primary_icon_gicon: Gio.Icon;
-    primaryIconGicon: Gio.Icon;
-    primary_icon_name: string;
-    primaryIconName: string;
-    primary_icon_paintable: Gdk.Paintable;
-    primaryIconPaintable: Gdk.Paintable;
-    primary_icon_sensitive: boolean;
-    primaryIconSensitive: boolean;
-    primary_icon_storage_type: ImageType;
-    primaryIconStorageType: ImageType;
-    primary_icon_tooltip_markup: string;
-    primaryIconTooltipMarkup: string;
-    primary_icon_tooltip_text: string;
-    primaryIconTooltipText: string;
-    progress_fraction: number;
-    progressFraction: number;
-    progress_pulse_step: number;
-    progressPulseStep: number;
-    scroll_offset: number;
-    scrollOffset: number;
-    secondary_icon_activatable: boolean;
-    secondaryIconActivatable: boolean;
-    secondary_icon_gicon: Gio.Icon;
-    secondaryIconGicon: Gio.Icon;
-    secondary_icon_name: string;
-    secondaryIconName: string;
-    secondary_icon_paintable: Gdk.Paintable;
-    secondaryIconPaintable: Gdk.Paintable;
-    secondary_icon_sensitive: boolean;
-    secondaryIconSensitive: boolean;
-    secondary_icon_storage_type: ImageType;
-    secondaryIconStorageType: ImageType;
-    secondary_icon_tooltip_markup: string;
-    secondaryIconTooltipMarkup: string;
-    secondary_icon_tooltip_text: string;
-    secondaryIconTooltipText: string;
-    show_emoji_icon: boolean;
-    showEmojiIcon: boolean;
-    tabs: Pango.TabArray;
-    text_length: number;
-    textLength: number;
-    truncate_multiline: boolean;
-    truncateMultiline: boolean;
-    visibility: boolean;
+    get activates_default(): boolean;
+    set activates_default(val: boolean);
+    get activatesDefault(): boolean;
+    set activatesDefault(val: boolean);
+    get attributes(): Pango.AttrList;
+    set attributes(val: Pango.AttrList);
+    get buffer(): EntryBuffer;
+    set buffer(val: EntryBuffer);
+    get completion(): EntryCompletion;
+    set completion(val: EntryCompletion);
+    get enable_emoji_completion(): boolean;
+    set enable_emoji_completion(val: boolean);
+    get enableEmojiCompletion(): boolean;
+    set enableEmojiCompletion(val: boolean);
+    get extra_menu(): Gio.MenuModel;
+    set extra_menu(val: Gio.MenuModel);
+    get extraMenu(): Gio.MenuModel;
+    set extraMenu(val: Gio.MenuModel);
+    get has_frame(): boolean;
+    set has_frame(val: boolean);
+    get hasFrame(): boolean;
+    set hasFrame(val: boolean);
+    get im_module(): string;
+    set im_module(val: string);
+    get imModule(): string;
+    set imModule(val: string);
+    get input_hints(): InputHints;
+    set input_hints(val: InputHints);
+    get inputHints(): InputHints;
+    set inputHints(val: InputHints);
+    get input_purpose(): InputPurpose;
+    set input_purpose(val: InputPurpose);
+    get inputPurpose(): InputPurpose;
+    set inputPurpose(val: InputPurpose);
+    get invisible_char(): number;
+    set invisible_char(val: number);
+    get invisibleChar(): number;
+    set invisibleChar(val: number);
+    get invisible_char_set(): boolean;
+    set invisible_char_set(val: boolean);
+    get invisibleCharSet(): boolean;
+    set invisibleCharSet(val: boolean);
+    get max_length(): number;
+    set max_length(val: number);
+    get maxLength(): number;
+    set maxLength(val: number);
+    get overwrite_mode(): boolean;
+    set overwrite_mode(val: boolean);
+    get overwriteMode(): boolean;
+    set overwriteMode(val: boolean);
+    get placeholder_text(): string;
+    set placeholder_text(val: string);
+    get placeholderText(): string;
+    set placeholderText(val: string);
+    get primary_icon_activatable(): boolean;
+    set primary_icon_activatable(val: boolean);
+    get primaryIconActivatable(): boolean;
+    set primaryIconActivatable(val: boolean);
+    get primary_icon_gicon(): Gio.Icon;
+    set primary_icon_gicon(val: Gio.Icon);
+    get primaryIconGicon(): Gio.Icon;
+    set primaryIconGicon(val: Gio.Icon);
+    get primary_icon_name(): string;
+    set primary_icon_name(val: string);
+    get primaryIconName(): string;
+    set primaryIconName(val: string);
+    get primary_icon_paintable(): Gdk.Paintable;
+    set primary_icon_paintable(val: Gdk.Paintable);
+    get primaryIconPaintable(): Gdk.Paintable;
+    set primaryIconPaintable(val: Gdk.Paintable);
+    get primary_icon_sensitive(): boolean;
+    set primary_icon_sensitive(val: boolean);
+    get primaryIconSensitive(): boolean;
+    set primaryIconSensitive(val: boolean);
+    get primary_icon_storage_type(): ImageType;
+    get primaryIconStorageType(): ImageType;
+    get primary_icon_tooltip_markup(): string;
+    set primary_icon_tooltip_markup(val: string);
+    get primaryIconTooltipMarkup(): string;
+    set primaryIconTooltipMarkup(val: string);
+    get primary_icon_tooltip_text(): string;
+    set primary_icon_tooltip_text(val: string);
+    get primaryIconTooltipText(): string;
+    set primaryIconTooltipText(val: string);
+    get progress_fraction(): number;
+    set progress_fraction(val: number);
+    get progressFraction(): number;
+    set progressFraction(val: number);
+    get progress_pulse_step(): number;
+    set progress_pulse_step(val: number);
+    get progressPulseStep(): number;
+    set progressPulseStep(val: number);
+    get scroll_offset(): number;
+    get scrollOffset(): number;
+    get secondary_icon_activatable(): boolean;
+    set secondary_icon_activatable(val: boolean);
+    get secondaryIconActivatable(): boolean;
+    set secondaryIconActivatable(val: boolean);
+    get secondary_icon_gicon(): Gio.Icon;
+    set secondary_icon_gicon(val: Gio.Icon);
+    get secondaryIconGicon(): Gio.Icon;
+    set secondaryIconGicon(val: Gio.Icon);
+    get secondary_icon_name(): string;
+    set secondary_icon_name(val: string);
+    get secondaryIconName(): string;
+    set secondaryIconName(val: string);
+    get secondary_icon_paintable(): Gdk.Paintable;
+    set secondary_icon_paintable(val: Gdk.Paintable);
+    get secondaryIconPaintable(): Gdk.Paintable;
+    set secondaryIconPaintable(val: Gdk.Paintable);
+    get secondary_icon_sensitive(): boolean;
+    set secondary_icon_sensitive(val: boolean);
+    get secondaryIconSensitive(): boolean;
+    set secondaryIconSensitive(val: boolean);
+    get secondary_icon_storage_type(): ImageType;
+    get secondaryIconStorageType(): ImageType;
+    get secondary_icon_tooltip_markup(): string;
+    set secondary_icon_tooltip_markup(val: string);
+    get secondaryIconTooltipMarkup(): string;
+    set secondaryIconTooltipMarkup(val: string);
+    get secondary_icon_tooltip_text(): string;
+    set secondary_icon_tooltip_text(val: string);
+    get secondaryIconTooltipText(): string;
+    set secondaryIconTooltipText(val: string);
+    get show_emoji_icon(): boolean;
+    set show_emoji_icon(val: boolean);
+    get showEmojiIcon(): boolean;
+    set showEmojiIcon(val: boolean);
+    get tabs(): Pango.TabArray;
+    set tabs(val: Pango.TabArray);
+    get text_length(): number;
+    get textLength(): number;
+    get truncate_multiline(): boolean;
+    set truncate_multiline(val: boolean);
+    get truncateMultiline(): boolean;
+    set truncateMultiline(val: boolean);
+    get visibility(): boolean;
+    set visibility(val: boolean);
 
     // Signals
 
@@ -6641,23 +6934,36 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    editing_canceled: boolean;
-    editingCanceled: boolean;
-    cursor_position: number;
-    cursorPosition: number;
-    editable: boolean;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    max_width_chars: number;
-    maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
-    text: string;
-    width_chars: number;
-    widthChars: number;
-    xalign: number;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get editing_canceled(): boolean;
+    set editing_canceled(val: boolean);
+    get editingCanceled(): boolean;
+    set editingCanceled(val: boolean);
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get editable(): boolean;
+    set editable(val: boolean);
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get selection_bound(): number;
+    get selectionBound(): number;
+    get text(): string;
+    set text(val: string);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get xalign(): number;
+    set xalign(val: number);
 
     // Constructors
 
@@ -6747,7 +7053,7 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     editing_done(): void;
     remove_widget(): void;
@@ -6802,10 +7108,13 @@ export class EntryBuffer extends GObject.Object {
     _init(properties?: Partial<EntryBuffer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    length: number;
-    max_length: number;
-    maxLength: number;
-    text: string;
+    get length(): number;
+    get max_length(): number;
+    set max_length(val: number);
+    get maxLength(): number;
+    set maxLength(val: number);
+    get text(): string;
+    set text(val: string);
 
     // Signals
 
@@ -6877,23 +7186,38 @@ export class EntryCompletion extends GObject.Object implements Buildable, CellLa
     _init(properties?: Partial<EntryCompletion.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    cell_area: CellArea;
-    cellArea: CellArea;
-    inline_completion: boolean;
-    inlineCompletion: boolean;
-    inline_selection: boolean;
-    inlineSelection: boolean;
-    minimum_key_length: number;
-    minimumKeyLength: number;
-    model: TreeModel;
-    popup_completion: boolean;
-    popupCompletion: boolean;
-    popup_set_width: boolean;
-    popupSetWidth: boolean;
-    popup_single_match: boolean;
-    popupSingleMatch: boolean;
-    text_column: number;
-    textColumn: number;
+    get cell_area(): CellArea;
+    get cellArea(): CellArea;
+    get inline_completion(): boolean;
+    set inline_completion(val: boolean);
+    get inlineCompletion(): boolean;
+    set inlineCompletion(val: boolean);
+    get inline_selection(): boolean;
+    set inline_selection(val: boolean);
+    get inlineSelection(): boolean;
+    set inlineSelection(val: boolean);
+    get minimum_key_length(): number;
+    set minimum_key_length(val: number);
+    get minimumKeyLength(): number;
+    set minimumKeyLength(val: number);
+    get model(): TreeModel;
+    set model(val: TreeModel);
+    get popup_completion(): boolean;
+    set popup_completion(val: boolean);
+    get popupCompletion(): boolean;
+    set popupCompletion(val: boolean);
+    get popup_set_width(): boolean;
+    set popup_set_width(val: boolean);
+    get popupSetWidth(): boolean;
+    set popupSetWidth(val: boolean);
+    get popup_single_match(): boolean;
+    set popup_single_match(val: boolean);
+    get popupSingleMatch(): boolean;
+    set popupSingleMatch(val: boolean);
+    get text_column(): number;
+    set text_column(val: number);
+    get textColumn(): number;
+    set textColumn(val: number);
 
     // Signals
 
@@ -6963,7 +7287,7 @@ export class EntryCompletion extends GObject.Object implements Buildable, CellLa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_attribute(cell: CellRenderer, attribute: string, column: number): void;
     clear(): void;
@@ -7002,12 +7326,17 @@ export abstract class EventController extends GObject.Object {
     _init(properties?: Partial<EventController.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    name: string;
-    propagation_limit: PropagationLimit;
-    propagationLimit: PropagationLimit;
-    propagation_phase: PropagationPhase;
-    propagationPhase: PropagationPhase;
-    widget: Widget;
+    get name(): string;
+    set name(val: string);
+    get propagation_limit(): PropagationLimit;
+    set propagation_limit(val: PropagationLimit);
+    get propagationLimit(): PropagationLimit;
+    set propagationLimit(val: PropagationLimit);
+    get propagation_phase(): PropagationPhase;
+    set propagation_phase(val: PropagationPhase);
+    get propagationPhase(): PropagationPhase;
+    set propagationPhase(val: PropagationPhase);
+    get widget(): Widget;
 
     // Members
 
@@ -7040,10 +7369,10 @@ export class EventControllerFocus extends EventController {
     _init(properties?: Partial<EventControllerFocus.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    contains_focus: boolean;
-    containsFocus: boolean;
-    is_focus: boolean;
-    isFocus: boolean;
+    get contains_focus(): boolean;
+    get containsFocus(): boolean;
+    get is_focus(): boolean;
+    get isFocus(): boolean;
 
     // Signals
 
@@ -7153,10 +7482,10 @@ export class EventControllerMotion extends EventController {
     _init(properties?: Partial<EventControllerMotion.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    contains_pointer: boolean;
-    containsPointer: boolean;
-    is_pointer: boolean;
-    isPointer: boolean;
+    get contains_pointer(): boolean;
+    get containsPointer(): boolean;
+    get is_pointer(): boolean;
+    get isPointer(): boolean;
 
     // Signals
 
@@ -7190,7 +7519,8 @@ export class EventControllerScroll extends EventController {
     _init(properties?: Partial<EventControllerScroll.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    flags: EventControllerScrollFlags;
+    get flags(): EventControllerScrollFlags;
+    set flags(val: EventControllerScrollFlags);
 
     // Signals
 
@@ -7227,7 +7557,8 @@ export module EveryFilter {
 }
 export class EveryFilter<A extends GObject.Object = GObject.Object>
     extends MultiFilter<A>
-    implements Gio.ListModel<A>, Buildable {
+    implements Gio.ListModel<A>, Buildable
+{
     static $gtype: GObject.GType<EveryFilter>;
 
     constructor(properties?: Partial<EveryFilter.ConstructorProperties<A>>, ...args: any[]);
@@ -7258,7 +7589,7 @@ export class EveryFilter<A extends GObject.Object = GObject.Object>
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Expander {
@@ -7284,17 +7615,28 @@ export class Expander extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<Expander.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    expanded: boolean;
-    label: string;
-    label_widget: Widget;
-    labelWidget: Widget;
-    resize_toplevel: boolean;
-    resizeToplevel: boolean;
-    use_markup: boolean;
-    useMarkup: boolean;
-    use_underline: boolean;
-    useUnderline: boolean;
+    get child(): Widget;
+    set child(val: Widget);
+    get expanded(): boolean;
+    set expanded(val: boolean);
+    get label(): string;
+    set label(val: string);
+    get label_widget(): Widget;
+    set label_widget(val: Widget);
+    get labelWidget(): Widget;
+    set labelWidget(val: Widget);
+    get resize_toplevel(): boolean;
+    set resize_toplevel(val: boolean);
+    get resizeToplevel(): boolean;
+    set resizeToplevel(val: boolean);
+    get use_markup(): boolean;
+    set use_markup(val: boolean);
+    get useMarkup(): boolean;
+    set useMarkup(val: boolean);
+    get use_underline(): boolean;
+    set use_underline(val: boolean);
+    get useUnderline(): boolean;
+    set useUnderline(val: boolean);
 
     // Signals
 
@@ -7307,8 +7649,10 @@ export class Expander extends Widget implements Accessible, Buildable, Constrain
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -7353,7 +7697,7 @@ export class Expander extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Expression {
@@ -7370,7 +7714,7 @@ export abstract class Expression {
     // Members
 
     bind(target: GObject.Object, property: string, this_?: GObject.Object | null): ExpressionWatch;
-    evaluate(this_: GObject.Object | null, value: any): boolean;
+    evaluate(this_: GObject.Object | null, value: GObject.Value | any): boolean;
     get_value_type(): GObject.GType;
     is_static(): boolean;
     ref(): Expression;
@@ -7384,7 +7728,8 @@ export module FileChooserDialog {
 }
 export class FileChooserDialog
     extends Dialog
-    implements Accessible, Buildable, ConstraintTarget, FileChooser, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ConstraintTarget, FileChooser, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<FileChooserDialog>;
 
     constructor(properties?: Partial<FileChooserDialog.ConstructorProperties>, ...args: any[]);
@@ -7392,41 +7737,24 @@ export class FileChooserDialog
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action: FileChooserAction;
-    create_folders: boolean;
-    createFolders: boolean;
-    filter: FileFilter;
-    filters: Gio.ListModel;
-    select_multiple: boolean;
-    selectMultiple: boolean;
-    shortcut_folders: Gio.ListModel;
-    shortcutFolders: Gio.ListModel;
+    get action(): FileChooserAction;
+    set action(val: FileChooserAction);
+    get create_folders(): boolean;
+    set create_folders(val: boolean);
+    get createFolders(): boolean;
+    set createFolders(val: boolean);
+    get filter(): FileFilter;
+    set filter(val: FileFilter);
+    get filters(): Gio.ListModel;
+    get select_multiple(): boolean;
+    set select_multiple(val: boolean);
+    get selectMultiple(): boolean;
+    set selectMultiple(val: boolean);
+    get shortcut_folders(): Gio.ListModel;
+    get shortcutFolders(): Gio.ListModel;
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     add_choice(id: string, label: string, options?: string[] | null, option_labels?: string[] | null): void;
     add_filter(filter: FileFilter): void;
     add_shortcut_folder(folder: Gio.File): boolean;
@@ -7452,16 +7780,6 @@ export class FileChooserDialog
     set_file(file: Gio.File): boolean;
     set_filter(filter: FileFilter): void;
     set_select_multiple(select_multiple: boolean): void;
-    get_renderer(): Gsk.Renderer;
-    get_surface(): Gdk.Surface;
-    get_surface_transform(): [number, number];
-    realize(): void;
-    unrealize(): void;
-    get_display(): Gdk.Display;
-    get_focus(): Widget | null;
-    set_focus(focus?: Widget | null): void;
-    vfunc_add_controller(controller: ShortcutController): void;
-    vfunc_remove_controller(controller: ShortcutController): void;
 }
 export module FileChooserNative {
     export interface ConstructorProperties extends NativeDialog.ConstructorProperties {
@@ -7479,22 +7797,32 @@ export class FileChooserNative extends NativeDialog implements FileChooser {
     _init(properties?: Partial<FileChooserNative.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accept_label: string;
-    acceptLabel: string;
-    cancel_label: string;
-    cancelLabel: string;
+    get accept_label(): string;
+    set accept_label(val: string);
+    get acceptLabel(): string;
+    set acceptLabel(val: string);
+    get cancel_label(): string;
+    set cancel_label(val: string);
+    get cancelLabel(): string;
+    set cancelLabel(val: string);
 
     // Implemented Properties
 
-    action: FileChooserAction;
-    create_folders: boolean;
-    createFolders: boolean;
-    filter: FileFilter;
-    filters: Gio.ListModel;
-    select_multiple: boolean;
-    selectMultiple: boolean;
-    shortcut_folders: Gio.ListModel;
-    shortcutFolders: Gio.ListModel;
+    get action(): FileChooserAction;
+    set action(val: FileChooserAction);
+    get create_folders(): boolean;
+    set create_folders(val: boolean);
+    get createFolders(): boolean;
+    set createFolders(val: boolean);
+    get filter(): FileFilter;
+    set filter(val: FileFilter);
+    get filters(): Gio.ListModel;
+    get select_multiple(): boolean;
+    set select_multiple(val: boolean);
+    get selectMultiple(): boolean;
+    set selectMultiple(val: boolean);
+    get shortcut_folders(): Gio.ListModel;
+    get shortcutFolders(): Gio.ListModel;
 
     // Constructors
 
@@ -7556,9 +7884,11 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
     _init(properties?: Partial<FileChooserWidget.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    search_mode: boolean;
-    searchMode: boolean;
-    subtitle: string;
+    get search_mode(): boolean;
+    set search_mode(val: boolean);
+    get searchMode(): boolean;
+    set searchMode(val: boolean);
+    get subtitle(): string;
 
     // Signals
 
@@ -7604,17 +7934,25 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action: FileChooserAction;
-    create_folders: boolean;
-    createFolders: boolean;
-    filter: FileFilter;
-    filters: Gio.ListModel;
-    select_multiple: boolean;
-    selectMultiple: boolean;
-    shortcut_folders: Gio.ListModel;
-    shortcutFolders: Gio.ListModel;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get action(): FileChooserAction;
+    set action(val: FileChooserAction);
+    get create_folders(): boolean;
+    set create_folders(val: boolean);
+    get createFolders(): boolean;
+    set createFolders(val: boolean);
+    get filter(): FileFilter;
+    set filter(val: FileFilter);
+    get filters(): Gio.ListModel;
+    get select_multiple(): boolean;
+    set select_multiple(val: boolean);
+    get selectMultiple(): boolean;
+    set selectMultiple(val: boolean);
+    get shortcut_folders(): Gio.ListModel;
+    get shortcutFolders(): Gio.ListModel;
 
     // Constructors
 
@@ -7641,7 +7979,7 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_choice(id: string, label: string, options?: string[] | null, option_labels?: string[] | null): void;
     add_filter(filter: FileFilter): void;
@@ -7682,7 +8020,8 @@ export class FileFilter extends Filter implements Buildable {
     _init(properties?: Partial<FileFilter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    name: string;
+    get name(): string;
+    set name(val: string);
 
     // Constructors
 
@@ -7713,7 +8052,7 @@ export class FileFilter extends Filter implements Buildable {
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Filter {
@@ -7756,17 +8095,21 @@ export module FilterListModel {
 }
 export class FilterListModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<FilterListModel>;
 
     constructor(properties?: Partial<FilterListModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<FilterListModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    filter: Filter;
-    incremental: boolean;
-    model: Gio.ListModel;
-    pending: number;
+    get filter(): Filter;
+    set filter(val: Filter);
+    get incremental(): boolean;
+    set incremental(val: boolean);
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
+    get pending(): number;
 
     // Constructors
 
@@ -7805,8 +8148,10 @@ export class Fixed extends Widget implements Accessible, Buildable, ConstraintTa
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -7842,7 +8187,7 @@ export class Fixed extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module FixedLayout {
@@ -7873,7 +8218,8 @@ export class FixedLayoutChild extends LayoutChild {
     _init(properties?: Partial<FixedLayoutChild.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    transform: Gsk.Transform;
+    get transform(): Gsk.Transform;
+    set transform(val: Gsk.Transform);
 
     // Members
 
@@ -7889,14 +8235,16 @@ export module FlattenListModel {
 }
 export class FlattenListModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<FlattenListModel>;
 
     constructor(properties?: Partial<FlattenListModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<FlattenListModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    model: Gio.ListModel;
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
 
     // Constructors
 
@@ -7945,21 +8293,36 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<FlowBox.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accept_unpaired_release: boolean;
-    acceptUnpairedRelease: boolean;
-    activate_on_single_click: boolean;
-    activateOnSingleClick: boolean;
-    column_spacing: number;
-    columnSpacing: number;
-    homogeneous: boolean;
-    max_children_per_line: number;
-    maxChildrenPerLine: number;
-    min_children_per_line: number;
-    minChildrenPerLine: number;
-    row_spacing: number;
-    rowSpacing: number;
-    selection_mode: SelectionMode;
-    selectionMode: SelectionMode;
+    get accept_unpaired_release(): boolean;
+    set accept_unpaired_release(val: boolean);
+    get acceptUnpairedRelease(): boolean;
+    set acceptUnpairedRelease(val: boolean);
+    get activate_on_single_click(): boolean;
+    set activate_on_single_click(val: boolean);
+    get activateOnSingleClick(): boolean;
+    set activateOnSingleClick(val: boolean);
+    get column_spacing(): number;
+    set column_spacing(val: number);
+    get columnSpacing(): number;
+    set columnSpacing(val: number);
+    get homogeneous(): boolean;
+    set homogeneous(val: boolean);
+    get max_children_per_line(): number;
+    set max_children_per_line(val: number);
+    get maxChildrenPerLine(): number;
+    set maxChildrenPerLine(val: number);
+    get min_children_per_line(): number;
+    set min_children_per_line(val: number);
+    get minChildrenPerLine(): number;
+    set minChildrenPerLine(val: number);
+    get row_spacing(): number;
+    set row_spacing(val: number);
+    get rowSpacing(): number;
+    set rowSpacing(val: number);
+    get selection_mode(): SelectionMode;
+    set selection_mode(val: SelectionMode);
+    get selectionMode(): SelectionMode;
+    set selectionMode(val: SelectionMode);
 
     // Signals
 
@@ -7996,9 +8359,12 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -8059,7 +8425,7 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -8077,7 +8443,8 @@ export class FlowBoxChild extends Widget implements Accessible, Buildable, Const
     _init(properties?: Partial<FlowBoxChild.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
+    get child(): Widget;
+    set child(val: Widget);
 
     // Signals
 
@@ -8090,8 +8457,10 @@ export class FlowBoxChild extends Widget implements Accessible, Buildable, Const
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -8127,7 +8496,7 @@ export class FlowBoxChild extends Widget implements Accessible, Buildable, Const
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module FontButton {
@@ -8148,12 +8517,18 @@ export class FontButton extends Widget implements Accessible, Buildable, Constra
     _init(properties?: Partial<FontButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    modal: boolean;
-    title: string;
-    use_font: boolean;
-    useFont: boolean;
-    use_size: boolean;
-    useSize: boolean;
+    get modal(): boolean;
+    set modal(val: boolean);
+    get title(): string;
+    set title(val: string);
+    get use_font(): boolean;
+    set use_font(val: boolean);
+    get useFont(): boolean;
+    set useFont(val: boolean);
+    get use_size(): boolean;
+    set use_size(val: boolean);
+    get useSize(): boolean;
+    set useSize(val: boolean);
 
     // Signals
 
@@ -8166,19 +8541,30 @@ export class FontButton extends Widget implements Accessible, Buildable, Constra
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    font: string;
-    font_desc: Pango.FontDescription;
-    fontDesc: Pango.FontDescription;
-    font_features: string;
-    fontFeatures: string;
-    language: string;
-    level: FontChooserLevel;
-    preview_text: string;
-    previewText: string;
-    show_preview_entry: boolean;
-    showPreviewEntry: boolean;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get font(): string;
+    set font(val: string);
+    get font_desc(): Pango.FontDescription;
+    set font_desc(val: Pango.FontDescription);
+    get fontDesc(): Pango.FontDescription;
+    set fontDesc(val: Pango.FontDescription);
+    get font_features(): string;
+    get fontFeatures(): string;
+    get language(): string;
+    set language(val: string);
+    get level(): FontChooserLevel;
+    set level(val: FontChooserLevel);
+    get preview_text(): string;
+    set preview_text(val: string);
+    get previewText(): string;
+    set previewText(val: string);
+    get show_preview_entry(): boolean;
+    set show_preview_entry(val: boolean);
+    get showPreviewEntry(): boolean;
+    set showPreviewEntry(val: boolean);
 
     // Constructors
 
@@ -8217,7 +8603,7 @@ export class FontButton extends Widget implements Accessible, Buildable, Constra
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_font(): string | null;
     get_font_desc(): Pango.FontDescription | null;
@@ -8253,7 +8639,8 @@ export module FontChooserDialog {
 }
 export class FontChooserDialog
     extends Dialog
-    implements Accessible, Buildable, ConstraintTarget, FontChooser, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ConstraintTarget, FontChooser, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<FontChooserDialog>;
 
     constructor(properties?: Partial<FontChooserDialog.ConstructorProperties>, ...args: any[]);
@@ -8261,48 +8648,35 @@ export class FontChooserDialog
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    font: string;
-    font_desc: Pango.FontDescription;
-    fontDesc: Pango.FontDescription;
-    font_features: string;
-    fontFeatures: string;
-    language: string;
-    level: FontChooserLevel;
-    preview_text: string;
-    previewText: string;
-    show_preview_entry: boolean;
-    showPreviewEntry: boolean;
+    get font(): string;
+    set font(val: string);
+    get font_desc(): Pango.FontDescription;
+    set font_desc(val: Pango.FontDescription);
+    get fontDesc(): Pango.FontDescription;
+    set fontDesc(val: Pango.FontDescription);
+    get font_features(): string;
+    get fontFeatures(): string;
+    get language(): string;
+    set language(val: string);
+    get level(): FontChooserLevel;
+    set level(val: FontChooserLevel);
+    get preview_text(): string;
+    set preview_text(val: string);
+    get previewText(): string;
+    set previewText(val: string);
+    get show_preview_entry(): boolean;
+    set show_preview_entry(val: boolean);
+    get showPreviewEntry(): boolean;
+    set showPreviewEntry(val: boolean);
 
     // Constructors
 
     static ["new"](title?: string | null, parent?: Window | null): FontChooserDialog;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.Dialog.new
+    static ["new"](...args: never[]): any;
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_font(): string | null;
     get_font_desc(): Pango.FontDescription | null;
     get_font_face(): Pango.FontFace | null;
@@ -8329,16 +8703,6 @@ export class FontChooserDialog
     vfunc_get_font_size(): number;
     vfunc_set_filter_func(filter?: FontFilterFunc | null): void;
     vfunc_set_font_map(fontmap?: Pango.FontMap | null): void;
-    get_renderer(): Gsk.Renderer;
-    get_surface(): Gdk.Surface;
-    get_surface_transform(): [number, number];
-    realize(): void;
-    unrealize(): void;
-    get_display(): Gdk.Display;
-    get_focus(): Widget | null;
-    set_focus(focus?: Widget | null): void;
-    vfunc_add_controller(controller: ShortcutController): void;
-    vfunc_remove_controller(controller: ShortcutController): void;
 }
 export module FontChooserWidget {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -8354,24 +8718,35 @@ export class FontChooserWidget extends Widget implements Accessible, Buildable, 
     _init(properties?: Partial<FontChooserWidget.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    tweak_action: Gio.Action;
-    tweakAction: Gio.Action;
+    get tweak_action(): Gio.Action;
+    get tweakAction(): Gio.Action;
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    font: string;
-    font_desc: Pango.FontDescription;
-    fontDesc: Pango.FontDescription;
-    font_features: string;
-    fontFeatures: string;
-    language: string;
-    level: FontChooserLevel;
-    preview_text: string;
-    previewText: string;
-    show_preview_entry: boolean;
-    showPreviewEntry: boolean;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get font(): string;
+    set font(val: string);
+    get font_desc(): Pango.FontDescription;
+    set font_desc(val: Pango.FontDescription);
+    get fontDesc(): Pango.FontDescription;
+    set fontDesc(val: Pango.FontDescription);
+    get font_features(): string;
+    get fontFeatures(): string;
+    get language(): string;
+    set language(val: string);
+    get level(): FontChooserLevel;
+    set level(val: FontChooserLevel);
+    get preview_text(): string;
+    set preview_text(val: string);
+    get previewText(): string;
+    set previewText(val: string);
+    get show_preview_entry(): boolean;
+    set show_preview_entry(val: boolean);
+    get showPreviewEntry(): boolean;
+    set showPreviewEntry(val: boolean);
 
     // Constructors
 
@@ -8398,7 +8773,7 @@ export class FontChooserWidget extends Widget implements Accessible, Buildable, 
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_font(): string | null;
     get_font_desc(): Pango.FontDescription | null;
@@ -8445,17 +8820,25 @@ export class Frame extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Frame.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    label: string;
-    label_widget: Widget;
-    labelWidget: Widget;
-    label_xalign: number;
-    labelXalign: number;
+    get child(): Widget;
+    set child(val: Widget);
+    get label(): string;
+    set label(val: string);
+    get label_widget(): Widget;
+    set label_widget(val: Widget);
+    get labelWidget(): Widget;
+    set labelWidget(val: Widget);
+    get label_xalign(): number;
+    set label_xalign(val: number);
+    get labelXalign(): number;
+    set labelXalign(val: number);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -8494,7 +8877,7 @@ export class Frame extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module GLArea {
@@ -8518,15 +8901,23 @@ export class GLArea extends Widget implements Accessible, Buildable, ConstraintT
     _init(properties?: Partial<GLArea.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    auto_render: boolean;
-    autoRender: boolean;
-    context: Gdk.GLContext;
-    has_depth_buffer: boolean;
-    hasDepthBuffer: boolean;
-    has_stencil_buffer: boolean;
-    hasStencilBuffer: boolean;
-    use_es: boolean;
-    useEs: boolean;
+    get auto_render(): boolean;
+    set auto_render(val: boolean);
+    get autoRender(): boolean;
+    set autoRender(val: boolean);
+    get context(): Gdk.GLContext;
+    get has_depth_buffer(): boolean;
+    set has_depth_buffer(val: boolean);
+    get hasDepthBuffer(): boolean;
+    set hasDepthBuffer(val: boolean);
+    get has_stencil_buffer(): boolean;
+    set has_stencil_buffer(val: boolean);
+    get hasStencilBuffer(): boolean;
+    set hasStencilBuffer(val: boolean);
+    get use_es(): boolean;
+    set use_es(val: boolean);
+    get useEs(): boolean;
+    set useEs(val: boolean);
 
     // Signals
 
@@ -8545,8 +8936,10 @@ export class GLArea extends Widget implements Accessible, Buildable, ConstraintT
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -8594,7 +8987,7 @@ export class GLArea extends Widget implements Accessible, Buildable, ConstraintT
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Gesture {
@@ -8611,8 +9004,8 @@ export abstract class Gesture extends EventController {
     _init(properties?: Partial<Gesture.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    n_points: number;
-    nPoints: number;
+    get n_points(): number;
+    get nPoints(): number;
 
     // Signals
 
@@ -8749,8 +9142,10 @@ export class GestureLongPress extends GestureSingle {
     _init(properties?: Partial<GestureLongPress.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    delay_factor: number;
-    delayFactor: number;
+    get delay_factor(): number;
+    set delay_factor(val: number);
+    get delayFactor(): number;
+    set delayFactor(val: number);
 
     // Signals
 
@@ -8786,7 +9181,8 @@ export class GesturePan extends GestureDrag {
     _init(properties?: Partial<GesturePan.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Signals
 
@@ -8800,7 +9196,8 @@ export class GesturePan extends GestureDrag {
     // Constructors
 
     static ["new"](orientation: Orientation): GesturePan;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.GestureDrag.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -8854,10 +9251,14 @@ export class GestureSingle extends Gesture {
     _init(properties?: Partial<GestureSingle.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    button: number;
-    exclusive: boolean;
-    touch_only: boolean;
-    touchOnly: boolean;
+    get button(): number;
+    set button(val: number);
+    get exclusive(): boolean;
+    set exclusive(val: boolean);
+    get touch_only(): boolean;
+    set touch_only(val: boolean);
+    get touchOnly(): boolean;
+    set touchOnly(val: boolean);
 
     // Members
 
@@ -8988,22 +9389,35 @@ export class Grid extends Widget implements Accessible, Buildable, ConstraintTar
     _init(properties?: Partial<Grid.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    baseline_row: number;
-    baselineRow: number;
-    column_homogeneous: boolean;
-    columnHomogeneous: boolean;
-    column_spacing: number;
-    columnSpacing: number;
-    row_homogeneous: boolean;
-    rowHomogeneous: boolean;
-    row_spacing: number;
-    rowSpacing: number;
+    get baseline_row(): number;
+    set baseline_row(val: number);
+    get baselineRow(): number;
+    set baselineRow(val: number);
+    get column_homogeneous(): boolean;
+    set column_homogeneous(val: boolean);
+    get columnHomogeneous(): boolean;
+    set columnHomogeneous(val: boolean);
+    get column_spacing(): number;
+    set column_spacing(val: number);
+    get columnSpacing(): number;
+    set columnSpacing(val: number);
+    get row_homogeneous(): boolean;
+    set row_homogeneous(val: boolean);
+    get rowHomogeneous(): boolean;
+    set rowHomogeneous(val: boolean);
+    get row_spacing(): number;
+    set row_spacing(val: number);
+    get rowSpacing(): number;
+    set rowSpacing(val: number);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -9055,7 +9469,7 @@ export class Grid extends Widget implements Accessible, Buildable, ConstraintTar
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -9082,16 +9496,26 @@ export class GridLayout extends LayoutManager {
     _init(properties?: Partial<GridLayout.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    baseline_row: number;
-    baselineRow: number;
-    column_homogeneous: boolean;
-    columnHomogeneous: boolean;
-    column_spacing: number;
-    columnSpacing: number;
-    row_homogeneous: boolean;
-    rowHomogeneous: boolean;
-    row_spacing: number;
-    rowSpacing: number;
+    get baseline_row(): number;
+    set baseline_row(val: number);
+    get baselineRow(): number;
+    set baselineRow(val: number);
+    get column_homogeneous(): boolean;
+    set column_homogeneous(val: boolean);
+    get columnHomogeneous(): boolean;
+    set columnHomogeneous(val: boolean);
+    get column_spacing(): number;
+    set column_spacing(val: number);
+    get columnSpacing(): number;
+    set columnSpacing(val: number);
+    get row_homogeneous(): boolean;
+    set row_homogeneous(val: boolean);
+    get rowHomogeneous(): boolean;
+    set rowHomogeneous(val: boolean);
+    get row_spacing(): number;
+    set row_spacing(val: number);
+    get rowSpacing(): number;
+    set rowSpacing(val: number);
 
     // Constructors
 
@@ -9130,12 +9554,18 @@ export class GridLayoutChild extends LayoutChild {
     _init(properties?: Partial<GridLayoutChild.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    column: number;
-    column_span: number;
-    columnSpan: number;
-    row: number;
-    row_span: number;
-    rowSpan: number;
+    get column(): number;
+    set column(val: number);
+    get column_span(): number;
+    set column_span(val: number);
+    get columnSpan(): number;
+    set columnSpan(val: number);
+    get row(): number;
+    set row(val: number);
+    get row_span(): number;
+    set row_span(val: number);
+    get rowSpan(): number;
+    set rowSpan(val: number);
 
     // Members
 
@@ -9170,16 +9600,26 @@ export class GridView extends ListBase implements Accessible, Buildable, Constra
     _init(properties?: Partial<GridView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    enable_rubberband: boolean;
-    enableRubberband: boolean;
-    factory: ListItemFactory;
-    max_columns: number;
-    maxColumns: number;
-    min_columns: number;
-    minColumns: number;
-    model: SelectionModel;
-    single_click_activate: boolean;
-    singleClickActivate: boolean;
+    get enable_rubberband(): boolean;
+    set enable_rubberband(val: boolean);
+    get enableRubberband(): boolean;
+    set enableRubberband(val: boolean);
+    get factory(): ListItemFactory;
+    set factory(val: ListItemFactory);
+    get max_columns(): number;
+    set max_columns(val: number);
+    get maxColumns(): number;
+    set maxColumns(val: number);
+    get min_columns(): number;
+    set min_columns(val: number);
+    get minColumns(): number;
+    set minColumns(val: number);
+    get model(): SelectionModel;
+    set model(val: SelectionModel);
+    get single_click_activate(): boolean;
+    set single_click_activate(val: boolean);
+    get singleClickActivate(): boolean;
+    set singleClickActivate(val: boolean);
 
     // Signals
 
@@ -9192,15 +9632,20 @@ export class GridView extends ListBase implements Accessible, Buildable, Constra
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -9223,27 +9668,6 @@ export class GridView extends ListBase implements Accessible, Buildable, Constra
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
     get_border(): [boolean, Border];
@@ -9275,17 +9699,25 @@ export class HeaderBar extends Widget implements Accessible, Buildable, Constrai
     _init(properties?: Partial<HeaderBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    decoration_layout: string;
-    decorationLayout: string;
-    show_title_buttons: boolean;
-    showTitleButtons: boolean;
-    title_widget: Widget;
-    titleWidget: Widget;
+    get decoration_layout(): string;
+    set decoration_layout(val: string);
+    get decorationLayout(): string;
+    set decorationLayout(val: string);
+    get show_title_buttons(): boolean;
+    set show_title_buttons(val: boolean);
+    get showTitleButtons(): boolean;
+    set showTitleButtons(val: boolean);
+    get title_widget(): Widget;
+    set title_widget(val: Widget);
+    get titleWidget(): Widget;
+    set titleWidget(val: Widget);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -9324,7 +9756,7 @@ export class HeaderBar extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module IMContext {
@@ -9343,10 +9775,14 @@ export abstract class IMContext extends GObject.Object {
     _init(properties?: Partial<IMContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    input_hints: InputHints;
-    inputHints: InputHints;
-    input_purpose: InputPurpose;
-    inputPurpose: InputPurpose;
+    get input_hints(): InputHints;
+    set input_hints(val: InputHints);
+    get inputHints(): InputHints;
+    set inputHints(val: InputHints);
+    get input_purpose(): InputPurpose;
+    set input_purpose(val: InputPurpose);
+    get inputPurpose(): InputPurpose;
+    set inputPurpose(val: InputPurpose);
 
     // Signals
 
@@ -9395,10 +9831,12 @@ export abstract class IMContext extends GObject.Object {
     focus_out(): void;
     get_preedit_string(): [string, Pango.AttrList, number];
     get_surrounding(): [boolean, string, number];
+    get_surrounding_with_selection(): [boolean, string, number, number];
     reset(): void;
     set_client_widget(widget?: Widget | null): void;
     set_cursor_location(area: Gdk.Rectangle): void;
     set_surrounding(text: string, len: number, cursor_index: number): void;
+    set_surrounding_with_selection(text: string, len: number, cursor_index: number, anchor_index: number): void;
     set_use_preedit(use_preedit: boolean): void;
     vfunc_commit(str: string): void;
     vfunc_delete_surrounding(offset: number, n_chars: number): boolean;
@@ -9407,6 +9845,7 @@ export abstract class IMContext extends GObject.Object {
     vfunc_focus_out(): void;
     vfunc_get_preedit_string(): [string, Pango.AttrList, number];
     vfunc_get_surrounding(): [boolean, string, number];
+    vfunc_get_surrounding_with_selection(): [boolean, string, number, number];
     vfunc_preedit_changed(): void;
     vfunc_preedit_end(): void;
     vfunc_preedit_start(): void;
@@ -9415,6 +9854,7 @@ export abstract class IMContext extends GObject.Object {
     vfunc_set_client_widget(widget?: Widget | null): void;
     vfunc_set_cursor_location(area: Gdk.Rectangle): void;
     vfunc_set_surrounding(text: string, len: number, cursor_index: number): void;
+    vfunc_set_surrounding_with_selection(text: string, len: number, cursor_index: number, anchor_index: number): void;
     vfunc_set_use_preedit(use_preedit: boolean): void;
 }
 export module IMContextSimple {
@@ -9427,9 +9867,6 @@ export class IMContextSimple extends IMContext {
 
     constructor(properties?: Partial<IMContextSimple.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<IMContextSimple.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    object: IMContext;
 
     // Constructors
 
@@ -9449,9 +9886,6 @@ export class IMMulticontext extends IMContext {
 
     constructor(properties?: Partial<IMMulticontext.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<IMMulticontext.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    object: IMContext;
 
     // Constructors
 
@@ -9479,11 +9913,11 @@ export class IconPaintable extends GObject.Object implements Gdk.Paintable {
     _init(properties?: Partial<IconPaintable.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    file: Gio.File;
-    icon_name: string;
-    iconName: string;
-    is_symbolic: boolean;
-    isSymbolic: boolean;
+    get file(): Gio.File;
+    get icon_name(): string;
+    get iconName(): string;
+    get is_symbolic(): boolean;
+    get isSymbolic(): boolean;
 
     // Constructors
 
@@ -9538,15 +9972,22 @@ export class IconTheme extends GObject.Object {
     _init(properties?: Partial<IconTheme.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Gdk.Display;
-    icon_names: string[];
-    iconNames: string[];
-    resource_path: string[];
-    resourcePath: string[];
-    search_path: string[];
-    searchPath: string[];
-    theme_name: string;
-    themeName: string;
+    get display(): Gdk.Display;
+    set display(val: Gdk.Display);
+    get icon_names(): string[];
+    get iconNames(): string[];
+    get resource_path(): string[];
+    set resource_path(val: string[]);
+    get resourcePath(): string[];
+    set resourcePath(val: string[]);
+    get search_path(): string[];
+    set search_path(val: string[]);
+    get searchPath(): string[];
+    set searchPath(val: string[]);
+    get theme_name(): string;
+    set theme_name(val: string);
+    get themeName(): string;
+    set themeName(val: string);
 
     // Signals
 
@@ -9571,6 +10012,7 @@ export class IconTheme extends GObject.Object {
     get_resource_path(): string[] | null;
     get_search_path(): string[] | null;
     get_theme_name(): string;
+    has_gicon(gicon: Gio.Icon): boolean;
     has_icon(icon_name: string): boolean;
     lookup_by_gicon(
         icon: Gio.Icon,
@@ -9633,35 +10075,62 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
     _init(properties?: Partial<IconView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activate_on_single_click: boolean;
-    activateOnSingleClick: boolean;
-    cell_area: CellArea;
-    cellArea: CellArea;
-    column_spacing: number;
-    columnSpacing: number;
-    columns: number;
-    item_orientation: Orientation;
-    itemOrientation: Orientation;
-    item_padding: number;
-    itemPadding: number;
-    item_width: number;
-    itemWidth: number;
-    margin: number;
-    markup_column: number;
-    markupColumn: number;
-    model: TreeModel;
-    pixbuf_column: number;
-    pixbufColumn: number;
-    reorderable: boolean;
-    row_spacing: number;
-    rowSpacing: number;
-    selection_mode: SelectionMode;
-    selectionMode: SelectionMode;
-    spacing: number;
-    text_column: number;
-    textColumn: number;
-    tooltip_column: number;
-    tooltipColumn: number;
+    get activate_on_single_click(): boolean;
+    set activate_on_single_click(val: boolean);
+    get activateOnSingleClick(): boolean;
+    set activateOnSingleClick(val: boolean);
+    get cell_area(): CellArea;
+    get cellArea(): CellArea;
+    get column_spacing(): number;
+    set column_spacing(val: number);
+    get columnSpacing(): number;
+    set columnSpacing(val: number);
+    get columns(): number;
+    set columns(val: number);
+    get item_orientation(): Orientation;
+    set item_orientation(val: Orientation);
+    get itemOrientation(): Orientation;
+    set itemOrientation(val: Orientation);
+    get item_padding(): number;
+    set item_padding(val: number);
+    get itemPadding(): number;
+    set itemPadding(val: number);
+    get item_width(): number;
+    set item_width(val: number);
+    get itemWidth(): number;
+    set itemWidth(val: number);
+    get margin(): number;
+    set margin(val: number);
+    get markup_column(): number;
+    set markup_column(val: number);
+    get markupColumn(): number;
+    set markupColumn(val: number);
+    get model(): TreeModel;
+    set model(val: TreeModel);
+    get pixbuf_column(): number;
+    set pixbuf_column(val: number);
+    get pixbufColumn(): number;
+    set pixbufColumn(val: number);
+    get reorderable(): boolean;
+    set reorderable(val: boolean);
+    get row_spacing(): number;
+    set row_spacing(val: number);
+    get rowSpacing(): number;
+    set rowSpacing(val: number);
+    get selection_mode(): SelectionMode;
+    set selection_mode(val: SelectionMode);
+    get selectionMode(): SelectionMode;
+    set selectionMode(val: SelectionMode);
+    get spacing(): number;
+    set spacing(val: number);
+    get text_column(): number;
+    set text_column(val: number);
+    get textColumn(): number;
+    set textColumn(val: number);
+    get tooltip_column(): number;
+    set tooltip_column(val: number);
+    get tooltipColumn(): number;
+    set tooltipColumn(val: number);
 
     // Signals
 
@@ -9701,14 +10170,22 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -9730,7 +10207,8 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
     get_column_spacing(): number;
     get_columns(): number;
     get_cursor(): [boolean, TreePath | null, CellRenderer | null];
-    get_cursor(...args: never[]): never;
+    // Conflicted with Gtk.Widget.get_cursor
+    get_cursor(...args: never[]): any;
     get_dest_item_at_pos(drag_x: number, drag_y: number): [boolean, TreePath | null, IconViewDropPosition | null];
     get_drag_dest_item(): [TreePath | null, IconViewDropPosition | null];
     get_item_at_pos(x: number, y: number): [boolean, TreePath | null, CellRenderer | null];
@@ -9767,7 +10245,8 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
     set_column_spacing(column_spacing: number): void;
     set_columns(columns: number): void;
     set_cursor(path: TreePath, cell: CellRenderer | null, start_editing: boolean): void;
-    set_cursor(...args: never[]): never;
+    // Conflicted with Gtk.Widget.set_cursor
+    set_cursor(...args: never[]): any;
     set_drag_dest_item(path: TreePath | null, pos: IconViewDropPosition): void;
     set_item_orientation(orientation: Orientation): void;
     set_item_padding(item_padding: number): void;
@@ -9810,7 +10289,7 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     add_attribute(cell: CellRenderer, attribute: string, column: number): void;
     clear(): void;
@@ -9867,25 +10346,39 @@ export class Image extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Image.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    file: string;
-    gicon: Gio.Icon;
-    icon_name: string;
-    iconName: string;
-    icon_size: IconSize;
-    iconSize: IconSize;
-    paintable: Gdk.Paintable;
-    pixel_size: number;
-    pixelSize: number;
-    resource: string;
-    storage_type: ImageType;
-    storageType: ImageType;
-    use_fallback: boolean;
-    useFallback: boolean;
+    get file(): string;
+    set file(val: string);
+    get gicon(): Gio.Icon;
+    set gicon(val: Gio.Icon);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get icon_size(): IconSize;
+    set icon_size(val: IconSize);
+    get iconSize(): IconSize;
+    set iconSize(val: IconSize);
+    get paintable(): Gdk.Paintable;
+    set paintable(val: Gdk.Paintable);
+    get pixel_size(): number;
+    set pixel_size(val: number);
+    get pixelSize(): number;
+    set pixelSize(val: number);
+    get resource(): string;
+    set resource(val: string);
+    get storage_type(): ImageType;
+    get storageType(): ImageType;
+    get use_fallback(): boolean;
+    set use_fallback(val: boolean);
+    get useFallback(): boolean;
+    set useFallback(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -9936,7 +10429,7 @@ export class Image extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module InfoBar {
@@ -9956,11 +10449,16 @@ export class InfoBar extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<InfoBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    message_type: MessageType;
-    messageType: MessageType;
-    revealed: boolean;
-    show_close_button: boolean;
-    showCloseButton: boolean;
+    get message_type(): MessageType;
+    set message_type(val: MessageType);
+    get messageType(): MessageType;
+    set messageType(val: MessageType);
+    get revealed(): boolean;
+    set revealed(val: boolean);
+    get show_close_button(): boolean;
+    set show_close_button(val: boolean);
+    get showCloseButton(): boolean;
+    set showCloseButton(val: boolean);
 
     // Signals
 
@@ -9976,8 +10474,10 @@ export class InfoBar extends Widget implements Accessible, Buildable, Constraint
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -10021,7 +10521,7 @@ export class InfoBar extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module KeyvalTrigger {
@@ -10038,8 +10538,8 @@ export class KeyvalTrigger extends ShortcutTrigger {
     _init(properties?: Partial<KeyvalTrigger.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    keyval: number;
-    modifiers: Gdk.ModifierType;
+    get keyval(): number;
+    get modifiers(): Gdk.ModifierType;
 
     // Constructors
 
@@ -10089,33 +10589,58 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Label.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    attributes: Pango.AttrList;
-    ellipsize: Pango.EllipsizeMode;
-    extra_menu: Gio.MenuModel;
-    extraMenu: Gio.MenuModel;
-    justify: Justification;
-    label: string;
-    lines: number;
-    max_width_chars: number;
-    maxWidthChars: number;
-    mnemonic_keyval: number;
-    mnemonicKeyval: number;
-    mnemonic_widget: Widget;
-    mnemonicWidget: Widget;
-    selectable: boolean;
-    single_line_mode: boolean;
-    singleLineMode: boolean;
-    use_markup: boolean;
-    useMarkup: boolean;
-    use_underline: boolean;
-    useUnderline: boolean;
-    width_chars: number;
-    widthChars: number;
-    wrap: boolean;
-    wrap_mode: Pango.WrapMode;
-    wrapMode: Pango.WrapMode;
-    xalign: number;
-    yalign: number;
+    get attributes(): Pango.AttrList;
+    set attributes(val: Pango.AttrList);
+    get ellipsize(): Pango.EllipsizeMode;
+    set ellipsize(val: Pango.EllipsizeMode);
+    get extra_menu(): Gio.MenuModel;
+    set extra_menu(val: Gio.MenuModel);
+    get extraMenu(): Gio.MenuModel;
+    set extraMenu(val: Gio.MenuModel);
+    get justify(): Justification;
+    set justify(val: Justification);
+    get label(): string;
+    set label(val: string);
+    get lines(): number;
+    set lines(val: number);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get mnemonic_keyval(): number;
+    get mnemonicKeyval(): number;
+    get mnemonic_widget(): Widget;
+    set mnemonic_widget(val: Widget);
+    get mnemonicWidget(): Widget;
+    set mnemonicWidget(val: Widget);
+    get selectable(): boolean;
+    set selectable(val: boolean);
+    get single_line_mode(): boolean;
+    set single_line_mode(val: boolean);
+    get singleLineMode(): boolean;
+    set singleLineMode(val: boolean);
+    get use_markup(): boolean;
+    set use_markup(val: boolean);
+    get useMarkup(): boolean;
+    set useMarkup(val: boolean);
+    get use_underline(): boolean;
+    set use_underline(val: boolean);
+    get useUnderline(): boolean;
+    set useUnderline(val: boolean);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get wrap(): boolean;
+    set wrap(val: boolean);
+    get wrap_mode(): Pango.WrapMode;
+    set wrap_mode(val: Pango.WrapMode);
+    get wrapMode(): Pango.WrapMode;
+    set wrapMode(val: Pango.WrapMode);
+    get xalign(): number;
+    set xalign(val: number);
+    get yalign(): number;
+    set yalign(val: number);
 
     // Signals
 
@@ -10143,8 +10668,10 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -10220,7 +10747,7 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module LayoutChild {
@@ -10239,10 +10766,10 @@ export abstract class LayoutChild extends GObject.Object {
     _init(properties?: Partial<LayoutChild.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child_widget: Widget;
-    childWidget: Widget;
-    layout_manager: LayoutManager;
-    layoutManager: LayoutManager;
+    get child_widget(): Widget;
+    get childWidget(): Widget;
+    get layout_manager(): LayoutManager;
+    get layoutManager(): LayoutManager;
 
     // Members
 
@@ -10302,13 +10829,20 @@ export class LevelBar extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<LevelBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    inverted: boolean;
-    max_value: number;
-    maxValue: number;
-    min_value: number;
-    minValue: number;
-    mode: LevelBarMode;
-    value: number;
+    get inverted(): boolean;
+    set inverted(val: boolean);
+    get max_value(): number;
+    set max_value(val: number);
+    get maxValue(): number;
+    set maxValue(val: number);
+    get min_value(): number;
+    set min_value(val: number);
+    get minValue(): number;
+    set minValue(val: number);
+    get mode(): LevelBarMode;
+    set mode(val: LevelBarMode);
+    get value(): number;
+    set value(val: number);
 
     // Signals
 
@@ -10321,9 +10855,12 @@ export class LevelBar extends Widget implements Accessible, Buildable, Constrain
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -10367,7 +10904,7 @@ export class LevelBar extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -10386,8 +10923,10 @@ export class LinkButton extends Button implements Accessible, Actionable, Builda
     _init(properties?: Partial<LinkButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    uri: string;
-    visited: boolean;
+    get uri(): string;
+    set uri(val: string);
+    get visited(): boolean;
+    set visited(val: boolean);
 
     // Signals
 
@@ -10400,19 +10939,23 @@ export class LinkButton extends Button implements Accessible, Actionable, Builda
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
     static ["new"](uri: string): LinkButton;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.Button.new
+    static ["new"](...args: never[]): any;
     static new_with_label(uri: string, label?: string | null): LinkButton;
-    static new_with_label(...args: never[]): never;
+    // Conflicted with Gtk.Button.new_with_label
+    static new_with_label(...args: never[]): any;
 
     // Members
 
@@ -10423,13 +10966,6 @@ export class LinkButton extends Button implements Accessible, Actionable, Builda
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
     get_action_name(): string | null;
     get_action_target_value(): GLib.Variant | null;
     set_action_name(action_name?: string | null): void;
@@ -10439,20 +10975,6 @@ export class LinkButton extends Button implements Accessible, Actionable, Builda
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
 }
 export module ListBase {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -10462,25 +10984,35 @@ export module ListBase {
 }
 export abstract class ListBase
     extends Widget
-    implements Accessible, Buildable, ConstraintTarget, Orientable, Scrollable {
+    implements Accessible, Buildable, ConstraintTarget, Orientable, Scrollable
+{
     static $gtype: GObject.GType<ListBase>;
 
     constructor(properties?: Partial<ListBase.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<ListBase.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Implemented Members
 
@@ -10503,7 +11035,7 @@ export abstract class ListBase
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -10538,14 +11070,22 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<ListBox.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accept_unpaired_release: boolean;
-    acceptUnpairedRelease: boolean;
-    activate_on_single_click: boolean;
-    activateOnSingleClick: boolean;
-    selection_mode: SelectionMode;
-    selectionMode: SelectionMode;
-    show_separators: boolean;
-    showSeparators: boolean;
+    get accept_unpaired_release(): boolean;
+    set accept_unpaired_release(val: boolean);
+    get acceptUnpairedRelease(): boolean;
+    set acceptUnpairedRelease(val: boolean);
+    get activate_on_single_click(): boolean;
+    set activate_on_single_click(val: boolean);
+    get activateOnSingleClick(): boolean;
+    set activateOnSingleClick(val: boolean);
+    get selection_mode(): SelectionMode;
+    set selection_mode(val: SelectionMode);
+    get selectionMode(): SelectionMode;
+    set selectionMode(val: SelectionMode);
+    get show_separators(): boolean;
+    set show_separators(val: boolean);
+    get showSeparators(): boolean;
+    set showSeparators(val: boolean);
 
     // Signals
 
@@ -10585,8 +11125,10 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -10602,7 +11144,7 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
     get_adjustment(): Adjustment;
     get_row_at_index(index_: number): ListBoxRow | null;
     get_row_at_y(y: number): ListBoxRow | null;
-    get_selected_row(): ListBoxRow;
+    get_selected_row(): ListBoxRow | null;
     get_selected_rows(): ListBoxRow[];
     get_selection_mode(): SelectionMode;
     get_show_separators(): boolean;
@@ -10647,7 +11189,7 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ListBoxRow {
@@ -10665,9 +11207,12 @@ export class ListBoxRow extends Widget implements Accessible, Actionable, Builda
     _init(properties?: Partial<ListBoxRow.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activatable: boolean;
-    child: Widget;
-    selectable: boolean;
+    get activatable(): boolean;
+    set activatable(val: boolean);
+    get child(): Widget;
+    set child(val: Widget);
+    get selectable(): boolean;
+    set selectable(val: boolean);
 
     // Signals
 
@@ -10680,12 +11225,18 @@ export class ListBoxRow extends Widget implements Accessible, Actionable, Builda
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
@@ -10736,7 +11287,7 @@ export class ListBoxRow extends Widget implements Accessible, Actionable, Builda
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ListItem {
@@ -10757,12 +11308,15 @@ export class ListItem extends GObject.Object {
     _init(properties?: Partial<ListItem.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activatable: boolean;
-    child: Widget;
-    item: GObject.Object;
-    position: number;
-    selectable: boolean;
-    selected: boolean;
+    get activatable(): boolean;
+    set activatable(val: boolean);
+    get child(): Widget;
+    set child(val: Widget);
+    get item(): GObject.Object;
+    get position(): number;
+    get selectable(): boolean;
+    set selectable(val: boolean);
+    get selected(): boolean;
 
     // Members
 
@@ -10794,7 +11348,8 @@ export module ListStore {
 }
 export class ListStore
     extends GObject.Object
-    implements Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable {
+    implements Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable
+{
     static $gtype: GObject.GType<ListStore>;
 
     constructor(properties?: Partial<ListStore.ConstructorProperties>, ...args: any[]);
@@ -10811,7 +11366,7 @@ export class ListStore
     insert(position: number): TreeIter;
     insert_after(sibling?: TreeIter | null): TreeIter;
     insert_before(sibling?: TreeIter | null): TreeIter;
-    insert_with_valuesv(position: number, columns: number[], values: GObject.Value[]): TreeIter | null;
+    insert_with_values(position: number, columns: number[], values: GObject.Value[]): TreeIter | null;
     iter_is_valid(iter: TreeIter): boolean;
     move_after(iter: TreeIter, position?: TreeIter | null): void;
     move_before(iter: TreeIter, position?: TreeIter | null): void;
@@ -10819,9 +11374,10 @@ export class ListStore
     remove(iter: TreeIter): boolean;
     reorder(new_order: number[]): void;
     set_column_types(types: GObject.GType[]): void;
-    set_value(iter: TreeIter, column: number, value: any): void;
+    set_value(iter: TreeIter, column: number, value: GObject.Value | any): void;
     set(iter: TreeIter, columns: number[], values: GObject.Value[]): void;
-    set(...args: never[]): never;
+    // Conflicted with GObject.Object.set
+    set(...args: never[]): any;
     swap(a: TreeIter, b: TreeIter): void;
 
     // Implemented Members
@@ -10838,12 +11394,12 @@ export class ListStore
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
-    drag_data_received(dest: TreePath, value: any): boolean;
-    row_drop_possible(dest_path: TreePath, value: any): boolean;
-    vfunc_drag_data_received(dest: TreePath, value: any): boolean;
-    vfunc_row_drop_possible(dest_path: TreePath, value: any): boolean;
+    drag_data_received(dest: TreePath, value: GObject.Value | any): boolean;
+    row_drop_possible(dest_path: TreePath, value: GObject.Value | any): boolean;
+    vfunc_drag_data_received(dest: TreePath, value: GObject.Value | any): boolean;
+    vfunc_row_drop_possible(dest_path: TreePath, value: GObject.Value | any): boolean;
     drag_data_delete(path: TreePath): boolean;
     drag_data_get(path: TreePath): Gdk.ContentProvider | null;
     row_draggable(path: TreePath): boolean;
@@ -10931,14 +11487,22 @@ export class ListView extends ListBase implements Accessible, Buildable, Constra
     _init(properties?: Partial<ListView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    enable_rubberband: boolean;
-    enableRubberband: boolean;
-    factory: ListItemFactory;
-    model: SelectionModel;
-    show_separators: boolean;
-    showSeparators: boolean;
-    single_click_activate: boolean;
-    singleClickActivate: boolean;
+    get enable_rubberband(): boolean;
+    set enable_rubberband(val: boolean);
+    get enableRubberband(): boolean;
+    set enableRubberband(val: boolean);
+    get factory(): ListItemFactory;
+    set factory(val: ListItemFactory);
+    get model(): SelectionModel;
+    set model(val: SelectionModel);
+    get show_separators(): boolean;
+    set show_separators(val: boolean);
+    get showSeparators(): boolean;
+    set showSeparators(val: boolean);
+    get single_click_activate(): boolean;
+    set single_click_activate(val: boolean);
+    get singleClickActivate(): boolean;
+    set singleClickActivate(val: boolean);
 
     // Signals
 
@@ -10951,15 +11515,20 @@ export class ListView extends ListBase implements Accessible, Buildable, Constra
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -10980,27 +11549,6 @@ export class ListView extends ListBase implements Accessible, Buildable, Constra
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
     get_border(): [boolean, Border];
@@ -11037,31 +11585,45 @@ export class LockButton extends Button implements Accessible, Actionable, Builda
     _init(properties?: Partial<LockButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    permission: Gio.Permission;
-    text_lock: string;
-    textLock: string;
-    text_unlock: string;
-    textUnlock: string;
-    tooltip_lock: string;
-    tooltipLock: string;
-    tooltip_not_authorized: string;
-    tooltipNotAuthorized: string;
-    tooltip_unlock: string;
-    tooltipUnlock: string;
+    get permission(): Gio.Permission;
+    set permission(val: Gio.Permission);
+    get text_lock(): string;
+    set text_lock(val: string);
+    get textLock(): string;
+    set textLock(val: string);
+    get text_unlock(): string;
+    set text_unlock(val: string);
+    get textUnlock(): string;
+    set textUnlock(val: string);
+    get tooltip_lock(): string;
+    set tooltip_lock(val: string);
+    get tooltipLock(): string;
+    set tooltipLock(val: string);
+    get tooltip_not_authorized(): string;
+    set tooltip_not_authorized(val: string);
+    get tooltipNotAuthorized(): string;
+    set tooltipNotAuthorized(val: string);
+    get tooltip_unlock(): string;
+    set tooltip_unlock(val: string);
+    get tooltipUnlock(): string;
+    set tooltipUnlock(val: string);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
     static ["new"](permission?: Gio.Permission | null): LockButton;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gtk.Button.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -11070,13 +11632,6 @@ export class LockButton extends Button implements Accessible, Actionable, Builda
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
     get_action_name(): string | null;
     get_action_target_value(): GLib.Variant | null;
     set_action_name(action_name?: string | null): void;
@@ -11086,20 +11641,6 @@ export class LockButton extends Button implements Accessible, Actionable, Builda
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
 }
 export module MapListModel {
     export interface ConstructorProperties<A extends GObject.Object = GObject.Object>
@@ -11112,16 +11653,17 @@ export module MapListModel {
 }
 export class MapListModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<MapListModel>;
 
     constructor(properties?: Partial<MapListModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<MapListModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    has_map: boolean;
-    hasMap: boolean;
-    model: Gio.ListModel;
+    get has_map(): boolean;
+    get hasMap(): boolean;
+    get model(): Gio.ListModel;
 
     // Constructors
 
@@ -11157,13 +11699,17 @@ export class MediaControls extends Widget implements Accessible, Buildable, Cons
     _init(properties?: Partial<MediaControls.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    media_stream: MediaStream;
-    mediaStream: MediaStream;
+    get media_stream(): MediaStream;
+    set media_stream(val: MediaStream);
+    get mediaStream(): MediaStream;
+    set mediaStream(val: MediaStream);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -11195,7 +11741,7 @@ export class MediaControls extends Widget implements Accessible, Buildable, Cons
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module MediaFile {
@@ -11213,9 +11759,12 @@ export abstract class MediaFile extends MediaStream implements Gdk.Paintable {
     _init(properties?: Partial<MediaFile.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    file: Gio.File;
-    input_stream: Gio.InputStream;
-    inputStream: Gio.InputStream;
+    get file(): Gio.File;
+    set file(val: Gio.File);
+    get input_stream(): Gio.InputStream;
+    set input_stream(val: Gio.InputStream);
+    get inputStream(): Gio.InputStream;
+    set inputStream(val: Gio.InputStream);
 
     // Constructors
 
@@ -11287,21 +11836,26 @@ export abstract class MediaStream extends GObject.Object implements Gdk.Paintabl
     _init(properties?: Partial<MediaStream.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    duration: number;
-    ended: boolean;
-    error: GLib.Error;
-    has_audio: boolean;
-    hasAudio: boolean;
-    has_video: boolean;
-    hasVideo: boolean;
-    loop: boolean;
-    muted: boolean;
-    playing: boolean;
-    prepared: boolean;
-    seekable: boolean;
-    seeking: boolean;
-    timestamp: number;
-    volume: number;
+    get duration(): number;
+    get ended(): boolean;
+    get error(): GLib.Error;
+    get has_audio(): boolean;
+    get hasAudio(): boolean;
+    get has_video(): boolean;
+    get hasVideo(): boolean;
+    get loop(): boolean;
+    set loop(val: boolean);
+    get muted(): boolean;
+    set muted(val: boolean);
+    get playing(): boolean;
+    set playing(val: boolean);
+    get prepared(): boolean;
+    set prepared(val: boolean);
+    get seekable(): boolean;
+    get seeking(): boolean;
+    get timestamp(): number;
+    get volume(): number;
+    set volume(val: number);
 
     // Members
 
@@ -11383,22 +11937,35 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     _init(properties?: Partial<MenuButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    direction: ArrowType;
-    has_frame: boolean;
-    hasFrame: boolean;
-    icon_name: string;
-    iconName: string;
-    label: string;
-    menu_model: Gio.MenuModel;
-    menuModel: Gio.MenuModel;
-    popover: Popover;
-    use_underline: boolean;
-    useUnderline: boolean;
+    get direction(): ArrowType;
+    set direction(val: ArrowType);
+    get has_frame(): boolean;
+    set has_frame(val: boolean);
+    get hasFrame(): boolean;
+    set hasFrame(val: boolean);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get label(): string;
+    set label(val: string);
+    get menu_model(): Gio.MenuModel;
+    set menu_model(val: Gio.MenuModel);
+    get menuModel(): Gio.MenuModel;
+    set menuModel(val: Gio.MenuModel);
+    get popover(): Popover;
+    set popover(val: Popover);
+    get use_underline(): boolean;
+    set use_underline(val: boolean);
+    get useUnderline(): boolean;
+    set useUnderline(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -11407,7 +11974,8 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     // Members
 
     get_direction(): ArrowType;
-    get_direction(...args: never[]): never;
+    // Conflicted with Gtk.Widget.get_direction
+    get_direction(...args: never[]): any;
     get_has_frame(): boolean;
     get_icon_name(): string;
     get_label(): string;
@@ -11418,7 +11986,8 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     popup(): void;
     set_create_popup_func(func?: MenuButtonCreatePopupFunc | null, destroy_notify?: GLib.DestroyNotify | null): void;
     set_direction(direction: ArrowType): void;
-    set_direction(...args: never[]): never;
+    // Conflicted with Gtk.Widget.set_direction
+    set_direction(...args: never[]): any;
     set_has_frame(has_frame: boolean): void;
     set_icon_name(icon_name: string): void;
     set_label(label: string): void;
@@ -11447,7 +12016,7 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module MessageDialog {
@@ -11469,69 +12038,40 @@ export module MessageDialog {
 }
 export class MessageDialog
     extends Dialog
-    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<MessageDialog>;
 
     constructor(properties?: Partial<MessageDialog.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<MessageDialog.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    buttons: ButtonsType;
-    message_area: Widget;
-    messageArea: Widget;
-    message_type: MessageType;
-    messageType: MessageType;
-    secondary_text: string;
-    secondaryText: string;
-    secondary_use_markup: boolean;
-    secondaryUseMarkup: boolean;
-    text: string;
-    use_markup: boolean;
-    useMarkup: boolean;
-
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    set buttons(val: ButtonsType);
+    get message_area(): Widget;
+    get messageArea(): Widget;
+    get message_type(): MessageType;
+    set message_type(val: MessageType);
+    get messageType(): MessageType;
+    set messageType(val: MessageType);
+    get secondary_text(): string;
+    set secondary_text(val: string);
+    get secondaryText(): string;
+    set secondaryText(val: string);
+    get secondary_use_markup(): boolean;
+    set secondary_use_markup(val: boolean);
+    get secondaryUseMarkup(): boolean;
+    set secondaryUseMarkup(val: boolean);
+    get text(): string;
+    set text(val: string);
+    get use_markup(): boolean;
+    set use_markup(val: boolean);
+    get useMarkup(): boolean;
+    set useMarkup(val: boolean);
 
     // Members
 
     get_message_area(): Widget;
     set_markup(str: string): void;
-
-    // Implemented Members
-
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
-    get_renderer(): Gsk.Renderer;
-    get_surface(): Gdk.Surface;
-    get_surface_transform(): [number, number];
-    realize(): void;
-    unrealize(): void;
-    get_display(): Gdk.Display;
-    get_focus(): Widget | null;
-    set_focus(focus?: Widget | null): void;
-    vfunc_add_controller(controller: ShortcutController): void;
-    vfunc_remove_controller(controller: ShortcutController): void;
 }
 export module MnemonicAction {
     export interface ConstructorProperties extends ShortcutAction.ConstructorProperties {
@@ -11561,7 +12101,7 @@ export class MnemonicTrigger extends ShortcutTrigger {
     _init(properties?: Partial<MnemonicTrigger.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    keyval: number;
+    get keyval(): number;
 
     // Constructors
 
@@ -11586,17 +12126,16 @@ export class MountOperation extends Gio.MountOperation {
     _init(properties?: Partial<MountOperation.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Gdk.Display;
-    is_showing: boolean;
-    isShowing: boolean;
-
-    // Fields
-    priv: MountOperationPrivate | any;
+    get display(): Gdk.Display;
+    set display(val: Gdk.Display);
+    get is_showing(): boolean;
+    get isShowing(): boolean;
 
     // Constructors
 
     static ["new"](parent?: Window | null): MountOperation;
-    static ["new"](...args: never[]): never;
+    // Conflicted with Gio.MountOperation.new
+    static ["new"](...args: never[]): any;
 
     // Members
 
@@ -11613,7 +12152,8 @@ export module MultiFilter {
 }
 export abstract class MultiFilter<A extends GObject.Object = GObject.Object>
     extends Filter
-    implements Gio.ListModel<A>, Buildable {
+    implements Gio.ListModel<A>, Buildable
+{
     static $gtype: GObject.GType<MultiFilter>;
 
     constructor(properties?: Partial<MultiFilter.ConstructorProperties<A>>, ...args: any[]);
@@ -11645,7 +12185,7 @@ export abstract class MultiFilter<A extends GObject.Object = GObject.Object>
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module MultiSelection {
@@ -11657,14 +12197,16 @@ export module MultiSelection {
 }
 export class MultiSelection<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A>, SelectionModel<A> {
+    implements Gio.ListModel<A>, SelectionModel<A>
+{
     static $gtype: GObject.GType<MultiSelection>;
 
     constructor(properties?: Partial<MultiSelection.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<MultiSelection.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    model: Gio.ListModel;
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
 
     // Constructors
 
@@ -11713,7 +12255,8 @@ export module MultiSorter {
 }
 export class MultiSorter<A extends GObject.Object = GObject.Object>
     extends Sorter
-    implements Gio.ListModel<A>, Buildable {
+    implements Gio.ListModel<A>, Buildable
+{
     static $gtype: GObject.GType<MultiSorter>;
 
     constructor(properties?: Partial<MultiSorter.ConstructorProperties<A>>, ...args: any[]);
@@ -11749,7 +12292,7 @@ export class MultiSorter<A extends GObject.Object = GObject.Object>
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module NamedAction {
@@ -11766,8 +12309,8 @@ export class NamedAction extends ShortcutAction {
     _init(properties?: Partial<NamedAction.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    action_name: string;
-    actionName: string;
+    get action_name(): string;
+    get actionName(): string;
 
     // Constructors
 
@@ -11794,11 +12337,16 @@ export abstract class NativeDialog extends GObject.Object {
     _init(properties?: Partial<NativeDialog.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    modal: boolean;
-    title: string;
-    transient_for: Window;
-    transientFor: Window;
-    visible: boolean;
+    get modal(): boolean;
+    set modal(val: boolean);
+    get title(): string;
+    set title(val: string);
+    get transient_for(): Window;
+    set transient_for(val: Window);
+    get transientFor(): Window;
+    set transientFor(val: Window);
+    get visible(): boolean;
+    set visible(val: boolean);
 
     // Signals
 
@@ -11849,14 +12397,16 @@ export module NoSelection {
 }
 export class NoSelection<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A>, SelectionModel<A> {
+    implements Gio.ListModel<A>, SelectionModel<A>
+{
     static $gtype: GObject.GType<NoSelection>;
 
     constructor(properties?: Partial<NoSelection.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<NoSelection.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    model: Gio.ListModel;
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
 
     // Constructors
 
@@ -11922,19 +12472,31 @@ export class Notebook extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<Notebook.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    enable_popup: boolean;
-    enablePopup: boolean;
-    group_name: string;
-    groupName: string;
-    page: number;
-    pages: Gio.ListModel;
-    scrollable: boolean;
-    show_border: boolean;
-    showBorder: boolean;
-    show_tabs: boolean;
-    showTabs: boolean;
-    tab_pos: PositionType;
-    tabPos: PositionType;
+    get enable_popup(): boolean;
+    set enable_popup(val: boolean);
+    get enablePopup(): boolean;
+    set enablePopup(val: boolean);
+    get group_name(): string;
+    set group_name(val: string);
+    get groupName(): string;
+    set groupName(val: string);
+    get page(): number;
+    set page(val: number);
+    get pages(): Gio.ListModel;
+    get scrollable(): boolean;
+    set scrollable(val: boolean);
+    get show_border(): boolean;
+    set show_border(val: boolean);
+    get showBorder(): boolean;
+    set showBorder(val: boolean);
+    get show_tabs(): boolean;
+    set show_tabs(val: boolean);
+    get showTabs(): boolean;
+    set showTabs(val: boolean);
+    get tab_pos(): PositionType;
+    set tab_pos(val: PositionType);
+    get tabPos(): PositionType;
+    set tabPos(val: PositionType);
 
     // Signals
 
@@ -11977,8 +12539,10 @@ export class Notebook extends Widget implements Accessible, Buildable, Constrain
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -12052,7 +12616,7 @@ export class Notebook extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module NotebookPage {
@@ -12081,20 +12645,31 @@ export class NotebookPage extends GObject.Object {
     _init(properties?: Partial<NotebookPage.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    detachable: boolean;
-    menu: Widget;
-    menu_label: string;
-    menuLabel: string;
-    position: number;
-    reorderable: boolean;
-    tab: Widget;
-    tab_expand: boolean;
-    tabExpand: boolean;
-    tab_fill: boolean;
-    tabFill: boolean;
-    tab_label: string;
-    tabLabel: string;
+    get child(): Widget;
+    get detachable(): boolean;
+    set detachable(val: boolean);
+    get menu(): Widget;
+    get menu_label(): string;
+    set menu_label(val: string);
+    get menuLabel(): string;
+    set menuLabel(val: string);
+    get position(): number;
+    set position(val: number);
+    get reorderable(): boolean;
+    set reorderable(val: boolean);
+    get tab(): Widget;
+    get tab_expand(): boolean;
+    set tab_expand(val: boolean);
+    get tabExpand(): boolean;
+    set tabExpand(val: boolean);
+    get tab_fill(): boolean;
+    set tab_fill(val: boolean);
+    get tabFill(): boolean;
+    set tabFill(val: boolean);
+    get tab_label(): string;
+    set tab_label(val: string);
+    get tabLabel(): string;
+    set tabLabel(val: string);
 
     // Members
 
@@ -12130,9 +12705,12 @@ export class NumericSorter extends Sorter {
     _init(properties?: Partial<NumericSorter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    expression: Expression;
-    sort_order: SortType;
-    sortOrder: SortType;
+    get expression(): Expression;
+    set expression(val: Expression);
+    get sort_order(): SortType;
+    set sort_order(val: SortType);
+    get sortOrder(): SortType;
+    set sortOrder(val: SortType);
 
     // Constructors
 
@@ -12177,7 +12755,8 @@ export class Overlay extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<Overlay.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
+    get child(): Widget;
+    set child(val: Widget);
 
     // Signals
 
@@ -12196,8 +12775,10 @@ export class Overlay extends Widget implements Accessible, Buildable, Constraint
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -12235,7 +12816,7 @@ export class Overlay extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module OverlayLayout {
@@ -12268,9 +12849,12 @@ export class OverlayLayoutChild extends LayoutChild {
     _init(properties?: Partial<OverlayLayoutChild.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    clip_overlay: boolean;
-    clipOverlay: boolean;
-    measure: boolean;
+    get clip_overlay(): boolean;
+    set clip_overlay(val: boolean);
+    get clipOverlay(): boolean;
+    set clipOverlay(val: boolean);
+    get measure(): boolean;
+    set measure(val: boolean);
 
     // Members
 
@@ -12294,9 +12878,9 @@ export class PadController extends EventController {
     _init(properties?: Partial<PadController.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    action_group: Gio.ActionGroup;
-    actionGroup: Gio.ActionGroup;
-    pad: Gdk.Device;
+    get action_group(): Gio.ActionGroup;
+    get actionGroup(): Gio.ActionGroup;
+    get pad(): Gdk.Device;
 
     // Constructors
 
@@ -12351,6 +12935,33 @@ export class PageSetup extends GObject.Object {
     to_gvariant(): GLib.Variant;
     to_key_file(key_file: GLib.KeyFile, group_name?: string | null): void;
 }
+export module PageSetupUnixDialog {
+    export interface ConstructorProperties extends Dialog.ConstructorProperties {
+        [key: string]: any;
+    }
+}
+export class PageSetupUnixDialog
+    extends Dialog
+    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
+    static $gtype: GObject.GType<PageSetupUnixDialog>;
+
+    constructor(properties?: Partial<PageSetupUnixDialog.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<PageSetupUnixDialog.ConstructorProperties>, ...args: any[]): void;
+
+    // Constructors
+
+    static ["new"](title?: string | null, parent?: Window | null): PageSetupUnixDialog;
+    // Conflicted with Gtk.Dialog.new
+    static ["new"](...args: never[]): any;
+
+    // Members
+
+    get_page_setup(): PageSetup;
+    get_print_settings(): PrintSettings;
+    set_page_setup(page_setup: PageSetup): void;
+    set_print_settings(print_settings: PrintSettings): void;
+}
 export module Paned {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
         [key: string]: any;
@@ -12384,27 +12995,44 @@ export class Paned extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Paned.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    end_child: Widget;
-    endChild: Widget;
-    max_position: number;
-    maxPosition: number;
-    min_position: number;
-    minPosition: number;
-    position: number;
-    position_set: boolean;
-    positionSet: boolean;
-    resize_end_child: boolean;
-    resizeEndChild: boolean;
-    resize_start_child: boolean;
-    resizeStartChild: boolean;
-    shrink_end_child: boolean;
-    shrinkEndChild: boolean;
-    shrink_start_child: boolean;
-    shrinkStartChild: boolean;
-    start_child: Widget;
-    startChild: Widget;
-    wide_handle: boolean;
-    wideHandle: boolean;
+    get end_child(): Widget;
+    set end_child(val: Widget);
+    get endChild(): Widget;
+    set endChild(val: Widget);
+    get max_position(): number;
+    get maxPosition(): number;
+    get min_position(): number;
+    get minPosition(): number;
+    get position(): number;
+    set position(val: number);
+    get position_set(): boolean;
+    set position_set(val: boolean);
+    get positionSet(): boolean;
+    set positionSet(val: boolean);
+    get resize_end_child(): boolean;
+    set resize_end_child(val: boolean);
+    get resizeEndChild(): boolean;
+    set resizeEndChild(val: boolean);
+    get resize_start_child(): boolean;
+    set resize_start_child(val: boolean);
+    get resizeStartChild(): boolean;
+    set resizeStartChild(val: boolean);
+    get shrink_end_child(): boolean;
+    set shrink_end_child(val: boolean);
+    get shrinkEndChild(): boolean;
+    set shrinkEndChild(val: boolean);
+    get shrink_start_child(): boolean;
+    set shrink_start_child(val: boolean);
+    get shrinkStartChild(): boolean;
+    set shrinkStartChild(val: boolean);
+    get start_child(): Widget;
+    set start_child(val: Widget);
+    get startChild(): Widget;
+    set startChild(val: Widget);
+    get wide_handle(): boolean;
+    set wide_handle(val: boolean);
+    get wideHandle(): boolean;
+    set wideHandle(val: boolean);
 
     // Signals
 
@@ -12432,9 +13060,12 @@ export class Paned extends Widget implements Accessible, Buildable, ConstraintTa
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -12480,22 +13111,12 @@ export class Paned extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
 }
-export module ParamSpecExpression {
-    export interface ConstructorProperties extends GObject.ParamSpec.ConstructorProperties {
-        [key: string]: any;
-    }
-}
-export class ParamSpecExpression extends GObject.ParamSpec {
-    static $gtype: GObject.GType<ParamSpecExpression>;
 
-    constructor(properties?: Partial<ParamSpecExpression.ConstructorProperties>, ...args: any[]);
-    _init(properties?: Partial<ParamSpecExpression.ConstructorProperties>, ...args: any[]): void;
-}
 export module PasswordEntry {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
         [key: string]: any;
@@ -12516,14 +13137,22 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
     _init(properties?: Partial<PasswordEntry.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activates_default: boolean;
-    activatesDefault: boolean;
-    extra_menu: Gio.MenuModel;
-    extraMenu: Gio.MenuModel;
-    placeholder_text: string;
-    placeholderText: string;
-    show_peek_icon: boolean;
-    showPeekIcon: boolean;
+    get activates_default(): boolean;
+    set activates_default(val: boolean);
+    get activatesDefault(): boolean;
+    set activatesDefault(val: boolean);
+    get extra_menu(): Gio.MenuModel;
+    set extra_menu(val: Gio.MenuModel);
+    get extraMenu(): Gio.MenuModel;
+    set extraMenu(val: Gio.MenuModel);
+    get placeholder_text(): string;
+    set placeholder_text(val: string);
+    get placeholderText(): string;
+    set placeholderText(val: string);
+    get show_peek_icon(): boolean;
+    set show_peek_icon(val: boolean);
+    get showPeekIcon(): boolean;
+    set showPeekIcon(val: boolean);
 
     // Signals
 
@@ -12536,21 +13165,32 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    cursor_position: number;
-    cursorPosition: number;
-    editable: boolean;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    max_width_chars: number;
-    maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
-    text: string;
-    width_chars: number;
-    widthChars: number;
-    xalign: number;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get editable(): boolean;
+    set editable(val: boolean);
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get selection_bound(): number;
+    get selectionBound(): number;
+    get text(): string;
+    set text(val: string);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get xalign(): number;
+    set xalign(val: number);
 
     // Constructors
 
@@ -12584,7 +13224,7 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     delete_selection(): void;
     delete_text(start_pos: number, end_pos: number): void;
@@ -12639,19 +13279,29 @@ export class Picture extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<Picture.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    alternative_text: string;
-    alternativeText: string;
-    can_shrink: boolean;
-    canShrink: boolean;
-    file: Gio.File;
-    keep_aspect_ratio: boolean;
-    keepAspectRatio: boolean;
-    paintable: Gdk.Paintable;
+    get alternative_text(): string;
+    set alternative_text(val: string);
+    get alternativeText(): string;
+    set alternativeText(val: string);
+    get can_shrink(): boolean;
+    set can_shrink(val: boolean);
+    get canShrink(): boolean;
+    set canShrink(val: boolean);
+    get file(): Gio.File;
+    set file(val: Gio.File);
+    get keep_aspect_ratio(): boolean;
+    set keep_aspect_ratio(val: boolean);
+    get keepAspectRatio(): boolean;
+    set keepAspectRatio(val: boolean);
+    get paintable(): Gdk.Paintable;
+    set paintable(val: Gdk.Paintable);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -12699,7 +13349,7 @@ export class Picture extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Popover {
@@ -12727,19 +13377,32 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<Popover.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    autohide: boolean;
-    cascade_popdown: boolean;
-    cascadePopdown: boolean;
-    child: Widget;
-    default_widget: Widget;
-    defaultWidget: Widget;
-    has_arrow: boolean;
-    hasArrow: boolean;
-    mnemonics_visible: boolean;
-    mnemonicsVisible: boolean;
-    pointing_to: Gdk.Rectangle;
-    pointingTo: Gdk.Rectangle;
-    position: PositionType;
+    get autohide(): boolean;
+    set autohide(val: boolean);
+    get cascade_popdown(): boolean;
+    set cascade_popdown(val: boolean);
+    get cascadePopdown(): boolean;
+    set cascadePopdown(val: boolean);
+    get child(): Widget;
+    set child(val: Widget);
+    get default_widget(): Widget;
+    set default_widget(val: Widget);
+    get defaultWidget(): Widget;
+    set defaultWidget(val: Widget);
+    get has_arrow(): boolean;
+    set has_arrow(val: boolean);
+    get hasArrow(): boolean;
+    set hasArrow(val: boolean);
+    get mnemonics_visible(): boolean;
+    set mnemonics_visible(val: boolean);
+    get mnemonicsVisible(): boolean;
+    set mnemonicsVisible(val: boolean);
+    get pointing_to(): Gdk.Rectangle;
+    set pointing_to(val: Gdk.Rectangle);
+    get pointingTo(): Gdk.Rectangle;
+    set pointingTo(val: Gdk.Rectangle);
+    get position(): PositionType;
+    set position(val: PositionType);
 
     // Signals
 
@@ -12755,8 +13418,10 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -12808,7 +13473,7 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
@@ -12834,15 +13499,14 @@ export class PopoverMenu extends Popover implements Accessible, Buildable, Const
     _init(properties?: Partial<PopoverMenu.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    menu_model: Gio.MenuModel;
-    menuModel: Gio.MenuModel;
-    visible_submenu: string;
-    visibleSubmenu: string;
-
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get menu_model(): Gio.MenuModel;
+    set menu_model(val: Gio.MenuModel);
+    get menuModel(): Gio.MenuModel;
+    set menuModel(val: Gio.MenuModel);
+    get visible_submenu(): string;
+    set visible_submenu(val: string);
+    get visibleSubmenu(): string;
+    set visibleSubmenu(val: string);
 
     // Constructors
 
@@ -12858,27 +13522,6 @@ export class PopoverMenu extends Popover implements Accessible, Buildable, Const
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -12901,13 +13544,17 @@ export class PopoverMenuBar extends Widget implements Accessible, Buildable, Con
     _init(properties?: Partial<PopoverMenuBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    menu_model: Gio.MenuModel;
-    menuModel: Gio.MenuModel;
+    get menu_model(): Gio.MenuModel;
+    set menu_model(val: Gio.MenuModel);
+    get menuModel(): Gio.MenuModel;
+    set menuModel(val: Gio.MenuModel);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -12941,7 +13588,7 @@ export class PopoverMenuBar extends Widget implements Accessible, Buildable, Con
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module PrintContext {
@@ -12968,6 +13615,81 @@ export class PrintContext extends GObject.Object {
     get_pango_fontmap(): Pango.FontMap;
     get_width(): number;
     set_cairo_context(cr: cairo.Context, dpi_x: number, dpi_y: number): void;
+}
+export module PrintJob {
+    export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
+        [key: string]: any;
+        page_setup: PageSetup;
+        pageSetup: PageSetup;
+        printer: Printer;
+        settings: PrintSettings;
+        title: string;
+        track_print_status: boolean;
+        trackPrintStatus: boolean;
+    }
+}
+export class PrintJob extends GObject.Object {
+    static $gtype: GObject.GType<PrintJob>;
+
+    constructor(properties?: Partial<PrintJob.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<PrintJob.ConstructorProperties>, ...args: any[]): void;
+
+    // Properties
+    get page_setup(): PageSetup;
+    get pageSetup(): PageSetup;
+    get printer(): Printer;
+    get settings(): PrintSettings;
+    get title(): string;
+    get track_print_status(): boolean;
+    set track_print_status(val: boolean);
+    get trackPrintStatus(): boolean;
+    set trackPrintStatus(val: boolean);
+
+    // Signals
+
+    connect(id: string, callback: (...args: any[]) => any): number;
+    connect_after(id: string, callback: (...args: any[]) => any): number;
+    emit(id: string, ...args: any[]): void;
+    connect(signal: "status-changed", callback: (_source: this) => void): number;
+    connect_after(signal: "status-changed", callback: (_source: this) => void): number;
+    emit(signal: "status-changed"): void;
+
+    // Constructors
+
+    static ["new"](title: string, printer: Printer, settings: PrintSettings, page_setup: PageSetup): PrintJob;
+
+    // Members
+
+    get_collate(): boolean;
+    get_n_up(): number;
+    get_n_up_layout(): NumberUpLayout;
+    get_num_copies(): number;
+    get_page_ranges(): PageRange[];
+    get_page_set(): PageSet;
+    get_pages(): PrintPages;
+    get_printer(): Printer;
+    get_reverse(): boolean;
+    get_rotate(): boolean;
+    get_scale(): number;
+    get_settings(): PrintSettings;
+    get_status(): PrintStatus;
+    get_surface(): cairo.Surface;
+    get_title(): string;
+    get_track_print_status(): boolean;
+    send(callback: PrintJobCompleteFunc): void;
+    set_collate(collate: boolean): void;
+    set_n_up(n_up: number): void;
+    set_n_up_layout(layout: NumberUpLayout): void;
+    set_num_copies(num_copies: number): void;
+    set_page_ranges(ranges: PageRange[]): void;
+    set_page_set(page_set: PageSet): void;
+    set_pages(pages: PrintPages): void;
+    set_reverse(reverse: boolean): void;
+    set_rotate(rotate: boolean): void;
+    set_scale(scale: number): void;
+    set_source_fd(fd: number): boolean;
+    set_source_file(filename: string): boolean;
+    set_track_print_status(track_status: boolean): void;
 }
 export module PrintOperation {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -13015,40 +13737,69 @@ export class PrintOperation extends GObject.Object implements PrintOperationPrev
     _init(properties?: Partial<PrintOperation.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    allow_async: boolean;
-    allowAsync: boolean;
-    current_page: number;
-    currentPage: number;
-    custom_tab_label: string;
-    customTabLabel: string;
-    default_page_setup: PageSetup;
-    defaultPageSetup: PageSetup;
-    embed_page_setup: boolean;
-    embedPageSetup: boolean;
-    export_filename: string;
-    exportFilename: string;
-    has_selection: boolean;
-    hasSelection: boolean;
-    job_name: string;
-    jobName: string;
-    n_pages: number;
-    nPages: number;
-    n_pages_to_print: number;
-    nPagesToPrint: number;
-    print_settings: PrintSettings;
-    printSettings: PrintSettings;
-    show_progress: boolean;
-    showProgress: boolean;
-    status: PrintStatus;
-    status_string: string;
-    statusString: string;
-    support_selection: boolean;
-    supportSelection: boolean;
-    track_print_status: boolean;
-    trackPrintStatus: boolean;
-    unit: Unit;
-    use_full_page: boolean;
-    useFullPage: boolean;
+    get allow_async(): boolean;
+    set allow_async(val: boolean);
+    get allowAsync(): boolean;
+    set allowAsync(val: boolean);
+    get current_page(): number;
+    set current_page(val: number);
+    get currentPage(): number;
+    set currentPage(val: number);
+    get custom_tab_label(): string;
+    set custom_tab_label(val: string);
+    get customTabLabel(): string;
+    set customTabLabel(val: string);
+    get default_page_setup(): PageSetup;
+    set default_page_setup(val: PageSetup);
+    get defaultPageSetup(): PageSetup;
+    set defaultPageSetup(val: PageSetup);
+    get embed_page_setup(): boolean;
+    set embed_page_setup(val: boolean);
+    get embedPageSetup(): boolean;
+    set embedPageSetup(val: boolean);
+    get export_filename(): string;
+    set export_filename(val: string);
+    get exportFilename(): string;
+    set exportFilename(val: string);
+    get has_selection(): boolean;
+    set has_selection(val: boolean);
+    get hasSelection(): boolean;
+    set hasSelection(val: boolean);
+    get job_name(): string;
+    set job_name(val: string);
+    get jobName(): string;
+    set jobName(val: string);
+    get n_pages(): number;
+    set n_pages(val: number);
+    get nPages(): number;
+    set nPages(val: number);
+    get n_pages_to_print(): number;
+    get nPagesToPrint(): number;
+    get print_settings(): PrintSettings;
+    set print_settings(val: PrintSettings);
+    get printSettings(): PrintSettings;
+    set printSettings(val: PrintSettings);
+    get show_progress(): boolean;
+    set show_progress(val: boolean);
+    get showProgress(): boolean;
+    set showProgress(val: boolean);
+    get status(): PrintStatus;
+    get status_string(): string;
+    get statusString(): string;
+    get support_selection(): boolean;
+    set support_selection(val: boolean);
+    get supportSelection(): boolean;
+    set supportSelection(val: boolean);
+    get track_print_status(): boolean;
+    set track_print_status(val: boolean);
+    get trackPrintStatus(): boolean;
+    set trackPrintStatus(val: boolean);
+    get unit(): Unit;
+    set unit(val: Unit);
+    get use_full_page(): boolean;
+    set use_full_page(val: boolean);
+    get useFullPage(): boolean;
+    set useFullPage(val: boolean);
 
     // Signals
 
@@ -13236,7 +13987,8 @@ export class PrintSettings extends GObject.Object {
     load_file(file_name: string): boolean;
     load_key_file(key_file: GLib.KeyFile, group_name?: string | null): boolean;
     set(key: string, value?: string | null): void;
-    set(...args: never[]): never;
+    // Conflicted with GObject.Object.set
+    set(...args: never[]): any;
     set_bool(key: string, value: boolean): void;
     set_collate(collate: boolean): void;
     set_default_source(default_source: string): void;
@@ -13271,6 +14023,178 @@ export class PrintSettings extends GObject.Object {
     to_key_file(key_file: GLib.KeyFile, group_name?: string | null): void;
     unset(key: string): void;
 }
+export module PrintUnixDialog {
+    export interface ConstructorProperties extends Dialog.ConstructorProperties {
+        [key: string]: any;
+        current_page: number;
+        currentPage: number;
+        embed_page_setup: boolean;
+        embedPageSetup: boolean;
+        has_selection: boolean;
+        hasSelection: boolean;
+        manual_capabilities: PrintCapabilities;
+        manualCapabilities: PrintCapabilities;
+        page_setup: PageSetup;
+        pageSetup: PageSetup;
+        print_settings: PrintSettings;
+        printSettings: PrintSettings;
+        selected_printer: Printer;
+        selectedPrinter: Printer;
+        support_selection: boolean;
+        supportSelection: boolean;
+    }
+}
+export class PrintUnixDialog
+    extends Dialog
+    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
+    static $gtype: GObject.GType<PrintUnixDialog>;
+
+    constructor(properties?: Partial<PrintUnixDialog.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<PrintUnixDialog.ConstructorProperties>, ...args: any[]): void;
+
+    // Properties
+    get current_page(): number;
+    set current_page(val: number);
+    get currentPage(): number;
+    set currentPage(val: number);
+    get embed_page_setup(): boolean;
+    set embed_page_setup(val: boolean);
+    get embedPageSetup(): boolean;
+    set embedPageSetup(val: boolean);
+    get has_selection(): boolean;
+    set has_selection(val: boolean);
+    get hasSelection(): boolean;
+    set hasSelection(val: boolean);
+    get manual_capabilities(): PrintCapabilities;
+    set manual_capabilities(val: PrintCapabilities);
+    get manualCapabilities(): PrintCapabilities;
+    set manualCapabilities(val: PrintCapabilities);
+    get page_setup(): PageSetup;
+    set page_setup(val: PageSetup);
+    get pageSetup(): PageSetup;
+    set pageSetup(val: PageSetup);
+    get print_settings(): PrintSettings;
+    set print_settings(val: PrintSettings);
+    get printSettings(): PrintSettings;
+    set printSettings(val: PrintSettings);
+    get selected_printer(): Printer;
+    get selectedPrinter(): Printer;
+    get support_selection(): boolean;
+    set support_selection(val: boolean);
+    get supportSelection(): boolean;
+    set supportSelection(val: boolean);
+
+    // Constructors
+
+    static ["new"](title?: string | null, parent?: Window | null): PrintUnixDialog;
+    // Conflicted with Gtk.Dialog.new
+    static ["new"](...args: never[]): any;
+
+    // Members
+
+    add_custom_tab(child: Widget, tab_label: Widget): void;
+    get_current_page(): number;
+    get_embed_page_setup(): boolean;
+    get_has_selection(): boolean;
+    get_manual_capabilities(): PrintCapabilities;
+    get_page_setup(): PageSetup;
+    get_page_setup_set(): boolean;
+    get_selected_printer(): Printer;
+    get_settings(): PrintSettings;
+    // Conflicted with Gtk.Widget.get_settings
+    get_settings(...args: never[]): any;
+    get_support_selection(): boolean;
+    set_current_page(current_page: number): void;
+    set_embed_page_setup(embed: boolean): void;
+    set_has_selection(has_selection: boolean): void;
+    set_manual_capabilities(capabilities: PrintCapabilities): void;
+    set_page_setup(page_setup: PageSetup): void;
+    set_settings(settings?: PrintSettings | null): void;
+    set_support_selection(support_selection: boolean): void;
+}
+export module Printer {
+    export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
+        [key: string]: any;
+        accepting_jobs: boolean;
+        acceptingJobs: boolean;
+        accepts_pdf: boolean;
+        acceptsPdf: boolean;
+        accepts_ps: boolean;
+        acceptsPs: boolean;
+        icon_name: string;
+        iconName: string;
+        is_virtual: boolean;
+        isVirtual: boolean;
+        job_count: number;
+        jobCount: number;
+        location: string;
+        name: string;
+        paused: boolean;
+        state_message: string;
+        stateMessage: string;
+    }
+}
+export class Printer extends GObject.Object {
+    static $gtype: GObject.GType<Printer>;
+
+    constructor(properties?: Partial<Printer.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<Printer.ConstructorProperties>, ...args: any[]): void;
+
+    // Properties
+    get accepting_jobs(): boolean;
+    get acceptingJobs(): boolean;
+    get accepts_pdf(): boolean;
+    get acceptsPdf(): boolean;
+    get accepts_ps(): boolean;
+    get acceptsPs(): boolean;
+    get icon_name(): string;
+    get iconName(): string;
+    get is_virtual(): boolean;
+    get isVirtual(): boolean;
+    get job_count(): number;
+    get jobCount(): number;
+    get location(): string;
+    get name(): string;
+    get paused(): boolean;
+    get state_message(): string;
+    get stateMessage(): string;
+
+    // Signals
+
+    connect(id: string, callback: (...args: any[]) => any): number;
+    connect_after(id: string, callback: (...args: any[]) => any): number;
+    emit(id: string, ...args: any[]): void;
+    connect(signal: "details-acquired", callback: (_source: this, success: boolean) => void): number;
+    connect_after(signal: "details-acquired", callback: (_source: this, success: boolean) => void): number;
+    emit(signal: "details-acquired", success: boolean): void;
+
+    // Constructors
+
+    static ["new"](name: string, backend: PrintBackend, virtual_: boolean): Printer;
+
+    // Members
+
+    compare(b: Printer): number;
+    get_backend(): PrintBackend;
+    get_capabilities(): PrintCapabilities;
+    get_default_page_size(): PageSetup;
+    get_description(): string;
+    get_hard_margins(): [boolean, number, number, number, number];
+    get_hard_margins_for_paper_size(paper_size: PaperSize): [boolean, number, number, number, number];
+    get_icon_name(): string;
+    get_job_count(): number;
+    get_location(): string;
+    get_name(): string;
+    get_state_message(): string;
+    has_details(): boolean;
+    is_accepting_jobs(): boolean;
+    is_active(): boolean;
+    is_default(): boolean;
+    is_paused(): boolean;
+    list_papers(): PageSetup[];
+    request_details(): void;
+}
 export module ProgressBar {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
         [key: string]: any;
@@ -13291,20 +14215,31 @@ export class ProgressBar extends Widget implements Accessible, Buildable, Constr
     _init(properties?: Partial<ProgressBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    ellipsize: Pango.EllipsizeMode;
-    fraction: number;
-    inverted: boolean;
-    pulse_step: number;
-    pulseStep: number;
-    show_text: boolean;
-    showText: boolean;
-    text: string;
+    get ellipsize(): Pango.EllipsizeMode;
+    set ellipsize(val: Pango.EllipsizeMode);
+    get fraction(): number;
+    set fraction(val: number);
+    get inverted(): boolean;
+    set inverted(val: boolean);
+    get pulse_step(): number;
+    set pulse_step(val: number);
+    get pulseStep(): number;
+    set pulseStep(val: number);
+    get show_text(): boolean;
+    set show_text(val: boolean);
+    get showText(): boolean;
+    set showText(val: boolean);
+    get text(): string;
+    set text(val: string);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -13347,7 +14282,7 @@ export class ProgressBar extends Widget implements Accessible, Buildable, Constr
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -13395,16 +14330,26 @@ export class Range extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Range.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    adjustment: Adjustment;
-    fill_level: number;
-    fillLevel: number;
-    inverted: boolean;
-    restrict_to_fill_level: boolean;
-    restrictToFillLevel: boolean;
-    round_digits: number;
-    roundDigits: number;
-    show_fill_level: boolean;
-    showFillLevel: boolean;
+    get adjustment(): Adjustment;
+    set adjustment(val: Adjustment);
+    get fill_level(): number;
+    set fill_level(val: number);
+    get fillLevel(): number;
+    set fillLevel(val: number);
+    get inverted(): boolean;
+    set inverted(val: boolean);
+    get restrict_to_fill_level(): boolean;
+    set restrict_to_fill_level(val: boolean);
+    get restrictToFillLevel(): boolean;
+    set restrictToFillLevel(val: boolean);
+    get round_digits(): number;
+    set round_digits(val: number);
+    get roundDigits(): number;
+    set roundDigits(val: number);
+    get show_fill_level(): boolean;
+    set show_fill_level(val: boolean);
+    get showFillLevel(): boolean;
+    set showFillLevel(val: boolean);
 
     // Signals
 
@@ -13429,9 +14374,12 @@ export class Range extends Widget implements Accessible, Buildable, ConstraintTa
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Members
 
@@ -13484,7 +14432,7 @@ export class Range extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -13503,8 +14451,8 @@ export class RecentManager extends GObject.Object {
     _init(properties?: Partial<RecentManager.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    filename: string;
-    size: number;
+    get filename(): string;
+    get size(): number;
 
     // Signals
 
@@ -13553,20 +14501,29 @@ export class Revealer extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<Revealer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    child_revealed: boolean;
-    childRevealed: boolean;
-    reveal_child: boolean;
-    revealChild: boolean;
-    transition_duration: number;
-    transitionDuration: number;
-    transition_type: RevealerTransitionType;
-    transitionType: RevealerTransitionType;
+    get child(): Widget;
+    set child(val: Widget);
+    get child_revealed(): boolean;
+    get childRevealed(): boolean;
+    get reveal_child(): boolean;
+    set reveal_child(val: boolean);
+    get revealChild(): boolean;
+    set revealChild(val: boolean);
+    get transition_duration(): number;
+    set transition_duration(val: number);
+    get transitionDuration(): number;
+    set transitionDuration(val: number);
+    get transition_type(): RevealerTransitionType;
+    set transition_type(val: RevealerTransitionType);
+    get transitionType(): RevealerTransitionType;
+    set transitionType(val: RevealerTransitionType);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -13605,7 +14562,7 @@ export class Revealer extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Scale {
@@ -13627,19 +14584,25 @@ export class Scale extends Range implements Accessible, Buildable, ConstraintTar
     _init(properties?: Partial<Scale.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    digits: number;
-    draw_value: boolean;
-    drawValue: boolean;
-    has_origin: boolean;
-    hasOrigin: boolean;
-    value_pos: PositionType;
-    valuePos: PositionType;
+    get digits(): number;
+    set digits(val: number);
+    get draw_value(): boolean;
+    set draw_value(val: boolean);
+    get drawValue(): boolean;
+    set drawValue(val: boolean);
+    get has_origin(): boolean;
+    set has_origin(val: boolean);
+    get hasOrigin(): boolean;
+    set hasOrigin(val: boolean);
+    get value_pos(): PositionType;
+    set value_pos(val: PositionType);
+    get valuePos(): PositionType;
+    set valuePos(val: PositionType);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -13665,27 +14628,6 @@ export class Scale extends Range implements Accessible, Buildable, ConstraintTar
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
 }
@@ -13704,9 +14646,12 @@ export class ScaleButton extends Widget implements Accessible, Buildable, Constr
     _init(properties?: Partial<ScaleButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    adjustment: Adjustment;
-    icons: string[];
-    value: number;
+    get adjustment(): Adjustment;
+    set adjustment(val: Adjustment);
+    get icons(): string[];
+    set icons(val: string[]);
+    get value(): number;
+    set value(val: number);
 
     // Signals
 
@@ -13725,9 +14670,12 @@ export class ScaleButton extends Widget implements Accessible, Buildable, Constr
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -13766,7 +14714,7 @@ export class ScaleButton extends Widget implements Accessible, Buildable, Constr
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -13784,13 +14732,17 @@ export class Scrollbar extends Widget implements Accessible, Buildable, Constrai
     _init(properties?: Partial<Scrollbar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    adjustment: Adjustment;
+    get adjustment(): Adjustment;
+    set adjustment(val: Adjustment);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -13822,7 +14774,7 @@ export class Scrollbar extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -13866,33 +14818,60 @@ export class ScrolledWindow extends Widget implements Accessible, Buildable, Con
     _init(properties?: Partial<ScrolledWindow.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    hadjustment: Adjustment;
-    has_frame: boolean;
-    hasFrame: boolean;
-    hscrollbar_policy: PolicyType;
-    hscrollbarPolicy: PolicyType;
-    kinetic_scrolling: boolean;
-    kineticScrolling: boolean;
-    max_content_height: number;
-    maxContentHeight: number;
-    max_content_width: number;
-    maxContentWidth: number;
-    min_content_height: number;
-    minContentHeight: number;
-    min_content_width: number;
-    minContentWidth: number;
-    overlay_scrolling: boolean;
-    overlayScrolling: boolean;
-    propagate_natural_height: boolean;
-    propagateNaturalHeight: boolean;
-    propagate_natural_width: boolean;
-    propagateNaturalWidth: boolean;
-    vadjustment: Adjustment;
-    vscrollbar_policy: PolicyType;
-    vscrollbarPolicy: PolicyType;
-    window_placement: CornerType;
-    windowPlacement: CornerType;
+    get child(): Widget;
+    set child(val: Widget);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get has_frame(): boolean;
+    set has_frame(val: boolean);
+    get hasFrame(): boolean;
+    set hasFrame(val: boolean);
+    get hscrollbar_policy(): PolicyType;
+    set hscrollbar_policy(val: PolicyType);
+    get hscrollbarPolicy(): PolicyType;
+    set hscrollbarPolicy(val: PolicyType);
+    get kinetic_scrolling(): boolean;
+    set kinetic_scrolling(val: boolean);
+    get kineticScrolling(): boolean;
+    set kineticScrolling(val: boolean);
+    get max_content_height(): number;
+    set max_content_height(val: number);
+    get maxContentHeight(): number;
+    set maxContentHeight(val: number);
+    get max_content_width(): number;
+    set max_content_width(val: number);
+    get maxContentWidth(): number;
+    set maxContentWidth(val: number);
+    get min_content_height(): number;
+    set min_content_height(val: number);
+    get minContentHeight(): number;
+    set minContentHeight(val: number);
+    get min_content_width(): number;
+    set min_content_width(val: number);
+    get minContentWidth(): number;
+    set minContentWidth(val: number);
+    get overlay_scrolling(): boolean;
+    set overlay_scrolling(val: boolean);
+    get overlayScrolling(): boolean;
+    set overlayScrolling(val: boolean);
+    get propagate_natural_height(): boolean;
+    set propagate_natural_height(val: boolean);
+    get propagateNaturalHeight(): boolean;
+    set propagateNaturalHeight(val: boolean);
+    get propagate_natural_width(): boolean;
+    set propagate_natural_width(val: boolean);
+    get propagateNaturalWidth(): boolean;
+    set propagateNaturalWidth(val: boolean);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscrollbar_policy(): PolicyType;
+    set vscrollbar_policy(val: PolicyType);
+    get vscrollbarPolicy(): PolicyType;
+    set vscrollbarPolicy(val: PolicyType);
+    get window_placement(): CornerType;
+    set window_placement(val: CornerType);
+    get windowPlacement(): CornerType;
+    set windowPlacement(val: CornerType);
 
     // Signals
 
@@ -13920,8 +14899,10 @@ export class ScrolledWindow extends Widget implements Accessible, Buildable, Con
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -13982,7 +14963,7 @@ export class ScrolledWindow extends Widget implements Accessible, Buildable, Con
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module SearchBar {
@@ -14004,18 +14985,27 @@ export class SearchBar extends Widget implements Accessible, Buildable, Constrai
     _init(properties?: Partial<SearchBar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    key_capture_widget: Widget;
-    keyCaptureWidget: Widget;
-    search_mode_enabled: boolean;
-    searchModeEnabled: boolean;
-    show_close_button: boolean;
-    showCloseButton: boolean;
+    get child(): Widget;
+    set child(val: Widget);
+    get key_capture_widget(): Widget;
+    set key_capture_widget(val: Widget);
+    get keyCaptureWidget(): Widget;
+    set keyCaptureWidget(val: Widget);
+    get search_mode_enabled(): boolean;
+    set search_mode_enabled(val: boolean);
+    get searchModeEnabled(): boolean;
+    set searchModeEnabled(val: boolean);
+    get show_close_button(): boolean;
+    set show_close_button(val: boolean);
+    get showCloseButton(): boolean;
+    set showCloseButton(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -14054,7 +15044,7 @@ export class SearchBar extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module SearchEntry {
@@ -14073,10 +15063,14 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
     _init(properties?: Partial<SearchEntry.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activates_default: boolean;
-    activatesDefault: boolean;
-    placeholder_text: string;
-    placeholderText: string;
+    get activates_default(): boolean;
+    set activates_default(val: boolean);
+    get activatesDefault(): boolean;
+    set activatesDefault(val: boolean);
+    get placeholder_text(): string;
+    set placeholder_text(val: string);
+    get placeholderText(): string;
+    set placeholderText(val: string);
 
     // Signals
 
@@ -14104,21 +15098,32 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    cursor_position: number;
-    cursorPosition: number;
-    editable: boolean;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    max_width_chars: number;
-    maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
-    text: string;
-    width_chars: number;
-    widthChars: number;
-    xalign: number;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get editable(): boolean;
+    set editable(val: boolean);
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get selection_bound(): number;
+    get selectionBound(): number;
+    get text(): string;
+    set text(val: string);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get xalign(): number;
+    set xalign(val: number);
 
     // Constructors
 
@@ -14150,7 +15155,7 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     delete_selection(): void;
     delete_text(start_pos: number, end_pos: number): void;
@@ -14194,14 +15199,16 @@ export module SelectionFilterModel {
 }
 export class SelectionFilterModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<SelectionFilterModel>;
 
     constructor(properties?: Partial<SelectionFilterModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<SelectionFilterModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    model: SelectionModel;
+    get model(): SelectionModel;
+    set model(val: SelectionModel);
 
     // Constructors
 
@@ -14235,9 +15242,12 @@ export class Separator extends Widget implements Accessible, Buildable, Constrai
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -14264,7 +15274,7 @@ export class Separator extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
@@ -14379,104 +15389,202 @@ export class Settings extends GObject.Object implements StyleProvider {
     _init(properties?: Partial<Settings.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    gtk_alternative_button_order: boolean;
-    gtkAlternativeButtonOrder: boolean;
-    gtk_alternative_sort_arrows: boolean;
-    gtkAlternativeSortArrows: boolean;
-    gtk_application_prefer_dark_theme: boolean;
-    gtkApplicationPreferDarkTheme: boolean;
-    gtk_cursor_aspect_ratio: number;
-    gtkCursorAspectRatio: number;
-    gtk_cursor_blink: boolean;
-    gtkCursorBlink: boolean;
-    gtk_cursor_blink_time: number;
-    gtkCursorBlinkTime: number;
-    gtk_cursor_blink_timeout: number;
-    gtkCursorBlinkTimeout: number;
-    gtk_cursor_theme_name: string;
-    gtkCursorThemeName: string;
-    gtk_cursor_theme_size: number;
-    gtkCursorThemeSize: number;
-    gtk_decoration_layout: string;
-    gtkDecorationLayout: string;
-    gtk_dialogs_use_header: boolean;
-    gtkDialogsUseHeader: boolean;
-    gtk_dnd_drag_threshold: number;
-    gtkDndDragThreshold: number;
-    gtk_double_click_distance: number;
-    gtkDoubleClickDistance: number;
-    gtk_double_click_time: number;
-    gtkDoubleClickTime: number;
-    gtk_enable_accels: boolean;
-    gtkEnableAccels: boolean;
-    gtk_enable_animations: boolean;
-    gtkEnableAnimations: boolean;
-    gtk_enable_event_sounds: boolean;
-    gtkEnableEventSounds: boolean;
-    gtk_enable_input_feedback_sounds: boolean;
-    gtkEnableInputFeedbackSounds: boolean;
-    gtk_enable_primary_paste: boolean;
-    gtkEnablePrimaryPaste: boolean;
-    gtk_entry_password_hint_timeout: number;
-    gtkEntryPasswordHintTimeout: number;
-    gtk_entry_select_on_focus: boolean;
-    gtkEntrySelectOnFocus: boolean;
-    gtk_error_bell: boolean;
-    gtkErrorBell: boolean;
-    gtk_font_name: string;
-    gtkFontName: string;
-    gtk_fontconfig_timestamp: number;
-    gtkFontconfigTimestamp: number;
-    gtk_icon_theme_name: string;
-    gtkIconThemeName: string;
-    gtk_im_module: string;
-    gtkImModule: string;
-    gtk_keynav_use_caret: boolean;
-    gtkKeynavUseCaret: boolean;
-    gtk_label_select_on_focus: boolean;
-    gtkLabelSelectOnFocus: boolean;
-    gtk_long_press_time: number;
-    gtkLongPressTime: number;
-    gtk_overlay_scrolling: boolean;
-    gtkOverlayScrolling: boolean;
-    gtk_primary_button_warps_slider: boolean;
-    gtkPrimaryButtonWarpsSlider: boolean;
-    gtk_print_backends: string;
-    gtkPrintBackends: string;
-    gtk_print_preview_command: string;
-    gtkPrintPreviewCommand: string;
-    gtk_recent_files_enabled: boolean;
-    gtkRecentFilesEnabled: boolean;
-    gtk_recent_files_max_age: number;
-    gtkRecentFilesMaxAge: number;
-    gtk_shell_shows_app_menu: boolean;
-    gtkShellShowsAppMenu: boolean;
-    gtk_shell_shows_desktop: boolean;
-    gtkShellShowsDesktop: boolean;
-    gtk_shell_shows_menubar: boolean;
-    gtkShellShowsMenubar: boolean;
-    gtk_sound_theme_name: string;
-    gtkSoundThemeName: string;
-    gtk_split_cursor: boolean;
-    gtkSplitCursor: boolean;
-    gtk_theme_name: string;
-    gtkThemeName: string;
-    gtk_titlebar_double_click: string;
-    gtkTitlebarDoubleClick: string;
-    gtk_titlebar_middle_click: string;
-    gtkTitlebarMiddleClick: string;
-    gtk_titlebar_right_click: string;
-    gtkTitlebarRightClick: string;
-    gtk_xft_antialias: number;
-    gtkXftAntialias: number;
-    gtk_xft_dpi: number;
-    gtkXftDpi: number;
-    gtk_xft_hinting: number;
-    gtkXftHinting: number;
-    gtk_xft_hintstyle: string;
-    gtkXftHintstyle: string;
-    gtk_xft_rgba: string;
-    gtkXftRgba: string;
+    get gtk_alternative_button_order(): boolean;
+    set gtk_alternative_button_order(val: boolean);
+    get gtkAlternativeButtonOrder(): boolean;
+    set gtkAlternativeButtonOrder(val: boolean);
+    get gtk_alternative_sort_arrows(): boolean;
+    set gtk_alternative_sort_arrows(val: boolean);
+    get gtkAlternativeSortArrows(): boolean;
+    set gtkAlternativeSortArrows(val: boolean);
+    get gtk_application_prefer_dark_theme(): boolean;
+    set gtk_application_prefer_dark_theme(val: boolean);
+    get gtkApplicationPreferDarkTheme(): boolean;
+    set gtkApplicationPreferDarkTheme(val: boolean);
+    get gtk_cursor_aspect_ratio(): number;
+    set gtk_cursor_aspect_ratio(val: number);
+    get gtkCursorAspectRatio(): number;
+    set gtkCursorAspectRatio(val: number);
+    get gtk_cursor_blink(): boolean;
+    set gtk_cursor_blink(val: boolean);
+    get gtkCursorBlink(): boolean;
+    set gtkCursorBlink(val: boolean);
+    get gtk_cursor_blink_time(): number;
+    set gtk_cursor_blink_time(val: number);
+    get gtkCursorBlinkTime(): number;
+    set gtkCursorBlinkTime(val: number);
+    get gtk_cursor_blink_timeout(): number;
+    set gtk_cursor_blink_timeout(val: number);
+    get gtkCursorBlinkTimeout(): number;
+    set gtkCursorBlinkTimeout(val: number);
+    get gtk_cursor_theme_name(): string;
+    set gtk_cursor_theme_name(val: string);
+    get gtkCursorThemeName(): string;
+    set gtkCursorThemeName(val: string);
+    get gtk_cursor_theme_size(): number;
+    set gtk_cursor_theme_size(val: number);
+    get gtkCursorThemeSize(): number;
+    set gtkCursorThemeSize(val: number);
+    get gtk_decoration_layout(): string;
+    set gtk_decoration_layout(val: string);
+    get gtkDecorationLayout(): string;
+    set gtkDecorationLayout(val: string);
+    get gtk_dialogs_use_header(): boolean;
+    set gtk_dialogs_use_header(val: boolean);
+    get gtkDialogsUseHeader(): boolean;
+    set gtkDialogsUseHeader(val: boolean);
+    get gtk_dnd_drag_threshold(): number;
+    set gtk_dnd_drag_threshold(val: number);
+    get gtkDndDragThreshold(): number;
+    set gtkDndDragThreshold(val: number);
+    get gtk_double_click_distance(): number;
+    set gtk_double_click_distance(val: number);
+    get gtkDoubleClickDistance(): number;
+    set gtkDoubleClickDistance(val: number);
+    get gtk_double_click_time(): number;
+    set gtk_double_click_time(val: number);
+    get gtkDoubleClickTime(): number;
+    set gtkDoubleClickTime(val: number);
+    get gtk_enable_accels(): boolean;
+    set gtk_enable_accels(val: boolean);
+    get gtkEnableAccels(): boolean;
+    set gtkEnableAccels(val: boolean);
+    get gtk_enable_animations(): boolean;
+    set gtk_enable_animations(val: boolean);
+    get gtkEnableAnimations(): boolean;
+    set gtkEnableAnimations(val: boolean);
+    get gtk_enable_event_sounds(): boolean;
+    set gtk_enable_event_sounds(val: boolean);
+    get gtkEnableEventSounds(): boolean;
+    set gtkEnableEventSounds(val: boolean);
+    get gtk_enable_input_feedback_sounds(): boolean;
+    set gtk_enable_input_feedback_sounds(val: boolean);
+    get gtkEnableInputFeedbackSounds(): boolean;
+    set gtkEnableInputFeedbackSounds(val: boolean);
+    get gtk_enable_primary_paste(): boolean;
+    set gtk_enable_primary_paste(val: boolean);
+    get gtkEnablePrimaryPaste(): boolean;
+    set gtkEnablePrimaryPaste(val: boolean);
+    get gtk_entry_password_hint_timeout(): number;
+    set gtk_entry_password_hint_timeout(val: number);
+    get gtkEntryPasswordHintTimeout(): number;
+    set gtkEntryPasswordHintTimeout(val: number);
+    get gtk_entry_select_on_focus(): boolean;
+    set gtk_entry_select_on_focus(val: boolean);
+    get gtkEntrySelectOnFocus(): boolean;
+    set gtkEntrySelectOnFocus(val: boolean);
+    get gtk_error_bell(): boolean;
+    set gtk_error_bell(val: boolean);
+    get gtkErrorBell(): boolean;
+    set gtkErrorBell(val: boolean);
+    get gtk_font_name(): string;
+    set gtk_font_name(val: string);
+    get gtkFontName(): string;
+    set gtkFontName(val: string);
+    get gtk_fontconfig_timestamp(): number;
+    set gtk_fontconfig_timestamp(val: number);
+    get gtkFontconfigTimestamp(): number;
+    set gtkFontconfigTimestamp(val: number);
+    get gtk_icon_theme_name(): string;
+    set gtk_icon_theme_name(val: string);
+    get gtkIconThemeName(): string;
+    set gtkIconThemeName(val: string);
+    get gtk_im_module(): string;
+    set gtk_im_module(val: string);
+    get gtkImModule(): string;
+    set gtkImModule(val: string);
+    get gtk_keynav_use_caret(): boolean;
+    set gtk_keynav_use_caret(val: boolean);
+    get gtkKeynavUseCaret(): boolean;
+    set gtkKeynavUseCaret(val: boolean);
+    get gtk_label_select_on_focus(): boolean;
+    set gtk_label_select_on_focus(val: boolean);
+    get gtkLabelSelectOnFocus(): boolean;
+    set gtkLabelSelectOnFocus(val: boolean);
+    get gtk_long_press_time(): number;
+    set gtk_long_press_time(val: number);
+    get gtkLongPressTime(): number;
+    set gtkLongPressTime(val: number);
+    get gtk_overlay_scrolling(): boolean;
+    set gtk_overlay_scrolling(val: boolean);
+    get gtkOverlayScrolling(): boolean;
+    set gtkOverlayScrolling(val: boolean);
+    get gtk_primary_button_warps_slider(): boolean;
+    set gtk_primary_button_warps_slider(val: boolean);
+    get gtkPrimaryButtonWarpsSlider(): boolean;
+    set gtkPrimaryButtonWarpsSlider(val: boolean);
+    get gtk_print_backends(): string;
+    set gtk_print_backends(val: string);
+    get gtkPrintBackends(): string;
+    set gtkPrintBackends(val: string);
+    get gtk_print_preview_command(): string;
+    set gtk_print_preview_command(val: string);
+    get gtkPrintPreviewCommand(): string;
+    set gtkPrintPreviewCommand(val: string);
+    get gtk_recent_files_enabled(): boolean;
+    set gtk_recent_files_enabled(val: boolean);
+    get gtkRecentFilesEnabled(): boolean;
+    set gtkRecentFilesEnabled(val: boolean);
+    get gtk_recent_files_max_age(): number;
+    set gtk_recent_files_max_age(val: number);
+    get gtkRecentFilesMaxAge(): number;
+    set gtkRecentFilesMaxAge(val: number);
+    get gtk_shell_shows_app_menu(): boolean;
+    set gtk_shell_shows_app_menu(val: boolean);
+    get gtkShellShowsAppMenu(): boolean;
+    set gtkShellShowsAppMenu(val: boolean);
+    get gtk_shell_shows_desktop(): boolean;
+    set gtk_shell_shows_desktop(val: boolean);
+    get gtkShellShowsDesktop(): boolean;
+    set gtkShellShowsDesktop(val: boolean);
+    get gtk_shell_shows_menubar(): boolean;
+    set gtk_shell_shows_menubar(val: boolean);
+    get gtkShellShowsMenubar(): boolean;
+    set gtkShellShowsMenubar(val: boolean);
+    get gtk_sound_theme_name(): string;
+    set gtk_sound_theme_name(val: string);
+    get gtkSoundThemeName(): string;
+    set gtkSoundThemeName(val: string);
+    get gtk_split_cursor(): boolean;
+    set gtk_split_cursor(val: boolean);
+    get gtkSplitCursor(): boolean;
+    set gtkSplitCursor(val: boolean);
+    get gtk_theme_name(): string;
+    set gtk_theme_name(val: string);
+    get gtkThemeName(): string;
+    set gtkThemeName(val: string);
+    get gtk_titlebar_double_click(): string;
+    set gtk_titlebar_double_click(val: string);
+    get gtkTitlebarDoubleClick(): string;
+    set gtkTitlebarDoubleClick(val: string);
+    get gtk_titlebar_middle_click(): string;
+    set gtk_titlebar_middle_click(val: string);
+    get gtkTitlebarMiddleClick(): string;
+    set gtkTitlebarMiddleClick(val: string);
+    get gtk_titlebar_right_click(): string;
+    set gtk_titlebar_right_click(val: string);
+    get gtkTitlebarRightClick(): string;
+    set gtkTitlebarRightClick(val: string);
+    get gtk_xft_antialias(): number;
+    set gtk_xft_antialias(val: number);
+    get gtkXftAntialias(): number;
+    set gtkXftAntialias(val: number);
+    get gtk_xft_dpi(): number;
+    set gtk_xft_dpi(val: number);
+    get gtkXftDpi(): number;
+    set gtkXftDpi(val: number);
+    get gtk_xft_hinting(): number;
+    set gtk_xft_hinting(val: number);
+    get gtkXftHinting(): number;
+    set gtkXftHinting(val: number);
+    get gtk_xft_hintstyle(): string;
+    set gtk_xft_hintstyle(val: string);
+    get gtkXftHintstyle(): string;
+    set gtkXftHintstyle(val: string);
+    get gtk_xft_rgba(): string;
+    set gtk_xft_rgba(val: string);
+    get gtkXftRgba(): string;
+    set gtkXftRgba(val: string);
 
     // Members
 
@@ -14499,9 +15607,12 @@ export class Shortcut extends GObject.Object {
     _init(properties?: Partial<Shortcut.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    action: ShortcutAction;
-    "arguments": GLib.Variant;
-    trigger: ShortcutTrigger;
+    get action(): ShortcutAction;
+    set action(val: ShortcutAction);
+    get arguments(): GLib.Variant;
+    set arguments(val: GLib.Variant);
+    get trigger(): ShortcutTrigger;
+    set trigger(val: ShortcutTrigger);
 
     // Constructors
 
@@ -14549,17 +15660,21 @@ export module ShortcutController {
 }
 export class ShortcutController<A extends GObject.Object = GObject.Object>
     extends EventController
-    implements Gio.ListModel<A>, Buildable {
+    implements Gio.ListModel<A>, Buildable
+{
     static $gtype: GObject.GType<ShortcutController>;
 
     constructor(properties?: Partial<ShortcutController.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<ShortcutController.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    mnemonic_modifiers: Gdk.ModifierType;
-    mnemonicModifiers: Gdk.ModifierType;
-    model: Gio.ListModel;
-    scope: ShortcutScope;
+    get mnemonic_modifiers(): Gdk.ModifierType;
+    set mnemonic_modifiers(val: Gdk.ModifierType);
+    get mnemonicModifiers(): Gdk.ModifierType;
+    set mnemonicModifiers(val: Gdk.ModifierType);
+    set model(val: Gio.ListModel);
+    get scope(): ShortcutScope;
+    set scope(val: ShortcutScope);
 
     // Constructors
 
@@ -14596,7 +15711,7 @@ export class ShortcutController<A extends GObject.Object = GObject.Object>
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ShortcutLabel {
@@ -14614,14 +15729,19 @@ export class ShortcutLabel extends Widget implements Accessible, Buildable, Cons
     _init(properties?: Partial<ShortcutLabel.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accelerator: string;
-    disabled_text: string;
-    disabledText: string;
+    get accelerator(): string;
+    set accelerator(val: string);
+    get disabled_text(): string;
+    set disabled_text(val: string);
+    get disabledText(): string;
+    set disabledText(val: string);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -14655,7 +15775,7 @@ export class ShortcutLabel extends Widget implements Accessible, Buildable, Cons
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ShortcutTrigger {
@@ -14703,43 +15823,23 @@ export class ShortcutsGroup extends Box implements Accessible, Buildable, Constr
     _init(properties?: Partial<ShortcutsGroup.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accel_size_group: SizeGroup;
-    accelSizeGroup: SizeGroup;
-    height: number;
-    title: string;
-    title_size_group: SizeGroup;
-    titleSizeGroup: SizeGroup;
-    view: string;
+    set accel_size_group(val: SizeGroup);
+    set accelSizeGroup(val: SizeGroup);
+    get height(): number;
+    get title(): string;
+    set title(val: string);
+    set title_size_group(val: SizeGroup);
+    set titleSizeGroup(val: SizeGroup);
+    get view(): string;
+    set view(val: string);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
 }
@@ -14762,13 +15862,20 @@ export class ShortcutsSection extends Box implements Accessible, Buildable, Cons
     _init(properties?: Partial<ShortcutsSection.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    max_height: number;
-    maxHeight: number;
-    section_name: string;
-    sectionName: string;
-    title: string;
-    view_name: string;
-    viewName: string;
+    get max_height(): number;
+    set max_height(val: number);
+    get maxHeight(): number;
+    set maxHeight(val: number);
+    get section_name(): string;
+    set section_name(val: string);
+    get sectionName(): string;
+    set sectionName(val: string);
+    get title(): string;
+    set title(val: string);
+    get view_name(): string;
+    set view_name(val: string);
+    get viewName(): string;
+    set viewName(val: string);
 
     // Signals
 
@@ -14781,33 +15888,11 @@ export class ShortcutsSection extends Box implements Accessible, Buildable, Cons
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
 }
@@ -14840,28 +15925,43 @@ export class ShortcutsShortcut extends Widget implements Accessible, Buildable, 
     _init(properties?: Partial<ShortcutsShortcut.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accel_size_group: SizeGroup;
-    accelSizeGroup: SizeGroup;
-    accelerator: string;
-    action_name: string;
-    actionName: string;
-    direction: TextDirection;
-    icon: Gio.Icon;
-    icon_set: boolean;
-    iconSet: boolean;
-    shortcut_type: ShortcutType;
-    shortcutType: ShortcutType;
-    subtitle: string;
-    subtitle_set: boolean;
-    subtitleSet: boolean;
-    title: string;
-    title_size_group: SizeGroup;
-    titleSizeGroup: SizeGroup;
+    set accel_size_group(val: SizeGroup);
+    set accelSizeGroup(val: SizeGroup);
+    get accelerator(): string;
+    set accelerator(val: string);
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get direction(): TextDirection;
+    set direction(val: TextDirection);
+    get icon(): Gio.Icon;
+    set icon(val: Gio.Icon);
+    get icon_set(): boolean;
+    set icon_set(val: boolean);
+    get iconSet(): boolean;
+    set iconSet(val: boolean);
+    get shortcut_type(): ShortcutType;
+    set shortcut_type(val: ShortcutType);
+    get shortcutType(): ShortcutType;
+    set shortcutType(val: ShortcutType);
+    get subtitle(): string;
+    set subtitle(val: string);
+    get subtitle_set(): boolean;
+    set subtitle_set(val: boolean);
+    get subtitleSet(): boolean;
+    set subtitleSet(val: boolean);
+    get title(): string;
+    set title(val: string);
+    set title_size_group(val: SizeGroup);
+    set titleSizeGroup(val: SizeGroup);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Implemented Members
 
@@ -14884,7 +15984,7 @@ export class ShortcutsShortcut extends Widget implements Accessible, Buildable, 
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module ShortcutsWindow {
@@ -14898,17 +15998,22 @@ export module ShortcutsWindow {
 }
 export class ShortcutsWindow
     extends Window
-    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager {
+    implements Accessible, Buildable, ConstraintTarget, Native, Root, ShortcutManager
+{
     static $gtype: GObject.GType<ShortcutsWindow>;
 
     constructor(properties?: Partial<ShortcutsWindow.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<ShortcutsWindow.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    section_name: string;
-    sectionName: string;
-    view_name: string;
-    viewName: string;
+    get section_name(): string;
+    set section_name(val: string);
+    get sectionName(): string;
+    set sectionName(val: string);
+    get view_name(): string;
+    set view_name(val: string);
+    get viewName(): string;
+    set viewName(val: string);
 
     // Signals
 
@@ -14922,34 +16027,8 @@ export class ShortcutsWindow
     connect_after(signal: "search", callback: (_source: this) => void): number;
     emit(signal: "search"): void;
 
-    // Implemented Properties
-
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
     get_surface_transform(): [number, number];
@@ -14975,8 +16054,8 @@ export class SignalAction extends ShortcutAction {
     _init(properties?: Partial<SignalAction.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    signal_name: string;
-    signalName: string;
+    get signal_name(): string;
+    get signalName(): string;
 
     // Constructors
 
@@ -15034,20 +16113,26 @@ export module SingleSelection {
 }
 export class SingleSelection<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A>, SelectionModel<A> {
+    implements Gio.ListModel<A>, SelectionModel<A>
+{
     static $gtype: GObject.GType<SingleSelection>;
 
     constructor(properties?: Partial<SingleSelection.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<SingleSelection.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    autoselect: boolean;
-    can_unselect: boolean;
-    canUnselect: boolean;
-    model: Gio.ListModel;
-    selected: number;
-    selected_item: GObject.Object;
-    selectedItem: GObject.Object;
+    get autoselect(): boolean;
+    set autoselect(val: boolean);
+    get can_unselect(): boolean;
+    set can_unselect(val: boolean);
+    get canUnselect(): boolean;
+    set canUnselect(val: boolean);
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
+    get selected(): number;
+    set selected(val: number);
+    get selected_item(): GObject.Object;
+    get selectedItem(): GObject.Object;
 
     // Constructors
 
@@ -15059,7 +16144,7 @@ export class SingleSelection<A extends GObject.Object = GObject.Object>
     get_can_unselect(): boolean;
     get_model(): Gio.ListModel;
     get_selected(): number;
-    get_selected_item(): any | null;
+    get_selected_item<T = GObject.Object>(): T;
     set_autoselect(autoselect: boolean): void;
     set_can_unselect(can_unselect: boolean): void;
     set_model(model?: Gio.ListModel | null): void;
@@ -15108,7 +16193,8 @@ export class SizeGroup extends GObject.Object implements Buildable {
     _init(properties?: Partial<SizeGroup.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    mode: SizeGroupMode;
+    get mode(): SizeGroupMode;
+    set mode(val: SizeGroupMode);
 
     // Constructors
 
@@ -15136,7 +16222,7 @@ export class SizeGroup extends GObject.Object implements Buildable {
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module SliceListModel {
@@ -15150,16 +16236,20 @@ export module SliceListModel {
 }
 export class SliceListModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<SliceListModel>;
 
     constructor(properties?: Partial<SliceListModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<SliceListModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    model: Gio.ListModel;
-    offset: number;
-    size: number;
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
+    get offset(): number;
+    set offset(val: number);
+    get size(): number;
+    set size(val: number);
 
     // Constructors
 
@@ -15309,17 +16399,21 @@ export module SortListModel {
 }
 export class SortListModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<SortListModel>;
 
     constructor(properties?: Partial<SortListModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<SortListModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    incremental: boolean;
-    model: Gio.ListModel;
-    pending: number;
-    sorter: Sorter;
+    get incremental(): boolean;
+    set incremental(val: boolean);
+    get model(): Gio.ListModel;
+    set model(val: Gio.ListModel);
+    get pending(): number;
+    get sorter(): Sorter;
+    set sorter(val: Sorter);
 
     // Constructors
 
@@ -15391,24 +16485,36 @@ export module SpinButton {
 }
 export class SpinButton
     extends Widget
-    implements Accessible, Buildable, CellEditable, ConstraintTarget, Editable, Orientable {
+    implements Accessible, Buildable, CellEditable, ConstraintTarget, Editable, Orientable
+{
     static $gtype: GObject.GType<SpinButton>;
 
     constructor(properties?: Partial<SpinButton.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<SpinButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    adjustment: Adjustment;
-    climb_rate: number;
-    climbRate: number;
-    digits: number;
-    numeric: boolean;
-    snap_to_ticks: boolean;
-    snapToTicks: boolean;
-    update_policy: SpinButtonUpdatePolicy;
-    updatePolicy: SpinButtonUpdatePolicy;
-    value: number;
-    wrap: boolean;
+    get adjustment(): Adjustment;
+    set adjustment(val: Adjustment);
+    get climb_rate(): number;
+    set climb_rate(val: number);
+    get climbRate(): number;
+    set climbRate(val: number);
+    get digits(): number;
+    set digits(val: number);
+    get numeric(): boolean;
+    set numeric(val: boolean);
+    get snap_to_ticks(): boolean;
+    set snap_to_ticks(val: boolean);
+    get snapToTicks(): boolean;
+    set snapToTicks(val: boolean);
+    get update_policy(): SpinButtonUpdatePolicy;
+    set update_policy(val: SpinButtonUpdatePolicy);
+    get updatePolicy(): SpinButtonUpdatePolicy;
+    set updatePolicy(val: SpinButtonUpdatePolicy);
+    get value(): number;
+    set value(val: number);
+    get wrap(): boolean;
+    set wrap(val: boolean);
 
     // Signals
 
@@ -15433,24 +16539,38 @@ export class SpinButton
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    editing_canceled: boolean;
-    editingCanceled: boolean;
-    cursor_position: number;
-    cursorPosition: number;
-    editable: boolean;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    max_width_chars: number;
-    maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
-    text: string;
-    width_chars: number;
-    widthChars: number;
-    xalign: number;
-    orientation: Orientation;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get editing_canceled(): boolean;
+    set editing_canceled(val: boolean);
+    get editingCanceled(): boolean;
+    set editingCanceled(val: boolean);
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get editable(): boolean;
+    set editable(val: boolean);
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get selection_bound(): number;
+    get selectionBound(): number;
+    get text(): string;
+    set text(val: string);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get xalign(): number;
+    set xalign(val: number);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -15505,7 +16625,7 @@ export class SpinButton
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     editing_done(): void;
     remove_widget(): void;
@@ -15561,12 +16681,15 @@ export class Spinner extends Widget implements Accessible, Buildable, Constraint
     _init(properties?: Partial<Spinner.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    spinning: boolean;
+    get spinning(): boolean;
+    set spinning(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -15600,7 +16723,7 @@ export class Spinner extends Widget implements Accessible, Buildable, Constraint
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Stack {
@@ -15630,26 +16753,40 @@ export class Stack extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Stack.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    hhomogeneous: boolean;
-    interpolate_size: boolean;
-    interpolateSize: boolean;
-    pages: SelectionModel;
-    transition_duration: number;
-    transitionDuration: number;
-    transition_running: boolean;
-    transitionRunning: boolean;
-    transition_type: StackTransitionType;
-    transitionType: StackTransitionType;
-    vhomogeneous: boolean;
-    visible_child: Widget;
-    visibleChild: Widget;
-    visible_child_name: string;
-    visibleChildName: string;
+    get hhomogeneous(): boolean;
+    set hhomogeneous(val: boolean);
+    get interpolate_size(): boolean;
+    set interpolate_size(val: boolean);
+    get interpolateSize(): boolean;
+    set interpolateSize(val: boolean);
+    get pages(): SelectionModel;
+    get transition_duration(): number;
+    set transition_duration(val: number);
+    get transitionDuration(): number;
+    set transitionDuration(val: number);
+    get transition_running(): boolean;
+    get transitionRunning(): boolean;
+    get transition_type(): StackTransitionType;
+    set transition_type(val: StackTransitionType);
+    get transitionType(): StackTransitionType;
+    set transitionType(val: StackTransitionType);
+    get vhomogeneous(): boolean;
+    set vhomogeneous(val: boolean);
+    get visible_child(): Widget;
+    set visible_child(val: Widget);
+    get visibleChild(): Widget;
+    set visibleChild(val: Widget);
+    get visible_child_name(): string;
+    set visible_child_name(val: string);
+    get visibleChildName(): string;
+    set visibleChildName(val: string);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -15702,7 +16839,7 @@ export class Stack extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module StackPage {
@@ -15727,21 +16864,31 @@ export class StackPage extends GObject.Object implements Accessible {
     _init(properties?: Partial<StackPage.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    icon_name: string;
-    iconName: string;
-    name: string;
-    needs_attention: boolean;
-    needsAttention: boolean;
-    title: string;
-    use_underline: boolean;
-    useUnderline: boolean;
-    visible: boolean;
+    get child(): Widget;
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get name(): string;
+    get needs_attention(): boolean;
+    set needs_attention(val: boolean);
+    get needsAttention(): boolean;
+    set needsAttention(val: boolean);
+    get title(): string;
+    set title(val: string);
+    get use_underline(): boolean;
+    set use_underline(val: boolean);
+    get useUnderline(): boolean;
+    set useUnderline(val: boolean);
+    get visible(): boolean;
+    set visible(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Members
 
@@ -15782,12 +16929,15 @@ export class StackSidebar extends Widget implements Accessible, Buildable, Const
     _init(properties?: Partial<StackSidebar.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    stack: Stack;
+    get stack(): Stack;
+    set stack(val: Stack);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -15819,7 +16969,7 @@ export class StackSidebar extends Widget implements Accessible, Buildable, Const
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module StackSwitcher {
@@ -15835,12 +16985,15 @@ export class StackSwitcher extends Widget implements Accessible, Buildable, Cons
     _init(properties?: Partial<StackSwitcher.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    stack: Stack;
+    get stack(): Stack;
+    set stack(val: Stack);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -15872,7 +17025,7 @@ export class StackSwitcher extends Widget implements Accessible, Buildable, Cons
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Statusbar {
@@ -15900,8 +17053,10 @@ export class Statusbar extends Widget implements Accessible, Buildable, Constrai
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -15936,7 +17091,7 @@ export class Statusbar extends Widget implements Accessible, Buildable, Constrai
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module StringFilter {
@@ -15957,12 +17112,18 @@ export class StringFilter extends Filter {
     _init(properties?: Partial<StringFilter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    expression: Expression;
-    ignore_case: boolean;
-    ignoreCase: boolean;
-    match_mode: StringFilterMatchMode;
-    matchMode: StringFilterMatchMode;
-    search: string;
+    get expression(): Expression;
+    set expression(val: Expression);
+    get ignore_case(): boolean;
+    set ignore_case(val: boolean);
+    get ignoreCase(): boolean;
+    set ignoreCase(val: boolean);
+    get match_mode(): StringFilterMatchMode;
+    set match_mode(val: StringFilterMatchMode);
+    get matchMode(): StringFilterMatchMode;
+    set matchMode(val: StringFilterMatchMode);
+    get search(): string;
+    set search(val: string);
 
     // Constructors
 
@@ -15970,11 +17131,11 @@ export class StringFilter extends Filter {
 
     // Members
 
-    get_expression(): Expression;
+    get_expression(): Expression | null;
     get_ignore_case(): boolean;
     get_match_mode(): StringFilterMatchMode;
     get_search(): string | null;
-    set_expression(expression: Expression): void;
+    set_expression(expression?: Expression | null): void;
     set_ignore_case(ignore_case: boolean): void;
     set_match_mode(mode: StringFilterMatchMode): void;
     set_search(search?: string | null): void;
@@ -15987,7 +17148,8 @@ export module StringList {
 }
 export class StringList<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A>, Buildable {
+    implements Gio.ListModel<A>, Buildable
+{
     static $gtype: GObject.GType<StringList>;
 
     constructor(properties?: Partial<StringList.ConstructorProperties<A>>, ...args: any[]);
@@ -16026,7 +17188,7 @@ export class StringList<A extends GObject.Object = GObject.Object>
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module StringObject {
@@ -16042,7 +17204,7 @@ export class StringObject extends GObject.Object {
     _init(properties?: Partial<StringObject.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    string: string;
+    get string(): string;
 
     // Constructors
 
@@ -16067,9 +17229,12 @@ export class StringSorter extends Sorter {
     _init(properties?: Partial<StringSorter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    expression: Expression;
-    ignore_case: boolean;
-    ignoreCase: boolean;
+    get expression(): Expression;
+    set expression(val: Expression);
+    get ignore_case(): boolean;
+    set ignore_case(val: boolean);
+    get ignoreCase(): boolean;
+    set ignoreCase(val: boolean);
 
     // Constructors
 
@@ -16095,10 +17260,8 @@ export class StyleContext extends GObject.Object {
     _init(properties?: Partial<StyleContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    display: Gdk.Display;
-
-    // Fields
-    parent_object: GObject.Object;
+    get display(): Gdk.Display;
+    set display(val: Gdk.Display);
 
     // Members
 
@@ -16139,8 +17302,10 @@ export class Switch extends Widget implements Accessible, Actionable, Buildable,
     _init(properties?: Partial<Switch.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active: boolean;
-    state: boolean;
+    get active(): boolean;
+    set active(val: boolean);
+    get state(): boolean;
+    set state(val: boolean);
 
     // Signals
 
@@ -16156,12 +17321,18 @@ export class Switch extends Widget implements Accessible, Actionable, Buildable,
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
@@ -16204,7 +17375,7 @@ export class Switch extends Widget implements Accessible, Actionable, Buildable,
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Text {
@@ -16251,38 +17422,68 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
     _init(properties?: Partial<Text.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activates_default: boolean;
-    activatesDefault: boolean;
-    attributes: Pango.AttrList;
-    buffer: EntryBuffer;
-    enable_emoji_completion: boolean;
-    enableEmojiCompletion: boolean;
-    extra_menu: Gio.MenuModel;
-    extraMenu: Gio.MenuModel;
-    im_module: string;
-    imModule: string;
-    input_hints: InputHints;
-    inputHints: InputHints;
-    input_purpose: InputPurpose;
-    inputPurpose: InputPurpose;
-    invisible_char: number;
-    invisibleChar: number;
-    invisible_char_set: boolean;
-    invisibleCharSet: boolean;
-    max_length: number;
-    maxLength: number;
-    overwrite_mode: boolean;
-    overwriteMode: boolean;
-    placeholder_text: string;
-    placeholderText: string;
-    propagate_text_width: boolean;
-    propagateTextWidth: boolean;
-    scroll_offset: number;
-    scrollOffset: number;
-    tabs: Pango.TabArray;
-    truncate_multiline: boolean;
-    truncateMultiline: boolean;
-    visibility: boolean;
+    get activates_default(): boolean;
+    set activates_default(val: boolean);
+    get activatesDefault(): boolean;
+    set activatesDefault(val: boolean);
+    get attributes(): Pango.AttrList;
+    set attributes(val: Pango.AttrList);
+    get buffer(): EntryBuffer;
+    set buffer(val: EntryBuffer);
+    get enable_emoji_completion(): boolean;
+    set enable_emoji_completion(val: boolean);
+    get enableEmojiCompletion(): boolean;
+    set enableEmojiCompletion(val: boolean);
+    get extra_menu(): Gio.MenuModel;
+    set extra_menu(val: Gio.MenuModel);
+    get extraMenu(): Gio.MenuModel;
+    set extraMenu(val: Gio.MenuModel);
+    get im_module(): string;
+    set im_module(val: string);
+    get imModule(): string;
+    set imModule(val: string);
+    get input_hints(): InputHints;
+    set input_hints(val: InputHints);
+    get inputHints(): InputHints;
+    set inputHints(val: InputHints);
+    get input_purpose(): InputPurpose;
+    set input_purpose(val: InputPurpose);
+    get inputPurpose(): InputPurpose;
+    set inputPurpose(val: InputPurpose);
+    get invisible_char(): number;
+    set invisible_char(val: number);
+    get invisibleChar(): number;
+    set invisibleChar(val: number);
+    get invisible_char_set(): boolean;
+    set invisible_char_set(val: boolean);
+    get invisibleCharSet(): boolean;
+    set invisibleCharSet(val: boolean);
+    get max_length(): number;
+    set max_length(val: number);
+    get maxLength(): number;
+    set maxLength(val: number);
+    get overwrite_mode(): boolean;
+    set overwrite_mode(val: boolean);
+    get overwriteMode(): boolean;
+    set overwriteMode(val: boolean);
+    get placeholder_text(): string;
+    set placeholder_text(val: string);
+    get placeholderText(): string;
+    set placeholderText(val: string);
+    get propagate_text_width(): boolean;
+    set propagate_text_width(val: boolean);
+    get propagateTextWidth(): boolean;
+    set propagateTextWidth(val: boolean);
+    get scroll_offset(): number;
+    get scrollOffset(): number;
+    get tabs(): Pango.TabArray;
+    set tabs(val: Pango.TabArray);
+    get truncate_multiline(): boolean;
+    set truncate_multiline(val: boolean);
+    get truncateMultiline(): boolean;
+    set truncateMultiline(val: boolean);
+    get visibility(): boolean;
+    set visibility(val: boolean);
 
     // Signals
 
@@ -16334,21 +17535,32 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    cursor_position: number;
-    cursorPosition: number;
-    editable: boolean;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    max_width_chars: number;
-    maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
-    text: string;
-    width_chars: number;
-    widthChars: number;
-    xalign: number;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get editable(): boolean;
+    set editable(val: boolean);
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get max_width_chars(): number;
+    set max_width_chars(val: number);
+    get maxWidthChars(): number;
+    set maxWidthChars(val: number);
+    get selection_bound(): number;
+    get selectionBound(): number;
+    get text(): string;
+    set text(val: string);
+    get width_chars(): number;
+    set width_chars(val: number);
+    get widthChars(): number;
+    set widthChars(val: number);
+    get xalign(): number;
+    set xalign(val: number);
 
     // Constructors
 
@@ -16412,7 +17624,7 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     delete_selection(): void;
     delete_text(start_pos: number, end_pos: number): void;
@@ -16472,22 +17684,22 @@ export class TextBuffer extends GObject.Object {
     _init(properties?: Partial<TextBuffer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    can_redo: boolean;
-    canRedo: boolean;
-    can_undo: boolean;
-    canUndo: boolean;
-    cursor_position: number;
-    cursorPosition: number;
-    enable_undo: boolean;
-    enableUndo: boolean;
-    has_selection: boolean;
-    hasSelection: boolean;
-    tag_table: TextTagTable;
-    tagTable: TextTagTable;
-    text: string;
-
-    // Fields
-    priv: TextBufferPrivate;
+    get can_redo(): boolean;
+    get canRedo(): boolean;
+    get can_undo(): boolean;
+    get canUndo(): boolean;
+    get cursor_position(): number;
+    get cursorPosition(): number;
+    get enable_undo(): boolean;
+    set enable_undo(val: boolean);
+    get enableUndo(): boolean;
+    set enableUndo(val: boolean);
+    get has_selection(): boolean;
+    get hasSelection(): boolean;
+    get tag_table(): TextTagTable;
+    get tagTable(): TextTagTable;
+    get text(): string;
+    set text(val: string);
 
     // Signals
 
@@ -16694,9 +17906,9 @@ export class TextMark extends GObject.Object {
     _init(properties?: Partial<TextMark.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    left_gravity: boolean;
-    leftGravity: boolean;
-    name: string;
+    get left_gravity(): boolean;
+    get leftGravity(): boolean;
+    get name(): string;
 
     // Constructors
 
@@ -16862,148 +18074,279 @@ export class TextTag extends GObject.Object {
     _init(properties?: Partial<TextTag.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accumulative_margin: boolean;
-    accumulativeMargin: boolean;
-    allow_breaks: boolean;
-    allowBreaks: boolean;
-    allow_breaks_set: boolean;
-    allowBreaksSet: boolean;
-    background: string;
-    background_full_height: boolean;
-    backgroundFullHeight: boolean;
-    background_full_height_set: boolean;
-    backgroundFullHeightSet: boolean;
-    background_rgba: Gdk.RGBA;
-    backgroundRgba: Gdk.RGBA;
-    background_set: boolean;
-    backgroundSet: boolean;
-    direction: TextDirection;
-    editable: boolean;
-    editable_set: boolean;
-    editableSet: boolean;
-    fallback: boolean;
-    fallback_set: boolean;
-    fallbackSet: boolean;
-    family: string;
-    family_set: boolean;
-    familySet: boolean;
-    font: string;
-    font_desc: Pango.FontDescription;
-    fontDesc: Pango.FontDescription;
-    font_features: string;
-    fontFeatures: string;
-    font_features_set: boolean;
-    fontFeaturesSet: boolean;
-    foreground: string;
-    foreground_rgba: Gdk.RGBA;
-    foregroundRgba: Gdk.RGBA;
-    foreground_set: boolean;
-    foregroundSet: boolean;
-    indent: number;
-    indent_set: boolean;
-    indentSet: boolean;
-    insert_hyphens: boolean;
-    insertHyphens: boolean;
-    insert_hyphens_set: boolean;
-    insertHyphensSet: boolean;
-    invisible: boolean;
-    invisible_set: boolean;
-    invisibleSet: boolean;
-    justification: Justification;
-    justification_set: boolean;
-    justificationSet: boolean;
-    language: string;
-    language_set: boolean;
-    languageSet: boolean;
-    left_margin: number;
-    leftMargin: number;
-    left_margin_set: boolean;
-    leftMarginSet: boolean;
-    letter_spacing: number;
-    letterSpacing: number;
-    letter_spacing_set: boolean;
-    letterSpacingSet: boolean;
-    name: string;
-    overline: Pango.Overline;
-    overline_rgba: Gdk.RGBA;
-    overlineRgba: Gdk.RGBA;
-    overline_rgba_set: boolean;
-    overlineRgbaSet: boolean;
-    overline_set: boolean;
-    overlineSet: boolean;
-    paragraph_background: string;
-    paragraphBackground: string;
-    paragraph_background_rgba: Gdk.RGBA;
-    paragraphBackgroundRgba: Gdk.RGBA;
-    paragraph_background_set: boolean;
-    paragraphBackgroundSet: boolean;
-    pixels_above_lines: number;
-    pixelsAboveLines: number;
-    pixels_above_lines_set: boolean;
-    pixelsAboveLinesSet: boolean;
-    pixels_below_lines: number;
-    pixelsBelowLines: number;
-    pixels_below_lines_set: boolean;
-    pixelsBelowLinesSet: boolean;
-    pixels_inside_wrap: number;
-    pixelsInsideWrap: number;
-    pixels_inside_wrap_set: boolean;
-    pixelsInsideWrapSet: boolean;
-    right_margin: number;
-    rightMargin: number;
-    right_margin_set: boolean;
-    rightMarginSet: boolean;
-    rise: number;
-    rise_set: boolean;
-    riseSet: boolean;
-    scale: number;
-    scale_set: boolean;
-    scaleSet: boolean;
-    show_spaces: Pango.ShowFlags;
-    showSpaces: Pango.ShowFlags;
-    show_spaces_set: boolean;
-    showSpacesSet: boolean;
-    size: number;
-    size_points: number;
-    sizePoints: number;
-    size_set: boolean;
-    sizeSet: boolean;
-    stretch: Pango.Stretch;
-    stretch_set: boolean;
-    stretchSet: boolean;
-    strikethrough: boolean;
-    strikethrough_rgba: Gdk.RGBA;
-    strikethroughRgba: Gdk.RGBA;
-    strikethrough_rgba_set: boolean;
-    strikethroughRgbaSet: boolean;
-    strikethrough_set: boolean;
-    strikethroughSet: boolean;
-    style: Pango.Style;
-    style_set: boolean;
-    styleSet: boolean;
-    tabs: Pango.TabArray;
-    tabs_set: boolean;
-    tabsSet: boolean;
-    underline: Pango.Underline;
-    underline_rgba: Gdk.RGBA;
-    underlineRgba: Gdk.RGBA;
-    underline_rgba_set: boolean;
-    underlineRgbaSet: boolean;
-    underline_set: boolean;
-    underlineSet: boolean;
-    variant: Pango.Variant;
-    variant_set: boolean;
-    variantSet: boolean;
-    weight: number;
-    weight_set: boolean;
-    weightSet: boolean;
-    wrap_mode: WrapMode;
-    wrapMode: WrapMode;
-    wrap_mode_set: boolean;
-    wrapModeSet: boolean;
-
-    // Fields
-    priv: TextTagPrivate;
+    get accumulative_margin(): boolean;
+    set accumulative_margin(val: boolean);
+    get accumulativeMargin(): boolean;
+    set accumulativeMargin(val: boolean);
+    get allow_breaks(): boolean;
+    set allow_breaks(val: boolean);
+    get allowBreaks(): boolean;
+    set allowBreaks(val: boolean);
+    get allow_breaks_set(): boolean;
+    set allow_breaks_set(val: boolean);
+    get allowBreaksSet(): boolean;
+    set allowBreaksSet(val: boolean);
+    set background(val: string);
+    get background_full_height(): boolean;
+    set background_full_height(val: boolean);
+    get backgroundFullHeight(): boolean;
+    set backgroundFullHeight(val: boolean);
+    get background_full_height_set(): boolean;
+    set background_full_height_set(val: boolean);
+    get backgroundFullHeightSet(): boolean;
+    set backgroundFullHeightSet(val: boolean);
+    get background_rgba(): Gdk.RGBA;
+    set background_rgba(val: Gdk.RGBA);
+    get backgroundRgba(): Gdk.RGBA;
+    set backgroundRgba(val: Gdk.RGBA);
+    get background_set(): boolean;
+    set background_set(val: boolean);
+    get backgroundSet(): boolean;
+    set backgroundSet(val: boolean);
+    get direction(): TextDirection;
+    set direction(val: TextDirection);
+    get editable(): boolean;
+    set editable(val: boolean);
+    get editable_set(): boolean;
+    set editable_set(val: boolean);
+    get editableSet(): boolean;
+    set editableSet(val: boolean);
+    get fallback(): boolean;
+    set fallback(val: boolean);
+    get fallback_set(): boolean;
+    set fallback_set(val: boolean);
+    get fallbackSet(): boolean;
+    set fallbackSet(val: boolean);
+    get family(): string;
+    set family(val: string);
+    get family_set(): boolean;
+    set family_set(val: boolean);
+    get familySet(): boolean;
+    set familySet(val: boolean);
+    get font(): string;
+    set font(val: string);
+    get font_desc(): Pango.FontDescription;
+    set font_desc(val: Pango.FontDescription);
+    get fontDesc(): Pango.FontDescription;
+    set fontDesc(val: Pango.FontDescription);
+    get font_features(): string;
+    set font_features(val: string);
+    get fontFeatures(): string;
+    set fontFeatures(val: string);
+    get font_features_set(): boolean;
+    set font_features_set(val: boolean);
+    get fontFeaturesSet(): boolean;
+    set fontFeaturesSet(val: boolean);
+    set foreground(val: string);
+    get foreground_rgba(): Gdk.RGBA;
+    set foreground_rgba(val: Gdk.RGBA);
+    get foregroundRgba(): Gdk.RGBA;
+    set foregroundRgba(val: Gdk.RGBA);
+    get foreground_set(): boolean;
+    set foreground_set(val: boolean);
+    get foregroundSet(): boolean;
+    set foregroundSet(val: boolean);
+    get indent(): number;
+    set indent(val: number);
+    get indent_set(): boolean;
+    set indent_set(val: boolean);
+    get indentSet(): boolean;
+    set indentSet(val: boolean);
+    get insert_hyphens(): boolean;
+    set insert_hyphens(val: boolean);
+    get insertHyphens(): boolean;
+    set insertHyphens(val: boolean);
+    get insert_hyphens_set(): boolean;
+    set insert_hyphens_set(val: boolean);
+    get insertHyphensSet(): boolean;
+    set insertHyphensSet(val: boolean);
+    get invisible(): boolean;
+    set invisible(val: boolean);
+    get invisible_set(): boolean;
+    set invisible_set(val: boolean);
+    get invisibleSet(): boolean;
+    set invisibleSet(val: boolean);
+    get justification(): Justification;
+    set justification(val: Justification);
+    get justification_set(): boolean;
+    set justification_set(val: boolean);
+    get justificationSet(): boolean;
+    set justificationSet(val: boolean);
+    get language(): string;
+    set language(val: string);
+    get language_set(): boolean;
+    set language_set(val: boolean);
+    get languageSet(): boolean;
+    set languageSet(val: boolean);
+    get left_margin(): number;
+    set left_margin(val: number);
+    get leftMargin(): number;
+    set leftMargin(val: number);
+    get left_margin_set(): boolean;
+    set left_margin_set(val: boolean);
+    get leftMarginSet(): boolean;
+    set leftMarginSet(val: boolean);
+    get letter_spacing(): number;
+    set letter_spacing(val: number);
+    get letterSpacing(): number;
+    set letterSpacing(val: number);
+    get letter_spacing_set(): boolean;
+    set letter_spacing_set(val: boolean);
+    get letterSpacingSet(): boolean;
+    set letterSpacingSet(val: boolean);
+    get name(): string;
+    get overline(): Pango.Overline;
+    set overline(val: Pango.Overline);
+    get overline_rgba(): Gdk.RGBA;
+    set overline_rgba(val: Gdk.RGBA);
+    get overlineRgba(): Gdk.RGBA;
+    set overlineRgba(val: Gdk.RGBA);
+    get overline_rgba_set(): boolean;
+    set overline_rgba_set(val: boolean);
+    get overlineRgbaSet(): boolean;
+    set overlineRgbaSet(val: boolean);
+    get overline_set(): boolean;
+    set overline_set(val: boolean);
+    get overlineSet(): boolean;
+    set overlineSet(val: boolean);
+    set paragraph_background(val: string);
+    set paragraphBackground(val: string);
+    get paragraph_background_rgba(): Gdk.RGBA;
+    set paragraph_background_rgba(val: Gdk.RGBA);
+    get paragraphBackgroundRgba(): Gdk.RGBA;
+    set paragraphBackgroundRgba(val: Gdk.RGBA);
+    get paragraph_background_set(): boolean;
+    set paragraph_background_set(val: boolean);
+    get paragraphBackgroundSet(): boolean;
+    set paragraphBackgroundSet(val: boolean);
+    get pixels_above_lines(): number;
+    set pixels_above_lines(val: number);
+    get pixelsAboveLines(): number;
+    set pixelsAboveLines(val: number);
+    get pixels_above_lines_set(): boolean;
+    set pixels_above_lines_set(val: boolean);
+    get pixelsAboveLinesSet(): boolean;
+    set pixelsAboveLinesSet(val: boolean);
+    get pixels_below_lines(): number;
+    set pixels_below_lines(val: number);
+    get pixelsBelowLines(): number;
+    set pixelsBelowLines(val: number);
+    get pixels_below_lines_set(): boolean;
+    set pixels_below_lines_set(val: boolean);
+    get pixelsBelowLinesSet(): boolean;
+    set pixelsBelowLinesSet(val: boolean);
+    get pixels_inside_wrap(): number;
+    set pixels_inside_wrap(val: number);
+    get pixelsInsideWrap(): number;
+    set pixelsInsideWrap(val: number);
+    get pixels_inside_wrap_set(): boolean;
+    set pixels_inside_wrap_set(val: boolean);
+    get pixelsInsideWrapSet(): boolean;
+    set pixelsInsideWrapSet(val: boolean);
+    get right_margin(): number;
+    set right_margin(val: number);
+    get rightMargin(): number;
+    set rightMargin(val: number);
+    get right_margin_set(): boolean;
+    set right_margin_set(val: boolean);
+    get rightMarginSet(): boolean;
+    set rightMarginSet(val: boolean);
+    get rise(): number;
+    set rise(val: number);
+    get rise_set(): boolean;
+    set rise_set(val: boolean);
+    get riseSet(): boolean;
+    set riseSet(val: boolean);
+    get scale(): number;
+    set scale(val: number);
+    get scale_set(): boolean;
+    set scale_set(val: boolean);
+    get scaleSet(): boolean;
+    set scaleSet(val: boolean);
+    get show_spaces(): Pango.ShowFlags;
+    set show_spaces(val: Pango.ShowFlags);
+    get showSpaces(): Pango.ShowFlags;
+    set showSpaces(val: Pango.ShowFlags);
+    get show_spaces_set(): boolean;
+    set show_spaces_set(val: boolean);
+    get showSpacesSet(): boolean;
+    set showSpacesSet(val: boolean);
+    get size(): number;
+    set size(val: number);
+    get size_points(): number;
+    set size_points(val: number);
+    get sizePoints(): number;
+    set sizePoints(val: number);
+    get size_set(): boolean;
+    set size_set(val: boolean);
+    get sizeSet(): boolean;
+    set sizeSet(val: boolean);
+    get stretch(): Pango.Stretch;
+    set stretch(val: Pango.Stretch);
+    get stretch_set(): boolean;
+    set stretch_set(val: boolean);
+    get stretchSet(): boolean;
+    set stretchSet(val: boolean);
+    get strikethrough(): boolean;
+    set strikethrough(val: boolean);
+    get strikethrough_rgba(): Gdk.RGBA;
+    set strikethrough_rgba(val: Gdk.RGBA);
+    get strikethroughRgba(): Gdk.RGBA;
+    set strikethroughRgba(val: Gdk.RGBA);
+    get strikethrough_rgba_set(): boolean;
+    set strikethrough_rgba_set(val: boolean);
+    get strikethroughRgbaSet(): boolean;
+    set strikethroughRgbaSet(val: boolean);
+    get strikethrough_set(): boolean;
+    set strikethrough_set(val: boolean);
+    get strikethroughSet(): boolean;
+    set strikethroughSet(val: boolean);
+    get style(): Pango.Style;
+    set style(val: Pango.Style);
+    get style_set(): boolean;
+    set style_set(val: boolean);
+    get styleSet(): boolean;
+    set styleSet(val: boolean);
+    get tabs(): Pango.TabArray;
+    set tabs(val: Pango.TabArray);
+    get tabs_set(): boolean;
+    set tabs_set(val: boolean);
+    get tabsSet(): boolean;
+    set tabsSet(val: boolean);
+    get underline(): Pango.Underline;
+    set underline(val: Pango.Underline);
+    get underline_rgba(): Gdk.RGBA;
+    set underline_rgba(val: Gdk.RGBA);
+    get underlineRgba(): Gdk.RGBA;
+    set underlineRgba(val: Gdk.RGBA);
+    get underline_rgba_set(): boolean;
+    set underline_rgba_set(val: boolean);
+    get underlineRgbaSet(): boolean;
+    set underlineRgbaSet(val: boolean);
+    get underline_set(): boolean;
+    set underline_set(val: boolean);
+    get underlineSet(): boolean;
+    set underlineSet(val: boolean);
+    get variant(): Pango.Variant;
+    set variant(val: Pango.Variant);
+    get variant_set(): boolean;
+    set variant_set(val: boolean);
+    get variantSet(): boolean;
+    set variantSet(val: boolean);
+    get weight(): number;
+    set weight(val: number);
+    get weight_set(): boolean;
+    set weight_set(val: boolean);
+    get weightSet(): boolean;
+    set weightSet(val: boolean);
+    get wrap_mode(): WrapMode;
+    set wrap_mode(val: WrapMode);
+    get wrapMode(): WrapMode;
+    set wrapMode(val: WrapMode);
+    get wrap_mode_set(): boolean;
+    set wrap_mode_set(val: boolean);
+    get wrapModeSet(): boolean;
+    set wrapModeSet(val: boolean);
 
     // Constructors
 
@@ -17070,7 +18413,7 @@ export class TextTagTable extends GObject.Object implements Buildable {
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module TextView {
@@ -17120,41 +18463,76 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<TextView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    accepts_tab: boolean;
-    acceptsTab: boolean;
-    bottom_margin: number;
-    bottomMargin: number;
-    buffer: TextBuffer;
-    cursor_visible: boolean;
-    cursorVisible: boolean;
-    editable: boolean;
-    extra_menu: Gio.MenuModel;
-    extraMenu: Gio.MenuModel;
-    im_module: string;
-    imModule: string;
-    indent: number;
-    input_hints: InputHints;
-    inputHints: InputHints;
-    input_purpose: InputPurpose;
-    inputPurpose: InputPurpose;
-    justification: Justification;
-    left_margin: number;
-    leftMargin: number;
-    monospace: boolean;
-    overwrite: boolean;
-    pixels_above_lines: number;
-    pixelsAboveLines: number;
-    pixels_below_lines: number;
-    pixelsBelowLines: number;
-    pixels_inside_wrap: number;
-    pixelsInsideWrap: number;
-    right_margin: number;
-    rightMargin: number;
-    tabs: Pango.TabArray;
-    top_margin: number;
-    topMargin: number;
-    wrap_mode: WrapMode;
-    wrapMode: WrapMode;
+    get accepts_tab(): boolean;
+    set accepts_tab(val: boolean);
+    get acceptsTab(): boolean;
+    set acceptsTab(val: boolean);
+    get bottom_margin(): number;
+    set bottom_margin(val: number);
+    get bottomMargin(): number;
+    set bottomMargin(val: number);
+    get buffer(): TextBuffer;
+    set buffer(val: TextBuffer);
+    get cursor_visible(): boolean;
+    set cursor_visible(val: boolean);
+    get cursorVisible(): boolean;
+    set cursorVisible(val: boolean);
+    get editable(): boolean;
+    set editable(val: boolean);
+    get extra_menu(): Gio.MenuModel;
+    set extra_menu(val: Gio.MenuModel);
+    get extraMenu(): Gio.MenuModel;
+    set extraMenu(val: Gio.MenuModel);
+    get im_module(): string;
+    set im_module(val: string);
+    get imModule(): string;
+    set imModule(val: string);
+    get indent(): number;
+    set indent(val: number);
+    get input_hints(): InputHints;
+    set input_hints(val: InputHints);
+    get inputHints(): InputHints;
+    set inputHints(val: InputHints);
+    get input_purpose(): InputPurpose;
+    set input_purpose(val: InputPurpose);
+    get inputPurpose(): InputPurpose;
+    set inputPurpose(val: InputPurpose);
+    get justification(): Justification;
+    set justification(val: Justification);
+    get left_margin(): number;
+    set left_margin(val: number);
+    get leftMargin(): number;
+    set leftMargin(val: number);
+    get monospace(): boolean;
+    set monospace(val: boolean);
+    get overwrite(): boolean;
+    set overwrite(val: boolean);
+    get pixels_above_lines(): number;
+    set pixels_above_lines(val: number);
+    get pixelsAboveLines(): number;
+    set pixelsAboveLines(val: number);
+    get pixels_below_lines(): number;
+    set pixels_below_lines(val: number);
+    get pixelsBelowLines(): number;
+    set pixelsBelowLines(val: number);
+    get pixels_inside_wrap(): number;
+    set pixels_inside_wrap(val: number);
+    get pixelsInsideWrap(): number;
+    set pixelsInsideWrap(val: number);
+    get right_margin(): number;
+    set right_margin(val: number);
+    get rightMargin(): number;
+    set rightMargin(val: number);
+    get tabs(): Pango.TabArray;
+    set tabs(val: Pango.TabArray);
+    get top_margin(): number;
+    set top_margin(val: number);
+    get topMargin(): number;
+    set topMargin(val: number);
+    get wrap_mode(): WrapMode;
+    set wrap_mode(val: WrapMode);
+    get wrapMode(): WrapMode;
+    set wrapMode(val: WrapMode);
 
     // Signals
 
@@ -17242,14 +18620,22 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -17366,7 +18752,7 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
     get_hadjustment(): Adjustment;
@@ -17393,8 +18779,9 @@ export class ToggleButton extends Button implements Accessible, Actionable, Buil
     _init(properties?: Partial<ToggleButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    active: boolean;
-    group: ToggleButton;
+    get active(): boolean;
+    set active(val: boolean);
+    set group(val: ToggleButton);
 
     // Signals
 
@@ -17407,12 +18794,14 @@ export class ToggleButton extends Button implements Accessible, Actionable, Buil
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    action_name: string;
-    actionName: string;
-    action_target: GLib.Variant;
-    actionTarget: GLib.Variant;
+    get action_name(): string;
+    set action_name(val: string);
+    get actionName(): string;
+    set actionName(val: string);
+    get action_target(): GLib.Variant;
+    set action_target(val: GLib.Variant);
+    get actionTarget(): GLib.Variant;
+    set actionTarget(val: GLib.Variant);
 
     // Constructors
 
@@ -17430,13 +18819,6 @@ export class ToggleButton extends Button implements Accessible, Actionable, Buil
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
     get_action_name(): string | null;
     get_action_target_value(): GLib.Variant | null;
     set_action_name(action_name?: string | null): void;
@@ -17446,20 +18828,6 @@ export class ToggleButton extends Button implements Accessible, Actionable, Buil
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
 }
 export module Tooltip {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -17498,15 +18866,20 @@ export class TreeExpander extends Widget implements Accessible, Buildable, Const
     _init(properties?: Partial<TreeExpander.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    item: GObject.Object;
-    list_row: TreeListRow;
-    listRow: TreeListRow;
+    get child(): Widget;
+    set child(val: Widget);
+    get item(): GObject.Object;
+    get list_row(): TreeListRow;
+    set list_row(val: TreeListRow);
+    get listRow(): TreeListRow;
+    set listRow(val: TreeListRow);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -17541,7 +18914,7 @@ export class TreeExpander extends Widget implements Accessible, Buildable, Const
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module TreeListModel {
@@ -17555,16 +18928,18 @@ export module TreeListModel {
 }
 export class TreeListModel<A extends GObject.Object = GObject.Object>
     extends GObject.Object
-    implements Gio.ListModel<A> {
+    implements Gio.ListModel<A>
+{
     static $gtype: GObject.GType<TreeListModel>;
 
     constructor(properties?: Partial<TreeListModel.ConstructorProperties<A>>, ...args: any[]);
     _init(properties?: Partial<TreeListModel.ConstructorProperties<A>>, ...args: any[]): void;
 
     // Properties
-    autoexpand: boolean;
-    model: Gio.ListModel;
-    passthrough: boolean;
+    get autoexpand(): boolean;
+    set autoexpand(val: boolean);
+    get model(): Gio.ListModel;
+    get passthrough(): boolean;
 
     // Constructors
 
@@ -17611,11 +18986,12 @@ export class TreeListRow extends GObject.Object {
     _init(properties?: Partial<TreeListRow.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    children: Gio.ListModel;
-    depth: number;
-    expandable: boolean;
-    expanded: boolean;
-    item: GObject.Object;
+    get children(): Gio.ListModel;
+    get depth(): number;
+    get expandable(): boolean;
+    get expanded(): boolean;
+    set expanded(val: boolean);
+    get item(): GObject.Object;
 
     // Members
 
@@ -17642,7 +19018,8 @@ export class TreeListRowSorter extends Sorter {
     _init(properties?: Partial<TreeListRowSorter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    sorter: Sorter;
+    get sorter(): Sorter;
+    set sorter(val: Sorter);
 
     // Constructors
 
@@ -17669,10 +19046,10 @@ export class TreeModelFilter extends GObject.Object implements TreeDragSource, T
     _init(properties?: Partial<TreeModelFilter.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child_model: TreeModel;
-    childModel: TreeModel;
-    virtual_root: TreePath;
-    virtualRoot: TreePath;
+    get child_model(): TreeModel;
+    get childModel(): TreeModel;
+    get virtual_root(): TreePath;
+    get virtualRoot(): TreePath;
 
     // Members
 
@@ -17686,7 +19063,7 @@ export class TreeModelFilter extends GObject.Object implements TreeDragSource, T
     set_modify_func(types: GObject.GType[], func: TreeModelFilterModifyFunc, destroy?: GLib.DestroyNotify | null): void;
     set_visible_column(column: number): void;
     set_visible_func(func: TreeModelFilterVisibleFunc, destroy?: GLib.DestroyNotify | null): void;
-    vfunc_modify(child_model: TreeModel, iter: TreeIter, value: any, column: number): void;
+    vfunc_modify(child_model: TreeModel, iter: TreeIter, value: GObject.Value | any, column: number): void;
     vfunc_visible(child_model: TreeModel, iter: TreeIter): boolean;
 
     // Implemented Members
@@ -17755,7 +19132,7 @@ export class TreeModelSort extends GObject.Object implements TreeDragSource, Tre
     _init(properties?: Partial<TreeModelSort.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    model: TreeModel;
+    get model(): TreeModel;
 
     // Constructors
 
@@ -17854,7 +19231,8 @@ export class TreeSelection extends GObject.Object {
     _init(properties?: Partial<TreeSelection.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    mode: SelectionMode;
+    get mode(): SelectionMode;
+    set mode(val: SelectionMode);
 
     // Signals
 
@@ -17893,14 +19271,12 @@ export module TreeStore {
 }
 export class TreeStore
     extends GObject.Object
-    implements Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable {
+    implements Buildable, TreeDragDest, TreeDragSource, TreeModel, TreeSortable
+{
     static $gtype: GObject.GType<TreeStore>;
 
     constructor(properties?: Partial<TreeStore.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<TreeStore.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    priv: TreeStorePrivate;
 
     // Constructors
 
@@ -17927,9 +19303,10 @@ export class TreeStore
     prepend(parent?: TreeIter | null): TreeIter;
     remove(iter: TreeIter): boolean;
     set_column_types(types: GObject.GType[]): void;
-    set_value(iter: TreeIter, column: number, value: any): void;
+    set_value(iter: TreeIter, column: number, value: GObject.Value | any): void;
     set(iter: TreeIter, columns: number[], values: GObject.Value[]): void;
-    set(...args: never[]): never;
+    // Conflicted with GObject.Object.set
+    set(...args: never[]): any;
     swap(a: TreeIter, b: TreeIter): void;
 
     // Implemented Members
@@ -17946,12 +19323,12 @@ export class TreeStore
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
-    drag_data_received(dest: TreePath, value: any): boolean;
-    row_drop_possible(dest_path: TreePath, value: any): boolean;
-    vfunc_drag_data_received(dest: TreePath, value: any): boolean;
-    vfunc_row_drop_possible(dest_path: TreePath, value: any): boolean;
+    drag_data_received(dest: TreePath, value: GObject.Value | any): boolean;
+    row_drop_possible(dest_path: TreePath, value: GObject.Value | any): boolean;
+    vfunc_drag_data_received(dest: TreePath, value: GObject.Value | any): boolean;
+    vfunc_row_drop_possible(dest_path: TreePath, value: GObject.Value | any): boolean;
     drag_data_delete(path: TreePath): boolean;
     drag_data_get(path: TreePath): Gdk.ContentProvider | null;
     row_draggable(path: TreePath): boolean;
@@ -18063,38 +19440,70 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<TreeView.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    activate_on_single_click: boolean;
-    activateOnSingleClick: boolean;
-    enable_grid_lines: TreeViewGridLines;
-    enableGridLines: TreeViewGridLines;
-    enable_search: boolean;
-    enableSearch: boolean;
-    enable_tree_lines: boolean;
-    enableTreeLines: boolean;
-    expander_column: TreeViewColumn;
-    expanderColumn: TreeViewColumn;
-    fixed_height_mode: boolean;
-    fixedHeightMode: boolean;
-    headers_clickable: boolean;
-    headersClickable: boolean;
-    headers_visible: boolean;
-    headersVisible: boolean;
-    hover_expand: boolean;
-    hoverExpand: boolean;
-    hover_selection: boolean;
-    hoverSelection: boolean;
-    level_indentation: number;
-    levelIndentation: number;
-    model: TreeModel;
-    reorderable: boolean;
-    rubber_banding: boolean;
-    rubberBanding: boolean;
-    search_column: number;
-    searchColumn: number;
-    show_expanders: boolean;
-    showExpanders: boolean;
-    tooltip_column: number;
-    tooltipColumn: number;
+    get activate_on_single_click(): boolean;
+    set activate_on_single_click(val: boolean);
+    get activateOnSingleClick(): boolean;
+    set activateOnSingleClick(val: boolean);
+    get enable_grid_lines(): TreeViewGridLines;
+    set enable_grid_lines(val: TreeViewGridLines);
+    get enableGridLines(): TreeViewGridLines;
+    set enableGridLines(val: TreeViewGridLines);
+    get enable_search(): boolean;
+    set enable_search(val: boolean);
+    get enableSearch(): boolean;
+    set enableSearch(val: boolean);
+    get enable_tree_lines(): boolean;
+    set enable_tree_lines(val: boolean);
+    get enableTreeLines(): boolean;
+    set enableTreeLines(val: boolean);
+    get expander_column(): TreeViewColumn;
+    set expander_column(val: TreeViewColumn);
+    get expanderColumn(): TreeViewColumn;
+    set expanderColumn(val: TreeViewColumn);
+    get fixed_height_mode(): boolean;
+    set fixed_height_mode(val: boolean);
+    get fixedHeightMode(): boolean;
+    set fixedHeightMode(val: boolean);
+    get headers_clickable(): boolean;
+    set headers_clickable(val: boolean);
+    get headersClickable(): boolean;
+    set headersClickable(val: boolean);
+    get headers_visible(): boolean;
+    set headers_visible(val: boolean);
+    get headersVisible(): boolean;
+    set headersVisible(val: boolean);
+    get hover_expand(): boolean;
+    set hover_expand(val: boolean);
+    get hoverExpand(): boolean;
+    set hoverExpand(val: boolean);
+    get hover_selection(): boolean;
+    set hover_selection(val: boolean);
+    get hoverSelection(): boolean;
+    set hoverSelection(val: boolean);
+    get level_indentation(): number;
+    set level_indentation(val: number);
+    get levelIndentation(): number;
+    set levelIndentation(val: number);
+    get model(): TreeModel;
+    set model(val: TreeModel);
+    get reorderable(): boolean;
+    set reorderable(val: boolean);
+    get rubber_banding(): boolean;
+    set rubber_banding(val: boolean);
+    get rubberBanding(): boolean;
+    set rubberBanding(val: boolean);
+    get search_column(): number;
+    set search_column(val: number);
+    get searchColumn(): number;
+    set searchColumn(val: number);
+    get show_expanders(): boolean;
+    set show_expanders(val: boolean);
+    get showExpanders(): boolean;
+    set showExpanders(val: boolean);
+    get tooltip_column(): number;
+    set tooltip_column(val: number);
+    get tooltipColumn(): number;
+    set tooltipColumn(val: number);
 
     // Signals
 
@@ -18170,14 +19579,22 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -18212,7 +19629,8 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     get_column(n: number): TreeViewColumn | null;
     get_columns(): TreeViewColumn[];
     get_cursor(): [TreePath | null, TreeViewColumn | null];
-    get_cursor(...args: never[]): never;
+    // Conflicted with Gtk.Widget.get_cursor
+    get_cursor(...args: never[]): any;
     get_dest_row_at_pos(drag_x: number, drag_y: number): [boolean, TreePath | null, TreeViewDropPosition | null];
     get_drag_dest_row(): [TreePath | null, TreeViewDropPosition | null];
     get_enable_search(): boolean;
@@ -18268,7 +19686,8 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     set_activate_on_single_click(single: boolean): void;
     set_column_drag_function(func?: TreeViewColumnDropFunc | null, destroy?: GLib.DestroyNotify | null): void;
     set_cursor(path: TreePath, focus_column: TreeViewColumn | null, start_editing: boolean): void;
-    set_cursor(...args: never[]): never;
+    // Conflicted with Gtk.Widget.set_cursor
+    set_cursor(...args: never[]): any;
     set_cursor_on_cell(
         path: TreePath,
         focus_column: TreeViewColumn | null,
@@ -18341,7 +19760,7 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
     get_hadjustment(): Adjustment;
@@ -18393,33 +19812,55 @@ export class TreeViewColumn extends GObject.InitiallyUnowned implements Buildabl
     _init(properties?: Partial<TreeViewColumn.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    alignment: number;
-    cell_area: CellArea;
-    cellArea: CellArea;
-    clickable: boolean;
-    expand: boolean;
-    fixed_width: number;
-    fixedWidth: number;
-    max_width: number;
-    maxWidth: number;
-    min_width: number;
-    minWidth: number;
-    reorderable: boolean;
-    resizable: boolean;
-    sizing: TreeViewColumnSizing;
-    sort_column_id: number;
-    sortColumnId: number;
-    sort_indicator: boolean;
-    sortIndicator: boolean;
-    sort_order: SortType;
-    sortOrder: SortType;
-    spacing: number;
-    title: string;
-    visible: boolean;
-    widget: Widget;
-    width: number;
-    x_offset: number;
-    xOffset: number;
+    get alignment(): number;
+    set alignment(val: number);
+    get cell_area(): CellArea;
+    get cellArea(): CellArea;
+    get clickable(): boolean;
+    set clickable(val: boolean);
+    get expand(): boolean;
+    set expand(val: boolean);
+    get fixed_width(): number;
+    set fixed_width(val: number);
+    get fixedWidth(): number;
+    set fixedWidth(val: number);
+    get max_width(): number;
+    set max_width(val: number);
+    get maxWidth(): number;
+    set maxWidth(val: number);
+    get min_width(): number;
+    set min_width(val: number);
+    get minWidth(): number;
+    set minWidth(val: number);
+    get reorderable(): boolean;
+    set reorderable(val: boolean);
+    get resizable(): boolean;
+    set resizable(val: boolean);
+    get sizing(): TreeViewColumnSizing;
+    set sizing(val: TreeViewColumnSizing);
+    get sort_column_id(): number;
+    set sort_column_id(val: number);
+    get sortColumnId(): number;
+    set sortColumnId(val: number);
+    get sort_indicator(): boolean;
+    set sort_indicator(val: boolean);
+    get sortIndicator(): boolean;
+    set sortIndicator(val: boolean);
+    get sort_order(): SortType;
+    set sort_order(val: SortType);
+    get sortOrder(): SortType;
+    set sortOrder(val: SortType);
+    get spacing(): number;
+    set spacing(val: number);
+    get title(): string;
+    set title(val: string);
+    get visible(): boolean;
+    set visible(val: boolean);
+    get widget(): Widget;
+    set widget(val: Widget);
+    get width(): number;
+    get x_offset(): number;
+    get xOffset(): number;
 
     // Signals
 
@@ -18471,7 +19912,8 @@ export class TreeViewColumn extends GObject.InitiallyUnowned implements Buildabl
     queue_resize(): void;
     set_alignment(xalign: number): void;
     set_cell_data_func(cell_renderer: CellRenderer, func?: TreeCellDataFunc | null): void;
-    set_cell_data_func(...args: never[]): never;
+    // Conflicted with Gtk.CellLayout.set_cell_data_func
+    set_cell_data_func(...args: never[]): any;
     set_clickable(clickable: boolean): void;
     set_expand(expand: boolean): void;
     set_fixed_width(fixed_width: number): void;
@@ -18502,7 +19944,7 @@ export class TreeViewColumn extends GObject.InitiallyUnowned implements Buildabl
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_area(): CellArea | null;
     get_cells(): CellRenderer[];
@@ -18534,16 +19976,23 @@ export class Video extends Widget implements Accessible, Buildable, ConstraintTa
     _init(properties?: Partial<Video.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    autoplay: boolean;
-    file: Gio.File;
-    loop: boolean;
-    media_stream: MediaStream;
-    mediaStream: MediaStream;
+    get autoplay(): boolean;
+    set autoplay(val: boolean);
+    get file(): Gio.File;
+    set file(val: Gio.File);
+    get loop(): boolean;
+    set loop(val: boolean);
+    get media_stream(): MediaStream;
+    set media_stream(val: MediaStream);
+    get mediaStream(): MediaStream;
+    set mediaStream(val: MediaStream);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -18587,7 +20036,7 @@ export class Video extends Widget implements Accessible, Buildable, ConstraintTa
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module Viewport {
@@ -18605,20 +20054,31 @@ export class Viewport extends Widget implements Accessible, Buildable, Constrain
     _init(properties?: Partial<Viewport.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
-    scroll_to_focus: boolean;
-    scrollToFocus: boolean;
+    get child(): Widget;
+    set child(val: Widget);
+    get scroll_to_focus(): boolean;
+    set scroll_to_focus(val: boolean);
+    get scrollToFocus(): boolean;
+    set scrollToFocus(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    hadjustment: Adjustment;
-    hscroll_policy: ScrollablePolicy;
-    hscrollPolicy: ScrollablePolicy;
-    vadjustment: Adjustment;
-    vscroll_policy: ScrollablePolicy;
-    vscrollPolicy: ScrollablePolicy;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
+    get hadjustment(): Adjustment;
+    set hadjustment(val: Adjustment);
+    get hscroll_policy(): ScrollablePolicy;
+    set hscroll_policy(val: ScrollablePolicy);
+    get hscrollPolicy(): ScrollablePolicy;
+    set hscrollPolicy(val: ScrollablePolicy);
+    get vadjustment(): Adjustment;
+    set vadjustment(val: Adjustment);
+    get vscroll_policy(): ScrollablePolicy;
+    set vscroll_policy(val: ScrollablePolicy);
+    get vscrollPolicy(): ScrollablePolicy;
+    set vscrollPolicy(val: ScrollablePolicy);
 
     // Constructors
 
@@ -18652,7 +20112,7 @@ export class Viewport extends Widget implements Accessible, Buildable, Constrain
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
     get_hadjustment(): Adjustment;
@@ -18679,43 +20139,22 @@ export class VolumeButton extends ScaleButton implements Accessible, Buildable, 
     _init(properties?: Partial<VolumeButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    use_symbolic: boolean;
-    useSymbolic: boolean;
+    get use_symbolic(): boolean;
+    set use_symbolic(val: boolean);
+    get useSymbolic(): boolean;
+    set useSymbolic(val: boolean);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
-    orientation: Orientation;
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
     static ["new"](): VolumeButton;
-    static ["new"](...args: never[]): never;
 
     // Implemented Members
 
-    get_accessible_role(): AccessibleRole;
-    reset_property(property: AccessibleProperty): void;
-    reset_relation(relation: AccessibleRelation): void;
-    reset_state(state: AccessibleState): void;
-    update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
-    update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
-    update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
-    vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
-    vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
-    vfunc_custom_tag_start(
-        builder: Builder,
-        child: GObject.Object | null,
-        tagname: string
-    ): [boolean, BuildableParser, any | null];
-    vfunc_get_id(): string;
-    vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
-    vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
-    vfunc_set_id(id: string): void;
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
 }
@@ -18785,60 +20224,105 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     _init(properties?: Partial<Widget.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    can_focus: boolean;
-    canFocus: boolean;
-    can_target: boolean;
-    canTarget: boolean;
-    css_classes: string[];
-    cssClasses: string[];
-    css_name: string;
-    cssName: string;
-    cursor: Gdk.Cursor;
-    focus_on_click: boolean;
-    focusOnClick: boolean;
-    focusable: boolean;
-    halign: Align;
-    has_default: boolean;
-    hasDefault: boolean;
-    has_focus: boolean;
-    hasFocus: boolean;
-    has_tooltip: boolean;
-    hasTooltip: boolean;
-    height_request: number;
-    heightRequest: number;
-    hexpand: boolean;
-    hexpand_set: boolean;
-    hexpandSet: boolean;
-    layout_manager: LayoutManager;
-    layoutManager: LayoutManager;
-    margin_bottom: number;
-    marginBottom: number;
-    margin_end: number;
-    marginEnd: number;
-    margin_start: number;
-    marginStart: number;
-    margin_top: number;
-    marginTop: number;
-    name: string;
-    opacity: number;
-    overflow: Overflow;
-    receives_default: boolean;
-    receivesDefault: boolean;
-    root: Root;
-    scale_factor: number;
-    scaleFactor: number;
-    sensitive: boolean;
-    tooltip_markup: string;
-    tooltipMarkup: string;
-    tooltip_text: string;
-    tooltipText: string;
-    valign: Align;
-    vexpand: boolean;
-    vexpand_set: boolean;
-    vexpandSet: boolean;
-    visible: boolean;
-    width_request: number;
-    widthRequest: number;
+    get can_focus(): boolean;
+    set can_focus(val: boolean);
+    get canFocus(): boolean;
+    set canFocus(val: boolean);
+    get can_target(): boolean;
+    set can_target(val: boolean);
+    get canTarget(): boolean;
+    set canTarget(val: boolean);
+    get css_classes(): string[];
+    set css_classes(val: string[]);
+    get cssClasses(): string[];
+    set cssClasses(val: string[]);
+    get css_name(): string;
+    get cssName(): string;
+    get cursor(): Gdk.Cursor;
+    set cursor(val: Gdk.Cursor);
+    get focus_on_click(): boolean;
+    set focus_on_click(val: boolean);
+    get focusOnClick(): boolean;
+    set focusOnClick(val: boolean);
+    get focusable(): boolean;
+    set focusable(val: boolean);
+    get halign(): Align;
+    set halign(val: Align);
+    get has_default(): boolean;
+    get hasDefault(): boolean;
+    get has_focus(): boolean;
+    get hasFocus(): boolean;
+    get has_tooltip(): boolean;
+    set has_tooltip(val: boolean);
+    get hasTooltip(): boolean;
+    set hasTooltip(val: boolean);
+    get height_request(): number;
+    set height_request(val: number);
+    get heightRequest(): number;
+    set heightRequest(val: number);
+    get hexpand(): boolean;
+    set hexpand(val: boolean);
+    get hexpand_set(): boolean;
+    set hexpand_set(val: boolean);
+    get hexpandSet(): boolean;
+    set hexpandSet(val: boolean);
+    get layout_manager(): LayoutManager;
+    set layout_manager(val: LayoutManager);
+    get layoutManager(): LayoutManager;
+    set layoutManager(val: LayoutManager);
+    get margin_bottom(): number;
+    set margin_bottom(val: number);
+    get marginBottom(): number;
+    set marginBottom(val: number);
+    get margin_end(): number;
+    set margin_end(val: number);
+    get marginEnd(): number;
+    set marginEnd(val: number);
+    get margin_start(): number;
+    set margin_start(val: number);
+    get marginStart(): number;
+    set marginStart(val: number);
+    get margin_top(): number;
+    set margin_top(val: number);
+    get marginTop(): number;
+    set marginTop(val: number);
+    get name(): string;
+    set name(val: string);
+    get opacity(): number;
+    set opacity(val: number);
+    get overflow(): Overflow;
+    set overflow(val: Overflow);
+    get receives_default(): boolean;
+    set receives_default(val: boolean);
+    get receivesDefault(): boolean;
+    set receivesDefault(val: boolean);
+    get root(): Root;
+    get scale_factor(): number;
+    get scaleFactor(): number;
+    get sensitive(): boolean;
+    set sensitive(val: boolean);
+    get tooltip_markup(): string;
+    set tooltip_markup(val: string);
+    get tooltipMarkup(): string;
+    set tooltipMarkup(val: string);
+    get tooltip_text(): string;
+    set tooltip_text(val: string);
+    get tooltipText(): string;
+    set tooltipText(val: string);
+    get valign(): Align;
+    set valign(val: Align);
+    get vexpand(): boolean;
+    set vexpand(val: boolean);
+    get vexpand_set(): boolean;
+    set vexpand_set(val: boolean);
+    get vexpandSet(): boolean;
+    set vexpandSet(val: boolean);
+    get visible(): boolean;
+    set visible(val: boolean);
+    get width_request(): number;
+    set width_request(val: number);
+    get widthRequest(): number;
+    set widthRequest(val: number);
 
     // Signals
 
@@ -18896,8 +20380,10 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Members
 
@@ -18953,7 +20439,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     get_margin_end(): number;
     get_margin_start(): number;
     get_margin_top(): number;
-    get_name(): string | null;
+    get_name(): string;
     get_native(): Native | null;
     get_next_sibling(): Widget | null;
     get_opacity(): number;
@@ -19109,7 +20595,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module WidgetPaintable {
@@ -19125,7 +20611,8 @@ export class WidgetPaintable extends GObject.Object implements Gdk.Paintable {
     _init(properties?: Partial<WidgetPaintable.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    widget: Widget;
+    get widget(): Widget;
+    set widget(val: Widget);
 
     // Constructors
 
@@ -19180,6 +20667,8 @@ export module Window {
         focus_widget: Widget;
         focusWidget: Widget;
         fullscreened: boolean;
+        handle_menubar_accel: boolean;
+        handleMenubarAccel: boolean;
         hide_on_close: boolean;
         hideOnClose: boolean;
         icon_name: string;
@@ -19205,40 +20694,74 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     _init(properties?: Partial<Window.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    application: Application;
-    child: Widget;
-    decorated: boolean;
-    default_height: number;
-    defaultHeight: number;
-    default_widget: Widget;
-    defaultWidget: Widget;
-    default_width: number;
-    defaultWidth: number;
-    deletable: boolean;
-    destroy_with_parent: boolean;
-    destroyWithParent: boolean;
-    display: Gdk.Display;
-    focus_visible: boolean;
-    focusVisible: boolean;
-    focus_widget: Widget;
-    focusWidget: Widget;
-    fullscreened: boolean;
-    hide_on_close: boolean;
-    hideOnClose: boolean;
-    icon_name: string;
-    iconName: string;
-    is_active: boolean;
-    isActive: boolean;
-    maximized: boolean;
-    mnemonics_visible: boolean;
-    mnemonicsVisible: boolean;
-    modal: boolean;
-    resizable: boolean;
-    startup_id: string;
-    startupId: string;
-    title: string;
-    transient_for: Window;
-    transientFor: Window;
+    get application(): Application;
+    set application(val: Application);
+    get child(): Widget;
+    set child(val: Widget);
+    get decorated(): boolean;
+    set decorated(val: boolean);
+    get default_height(): number;
+    set default_height(val: number);
+    get defaultHeight(): number;
+    set defaultHeight(val: number);
+    get default_widget(): Widget;
+    set default_widget(val: Widget);
+    get defaultWidget(): Widget;
+    set defaultWidget(val: Widget);
+    get default_width(): number;
+    set default_width(val: number);
+    get defaultWidth(): number;
+    set defaultWidth(val: number);
+    get deletable(): boolean;
+    set deletable(val: boolean);
+    get destroy_with_parent(): boolean;
+    set destroy_with_parent(val: boolean);
+    get destroyWithParent(): boolean;
+    set destroyWithParent(val: boolean);
+    get display(): Gdk.Display;
+    set display(val: Gdk.Display);
+    get focus_visible(): boolean;
+    set focus_visible(val: boolean);
+    get focusVisible(): boolean;
+    set focusVisible(val: boolean);
+    get focus_widget(): Widget;
+    set focus_widget(val: Widget);
+    get focusWidget(): Widget;
+    set focusWidget(val: Widget);
+    get fullscreened(): boolean;
+    set fullscreened(val: boolean);
+    get handle_menubar_accel(): boolean;
+    set handle_menubar_accel(val: boolean);
+    get handleMenubarAccel(): boolean;
+    set handleMenubarAccel(val: boolean);
+    get hide_on_close(): boolean;
+    set hide_on_close(val: boolean);
+    get hideOnClose(): boolean;
+    set hideOnClose(val: boolean);
+    get icon_name(): string;
+    set icon_name(val: string);
+    get iconName(): string;
+    set iconName(val: string);
+    get is_active(): boolean;
+    get isActive(): boolean;
+    get maximized(): boolean;
+    set maximized(val: boolean);
+    get mnemonics_visible(): boolean;
+    set mnemonics_visible(val: boolean);
+    get mnemonicsVisible(): boolean;
+    set mnemonicsVisible(val: boolean);
+    get modal(): boolean;
+    set modal(val: boolean);
+    get resizable(): boolean;
+    set resizable(val: boolean);
+    set startup_id(val: string);
+    set startupId(val: string);
+    get title(): string;
+    set title(val: string);
+    get transient_for(): Window;
+    set transient_for(val: Window);
+    get transientFor(): Window;
+    set transientFor(val: Window);
 
     // Signals
 
@@ -19263,8 +20786,10 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -19286,6 +20811,7 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     get_focus(): Widget | null;
     get_focus_visible(): boolean;
     get_group(): WindowGroup;
+    get_handle_menubar_accel(): boolean;
     get_hide_on_close(): boolean;
     get_icon_name(): string | null;
     get_mnemonics_visible(): boolean;
@@ -19311,6 +20837,7 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     set_display(display: Gdk.Display): void;
     set_focus(focus?: Widget | null): void;
     set_focus_visible(setting: boolean): void;
+    set_handle_menubar_accel(handle_menubar_accel: boolean): void;
     set_hide_on_close(setting: boolean): void;
     set_icon_name(name?: string | null): void;
     set_mnemonics_visible(setting: boolean): void;
@@ -19356,7 +20883,7 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_renderer(): Gsk.Renderer;
     get_surface(): Gdk.Surface;
@@ -19383,15 +20910,20 @@ export class WindowControls extends Widget implements Accessible, Buildable, Con
     _init(properties?: Partial<WindowControls.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    decoration_layout: string;
-    decorationLayout: string;
-    empty: boolean;
-    side: PackType;
+    get decoration_layout(): string;
+    set decoration_layout(val: string);
+    get decorationLayout(): string;
+    set decorationLayout(val: string);
+    get empty(): boolean;
+    get side(): PackType;
+    set side(val: PackType);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -19426,7 +20958,7 @@ export class WindowControls extends Widget implements Accessible, Buildable, Con
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 export module WindowGroup {
@@ -19439,9 +20971,6 @@ export class WindowGroup extends GObject.Object {
 
     constructor(properties?: Partial<WindowGroup.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<WindowGroup.ConstructorProperties>, ...args: any[]): void;
-
-    // Fields
-    priv: WindowGroupPrivate;
 
     // Constructors
 
@@ -19466,12 +20995,15 @@ export class WindowHandle extends Widget implements Accessible, Buildable, Const
     _init(properties?: Partial<WindowHandle.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    child: Widget;
+    get child(): Widget;
+    set child(val: Widget);
 
     // Implemented Properties
 
-    accessible_role: AccessibleRole;
-    accessibleRole: AccessibleRole;
+    get accessible_role(): AccessibleRole;
+    set accessible_role(val: AccessibleRole);
+    get accessibleRole(): AccessibleRole;
+    set accessibleRole(val: AccessibleRole);
 
     // Constructors
 
@@ -19503,7 +21035,7 @@ export class WindowHandle extends Widget implements Accessible, Buildable, Const
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 
@@ -19551,9 +21083,6 @@ export class BitsetIter {
     static $gtype: GObject.GType<BitsetIter>;
 
     constructor(copy: BitsetIter);
-
-    // Fields
-    private_data: any[];
 
     // Members
     get_value(): number;
@@ -19610,9 +21139,6 @@ export class BuildableParser {
     static $gtype: GObject.GType<BuildableParser>;
 
     constructor(copy: BuildableParser);
-
-    // Fields
-    padding: any[];
 }
 
 export class ButtonPrivate {
@@ -19699,7 +21225,7 @@ export class ExpressionWatch {
     constructor(copy: ExpressionWatch);
 
     // Members
-    evaluate(value: any): boolean;
+    evaluate(value: GObject.Value | any): boolean;
     ref(): ExpressionWatch;
     unref(): void;
     unwatch(): void;
@@ -19794,6 +21320,12 @@ export class PaperSize {
     static get_paper_sizes(include_custom: boolean): PaperSize[];
 }
 
+export class PrintBackend {
+    static $gtype: GObject.GType<PrintBackend>;
+
+    constructor(copy: PrintBackend);
+}
+
 export class PrintOperationPrivate {
     static $gtype: GObject.GType<PrintOperationPrivate>;
 
@@ -19803,6 +21335,16 @@ export class PrintOperationPrivate {
 export class RecentData {
     static $gtype: GObject.GType<RecentData>;
 
+    constructor(
+        properties?: Partial<{
+            display_name?: string;
+            description?: string;
+            mime_type?: string;
+            app_name?: string;
+            app_exec?: string;
+            is_private?: boolean;
+        }>
+    );
     constructor(copy: RecentData);
 
     // Fields
@@ -19811,7 +21353,6 @@ export class RecentData {
     mime_type: string;
     app_name: string;
     app_exec: string;
-    groups: string[];
     is_private: boolean;
 }
 
@@ -19893,22 +21434,6 @@ export class Requisition {
     // Members
     copy(): Requisition;
     free(): void;
-}
-
-export class SettingsValue {
-    static $gtype: GObject.GType<SettingsValue>;
-
-    constructor(copy: SettingsValue);
-
-    // Fields
-    origin: string;
-    value: GObject.Value;
-}
-
-export class TextBTree {
-    static $gtype: GObject.GType<TextBTree>;
-
-    constructor(copy: TextBTree);
 }
 
 export class TextBufferPrivate {
@@ -20235,8 +21760,8 @@ export interface AppChooserNamespace {
 export type AppChooser = AppChooserPrototype;
 export interface AppChooserPrototype extends Widget {
     // Properties
-    content_type: string;
-    contentType: string;
+    readonly content_type: string;
+    readonly contentType: string;
 
     // Members
 
@@ -20267,7 +21792,7 @@ export interface BuildablePrototype extends GObject.Object {
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
-    vfunc_set_buildable_property(builder: Builder, name: string, value: any): void;
+    vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
 }
 
@@ -20384,22 +21909,32 @@ export interface EditableNamespace {
     $gtype: GObject.GType<Editable>;
     prototype: EditablePrototype;
 
-    delegate_get_property(object: GObject.Object, prop_id: number, value: any, pspec: GObject.ParamSpec): boolean;
-    delegate_set_property(object: GObject.Object, prop_id: number, value: any, pspec: GObject.ParamSpec): boolean;
+    delegate_get_property(
+        object: GObject.Object,
+        prop_id: number,
+        value: GObject.Value | any,
+        pspec: GObject.ParamSpec
+    ): boolean;
+    delegate_set_property(
+        object: GObject.Object,
+        prop_id: number,
+        value: GObject.Value | any,
+        pspec: GObject.ParamSpec
+    ): boolean;
     install_properties(object_class: GObject.Object, first_prop: number): number;
 }
 export type Editable = EditablePrototype;
 export interface EditablePrototype extends Widget {
     // Properties
-    cursor_position: number;
-    cursorPosition: number;
+    readonly cursor_position: number;
+    readonly cursorPosition: number;
     editable: boolean;
     enable_undo: boolean;
     enableUndo: boolean;
     max_width_chars: number;
     maxWidthChars: number;
-    selection_bound: number;
-    selectionBound: number;
+    readonly selection_bound: number;
+    readonly selectionBound: number;
     text: string;
     width_chars: number;
     widthChars: number;
@@ -20454,11 +21989,11 @@ export interface FileChooserPrototype extends GObject.Object {
     create_folders: boolean;
     createFolders: boolean;
     filter: FileFilter;
-    filters: Gio.ListModel;
+    readonly filters: Gio.ListModel;
     select_multiple: boolean;
     selectMultiple: boolean;
-    shortcut_folders: Gio.ListModel;
-    shortcutFolders: Gio.ListModel;
+    readonly shortcut_folders: Gio.ListModel;
+    readonly shortcutFolders: Gio.ListModel;
 
     // Members
 
@@ -20501,8 +22036,8 @@ export interface FontChooserPrototype extends GObject.Object {
     font: string;
     font_desc: Pango.FontDescription;
     fontDesc: Pango.FontDescription;
-    font_features: string;
-    fontFeatures: string;
+    readonly font_features: string;
+    readonly fontFeatures: string;
     language: string;
     level: FontChooserLevel;
     preview_text: string;
@@ -20706,10 +22241,10 @@ export type TreeDragDest = TreeDragDestPrototype;
 export interface TreeDragDestPrototype extends GObject.Object {
     // Members
 
-    drag_data_received(dest: TreePath, value: any): boolean;
-    row_drop_possible(dest_path: TreePath, value: any): boolean;
-    vfunc_drag_data_received(dest: TreePath, value: any): boolean;
-    vfunc_row_drop_possible(dest_path: TreePath, value: any): boolean;
+    drag_data_received(dest: TreePath, value: GObject.Value | any): boolean;
+    row_drop_possible(dest_path: TreePath, value: GObject.Value | any): boolean;
+    vfunc_drag_data_received(dest: TreePath, value: GObject.Value | any): boolean;
+    vfunc_row_drop_possible(dest_path: TreePath, value: GObject.Value | any): boolean;
 }
 
 export const TreeDragDest: TreeDragDestNamespace;

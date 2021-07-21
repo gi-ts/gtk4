@@ -1,10 +1,10 @@
 {
     "options": {
         "outputFormat": "folder",
-        "versionedOutput": false,
+        "versionedOutput": true,
         "propertyCase": "both",
         "out": "./packages/@gi-types/",
-        "versionedImports": false,
+        "versionedImports": true,
         "importPrefix": "@gi-types/",
         "emitMetadata": true,
         "inferGenerics": true,
@@ -13,11 +13,14 @@
     "libraries": {
         "Gdk": [
             "4.0"
-        ],   
-        "Gst": "1.0",
+        ],
         "Gtk": [
             "4.0"
         ],
-        "Gsk": "4.0" 
+        "Gsk": "4.0",
+        "Graphene": "1.0"
+    },
+    "dependencies": {
+        "Gst": "1.0"
     }
 }

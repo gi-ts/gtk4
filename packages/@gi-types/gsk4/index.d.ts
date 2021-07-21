@@ -4,12 +4,12 @@
  * Generated from 4.0
  */
 
-import * as Gdk from "@gi-types/gdk";
-import * as GObject from "@gi-types/gobject";
-import * as GLib from "@gi-types/glib";
-import * as Graphene from "@gi-types/graphene";
-import * as cairo from "@gi-types/cairo";
-import * as Pango from "@gi-types/pango";
+import * as Gdk from "@gi-types/gdk4";
+import * as GObject from "@gi-types/gobject2";
+import * as Graphene from "@gi-types/graphene1";
+import * as GLib from "@gi-types/glib2";
+import * as cairo from "@gi-types/cairo1";
+import * as Pango from "@gi-types/pango1";
 
 export function serialization_error_quark(): GLib.Quark;
 export function transform_parse(string: string): [boolean, Transform];
@@ -113,7 +113,7 @@ export class SerializationError extends GLib.Error {
     constructor(options: { message: string; code: number });
     constructor(copy: SerializationError);
 
-    // Properties
+    // Fields
     static UNSUPPORTED_FORMAT: number;
     static UNSUPPORTED_VERSION: number;
     static INVALID_DATA: number;
@@ -196,6 +196,21 @@ export class BorderNode extends RenderNode {
     get_colors(): Gdk.RGBA;
     get_outline(): RoundedRect;
     get_widths(): number[];
+}
+export module BroadwayRenderer {
+    export interface ConstructorProperties extends Renderer.ConstructorProperties {
+        [key: string]: any;
+    }
+}
+export class BroadwayRenderer extends Renderer {
+    static $gtype: GObject.GType<BroadwayRenderer>;
+
+    constructor(properties?: Partial<BroadwayRenderer.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<BroadwayRenderer.ConstructorProperties>, ...args: any[]): void;
+
+    // Constructors
+
+    static ["new"](): BroadwayRenderer;
 }
 export module CairoNode {
     export interface ConstructorProperties extends RenderNode.ConstructorProperties {
@@ -314,6 +329,7 @@ export class ConicGradientNode extends RenderNode {
 
     // Members
 
+    get_angle(): number;
     get_center(): Graphene.Point;
     get_color_stops(): ColorStop[];
     get_n_color_stops(): number;
@@ -409,8 +425,8 @@ export class GLShader extends GObject.Object {
     _init(properties?: Partial<GLShader.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    resource: string;
-    source: GLib.Bytes;
+    get resource(): string;
+    get source(): GLib.Bytes;
 
     // Constructors
 
@@ -521,6 +537,21 @@ export class LinearGradientNode extends RenderNode {
     get_end(): Graphene.Point;
     get_n_color_stops(): number;
     get_start(): Graphene.Point;
+}
+export module NglRenderer {
+    export interface ConstructorProperties extends Renderer.ConstructorProperties {
+        [key: string]: any;
+    }
+}
+export class NglRenderer extends Renderer {
+    static $gtype: GObject.GType<NglRenderer>;
+
+    constructor(properties?: Partial<NglRenderer.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<NglRenderer.ConstructorProperties>, ...args: any[]): void;
+
+    // Constructors
+
+    static ["new"](): NglRenderer;
 }
 export module OpacityNode {
     export interface ConstructorProperties extends RenderNode.ConstructorProperties {
@@ -642,8 +673,8 @@ export abstract class Renderer extends GObject.Object {
     _init(properties?: Partial<Renderer.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
-    realized: boolean;
-    surface: Gdk.Surface;
+    get realized(): boolean;
+    get surface(): Gdk.Surface;
 
     // Constructors
 
@@ -847,14 +878,12 @@ export class ColorStop {
     constructor(
         properties?: Partial<{
             offset?: number;
-            color?: Gdk.RGBA;
         }>
     );
     constructor(copy: ColorStop);
 
     // Fields
     offset: number;
-    color: Gdk.RGBA;
 }
 
 export class ParseLocation {
@@ -883,10 +912,6 @@ export class RoundedRect {
     static $gtype: GObject.GType<RoundedRect>;
 
     constructor(copy: RoundedRect);
-
-    // Fields
-    bounds: Graphene.Rect;
-    corner: Graphene.Size[];
 
     // Members
     contains_point(point: Graphene.Point): boolean;
@@ -934,7 +959,6 @@ export class Shadow {
 
     constructor(
         properties?: Partial<{
-            color?: Gdk.RGBA;
             dx?: number;
             dy?: number;
             radius?: number;
@@ -943,7 +967,6 @@ export class Shadow {
     constructor(copy: Shadow);
 
     // Fields
-    color: Gdk.RGBA;
     dx: number;
     dy: number;
     radius: number;
