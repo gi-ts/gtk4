@@ -1,7 +1,7 @@
 /**
  * Gtk 4.0
  *
- * Generated from 4.2.1
+ * Generated from 4.6.6
  */
 
 import * as Gio from "@gi-types/gio2";
@@ -19,6 +19,7 @@ export const BINARY_AGE: number;
 export const IM_MODULE_EXTENSION_POINT_NAME: string;
 export const INPUT_ERROR: number;
 export const INTERFACE_AGE: number;
+export const INVALID_LIST_POSITION: number;
 export const LEVEL_BAR_OFFSET_FULL: string;
 export const LEVEL_BAR_OFFSET_HIGH: string;
 export const LEVEL_BAR_OFFSET_LOW: string;
@@ -90,18 +91,18 @@ export function accelerator_name_with_keycode(
     keycode: number,
     accelerator_mods: Gdk.ModifierType
 ): string;
-export function accelerator_parse(accelerator: string): [boolean, number | null, Gdk.ModifierType | null];
+export function accelerator_parse(accelerator: string): [boolean, number, Gdk.ModifierType | null];
 export function accelerator_parse_with_keycode(
     accelerator: string,
-    display?: Gdk.Display | null
-): [boolean, number | null, number[] | null, Gdk.ModifierType | null];
+    display: Gdk.Display | null
+): [boolean, number, number[] | null, Gdk.ModifierType | null];
 export function accelerator_valid(keyval: number, modifiers: Gdk.ModifierType): boolean;
 export function accessible_property_init_value(property: AccessibleProperty, value: GObject.Value | any): void;
 export function accessible_relation_init_value(relation: AccessibleRelation, value: GObject.Value | any): void;
 export function accessible_state_init_value(state: AccessibleState, value: GObject.Value | any): void;
-export function bitset_iter_init_at(set: Bitset, target: number): [boolean, BitsetIter, number | null];
-export function bitset_iter_init_first(set: Bitset): [boolean, BitsetIter, number | null];
-export function bitset_iter_init_last(set: Bitset): [boolean, BitsetIter, number | null];
+export function bitset_iter_init_at(set: Bitset, target: number): [boolean, BitsetIter, number];
+export function bitset_iter_init_first(set: Bitset): [boolean, BitsetIter, number];
+export function bitset_iter_init_last(set: Bitset): [boolean, BitsetIter, number];
 export function builder_error_quark(): GLib.Quark;
 export function check_version(required_major: number, required_minor: number, required_micro: number): string | null;
 export function constraint_vfl_parser_error_quark(): GLib.Quark;
@@ -137,7 +138,7 @@ export function icon_theme_error_quark(): GLib.Quark;
 export function init(): void;
 export function init_check(): boolean;
 export function is_initialized(): boolean;
-export function native_get_for_surface(surface: Gdk.Surface): Native;
+export function native_get_for_surface(surface: Gdk.Surface): Native | null;
 export function ordering_from_cmpfunc(cmpfunc_result: number): Ordering;
 export function paper_size_get_default(): string;
 export function paper_size_get_paper_sizes(include_custom: boolean): PaperSize[];
@@ -1014,6 +1015,16 @@ export enum MovementStep {
     HORIZONTAL_PAGES = 9,
 }
 
+export namespace NaturalWrapMode {
+    export const $gtype: GObject.GType<NaturalWrapMode>;
+}
+
+export enum NaturalWrapMode {
+    INHERIT = 0,
+    NONE = 1,
+    WORD = 2,
+}
+
 export namespace NotebookTab {
     export const $gtype: GObject.GType<NotebookTab>;
 }
@@ -1504,6 +1515,17 @@ export enum StringFilterMatchMode {
     EXACT = 0,
     SUBSTRING = 1,
     PREFIX = 2,
+}
+
+export namespace SymbolicColor {
+    export const $gtype: GObject.GType<SymbolicColor>;
+}
+
+export enum SymbolicColor {
+    FOREGROUND = 0,
+    ERROR = 1,
+    WARNING = 2,
+    SUCCESS = 3,
 }
 
 export namespace SystemSetting {
@@ -2067,7 +2089,7 @@ export class ActionBar extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -2075,7 +2097,7 @@ export class ActionBar extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -2241,7 +2263,7 @@ export class AnyFilter<A extends GObject.Object = GObject.Object>
     vfunc_get_item(position: number): A | null;
     vfunc_get_item_type(): GObject.GType;
     vfunc_get_n_items(): number;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -2249,7 +2271,7 @@ export class AnyFilter<A extends GObject.Object = GObject.Object>
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -2292,6 +2314,9 @@ export class AppChooserButton extends Widget implements Accessible, AppChooser, 
     connect(id: string, callback: (...args: any[]) => any): number;
     connect_after(id: string, callback: (...args: any[]) => any): number;
     emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
     connect(signal: "changed", callback: (_source: this) => void): number;
     connect_after(signal: "changed", callback: (_source: this) => void): number;
     emit(signal: "changed"): void;
@@ -2338,7 +2363,7 @@ export class AppChooserButton extends Widget implements Accessible, AppChooser, 
     get_app_info(): Gio.AppInfo | null;
     get_content_type(): string;
     refresh(): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -2346,7 +2371,7 @@ export class AppChooserButton extends Widget implements Accessible, AppChooser, 
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -2493,7 +2518,7 @@ export class AppChooserWidget extends Widget implements Accessible, AppChooser, 
     get_app_info(): Gio.AppInfo | null;
     get_content_type(): string;
     refresh(): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -2501,7 +2526,7 @@ export class AppChooserWidget extends Widget implements Accessible, AppChooser, 
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -2772,7 +2797,7 @@ export class AspectFrame extends Widget implements Accessible, Buildable, Constr
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -2780,7 +2805,7 @@ export class AspectFrame extends Widget implements Accessible, Buildable, Constr
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -3063,7 +3088,7 @@ export class Box extends Widget implements Accessible, Buildable, ConstraintTarg
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -3071,7 +3096,7 @@ export class Box extends Widget implements Accessible, Buildable, ConstraintTarg
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -3354,7 +3379,7 @@ export class Button extends Widget implements Accessible, Actionable, Buildable,
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -3362,7 +3387,7 @@ export class Button extends Widget implements Accessible, Actionable, Buildable,
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -3486,7 +3511,7 @@ export class Calendar extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -3494,7 +3519,7 @@ export class Calendar extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -3662,23 +3687,15 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
         y: number
     ): [CellRenderer, Gdk.Rectangle | null];
     get_current_path_string(): string;
-    get_edit_widget(): CellEditable;
-    get_edited_cell(): CellRenderer;
-    get_focus_cell(): CellRenderer;
+    get_edit_widget(): CellEditable | null;
+    get_edited_cell(): CellRenderer | null;
+    get_focus_cell(): CellRenderer | null;
     get_focus_from_sibling(renderer: CellRenderer): CellRenderer | null;
     get_focus_siblings(renderer: CellRenderer): CellRenderer[];
-    get_preferred_height(context: CellAreaContext, widget: Widget): [number | null, number | null];
-    get_preferred_height_for_width(
-        context: CellAreaContext,
-        widget: Widget,
-        width: number
-    ): [number | null, number | null];
-    get_preferred_width(context: CellAreaContext, widget: Widget): [number | null, number | null];
-    get_preferred_width_for_height(
-        context: CellAreaContext,
-        widget: Widget,
-        height: number
-    ): [number | null, number | null];
+    get_preferred_height(context: CellAreaContext, widget: Widget): [number, number];
+    get_preferred_height_for_width(context: CellAreaContext, widget: Widget, width: number): [number, number];
+    get_preferred_width(context: CellAreaContext, widget: Widget): [number, number];
+    get_preferred_width_for_height(context: CellAreaContext, widget: Widget, height: number): [number, number];
     get_request_mode(): SizeRequestMode;
     has_renderer(renderer: CellRenderer): boolean;
     inner_cell_area(widget: Widget, cell_area: Gdk.Rectangle): Gdk.Rectangle;
@@ -3691,8 +3708,8 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
         orientation: Orientation,
         widget: Widget,
         for_size: number
-    ): [number | null, number | null];
-    set_focus_cell(renderer: CellRenderer): void;
+    ): [number, number];
+    set_focus_cell(renderer?: CellRenderer | null): void;
     snapshot(
         context: CellAreaContext,
         widget: Widget,
@@ -3736,18 +3753,10 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
         value: GObject.Value | any,
         pspec: GObject.ParamSpec
     ): void;
-    vfunc_get_preferred_height(context: CellAreaContext, widget: Widget): [number | null, number | null];
-    vfunc_get_preferred_height_for_width(
-        context: CellAreaContext,
-        widget: Widget,
-        width: number
-    ): [number | null, number | null];
-    vfunc_get_preferred_width(context: CellAreaContext, widget: Widget): [number | null, number | null];
-    vfunc_get_preferred_width_for_height(
-        context: CellAreaContext,
-        widget: Widget,
-        height: number
-    ): [number | null, number | null];
+    vfunc_get_preferred_height(context: CellAreaContext, widget: Widget): [number, number];
+    vfunc_get_preferred_height_for_width(context: CellAreaContext, widget: Widget, width: number): [number, number];
+    vfunc_get_preferred_width(context: CellAreaContext, widget: Widget): [number, number];
+    vfunc_get_preferred_width_for_height(context: CellAreaContext, widget: Widget, height: number): [number, number];
     vfunc_get_request_mode(): SizeRequestMode;
     vfunc_is_activatable(): boolean;
     vfunc_remove(renderer: CellRenderer): void;
@@ -3766,10 +3775,13 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
         flags: CellRendererState,
         paint_focus: boolean
     ): void;
+    static find_cell_property(property_name: string): GObject.ParamSpec;
+    static install_cell_property(property_id: number, pspec: GObject.ParamSpec): void;
+    static list_cell_properties(): GObject.ParamSpec[];
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -3777,7 +3789,7 @@ export abstract class CellArea extends GObject.InitiallyUnowned implements Build
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -3840,7 +3852,7 @@ export class CellAreaBox extends CellArea implements Buildable, CellLayout, Orie
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -3848,7 +3860,7 @@ export class CellAreaBox extends CellArea implements Buildable, CellLayout, Orie
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -3907,18 +3919,18 @@ export class CellAreaContext extends GObject.Object {
     // Members
 
     allocate(width: number, height: number): void;
-    get_allocation(): [number | null, number | null];
+    get_allocation(): [number, number];
     get_area(): CellArea;
-    get_preferred_height(): [number | null, number | null];
-    get_preferred_height_for_width(width: number): [number | null, number | null];
-    get_preferred_width(): [number | null, number | null];
-    get_preferred_width_for_height(height: number): [number | null, number | null];
+    get_preferred_height(): [number, number];
+    get_preferred_height_for_width(width: number): [number, number];
+    get_preferred_width(): [number, number];
+    get_preferred_width_for_height(height: number): [number, number];
     push_preferred_height(minimum_height: number, natural_height: number): void;
     push_preferred_width(minimum_width: number, natural_width: number): void;
     reset(): void;
     vfunc_allocate(width: number, height: number): void;
-    vfunc_get_preferred_height_for_width(width: number): [number | null, number | null];
-    vfunc_get_preferred_width_for_height(height: number): [number | null, number | null];
+    vfunc_get_preferred_height_for_width(width: number): [number, number];
+    vfunc_get_preferred_width_for_height(height: number): [number, number];
     vfunc_reset(): void;
 }
 export module CellRenderer {
@@ -4017,16 +4029,16 @@ export abstract class CellRenderer extends GObject.InitiallyUnowned {
         flags: CellRendererState
     ): boolean;
     get_aligned_area(widget: Widget, flags: CellRendererState, cell_area: Gdk.Rectangle): Gdk.Rectangle;
-    get_alignment(): [number | null, number | null];
-    get_fixed_size(): [number | null, number | null];
+    get_alignment(): [number, number];
+    get_fixed_size(): [number, number];
     get_is_expanded(): boolean;
     get_is_expander(): boolean;
-    get_padding(): [number | null, number | null];
-    get_preferred_height(widget: Widget): [number | null, number | null];
-    get_preferred_height_for_width(widget: Widget, width: number): [number | null, number | null];
+    get_padding(): [number, number];
+    get_preferred_height(widget: Widget): [number, number];
+    get_preferred_height_for_width(widget: Widget, width: number): [number, number];
     get_preferred_size(widget: Widget): [Requisition | null, Requisition | null];
-    get_preferred_width(widget: Widget): [number | null, number | null];
-    get_preferred_width_for_height(widget: Widget, height: number): [number | null, number | null];
+    get_preferred_width(widget: Widget): [number, number];
+    get_preferred_width_for_height(widget: Widget, height: number): [number, number];
     get_request_mode(): SizeRequestMode;
     get_sensitive(): boolean;
     get_state(widget: Widget | null, cell_state: CellRendererState): StateFlags;
@@ -4066,10 +4078,10 @@ export abstract class CellRenderer extends GObject.InitiallyUnowned {
     vfunc_editing_canceled(): void;
     vfunc_editing_started(editable: CellEditable, path: string): void;
     vfunc_get_aligned_area(widget: Widget, flags: CellRendererState, cell_area: Gdk.Rectangle): Gdk.Rectangle;
-    vfunc_get_preferred_height(widget: Widget): [number | null, number | null];
-    vfunc_get_preferred_height_for_width(widget: Widget, width: number): [number | null, number | null];
-    vfunc_get_preferred_width(widget: Widget): [number | null, number | null];
-    vfunc_get_preferred_width_for_height(widget: Widget, height: number): [number | null, number | null];
+    vfunc_get_preferred_height(widget: Widget): [number, number];
+    vfunc_get_preferred_height_for_width(widget: Widget, width: number): [number, number];
+    vfunc_get_preferred_width(widget: Widget): [number, number];
+    vfunc_get_preferred_width_for_height(widget: Widget, height: number): [number, number];
     vfunc_get_request_mode(): SizeRequestMode;
     vfunc_snapshot(
         snapshot: Snapshot,
@@ -4724,7 +4736,7 @@ export class CellView extends Widget implements Accessible, Buildable, CellLayou
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -4732,7 +4744,7 @@ export class CellView extends Widget implements Accessible, Buildable, CellLayou
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -4811,7 +4823,7 @@ export class CenterBox extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -4819,7 +4831,7 @@ export class CenterBox extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -4951,7 +4963,7 @@ export class CheckButton extends Widget implements Accessible, Actionable, Build
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -4959,7 +4971,7 @@ export class CheckButton extends Widget implements Accessible, Actionable, Build
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -5015,6 +5027,9 @@ export class ColorButton extends Widget implements Accessible, Buildable, ColorC
     connect(id: string, callback: (...args: any[]) => any): number;
     connect_after(id: string, callback: (...args: any[]) => any): number;
     emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
     connect(signal: "color-set", callback: (_source: this) => void): number;
     connect_after(signal: "color-set", callback: (_source: this) => void): number;
     emit(signal: "color-set"): void;
@@ -5053,7 +5068,7 @@ export class ColorButton extends Widget implements Accessible, Buildable, ColorC
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -5061,7 +5076,7 @@ export class ColorButton extends Widget implements Accessible, Buildable, ColorC
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -5171,7 +5186,7 @@ export class ColorChooserWidget extends Widget implements Accessible, Buildable,
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -5179,7 +5194,7 @@ export class ColorChooserWidget extends Widget implements Accessible, Buildable,
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -5304,7 +5319,7 @@ export class ColumnView extends Widget implements Accessible, Buildable, Constra
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -5312,16 +5327,16 @@ export class ColumnView extends Widget implements Accessible, Buildable, Constra
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
     vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -5471,6 +5486,9 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
     connect(id: string, callback: (...args: any[]) => any): number;
     connect_after(id: string, callback: (...args: any[]) => any): number;
     emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
     connect(signal: "changed", callback: (_source: this) => void): number;
     connect_after(signal: "changed", callback: (_source: this) => void): number;
     emit(signal: "changed"): void;
@@ -5530,6 +5548,7 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
     set_model(model?: TreeModel | null): void;
     set_popup_fixed_width(fixed: boolean): void;
     set_row_separator_func(func?: TreeViewRowSeparatorFunc | null, destroy?: GLib.DestroyNotify | null): void;
+    vfunc_activate(): void;
     vfunc_changed(): void;
     vfunc_format_entry_text(path: string): string;
 
@@ -5542,7 +5561,7 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -5550,7 +5569,7 @@ export class ComboBox extends Widget implements Accessible, Buildable, CellEdita
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -5793,10 +5812,10 @@ export class ConstraintGuide extends GObject.Object implements ConstraintTarget 
 
     // Members
 
-    get_max_size(width?: number | null, height?: number | null): void;
-    get_min_size(width?: number | null, height?: number | null): void;
+    get_max_size(): [number, number];
+    get_min_size(): [number, number];
     get_name(): string | null;
-    get_nat_size(width?: number | null, height?: number | null): void;
+    get_nat_size(): [number, number];
     get_strength(): ConstraintStrength;
     set_max_size(width: number, height: number): void;
     set_min_size(width: number, height: number): void;
@@ -5826,7 +5845,7 @@ export class ConstraintLayout extends LayoutManager implements Buildable {
         lines: string[],
         hspacing: number,
         vspacing: number,
-        views: GLib.HashTable<string, ConstraintTarget>
+        views: { [key: string]: any } | GLib.HashTable<string, ConstraintTarget>
     ): Constraint[];
     add_guide(guide: ConstraintGuide): void;
     observe_constraints(): Gio.ListModel;
@@ -5837,7 +5856,7 @@ export class ConstraintLayout extends LayoutManager implements Buildable {
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -5845,7 +5864,7 @@ export class ConstraintLayout extends LayoutManager implements Buildable {
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -6119,7 +6138,7 @@ export class DragIcon extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -6127,7 +6146,7 @@ export class DragIcon extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -6227,6 +6246,9 @@ export class DrawingArea extends Widget implements Accessible, Buildable, Constr
     get contentWidth(): number;
     set contentWidth(val: number);
 
+    // Fields
+    widget: Widget;
+
     // Signals
 
     connect(id: string, callback: (...args: any[]) => any): number;
@@ -6265,7 +6287,7 @@ export class DrawingArea extends Widget implements Accessible, Buildable, Constr
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -6273,7 +6295,7 @@ export class DrawingArea extends Widget implements Accessible, Buildable, Constr
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -6339,6 +6361,8 @@ export module DropDown {
         selected: number;
         selected_item: GObject.Object;
         selectedItem: GObject.Object;
+        show_arrow: boolean;
+        showArrow: boolean;
     }
 }
 export class DropDown extends Widget implements Accessible, Buildable, ConstraintTarget {
@@ -6366,6 +6390,19 @@ export class DropDown extends Widget implements Accessible, Buildable, Constrain
     set selected(val: number);
     get selected_item(): GObject.Object;
     get selectedItem(): GObject.Object;
+    get show_arrow(): boolean;
+    set show_arrow(val: boolean);
+    get showArrow(): boolean;
+    set showArrow(val: boolean);
+
+    // Signals
+
+    connect(id: string, callback: (...args: any[]) => any): number;
+    connect_after(id: string, callback: (...args: any[]) => any): number;
+    emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
 
     // Implemented Properties
 
@@ -6388,12 +6425,14 @@ export class DropDown extends Widget implements Accessible, Buildable, Constrain
     get_model(): Gio.ListModel | null;
     get_selected(): number;
     get_selected_item<T = GObject.Object>(): T;
+    get_show_arrow(): boolean;
     set_enable_search(enable_search: boolean): void;
     set_expression(expression?: Expression | null): void;
     set_factory(factory?: ListItemFactory | null): void;
     set_list_factory(factory?: ListItemFactory | null): void;
     set_model(model?: Gio.ListModel | null): void;
     set_selected(position: number): void;
+    set_show_arrow(show_arrow: boolean): void;
 
     // Implemented Members
 
@@ -6404,7 +6443,7 @@ export class DropDown extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -6412,7 +6451,7 @@ export class DropDown extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -6423,7 +6462,8 @@ export module DropTarget {
     export interface ConstructorProperties extends EventController.ConstructorProperties {
         [key: string]: any;
         actions: Gdk.DragAction;
-        drop: Gdk.Drop;
+        current_drop: Gdk.Drop;
+        currentDrop: Gdk.Drop;
         formats: Gdk.ContentFormats;
         preload: boolean;
         value: GObject.Value;
@@ -6438,7 +6478,8 @@ export class DropTarget extends EventController {
     // Properties
     get actions(): Gdk.DragAction;
     set actions(val: Gdk.DragAction);
-    get drop(): Gdk.Drop;
+    get current_drop(): Gdk.Drop;
+    get currentDrop(): Gdk.Drop;
     get formats(): Gdk.ContentFormats;
     get preload(): boolean;
     set preload(val: boolean);
@@ -6475,6 +6516,7 @@ export class DropTarget extends EventController {
     // Members
 
     get_actions(): Gdk.DragAction;
+    get_current_drop(): Gdk.Drop | null;
     get_drop(): Gdk.Drop | null;
     get_formats(): Gdk.ContentFormats | null;
     get_gtypes(): GObject.GType[] | null;
@@ -6612,7 +6654,7 @@ export class EditableLabel extends Widget implements Accessible, Buildable, Cons
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -6620,7 +6662,7 @@ export class EditableLabel extends Widget implements Accessible, Buildable, Cons
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -6636,7 +6678,7 @@ export class EditableLabel extends Widget implements Accessible, Buildable, Cons
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -6654,7 +6696,7 @@ export class EditableLabel extends Widget implements Accessible, Buildable, Cons
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
@@ -7041,7 +7083,7 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -7049,7 +7091,7 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -7070,7 +7112,7 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -7087,7 +7129,7 @@ export class Entry extends Widget implements Accessible, Buildable, CellEditable
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
@@ -7275,7 +7317,7 @@ export class EntryCompletion extends GObject.Object implements Buildable, CellLa
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -7283,7 +7325,7 @@ export class EntryCompletion extends GObject.Object implements Buildable, CellLa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -7344,12 +7386,12 @@ export abstract class EventController extends GObject.Object {
     get_current_event_device(): Gdk.Device | null;
     get_current_event_state(): Gdk.ModifierType;
     get_current_event_time(): number;
-    get_name(): string;
+    get_name(): string | null;
     get_propagation_limit(): PropagationLimit;
     get_propagation_phase(): PropagationPhase;
     get_widget(): Widget;
     reset(): void;
-    set_name(name: string): void;
+    set_name(name?: string | null): void;
     set_propagation_limit(limit: PropagationLimit): void;
     set_propagation_phase(phase: PropagationPhase): void;
 }
@@ -7439,8 +7481,8 @@ export class EventControllerKey extends EventController {
 
     forward(widget: Widget): boolean;
     get_group(): number;
-    get_im_context(): IMContext;
-    set_im_context(im_context: IMContext): void;
+    get_im_context(): IMContext | null;
+    set_im_context(im_context?: IMContext | null): void;
 }
 export module EventControllerLegacy {
     export interface ConstructorProperties extends EventController.ConstructorProperties {
@@ -7577,7 +7619,7 @@ export class EveryFilter<A extends GObject.Object = GObject.Object>
     vfunc_get_item(position: number): A | null;
     vfunc_get_item_type(): GObject.GType;
     vfunc_get_n_items(): number;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -7585,7 +7627,7 @@ export class EveryFilter<A extends GObject.Object = GObject.Object>
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -7685,7 +7727,7 @@ export class Expander extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -7693,7 +7735,7 @@ export class Expander extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -7759,11 +7801,11 @@ export class FileChooserDialog
     add_filter(filter: FileFilter): void;
     add_shortcut_folder(folder: Gio.File): boolean;
     get_action(): FileChooserAction;
-    get_choice(id: string): string;
+    get_choice(id: string): string | null;
     get_create_folders(): boolean;
-    get_current_folder(): Gio.File;
-    get_current_name(): string;
-    get_file(): Gio.File;
+    get_current_folder(): Gio.File | null;
+    get_current_name(): string | null;
+    get_file(): Gio.File | null;
     get_files(): Gio.ListModel;
     get_filter(): FileFilter | null;
     get_filters(): Gio.ListModel;
@@ -7775,7 +7817,7 @@ export class FileChooserDialog
     set_action(action: FileChooserAction): void;
     set_choice(id: string, option: string): void;
     set_create_folders(create_folders: boolean): void;
-    set_current_folder(file: Gio.File): boolean;
+    set_current_folder(file?: Gio.File | null): boolean;
     set_current_name(name: string): void;
     set_file(file: Gio.File): boolean;
     set_filter(filter: FileFilter): void;
@@ -7847,11 +7889,11 @@ export class FileChooserNative extends NativeDialog implements FileChooser {
     add_filter(filter: FileFilter): void;
     add_shortcut_folder(folder: Gio.File): boolean;
     get_action(): FileChooserAction;
-    get_choice(id: string): string;
+    get_choice(id: string): string | null;
     get_create_folders(): boolean;
-    get_current_folder(): Gio.File;
-    get_current_name(): string;
-    get_file(): Gio.File;
+    get_current_folder(): Gio.File | null;
+    get_current_name(): string | null;
+    get_file(): Gio.File | null;
     get_files(): Gio.ListModel;
     get_filter(): FileFilter | null;
     get_filters(): Gio.ListModel;
@@ -7863,7 +7905,7 @@ export class FileChooserNative extends NativeDialog implements FileChooser {
     set_action(action: FileChooserAction): void;
     set_choice(id: string, option: string): void;
     set_create_folders(create_folders: boolean): void;
-    set_current_folder(file: Gio.File): boolean;
+    set_current_folder(file?: Gio.File | null): boolean;
     set_current_name(name: string): void;
     set_file(file: Gio.File): boolean;
     set_filter(filter: FileFilter): void;
@@ -7967,7 +8009,7 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -7975,7 +8017,7 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -7985,11 +8027,11 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
     add_filter(filter: FileFilter): void;
     add_shortcut_folder(folder: Gio.File): boolean;
     get_action(): FileChooserAction;
-    get_choice(id: string): string;
+    get_choice(id: string): string | null;
     get_create_folders(): boolean;
-    get_current_folder(): Gio.File;
-    get_current_name(): string;
-    get_file(): Gio.File;
+    get_current_folder(): Gio.File | null;
+    get_current_name(): string | null;
+    get_file(): Gio.File | null;
     get_files(): Gio.ListModel;
     get_filter(): FileFilter | null;
     get_filters(): Gio.ListModel;
@@ -8001,7 +8043,7 @@ export class FileChooserWidget extends Widget implements Accessible, Buildable, 
     set_action(action: FileChooserAction): void;
     set_choice(id: string, option: string): void;
     set_create_folders(create_folders: boolean): void;
-    set_current_folder(file: Gio.File): boolean;
+    set_current_folder(file?: Gio.File | null): boolean;
     set_current_name(name: string): void;
     set_file(file: Gio.File): boolean;
     set_filter(filter: FileFilter): void;
@@ -8033,6 +8075,7 @@ export class FileFilter extends Filter implements Buildable {
     add_mime_type(mime_type: string): void;
     add_pattern(pattern: string): void;
     add_pixbuf_formats(): void;
+    add_suffix(suffix: string): void;
     get_attributes(): string[];
     get_name(): string | null;
     set_name(name?: string | null): void;
@@ -8040,7 +8083,7 @@ export class FileFilter extends Filter implements Buildable {
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8048,7 +8091,7 @@ export class FileFilter extends Filter implements Buildable {
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8175,7 +8218,7 @@ export class Fixed extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8183,7 +8226,7 @@ export class Fixed extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8253,7 +8296,7 @@ export class FlattenListModel<A extends GObject.Object = GObject.Object>
     // Members
 
     get_model(): Gio.ListModel | null;
-    get_model_for_item(position: number): Gio.ListModel;
+    get_model_for_item(position: number): Gio.ListModel | null;
     set_model(model?: Gio.ListModel | null): void;
 
     // Implemented Members
@@ -8372,6 +8415,7 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
 
     // Members
 
+    append(child: Widget): void;
     bind_model(model: Gio.ListModel | null, create_widget_func: FlowBoxCreateWidgetFunc): void;
     get_activate_on_single_click(): boolean;
     get_child_at_index(idx: number): FlowBoxChild | null;
@@ -8386,6 +8430,7 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
     insert(widget: Widget, position: number): void;
     invalidate_filter(): void;
     invalidate_sort(): void;
+    prepend(child: Widget): void;
     remove(widget: Widget): void;
     select_all(): void;
     select_child(child: FlowBoxChild): void;
@@ -8413,7 +8458,7 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8421,7 +8466,7 @@ export class FlowBox extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8484,7 +8529,7 @@ export class FlowBoxChild extends Widget implements Accessible, Buildable, Const
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8492,7 +8537,7 @@ export class FlowBoxChild extends Widget implements Accessible, Buildable, Const
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8535,6 +8580,9 @@ export class FontButton extends Widget implements Accessible, Buildable, Constra
     connect(id: string, callback: (...args: any[]) => any): number;
     connect_after(id: string, callback: (...args: any[]) => any): number;
     emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
     connect(signal: "font-set", callback: (_source: this) => void): number;
     connect_after(signal: "font-set", callback: (_source: this) => void): number;
     emit(signal: "font-set"): void;
@@ -8591,7 +8639,7 @@ export class FontButton extends Widget implements Accessible, Buildable, Constra
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8599,7 +8647,7 @@ export class FontButton extends Widget implements Accessible, Buildable, Constra
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8761,7 +8809,7 @@ export class FontChooserWidget extends Widget implements Accessible, Buildable, 
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8769,7 +8817,7 @@ export class FontChooserWidget extends Widget implements Accessible, Buildable, 
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8865,7 +8913,7 @@ export class Frame extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8873,7 +8921,7 @@ export class Frame extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -8949,7 +8997,7 @@ export class GLArea extends Widget implements Accessible, Buildable, ConstraintT
 
     attach_buffers(): void;
     get_auto_render(): boolean;
-    get_context(): Gdk.GLContext;
+    get_context(): Gdk.GLContext | null;
     get_error(): GLib.Error | null;
     get_has_depth_buffer(): boolean;
     get_has_stencil_buffer(): boolean;
@@ -8975,7 +9023,7 @@ export class GLArea extends Widget implements Accessible, Buildable, ConstraintT
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -8983,7 +9031,7 @@ export class GLArea extends Widget implements Accessible, Buildable, ConstraintT
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -9042,7 +9090,7 @@ export abstract class Gesture extends EventController {
     get_group(): Gesture[];
     get_last_event(sequence?: Gdk.EventSequence | null): Gdk.Event | null;
     get_last_updated_sequence(): Gdk.EventSequence | null;
-    get_point(sequence?: Gdk.EventSequence | null): [boolean, number | null, number | null];
+    get_point(sequence: Gdk.EventSequence | null): [boolean, number, number];
     get_sequence_state(sequence: Gdk.EventSequence): EventSequenceState;
     get_sequences(): Gdk.EventSequence[];
     group(gesture: Gesture): void;
@@ -9125,8 +9173,8 @@ export class GestureDrag extends GestureSingle {
 
     // Members
 
-    get_offset(): [boolean, number | null, number | null];
-    get_start_point(): [boolean, number | null, number | null];
+    get_offset(): [boolean, number, number];
+    get_start_point(): [boolean, number, number];
 }
 export module GestureLongPress {
     export interface ConstructorProperties extends GestureSingle.ConstructorProperties {
@@ -9437,7 +9485,7 @@ export class Grid extends Widget implements Accessible, Buildable, ConstraintTar
     insert_column(position: number): void;
     insert_next_to(sibling: Widget, side: PositionType): void;
     insert_row(position: number): void;
-    query_child(child: Widget): [number | null, number | null, number | null, number | null];
+    query_child(child: Widget): [number, number, number, number];
     remove(child: Widget): void;
     remove_column(position: number): void;
     remove_row(position: number): void;
@@ -9457,7 +9505,7 @@ export class Grid extends Widget implements Accessible, Buildable, ConstraintTar
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -9465,7 +9513,7 @@ export class Grid extends Widget implements Accessible, Buildable, ConstraintTar
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -9671,9 +9719,9 @@ export class GridView extends ListBase implements Accessible, Buildable, Constra
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -9744,7 +9792,7 @@ export class HeaderBar extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -9752,7 +9800,7 @@ export class HeaderBar extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -9868,6 +9916,9 @@ export class IMContextSimple extends IMContext {
     constructor(properties?: Partial<IMContextSimple.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<IMContextSimple.ConstructorProperties>, ...args: any[]): void;
 
+    // Fields
+    object: IMContext;
+
     // Constructors
 
     static ["new"](): IMContextSimple;
@@ -9887,6 +9938,9 @@ export class IMMulticontext extends IMContext {
     constructor(properties?: Partial<IMMulticontext.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<IMMulticontext.ConstructorProperties>, ...args: any[]): void;
 
+    // Fields
+    object: IMContext;
+
     // Constructors
 
     static ["new"](): IMMulticontext;
@@ -9894,7 +9948,7 @@ export class IMMulticontext extends IMContext {
     // Members
 
     get_context_id(): string;
-    set_context_id(context_id: string): void;
+    set_context_id(context_id?: string | null): void;
 }
 export module IconPaintable {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -9906,7 +9960,7 @@ export module IconPaintable {
         isSymbolic: boolean;
     }
 }
-export class IconPaintable extends GObject.Object implements Gdk.Paintable {
+export class IconPaintable extends GObject.Object implements Gdk.Paintable, SymbolicPaintable {
     static $gtype: GObject.GType<IconPaintable>;
 
     constructor(properties?: Partial<IconPaintable.ConstructorProperties>, ...args: any[]);
@@ -9950,6 +10004,8 @@ export class IconPaintable extends GObject.Object implements Gdk.Paintable {
     vfunc_get_intrinsic_height(): number;
     vfunc_get_intrinsic_width(): number;
     vfunc_snapshot(snapshot: Gdk.Snapshot, width: number, height: number): void;
+    snapshot_symbolic(snapshot: Gdk.Snapshot, width: number, height: number, colors: Gdk.RGBA[]): void;
+    vfunc_snapshot_symbolic(snapshot: Gdk.Snapshot, width: number, height: number, colors: Gdk.RGBA[]): void;
 }
 export module IconTheme {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -10029,7 +10085,7 @@ export class IconTheme extends GObject.Object {
         direction: TextDirection,
         flags: IconLookupFlags
     ): IconPaintable;
-    set_resource_path(path: string): void;
+    set_resource_path(path?: string[] | null): void;
     set_search_path(path?: string[] | null): void;
     set_theme_name(theme_name?: string | null): void;
     static get_for_display(display: Gdk.Display): IconTheme;
@@ -10195,7 +10251,7 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
 
     // Members
 
-    create_drag_icon(path: TreePath): Gdk.Paintable;
+    create_drag_icon(path: TreePath): Gdk.Paintable | null;
     enable_model_drag_dest(formats: Gdk.ContentFormats, actions: Gdk.DragAction): void;
     enable_model_drag_source(
         start_button_mask: Gdk.ModifierType,
@@ -10277,7 +10333,7 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -10285,7 +10341,7 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -10310,9 +10366,9 @@ export class IconView extends Widget implements Accessible, Buildable, CellLayou
     vfunc_reorder(cell: CellRenderer, position: number): void;
     vfunc_set_cell_data_func(cell: CellRenderer, func?: CellLayoutDataFunc | null): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -10417,7 +10473,7 @@ export class Image extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -10425,7 +10481,7 @@ export class Image extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -10509,7 +10565,7 @@ export class InfoBar extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -10517,7 +10573,7 @@ export class InfoBar extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -10566,6 +10622,8 @@ export module Label {
         mnemonicKeyval: number;
         mnemonic_widget: Widget;
         mnemonicWidget: Widget;
+        natural_wrap_mode: NaturalWrapMode;
+        naturalWrapMode: NaturalWrapMode;
         selectable: boolean;
         single_line_mode: boolean;
         singleLineMode: boolean;
@@ -10613,6 +10671,10 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
     set mnemonic_widget(val: Widget);
     get mnemonicWidget(): Widget;
     set mnemonicWidget(val: Widget);
+    get natural_wrap_mode(): NaturalWrapMode;
+    set natural_wrap_mode(val: NaturalWrapMode);
+    get naturalWrapMode(): NaturalWrapMode;
+    set naturalWrapMode(val: NaturalWrapMode);
     get selectable(): boolean;
     set selectable(val: boolean);
     get single_line_mode(): boolean;
@@ -10687,11 +10749,12 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
     get_justify(): Justification;
     get_label(): string;
     get_layout(): Pango.Layout;
-    get_layout_offsets(): [number | null, number | null];
+    get_layout_offsets(): [number, number];
     get_lines(): number;
     get_max_width_chars(): number;
     get_mnemonic_keyval(): number;
     get_mnemonic_widget(): Widget | null;
+    get_natural_wrap_mode(): NaturalWrapMode;
     get_selectable(): boolean;
     get_selection_bounds(): [boolean, number, number];
     get_single_line_mode(): boolean;
@@ -10714,6 +10777,7 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
     set_markup_with_mnemonic(str: string): void;
     set_max_width_chars(n_chars: number): void;
     set_mnemonic_widget(widget?: Widget | null): void;
+    set_natural_wrap_mode(wrap_mode: NaturalWrapMode): void;
     set_selectable(setting: boolean): void;
     set_single_line_mode(single_line_mode: boolean): void;
     set_text(str: string): void;
@@ -10735,7 +10799,7 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -10743,7 +10807,7 @@ export class Label extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -10794,19 +10858,11 @@ export abstract class LayoutManager extends GObject.Object {
     get_request_mode(): SizeRequestMode;
     get_widget(): Widget | null;
     layout_changed(): void;
-    measure(
-        widget: Widget,
-        orientation: Orientation,
-        for_size: number
-    ): [number | null, number | null, number | null, number | null];
+    measure(widget: Widget, orientation: Orientation, for_size: number): [number, number, number, number];
     vfunc_allocate(widget: Widget, width: number, height: number, baseline: number): void;
     vfunc_create_layout_child(widget: Widget, for_child: Widget): LayoutChild;
     vfunc_get_request_mode(widget: Widget): SizeRequestMode;
-    vfunc_measure(
-        widget: Widget,
-        orientation: Orientation,
-        for_size: number
-    ): [number | null, number | null, number | null, number | null];
+    vfunc_measure(widget: Widget, orientation: Orientation, for_size: number): [number, number, number, number];
     vfunc_root(): void;
     vfunc_unroot(): void;
 }
@@ -10892,7 +10948,7 @@ export class LevelBar extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -10900,7 +10956,7 @@ export class LevelBar extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -11023,7 +11079,7 @@ export abstract class ListBase
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -11031,7 +11087,7 @@ export abstract class ListBase
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -11040,9 +11096,9 @@ export abstract class ListBase
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -11141,7 +11197,7 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
     drag_highlight_row(row: ListBoxRow): void;
     drag_unhighlight_row(): void;
     get_activate_on_single_click(): boolean;
-    get_adjustment(): Adjustment;
+    get_adjustment(): Adjustment | null;
     get_row_at_index(index_: number): ListBoxRow | null;
     get_row_at_y(y: number): ListBoxRow | null;
     get_selected_row(): ListBoxRow | null;
@@ -11177,7 +11233,7 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -11185,7 +11241,7 @@ export class ListBox extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -11275,7 +11331,7 @@ export class ListBoxRow extends Widget implements Accessible, Actionable, Builda
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -11283,7 +11339,7 @@ export class ListBoxRow extends Widget implements Accessible, Actionable, Builda
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -11382,7 +11438,7 @@ export class ListStore
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -11390,7 +11446,7 @@ export class ListStore
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -11552,9 +11608,9 @@ export class ListView extends ListBase implements Accessible, Buildable, Constra
     get_orientation(): Orientation;
     set_orientation(orientation: Orientation): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -11627,7 +11683,7 @@ export class LockButton extends Button implements Accessible, Actionable, Builda
 
     // Members
 
-    get_permission(): Gio.Permission;
+    get_permission(): Gio.Permission | null;
     set_permission(permission?: Gio.Permission | null): void;
 
     // Implemented Members
@@ -11729,7 +11785,7 @@ export class MediaControls extends Widget implements Accessible, Buildable, Cons
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -11737,7 +11793,7 @@ export class MediaControls extends Widget implements Accessible, Buildable, Cons
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -11881,7 +11937,9 @@ export abstract class MediaStream extends GObject.Object implements Gdk.Paintabl
     set_muted(muted: boolean): void;
     set_playing(playing: boolean): void;
     set_volume(volume: number): void;
-    unprepared(): void;
+    stream_ended(): void;
+    stream_prepared(has_audio: boolean, has_video: boolean, seekable: boolean, duration: number): void;
+    stream_unprepared(): void;
     unrealize(surface: Gdk.Surface): void;
     update(timestamp: number): void;
     vfunc_pause(): void;
@@ -11917,6 +11975,9 @@ export abstract class MediaStream extends GObject.Object implements Gdk.Paintabl
 export module MenuButton {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
         [key: string]: any;
+        always_show_arrow: boolean;
+        alwaysShowArrow: boolean;
+        child: Widget;
         direction: ArrowType;
         has_frame: boolean;
         hasFrame: boolean;
@@ -11926,6 +11987,7 @@ export module MenuButton {
         menu_model: Gio.MenuModel;
         menuModel: Gio.MenuModel;
         popover: Popover;
+        primary: boolean;
         use_underline: boolean;
         useUnderline: boolean;
     }
@@ -11937,6 +11999,12 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     _init(properties?: Partial<MenuButton.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
+    get always_show_arrow(): boolean;
+    set always_show_arrow(val: boolean);
+    get alwaysShowArrow(): boolean;
+    set alwaysShowArrow(val: boolean);
+    get child(): Widget;
+    set child(val: Widget);
     get direction(): ArrowType;
     set direction(val: ArrowType);
     get has_frame(): boolean;
@@ -11955,10 +12023,21 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     set menuModel(val: Gio.MenuModel);
     get popover(): Popover;
     set popover(val: Popover);
+    get primary(): boolean;
+    set primary(val: boolean);
     get use_underline(): boolean;
     set use_underline(val: boolean);
     get useUnderline(): boolean;
     set useUnderline(val: boolean);
+
+    // Signals
+
+    connect(id: string, callback: (...args: any[]) => any): number;
+    connect_after(id: string, callback: (...args: any[]) => any): number;
+    emit(id: string, ...args: any[]): void;
+    connect(signal: "activate", callback: (_source: this) => void): number;
+    connect_after(signal: "activate", callback: (_source: this) => void): number;
+    emit(signal: "activate"): void;
 
     // Implemented Properties
 
@@ -11973,17 +12052,22 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
 
     // Members
 
+    get_always_show_arrow(): boolean;
+    get_child(): Widget | null;
     get_direction(): ArrowType;
     // Conflicted with Gtk.Widget.get_direction
     get_direction(...args: never[]): any;
     get_has_frame(): boolean;
-    get_icon_name(): string;
-    get_label(): string;
+    get_icon_name(): string | null;
+    get_label(): string | null;
     get_menu_model(): Gio.MenuModel | null;
     get_popover(): Popover | null;
+    get_primary(): boolean;
     get_use_underline(): boolean;
     popdown(): void;
     popup(): void;
+    set_always_show_arrow(always_show_arrow: boolean): void;
+    set_child(child?: Widget | null): void;
     set_create_popup_func(func?: MenuButtonCreatePopupFunc | null, destroy_notify?: GLib.DestroyNotify | null): void;
     set_direction(direction: ArrowType): void;
     // Conflicted with Gtk.Widget.set_direction
@@ -11993,6 +12077,7 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     set_label(label: string): void;
     set_menu_model(menu_model?: Gio.MenuModel | null): void;
     set_popover(popover?: Widget | null): void;
+    set_primary(primary: boolean): void;
     set_use_underline(use_underline: boolean): void;
 
     // Implemented Members
@@ -12004,7 +12089,7 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -12012,7 +12097,7 @@ export class MenuButton extends Widget implements Accessible, Buildable, Constra
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -12131,6 +12216,9 @@ export class MountOperation extends Gio.MountOperation {
     get is_showing(): boolean;
     get isShowing(): boolean;
 
+    // Fields
+    priv: MountOperationPrivate | any;
+
     // Constructors
 
     static ["new"](parent?: Window | null): MountOperation;
@@ -12140,7 +12228,7 @@ export class MountOperation extends Gio.MountOperation {
     // Members
 
     get_display(): Gdk.Display;
-    get_parent(): Window;
+    get_parent(): Window | null;
     set_display(display: Gdk.Display): void;
     set_parent(parent?: Window | null): void;
 }
@@ -12173,7 +12261,7 @@ export abstract class MultiFilter<A extends GObject.Object = GObject.Object>
     vfunc_get_item(position: number): A | null;
     vfunc_get_item_type(): GObject.GType;
     vfunc_get_n_items(): number;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -12181,7 +12269,7 @@ export abstract class MultiFilter<A extends GObject.Object = GObject.Object>
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -12214,7 +12302,7 @@ export class MultiSelection<A extends GObject.Object = GObject.Object>
 
     // Members
 
-    get_model(): Gio.ListModel;
+    get_model(): Gio.ListModel | null;
     set_model(model?: Gio.ListModel | null): void;
 
     // Implemented Members
@@ -12280,7 +12368,7 @@ export class MultiSorter<A extends GObject.Object = GObject.Object>
     vfunc_get_item(position: number): A | null;
     vfunc_get_item_type(): GObject.GType;
     vfunc_get_n_items(): number;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -12288,7 +12376,7 @@ export class MultiSorter<A extends GObject.Object = GObject.Object>
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -12414,7 +12502,7 @@ export class NoSelection<A extends GObject.Object = GObject.Object>
 
     // Members
 
-    get_model(): Gio.ListModel;
+    get_model(): Gio.ListModel | null;
     set_model(model?: Gio.ListModel | null): void;
 
     // Implemented Members
@@ -12506,8 +12594,8 @@ export class Notebook extends Widget implements Accessible, Buildable, Constrain
     connect(signal: "change-current-page", callback: (_source: this, object: number) => boolean): number;
     connect_after(signal: "change-current-page", callback: (_source: this, object: number) => boolean): number;
     emit(signal: "change-current-page", object: number): void;
-    connect(signal: "create-window", callback: (_source: this, page: Widget) => Notebook): number;
-    connect_after(signal: "create-window", callback: (_source: this, page: Widget) => Notebook): number;
+    connect(signal: "create-window", callback: (_source: this, page: Widget) => Notebook | null): number;
+    connect_after(signal: "create-window", callback: (_source: this, page: Widget) => Notebook | null): number;
     emit(signal: "create-window", page: Widget): void;
     connect(signal: "focus-tab", callback: (_source: this, object: NotebookTab) => boolean): number;
     connect_after(signal: "focus-tab", callback: (_source: this, object: NotebookTab) => boolean): number;
@@ -12604,7 +12692,7 @@ export class Notebook extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -12612,7 +12700,7 @@ export class Notebook extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -12804,7 +12892,7 @@ export class Overlay extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -12812,7 +12900,7 @@ export class Overlay extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -12958,9 +13046,9 @@ export class PageSetupUnixDialog
     // Members
 
     get_page_setup(): PageSetup;
-    get_print_settings(): PrintSettings;
+    get_print_settings(): PrintSettings | null;
     set_page_setup(page_setup: PageSetup): void;
-    set_print_settings(print_settings: PrintSettings): void;
+    set_print_settings(print_settings?: PrintSettings | null): void;
 }
 export module Paned {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -13081,13 +13169,13 @@ export class Paned extends Widget implements Accessible, Buildable, ConstraintTa
     get_shrink_start_child(): boolean;
     get_start_child(): Widget | null;
     get_wide_handle(): boolean;
-    set_end_child(child: Widget): void;
+    set_end_child(child?: Widget | null): void;
     set_position(position: number): void;
     set_resize_end_child(resize: boolean): void;
     set_resize_start_child(resize: boolean): void;
     set_shrink_end_child(resize: boolean): void;
     set_shrink_start_child(resize: boolean): void;
-    set_start_child(child: Widget): void;
+    set_start_child(child?: Widget | null): void;
     set_wide_handle(wide: boolean): void;
 
     // Implemented Members
@@ -13099,7 +13187,7 @@ export class Paned extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -13107,7 +13195,7 @@ export class Paned extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -13198,7 +13286,7 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
 
     // Members
 
-    get_extra_menu(): Gio.MenuModel;
+    get_extra_menu(): Gio.MenuModel | null;
     get_show_peek_icon(): boolean;
     set_extra_menu(model?: Gio.MenuModel | null): void;
     set_show_peek_icon(show_peek_icon: boolean): void;
@@ -13212,7 +13300,7 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -13220,7 +13308,7 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -13236,7 +13324,7 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -13254,10 +13342,25 @@ export class PasswordEntry extends Widget implements Accessible, Buildable, Cons
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
+}
+export module PasswordEntryBuffer {
+    export interface ConstructorProperties extends EntryBuffer.ConstructorProperties {
+        [key: string]: any;
+    }
+}
+export class PasswordEntryBuffer extends EntryBuffer {
+    static $gtype: GObject.GType<PasswordEntryBuffer>;
+
+    constructor(properties?: Partial<PasswordEntryBuffer.ConstructorProperties>, ...args: any[]);
+    _init(properties?: Partial<PasswordEntryBuffer.ConstructorProperties>, ...args: any[]): void;
+
+    // Constructors
+
+    static ["new"](): PasswordEntryBuffer;
 }
 export module Picture {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -13337,7 +13440,7 @@ export class Picture extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -13345,7 +13448,7 @@ export class Picture extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -13434,7 +13537,7 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
     get_child(): Widget | null;
     get_has_arrow(): boolean;
     get_mnemonics_visible(): boolean;
-    get_offset(): [number | null, number | null];
+    get_offset(): [number, number];
     get_pointing_to(): [boolean, Gdk.Rectangle];
     get_position(): PositionType;
     popdown(): void;
@@ -13447,7 +13550,7 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
     set_has_arrow(has_arrow: boolean): void;
     set_mnemonics_visible(mnemonics_visible: boolean): void;
     set_offset(x_offset: number, y_offset: number): void;
-    set_pointing_to(rect: Gdk.Rectangle): void;
+    set_pointing_to(rect?: Gdk.Rectangle | null): void;
     set_position(position: PositionType): void;
     vfunc_activate_default(): void;
     vfunc_closed(): void;
@@ -13461,7 +13564,7 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -13469,7 +13572,7 @@ export class Popover extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -13516,7 +13619,7 @@ export class PopoverMenu extends Popover implements Accessible, Buildable, Const
     // Members
 
     add_child(child: Widget, id: string): boolean;
-    get_menu_model(): Gio.MenuModel;
+    get_menu_model(): Gio.MenuModel | null;
     remove_child(child: Widget): boolean;
     set_menu_model(model?: Gio.MenuModel | null): void;
 
@@ -13563,7 +13666,7 @@ export class PopoverMenuBar extends Widget implements Accessible, Buildable, Con
     // Members
 
     add_child(child: Widget, id: string): boolean;
-    get_menu_model(): Gio.MenuModel;
+    get_menu_model(): Gio.MenuModel | null;
     remove_child(child: Widget): boolean;
     set_menu_model(model?: Gio.MenuModel | null): void;
 
@@ -13576,7 +13679,7 @@ export class PopoverMenuBar extends Widget implements Accessible, Buildable, Con
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -13584,7 +13687,7 @@ export class PopoverMenuBar extends Widget implements Accessible, Buildable, Con
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -13809,8 +13912,8 @@ export class PrintOperation extends GObject.Object implements PrintOperationPrev
     connect(signal: "begin-print", callback: (_source: this, context: PrintContext) => void): number;
     connect_after(signal: "begin-print", callback: (_source: this, context: PrintContext) => void): number;
     emit(signal: "begin-print", context: PrintContext): void;
-    connect(signal: "create-custom-widget", callback: (_source: this) => GObject.Object): number;
-    connect_after(signal: "create-custom-widget", callback: (_source: this) => GObject.Object): number;
+    connect(signal: "create-custom-widget", callback: (_source: this) => GObject.Object | null): number;
+    connect_after(signal: "create-custom-widget", callback: (_source: this) => GObject.Object | null): number;
     emit(signal: "create-custom-widget"): void;
     connect(signal: "custom-widget-apply", callback: (_source: this, widget: Widget) => void): number;
     connect_after(signal: "custom-widget-apply", callback: (_source: this, widget: Widget) => void): number;
@@ -13884,7 +13987,7 @@ export class PrintOperation extends GObject.Object implements PrintOperationPrev
     get_error(): void;
     get_has_selection(): boolean;
     get_n_pages_to_print(): number;
-    get_print_settings(): PrintSettings;
+    get_print_settings(): PrintSettings | null;
     get_status(): PrintStatus;
     get_status_string(): string;
     get_support_selection(): boolean;
@@ -13950,31 +14053,31 @@ export class PrintSettings extends GObject.Object {
 
     copy(): PrintSettings;
     foreach(func: PrintSettingsFunc): void;
-    get(key: string): string;
+    get(key: string): string | null;
     get_bool(key: string): boolean;
     get_collate(): boolean;
-    get_default_source(): string;
-    get_dither(): string;
+    get_default_source(): string | null;
+    get_dither(): string | null;
     get_double(key: string): number;
     get_double_with_default(key: string, def: number): number;
     get_duplex(): PrintDuplex;
-    get_finishings(): string;
+    get_finishings(): string | null;
     get_int(key: string): number;
     get_int_with_default(key: string, def: number): number;
     get_length(key: string, unit: Unit): number;
-    get_media_type(): string;
+    get_media_type(): string | null;
     get_n_copies(): number;
     get_number_up(): number;
     get_number_up_layout(): NumberUpLayout;
     get_orientation(): PageOrientation;
-    get_output_bin(): string;
+    get_output_bin(): string | null;
     get_page_ranges(): PageRange[];
     get_page_set(): PageSet;
     get_paper_height(unit: Unit): number;
-    get_paper_size(): PaperSize;
+    get_paper_size(): PaperSize | null;
     get_paper_width(unit: Unit): number;
     get_print_pages(): PrintPages;
-    get_printer(): string;
+    get_printer(): string | null;
     get_printer_lpi(): number;
     get_quality(): PrintQuality;
     get_resolution(): number;
@@ -14100,7 +14203,7 @@ export class PrintUnixDialog
     get_manual_capabilities(): PrintCapabilities;
     get_page_setup(): PageSetup;
     get_page_setup_set(): boolean;
-    get_selected_printer(): Printer;
+    get_selected_printer(): Printer | null;
     get_settings(): PrintSettings;
     // Conflicted with Gtk.Widget.get_settings
     get_settings(...args: never[]): any;
@@ -14270,7 +14373,7 @@ export class ProgressBar extends Widget implements Accessible, Buildable, Constr
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -14278,7 +14381,7 @@ export class ProgressBar extends Widget implements Accessible, Buildable, Constr
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -14305,7 +14408,7 @@ export class PropertyExpression extends Expression {
 
     // Members
 
-    get_expression(): Expression;
+    get_expression(): Expression | null;
     get_pspec(): GObject.ParamSpec;
 }
 export module Range {
@@ -14391,7 +14494,7 @@ export class Range extends Widget implements Accessible, Buildable, ConstraintTa
     get_restrict_to_fill_level(): boolean;
     get_round_digits(): number;
     get_show_fill_level(): boolean;
-    get_slider_range(): [number | null, number | null];
+    get_slider_range(): [number, number];
     get_slider_size_fixed(): boolean;
     get_value(): number;
     set_adjustment(adjustment: Adjustment): void;
@@ -14420,7 +14523,7 @@ export class Range extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -14428,7 +14531,7 @@ export class Range extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -14550,7 +14653,7 @@ export class Revealer extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -14558,7 +14661,7 @@ export class Revealer extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -14617,14 +14720,14 @@ export class Scale extends Range implements Accessible, Buildable, ConstraintTar
     get_draw_value(): boolean;
     get_has_origin(): boolean;
     get_layout(): Pango.Layout | null;
-    get_layout_offsets(): [number | null, number | null];
+    get_layout_offsets(): [number, number];
     get_value_pos(): PositionType;
     set_digits(digits: number): void;
     set_draw_value(draw_value: boolean): void;
     set_format_value_func(func?: ScaleFormatValueFunc | null, destroy_notify?: GLib.DestroyNotify | null): void;
     set_has_origin(has_origin: boolean): void;
     set_value_pos(pos: PositionType): void;
-    vfunc_get_layout_offsets(): [number | null, number | null];
+    vfunc_get_layout_offsets(): [number, number];
 
     // Implemented Members
 
@@ -14702,7 +14805,7 @@ export class ScaleButton extends Widget implements Accessible, Buildable, Constr
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -14710,7 +14813,7 @@ export class ScaleButton extends Widget implements Accessible, Buildable, Constr
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -14762,7 +14865,7 @@ export class Scrollbar extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -14770,7 +14873,7 @@ export class Scrollbar extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -14951,7 +15054,7 @@ export class ScrolledWindow extends Widget implements Accessible, Buildable, Con
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -14959,7 +15062,7 @@ export class ScrolledWindow extends Widget implements Accessible, Buildable, Con
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -15015,7 +15118,7 @@ export class SearchBar extends Widget implements Accessible, Buildable, Constrai
 
     connect_entry(entry: Editable): void;
     get_child(): Widget | null;
-    get_key_capture_widget(): Widget;
+    get_key_capture_widget(): Widget | null;
     get_search_mode(): boolean;
     get_show_close_button(): boolean;
     set_child(child?: Widget | null): void;
@@ -15032,7 +15135,7 @@ export class SearchBar extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -15040,7 +15143,7 @@ export class SearchBar extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -15131,7 +15234,7 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
 
     // Members
 
-    get_key_capture_widget(): Widget;
+    get_key_capture_widget(): Widget | null;
     set_key_capture_widget(widget?: Widget | null): void;
 
     // Implemented Members
@@ -15143,7 +15246,7 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -15151,7 +15254,7 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -15167,7 +15270,7 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -15185,7 +15288,7 @@ export class SearchEntry extends Widget implements Accessible, Buildable, Constr
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
@@ -15262,7 +15365,7 @@ export class Separator extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -15270,7 +15373,7 @@ export class Separator extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -15330,6 +15433,8 @@ export module Settings {
         gtkFontName: string;
         gtk_fontconfig_timestamp: number;
         gtkFontconfigTimestamp: number;
+        gtk_hint_font_metrics: boolean;
+        gtkHintFontMetrics: boolean;
         gtk_icon_theme_name: string;
         gtkIconThemeName: string;
         gtk_im_module: string;
@@ -15485,6 +15590,10 @@ export class Settings extends GObject.Object implements StyleProvider {
     set gtk_fontconfig_timestamp(val: number);
     get gtkFontconfigTimestamp(): number;
     set gtkFontconfigTimestamp(val: number);
+    get gtk_hint_font_metrics(): boolean;
+    set gtk_hint_font_metrics(val: boolean);
+    get gtkHintFontMetrics(): boolean;
+    set gtkHintFontMetrics(val: boolean);
     get gtk_icon_theme_name(): string;
     set gtk_icon_theme_name(val: string);
     get gtkIconThemeName(): string;
@@ -15699,7 +15808,7 @@ export class ShortcutController<A extends GObject.Object = GObject.Object>
     vfunc_get_item(position: number): A | null;
     vfunc_get_item_type(): GObject.GType;
     vfunc_get_n_items(): number;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -15707,7 +15816,7 @@ export class ShortcutController<A extends GObject.Object = GObject.Object>
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -15763,7 +15872,7 @@ export class ShortcutLabel extends Widget implements Accessible, Buildable, Cons
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -15771,7 +15880,7 @@ export class ShortcutLabel extends Widget implements Accessible, Buildable, Cons
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -15972,7 +16081,7 @@ export class ShortcutsShortcut extends Widget implements Accessible, Buildable, 
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -15980,7 +16089,7 @@ export class ShortcutsShortcut extends Widget implements Accessible, Buildable, 
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -16142,7 +16251,7 @@ export class SingleSelection<A extends GObject.Object = GObject.Object>
 
     get_autoselect(): boolean;
     get_can_unselect(): boolean;
-    get_model(): Gio.ListModel;
+    get_model(): Gio.ListModel | null;
     get_selected(): number;
     get_selected_item<T = GObject.Object>(): T;
     set_autoselect(autoselect: boolean): void;
@@ -16210,7 +16319,7 @@ export class SizeGroup extends GObject.Object implements Buildable {
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -16218,7 +16327,7 @@ export class SizeGroup extends GObject.Object implements Buildable {
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -16361,7 +16470,7 @@ export class Snapshot extends Gdk.Snapshot {
     push_opacity(opacity: number): void;
     push_repeat(bounds: Graphene.Rect, child_bounds?: Graphene.Rect | null): void;
     push_rounded_clip(bounds: Gsk.RoundedRect): void;
-    push_shadow(shadow: Gsk.Shadow, n_shadows: number): void;
+    push_shadow(shadow: Gsk.Shadow[]): void;
     render_background(context: StyleContext, x: number, y: number, width: number, height: number): void;
     render_focus(context: StyleContext, x: number, y: number, width: number, height: number): void;
     render_frame(context: StyleContext, x: number, y: number, width: number, height: number): void;
@@ -16380,8 +16489,8 @@ export class Snapshot extends Gdk.Snapshot {
     save(): void;
     scale(factor_x: number, factor_y: number): void;
     scale_3d(factor_x: number, factor_y: number, factor_z: number): void;
-    to_node(): Gsk.RenderNode;
-    to_paintable(size?: Graphene.Size | null): Gdk.Paintable;
+    to_node(): Gsk.RenderNode | null;
+    to_paintable(size?: Graphene.Size | null): Gdk.Paintable | null;
     transform(transform?: Gsk.Transform | null): void;
     transform_matrix(matrix: Graphene.Matrix): void;
     translate(point: Graphene.Point): void;
@@ -16583,9 +16692,9 @@ export class SpinButton
     get_adjustment(): Adjustment;
     get_climb_rate(): number;
     get_digits(): number;
-    get_increments(): [number | null, number | null];
+    get_increments(): [number, number];
     get_numeric(): boolean;
-    get_range(): [number | null, number | null];
+    get_range(): [number, number];
     get_snap_to_ticks(): boolean;
     get_update_policy(): SpinButtonUpdatePolicy;
     get_value(): number;
@@ -16613,7 +16722,7 @@ export class SpinButton
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -16621,7 +16730,7 @@ export class SpinButton
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -16643,7 +16752,7 @@ export class SpinButton
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -16661,7 +16770,7 @@ export class SpinButton
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
@@ -16711,7 +16820,7 @@ export class Spinner extends Widget implements Accessible, Buildable, Constraint
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -16719,7 +16828,7 @@ export class Spinner extends Widget implements Accessible, Buildable, Constraint
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -16800,7 +16909,7 @@ export class Stack extends Widget implements Accessible, Buildable, ConstraintTa
     get_child_by_name(name: string): Widget | null;
     get_hhomogeneous(): boolean;
     get_interpolate_size(): boolean;
-    get_page(child: Widget): StackPage;
+    get_page(child: Widget): StackPage | null;
     get_pages(): SelectionModel;
     get_transition_duration(): number;
     get_transition_running(): boolean;
@@ -16827,7 +16936,7 @@ export class Stack extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -16835,7 +16944,7 @@ export class Stack extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -16870,6 +16979,7 @@ export class StackPage extends GObject.Object implements Accessible {
     get iconName(): string;
     set iconName(val: string);
     get name(): string;
+    set name(val: string);
     get needs_attention(): boolean;
     set needs_attention(val: boolean);
     get needsAttention(): boolean;
@@ -16957,7 +17067,7 @@ export class StackSidebar extends Widget implements Accessible, Buildable, Const
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -16965,7 +17075,7 @@ export class StackSidebar extends Widget implements Accessible, Buildable, Const
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -16978,7 +17088,7 @@ export module StackSwitcher {
         stack: Stack;
     }
 }
-export class StackSwitcher extends Widget implements Accessible, Buildable, ConstraintTarget {
+export class StackSwitcher extends Widget implements Accessible, Buildable, ConstraintTarget, Orientable {
     static $gtype: GObject.GType<StackSwitcher>;
 
     constructor(properties?: Partial<StackSwitcher.ConstructorProperties>, ...args: any[]);
@@ -16994,6 +17104,8 @@ export class StackSwitcher extends Widget implements Accessible, Buildable, Cons
     set accessible_role(val: AccessibleRole);
     get accessibleRole(): AccessibleRole;
     set accessibleRole(val: AccessibleRole);
+    get orientation(): Orientation;
+    set orientation(val: Orientation);
 
     // Constructors
 
@@ -17013,7 +17125,7 @@ export class StackSwitcher extends Widget implements Accessible, Buildable, Cons
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -17021,12 +17133,14 @@ export class StackSwitcher extends Widget implements Accessible, Buildable, Cons
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
     vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
+    get_orientation(): Orientation;
+    set_orientation(orientation: Orientation): void;
 }
 export module Statusbar {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
@@ -17079,7 +17193,7 @@ export class Statusbar extends Widget implements Accessible, Buildable, Constrai
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -17087,7 +17201,7 @@ export class Statusbar extends Widget implements Accessible, Buildable, Constrai
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -17176,7 +17290,7 @@ export class StringList<A extends GObject.Object = GObject.Object>
     vfunc_get_item(position: number): A | null;
     vfunc_get_item_type(): GObject.GType;
     vfunc_get_n_items(): number;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -17184,7 +17298,7 @@ export class StringList<A extends GObject.Object = GObject.Object>
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -17262,6 +17376,9 @@ export class StyleContext extends GObject.Object {
     // Properties
     get display(): Gdk.Display;
     set display(val: Gdk.Display);
+
+    // Fields
+    parent_object: GObject.Object;
 
     // Members
 
@@ -17363,7 +17480,7 @@ export class Switch extends Widget implements Accessible, Actionable, Buildable,
     vfunc_get_action_target_value(): GLib.Variant | null;
     vfunc_set_action_name(action_name?: string | null): void;
     vfunc_set_action_target_value(target_value?: GLib.Variant | null): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -17371,7 +17488,7 @@ export class Switch extends Widget implements Accessible, Actionable, Buildable,
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -17569,6 +17686,7 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
 
     // Members
 
+    compute_cursor_extents(position: number): [Graphene.Rect | null, Graphene.Rect | null];
     get_activates_default(): boolean;
     get_attributes(): Pango.AttrList | null;
     get_buffer(): EntryBuffer;
@@ -17612,7 +17730,7 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -17620,7 +17738,7 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -17636,7 +17754,7 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -17654,7 +17772,7 @@ export class Text extends Widget implements Accessible, Buildable, ConstraintTar
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
@@ -17700,6 +17818,9 @@ export class TextBuffer extends GObject.Object {
     get tagTable(): TextTagTable;
     get text(): string;
     set text(val: string);
+
+    // Fields
+    priv: TextBufferPrivate;
 
     // Signals
 
@@ -17885,6 +18006,7 @@ export class TextChildAnchor extends GObject.Object {
     // Constructors
 
     static ["new"](): TextChildAnchor;
+    static new_with_replacement(character: string): TextChildAnchor;
 
     // Members
 
@@ -17916,7 +18038,7 @@ export class TextMark extends GObject.Object {
 
     // Members
 
-    get_buffer(): TextBuffer;
+    get_buffer(): TextBuffer | null;
     get_deleted(): boolean;
     get_left_gravity(): boolean;
     get_name(): string | null;
@@ -17987,6 +18109,10 @@ export module TextTag {
         letterSpacing: number;
         letter_spacing_set: boolean;
         letterSpacingSet: boolean;
+        line_height: number;
+        lineHeight: number;
+        line_height_set: boolean;
+        lineHeightSet: boolean;
         name: string;
         overline: Pango.Overline;
         overline_rgba: Gdk.RGBA;
@@ -18023,6 +18149,9 @@ export module TextTag {
         scale: number;
         scale_set: boolean;
         scaleSet: boolean;
+        sentence: boolean;
+        sentence_set: boolean;
+        sentenceSet: boolean;
         show_spaces: Pango.ShowFlags;
         showSpaces: Pango.ShowFlags;
         show_spaces_set: boolean;
@@ -18048,6 +18177,10 @@ export module TextTag {
         tabs: Pango.TabArray;
         tabs_set: boolean;
         tabsSet: boolean;
+        text_transform: Pango.TextTransform;
+        textTransform: Pango.TextTransform;
+        text_transform_set: boolean;
+        textTransformSet: boolean;
         underline: Pango.Underline;
         underline_rgba: Gdk.RGBA;
         underlineRgba: Gdk.RGBA;
@@ -18061,6 +18194,9 @@ export module TextTag {
         weight: number;
         weight_set: boolean;
         weightSet: boolean;
+        word: boolean;
+        word_set: boolean;
+        wordSet: boolean;
         wrap_mode: WrapMode;
         wrapMode: WrapMode;
         wrap_mode_set: boolean;
@@ -18194,6 +18330,14 @@ export class TextTag extends GObject.Object {
     set letter_spacing_set(val: boolean);
     get letterSpacingSet(): boolean;
     set letterSpacingSet(val: boolean);
+    get line_height(): number;
+    set line_height(val: number);
+    get lineHeight(): number;
+    set lineHeight(val: number);
+    get line_height_set(): boolean;
+    set line_height_set(val: boolean);
+    get lineHeightSet(): boolean;
+    set lineHeightSet(val: boolean);
     get name(): string;
     get overline(): Pango.Overline;
     set overline(val: Pango.Overline);
@@ -18263,6 +18407,12 @@ export class TextTag extends GObject.Object {
     set scale_set(val: boolean);
     get scaleSet(): boolean;
     set scaleSet(val: boolean);
+    get sentence(): boolean;
+    set sentence(val: boolean);
+    get sentence_set(): boolean;
+    set sentence_set(val: boolean);
+    get sentenceSet(): boolean;
+    set sentenceSet(val: boolean);
     get show_spaces(): Pango.ShowFlags;
     set show_spaces(val: Pango.ShowFlags);
     get showSpaces(): Pango.ShowFlags;
@@ -18313,6 +18463,14 @@ export class TextTag extends GObject.Object {
     set tabs_set(val: boolean);
     get tabsSet(): boolean;
     set tabsSet(val: boolean);
+    get text_transform(): Pango.TextTransform;
+    set text_transform(val: Pango.TextTransform);
+    get textTransform(): Pango.TextTransform;
+    set textTransform(val: Pango.TextTransform);
+    get text_transform_set(): boolean;
+    set text_transform_set(val: boolean);
+    get textTransformSet(): boolean;
+    set textTransformSet(val: boolean);
     get underline(): Pango.Underline;
     set underline(val: Pango.Underline);
     get underline_rgba(): Gdk.RGBA;
@@ -18339,6 +18497,12 @@ export class TextTag extends GObject.Object {
     set weight_set(val: boolean);
     get weightSet(): boolean;
     set weightSet(val: boolean);
+    get word(): boolean;
+    set word(val: boolean);
+    get word_set(): boolean;
+    set word_set(val: boolean);
+    get wordSet(): boolean;
+    set wordSet(val: boolean);
     get wrap_mode(): WrapMode;
     set wrap_mode(val: WrapMode);
     get wrapMode(): WrapMode;
@@ -18347,6 +18511,9 @@ export class TextTag extends GObject.Object {
     set wrap_mode_set(val: boolean);
     get wrapModeSet(): boolean;
     set wrapModeSet(val: boolean);
+
+    // Fields
+    priv: TextTagPrivate;
 
     // Constructors
 
@@ -18401,7 +18568,7 @@ export class TextTagTable extends GObject.Object implements Buildable {
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -18409,7 +18576,7 @@ export class TextTagTable extends GObject.Object implements Buildable {
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -18648,7 +18815,7 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
     add_overlay(child: Widget, xpos: number, ypos: number): void;
     backward_display_line(iter: TextIter): boolean;
     backward_display_line_start(iter: TextIter): boolean;
-    buffer_to_window_coords(win: TextWindowType, buffer_x: number, buffer_y: number): [number | null, number | null];
+    buffer_to_window_coords(win: TextWindowType, buffer_x: number, buffer_y: number): [number, number];
     forward_display_line(iter: TextIter): boolean;
     forward_display_line_end(iter: TextIter): boolean;
     get_accepts_tab(): boolean;
@@ -18663,18 +18830,20 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
     get_input_hints(): InputHints;
     get_input_purpose(): InputPurpose;
     get_iter_at_location(x: number, y: number): [boolean, TextIter];
-    get_iter_at_position(x: number, y: number): [boolean, TextIter, number | null];
+    get_iter_at_position(x: number, y: number): [boolean, TextIter, number];
     get_iter_location(iter: TextIter): Gdk.Rectangle;
     get_justification(): Justification;
     get_left_margin(): number;
     get_line_at_y(y: number): [TextIter, number];
     get_line_yrange(iter: TextIter): [number, number];
+    get_ltr_context(): Pango.Context;
     get_monospace(): boolean;
     get_overwrite(): boolean;
     get_pixels_above_lines(): number;
     get_pixels_below_lines(): number;
     get_pixels_inside_wrap(): number;
     get_right_margin(): number;
+    get_rtl_context(): Pango.Context;
     get_tabs(): Pango.TabArray | null;
     get_top_margin(): number;
     get_visible_rect(): Gdk.Rectangle;
@@ -18712,7 +18881,7 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
     set_top_margin(top_margin: number): void;
     set_wrap_mode(wrap_mode: WrapMode): void;
     starts_display_line(iter: TextIter): boolean;
-    window_to_buffer_coords(win: TextWindowType, window_x: number, window_y: number): [number | null, number | null];
+    window_to_buffer_coords(win: TextWindowType, window_x: number, window_y: number): [number, number];
     vfunc_backspace(): void;
     vfunc_copy_clipboard(): void;
     vfunc_cut_clipboard(): void;
@@ -18740,7 +18909,7 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -18748,16 +18917,16 @@ export class TextView extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
     vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -18854,6 +19023,8 @@ export module TreeExpander {
     export interface ConstructorProperties extends Widget.ConstructorProperties {
         [key: string]: any;
         child: Widget;
+        indent_for_icon: boolean;
+        indentForIcon: boolean;
         item: GObject.Object;
         list_row: TreeListRow;
         listRow: TreeListRow;
@@ -18868,6 +19039,10 @@ export class TreeExpander extends Widget implements Accessible, Buildable, Const
     // Properties
     get child(): Widget;
     set child(val: Widget);
+    get indent_for_icon(): boolean;
+    set indent_for_icon(val: boolean);
+    get indentForIcon(): boolean;
+    set indentForIcon(val: boolean);
     get item(): GObject.Object;
     get list_row(): TreeListRow;
     set list_row(val: TreeListRow);
@@ -18888,9 +19063,11 @@ export class TreeExpander extends Widget implements Accessible, Buildable, Const
     // Members
 
     get_child(): Widget | null;
+    get_indent_for_icon(): boolean;
     get_item<T = GObject.Object>(): T;
     get_list_row(): TreeListRow | null;
     set_child(child?: Widget | null): void;
+    set_indent_for_icon(indent_for_icon: boolean): void;
     set_list_row(list_row?: TreeListRow | null): void;
 
     // Implemented Members
@@ -18902,7 +19079,7 @@ export class TreeExpander extends Widget implements Accessible, Buildable, Const
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -18910,7 +19087,7 @@ export class TreeExpander extends Widget implements Accessible, Buildable, Const
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -19278,6 +19455,9 @@ export class TreeStore
     constructor(properties?: Partial<TreeStore.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<TreeStore.ConstructorProperties>, ...args: any[]): void;
 
+    // Fields
+    priv: TreeStorePrivate;
+
     // Constructors
 
     static ["new"](types: GObject.GType[]): TreeStore;
@@ -19311,7 +19491,7 @@ export class TreeStore
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -19319,7 +19499,7 @@ export class TreeStore
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -19534,12 +19714,15 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
         callback: (_source: this, step: MovementStep, direction: number, extend: boolean, modify: boolean) => boolean
     ): number;
     emit(signal: "move-cursor", step: MovementStep, direction: number, extend: boolean, modify: boolean): void;
-    connect(signal: "row-activated", callback: (_source: this, path: TreePath, column: TreeViewColumn) => void): number;
+    connect(
+        signal: "row-activated",
+        callback: (_source: this, path: TreePath, column: TreeViewColumn | null) => void
+    ): number;
     connect_after(
         signal: "row-activated",
-        callback: (_source: this, path: TreePath, column: TreeViewColumn) => void
+        callback: (_source: this, path: TreePath, column: TreeViewColumn | null) => void
     ): number;
-    emit(signal: "row-activated", path: TreePath, column: TreeViewColumn): void;
+    emit(signal: "row-activated", path: TreePath, column: TreeViewColumn | null): void;
     connect(signal: "row-collapsed", callback: (_source: this, iter: TreeIter, path: TreePath) => void): number;
     connect_after(signal: "row-collapsed", callback: (_source: this, iter: TreeIter, path: TreePath) => void): number;
     emit(signal: "row-collapsed", iter: TreeIter, path: TreePath): void;
@@ -19645,10 +19828,7 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     get_level_indentation(): number;
     get_model(): TreeModel | null;
     get_n_columns(): number;
-    get_path_at_pos(
-        x: number,
-        y: number
-    ): [boolean, TreePath | null, TreeViewColumn | null, number | null, number | null];
+    get_path_at_pos(x: number, y: number): [boolean, TreePath | null, TreeViewColumn | null, number, number];
     get_reorderable(): boolean;
     get_rubber_banding(): boolean;
     get_search_column(): number;
@@ -19665,15 +19845,12 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     get_visible_rect(): Gdk.Rectangle;
     insert_column(column: TreeViewColumn, position: number): number;
     insert_column_with_data_func(position: number, title: string, cell: CellRenderer, func: TreeCellDataFunc): number;
-    is_blank_at_pos(
-        x: number,
-        y: number
-    ): [boolean, TreePath | null, TreeViewColumn | null, number | null, number | null];
+    is_blank_at_pos(x: number, y: number): [boolean, TreePath | null, TreeViewColumn | null, number, number];
     is_rubber_banding_active(): boolean;
     map_expanded_rows(func: TreeViewMappingFunc): void;
     move_column_after(column: TreeViewColumn, base_column?: TreeViewColumn | null): void;
     remove_column(column: TreeViewColumn): number;
-    row_activated(path: TreePath, column: TreeViewColumn): void;
+    row_activated(path: TreePath, column?: TreeViewColumn | null): void;
     row_expanded(path: TreePath): boolean;
     scroll_to_cell(
         path: TreePath | null,
@@ -19727,7 +19904,7 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     vfunc_cursor_changed(): void;
     vfunc_expand_collapse_cursor_row(logical: boolean, expand: boolean, open_all: boolean): boolean;
     vfunc_move_cursor(step: MovementStep, count: number, extend: boolean, modify: boolean): boolean;
-    vfunc_row_activated(path: TreePath, column: TreeViewColumn): void;
+    vfunc_row_activated(path: TreePath, column?: TreeViewColumn | null): void;
     vfunc_row_collapsed(iter: TreeIter, path: TreePath): void;
     vfunc_row_expanded(iter: TreeIter, path: TreePath): void;
     vfunc_select_all(): boolean;
@@ -19748,7 +19925,7 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -19756,16 +19933,16 @@ export class TreeView extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
     vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -19879,8 +20056,8 @@ export class TreeViewColumn extends GObject.InitiallyUnowned implements Buildabl
     // Members
 
     add_attribute(cell_renderer: CellRenderer, attribute: string, column: number): void;
-    cell_get_position(cell_renderer: CellRenderer): [boolean, number | null, number | null];
-    cell_get_size(): [number | null, number | null, number | null, number | null];
+    cell_get_position(cell_renderer: CellRenderer): [boolean, number, number];
+    cell_get_size(): [number, number, number, number];
     cell_is_visible(): boolean;
     cell_set_cell_data(tree_model: TreeModel, iter: TreeIter, is_expander: boolean, is_expanded: boolean): void;
     clear(): void;
@@ -19932,7 +20109,7 @@ export class TreeViewColumn extends GObject.InitiallyUnowned implements Buildabl
 
     // Implemented Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -19940,7 +20117,7 @@ export class TreeViewColumn extends GObject.InitiallyUnowned implements Buildabl
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -20024,7 +20201,7 @@ export class Video extends Widget implements Accessible, Buildable, ConstraintTa
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -20032,7 +20209,7 @@ export class Video extends Widget implements Accessible, Buildable, ConstraintTa
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -20100,7 +20277,7 @@ export class Viewport extends Widget implements Accessible, Buildable, Constrain
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -20108,16 +20285,16 @@ export class Viewport extends Widget implements Accessible, Buildable, Constrain
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
     vfunc_set_buildable_property(builder: Builder, name: string, value: GObject.Value | any): void;
     vfunc_set_id(id: string): void;
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -20457,7 +20634,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     get_sensitive(): boolean;
     get_settings(): Settings;
     get_size(orientation: Orientation): number;
-    get_size_request(): [number | null, number | null];
+    get_size_request(): [number, number];
     get_state_flags(): StateFlags;
     get_style_context(): StyleContext;
     get_template_child<T = GObject.Object>(widget_type: GObject.GType, name: string): T;
@@ -20485,7 +20662,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     keynav_failed(direction: DirectionType): boolean;
     list_mnemonic_labels(): Widget[];
     map(): void;
-    measure(orientation: Orientation, for_size: number): [number | null, number | null, number | null, number | null];
+    measure(orientation: Orientation, for_size: number): [number, number, number, number];
     mnemonic_activate(group_cycling: boolean): boolean;
     observe_children(): Gio.ListModel;
     observe_controllers(): Gio.ListModel;
@@ -20537,7 +20714,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     show(): void;
     size_allocate(allocation: Allocation, baseline: number): void;
     snapshot_child(child: Widget, snapshot: Snapshot): void;
-    translate_coordinates(dest_widget: Widget, src_x: number, src_y: number): [boolean, number | null, number | null];
+    translate_coordinates(dest_widget: Widget, src_x: number, src_y: number): [boolean, number, number];
     trigger_tooltip_query(): void;
     unmap(): void;
     unparent(): void;
@@ -20553,10 +20730,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     vfunc_hide(): void;
     vfunc_keynav_failed(direction: DirectionType): boolean;
     vfunc_map(): void;
-    vfunc_measure(
-        orientation: Orientation,
-        for_size: number
-    ): [number | null, number | null, number | null, number | null];
+    vfunc_measure(orientation: Orientation, for_size: number): [number, number, number, number];
     vfunc_mnemonic_activate(group_cycling: boolean): boolean;
     vfunc_move_focus(direction: DirectionType): void;
     vfunc_query_tooltip(x: number, y: number, keyboard_tooltip: boolean, tooltip: Tooltip): boolean;
@@ -20573,6 +20747,24 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     vfunc_unroot(): void;
     static get_default_direction(): TextDirection;
     static set_default_direction(dir: TextDirection): void;
+    static add_shortcut(shortcut: Shortcut): void;
+    static bind_template_callback_full(callback_name: string, callback_symbol: GObject.Callback): void;
+    static bind_template_child_full(name: string, internal_child: boolean, struct_offset: number): void;
+    static get_accessible_role(): AccessibleRole;
+    static get_activate_signal(): number;
+    static get_css_name(): string;
+    static get_layout_manager_type(): GObject.GType;
+    static install_action(action_name: string, parameter_type: string | null, activate: WidgetActionActivateFunc): void;
+    static install_property_action(action_name: string, property_name: string): void;
+    static query_action(index_: number): [boolean, GObject.GType, string, GLib.VariantType | null, string];
+    static set_accessible_role(accessible_role: AccessibleRole): void;
+    static set_activate_signal(signal_id: number): void;
+    static set_activate_signal_from_name(signal_name: string): void;
+    static set_css_name(name: string): void;
+    static set_layout_manager_type(type: GObject.GType): void;
+    static set_template(template_bytes: GLib.Bytes | Uint8Array): void;
+    static set_template_from_resource(resource_name: string): void;
+    static set_template_scope(scope: BuilderScope): void;
 
     // Implemented Members
 
@@ -20583,7 +20775,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -20591,7 +20783,7 @@ export abstract class Widget extends GObject.InitiallyUnowned implements Accessi
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -20683,6 +20875,7 @@ export module Window {
         startup_id: string;
         startupId: string;
         title: string;
+        titlebar: Widget;
         transient_for: Window;
         transientFor: Window;
     }
@@ -20758,6 +20951,8 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     set startupId(val: string);
     get title(): string;
     set title(val: string);
+    get titlebar(): Widget;
+    set titlebar(val: Widget);
     get transient_for(): Window;
     set transient_for(val: Window);
     get transientFor(): Window;
@@ -20804,7 +20999,7 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     get_application(): Application | null;
     get_child(): Widget | null;
     get_decorated(): boolean;
-    get_default_size(): [number | null, number | null];
+    get_default_size(): [number, number];
     get_default_widget(): Widget | null;
     get_deletable(): boolean;
     get_destroy_with_parent(): boolean;
@@ -20871,7 +21066,7 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -20879,7 +21074,7 @@ export class Window extends Widget implements Accessible, Buildable, ConstraintT
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -20946,7 +21141,7 @@ export class WindowControls extends Widget implements Accessible, Buildable, Con
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -20954,7 +21149,7 @@ export class WindowControls extends Widget implements Accessible, Buildable, Con
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -20971,6 +21166,9 @@ export class WindowGroup extends GObject.Object {
 
     constructor(properties?: Partial<WindowGroup.ConstructorProperties>, ...args: any[]);
     _init(properties?: Partial<WindowGroup.ConstructorProperties>, ...args: any[]): void;
+
+    // Fields
+    priv: WindowGroupPrivate;
 
     // Constructors
 
@@ -21023,7 +21221,7 @@ export class WindowHandle extends Widget implements Accessible, Buildable, Const
     update_property(properties: AccessibleProperty[], values: GObject.Value[]): void;
     update_relation(relations: AccessibleRelation[], values: GObject.Value[]): void;
     update_state(states: AccessibleState[], values: GObject.Value[]): void;
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -21031,7 +21229,7 @@ export class WindowHandle extends Widget implements Accessible, Buildable, Const
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -21043,6 +21241,7 @@ export class Bitset {
     static $gtype: GObject.GType<Bitset>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Bitset);
 
     // Constructors
@@ -21087,11 +21286,11 @@ export class BitsetIter {
     // Members
     get_value(): number;
     is_valid(): boolean;
-    next(): [boolean, number | null];
-    previous(): [boolean, number | null];
-    static init_at(set: Bitset, target: number): [boolean, BitsetIter, number | null];
-    static init_first(set: Bitset): [boolean, BitsetIter, number | null];
-    static init_last(set: Bitset): [boolean, BitsetIter, number | null];
+    next(): [boolean, number];
+    previous(): [boolean, number];
+    static init_at(set: Bitset, target: number): [boolean, BitsetIter, number];
+    static init_first(set: Bitset): [boolean, BitsetIter, number];
+    static init_last(set: Bitset): [boolean, BitsetIter, number];
 }
 
 export class Border {
@@ -21130,7 +21329,7 @@ export class BuildableParseContext {
     // Members
     get_element(): string | null;
     get_element_stack(): string[];
-    get_position(): [number | null, number | null];
+    get_position(): [number, number];
     pop(): any | null;
     push(parser: BuildableParser, user_data?: any | null): void;
 }
@@ -21204,7 +21403,7 @@ export class CssSection {
 
     // Members
     get_end_location(): CssLocation;
-    get_file(): Gio.File;
+    get_file(): Gio.File | null;
     get_parent(): CssSection | null;
     get_start_location(): CssLocation;
     print(string: GLib.String): void;
@@ -21335,16 +21534,6 @@ export class PrintOperationPrivate {
 export class RecentData {
     static $gtype: GObject.GType<RecentData>;
 
-    constructor(
-        properties?: Partial<{
-            display_name?: string;
-            description?: string;
-            mime_type?: string;
-            app_name?: string;
-            app_exec?: string;
-            is_private?: boolean;
-        }>
-    );
     constructor(copy: RecentData);
 
     // Fields
@@ -21353,6 +21542,7 @@ export class RecentData {
     mime_type: string;
     app_name: string;
     app_exec: string;
+    groups: string[];
     is_private: boolean;
 }
 
@@ -21445,41 +21635,7 @@ export class TextBufferPrivate {
 export class TextIter {
     static $gtype: GObject.GType<TextIter>;
 
-    constructor(
-        properties?: Partial<{
-            dummy1?: any;
-            dummy2?: any;
-            dummy3?: number;
-            dummy4?: number;
-            dummy5?: number;
-            dummy6?: number;
-            dummy7?: number;
-            dummy8?: number;
-            dummy9?: any;
-            dummy10?: any;
-            dummy11?: number;
-            dummy12?: number;
-            dummy13?: number;
-            dummy14?: any;
-        }>
-    );
     constructor(copy: TextIter);
-
-    // Fields
-    dummy1: any;
-    dummy2: any;
-    dummy3: number;
-    dummy4: number;
-    dummy5: number;
-    dummy6: number;
-    dummy7: number;
-    dummy8: number;
-    dummy9: any;
-    dummy10: any;
-    dummy11: number;
-    dummy12: number;
-    dummy13: number;
-    dummy14: any;
 
     // Members
     assign(other: TextIter): void;
@@ -21545,14 +21701,14 @@ export class TextIter {
     get_bytes_in_line(): number;
     get_char(): number;
     get_chars_in_line(): number;
-    get_child_anchor(): TextChildAnchor;
+    get_child_anchor(): TextChildAnchor | null;
     get_language(): Pango.Language;
     get_line(): number;
     get_line_index(): number;
     get_line_offset(): number;
     get_marks(): TextMark[];
     get_offset(): number;
-    get_paintable(): Gdk.Paintable;
+    get_paintable(): Gdk.Paintable | null;
     get_slice(end: TextIter): string;
     get_tags(): TextTag[];
     get_text(end: TextIter): string;
@@ -21634,6 +21790,7 @@ export class TreePath {
     static $gtype: GObject.GType<TreePath>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: TreePath);
 
     // Constructors
@@ -21649,7 +21806,7 @@ export class TreePath {
     down(): void;
     free(): void;
     get_depth(): number;
-    get_indices(): number[];
+    get_indices(): number[] | null;
     is_ancestor(descendant: TreePath): boolean;
     is_descendant(ancestor: TreePath): boolean;
     next(): void;
@@ -21780,7 +21937,7 @@ export type Buildable = BuildablePrototype;
 export interface BuildablePrototype extends GObject.Object {
     // Members
 
-    get_buildable_id(): string;
+    get_buildable_id(): string | null;
     vfunc_add_child(builder: Builder, child: GObject.Object, type?: string | null): void;
     vfunc_custom_finished(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
     vfunc_custom_tag_end(builder: Builder, child: GObject.Object | null, tagname: string, data?: any | null): void;
@@ -21788,7 +21945,7 @@ export interface BuildablePrototype extends GObject.Object {
         builder: Builder,
         child: GObject.Object | null,
         tagname: string
-    ): [boolean, BuildableParser, any | null];
+    ): [boolean, BuildableParser, any];
     vfunc_get_id(): string;
     vfunc_get_internal_child<T = GObject.Object>(builder: Builder, childname: string): T;
     vfunc_parser_finished(builder: Builder): void;
@@ -21922,6 +22079,8 @@ export interface EditableNamespace {
         pspec: GObject.ParamSpec
     ): boolean;
     install_properties(object_class: GObject.Object, first_prop: number): number;
+    // Conflicted with GObject.Object.install_properties
+    install_properties(...args: never[]): any;
 }
 export type Editable = EditablePrototype;
 export interface EditablePrototype extends Widget {
@@ -21952,7 +22111,7 @@ export interface EditablePrototype extends Widget {
     get_enable_undo(): boolean;
     get_max_width_chars(): number;
     get_position(): number;
-    get_selection_bounds(): [boolean, number | null, number | null];
+    get_selection_bounds(): [boolean, number, number];
     get_text(): string;
     get_width_chars(): number;
     init_delegate(): void;
@@ -21970,7 +22129,7 @@ export interface EditablePrototype extends Widget {
     vfunc_do_delete_text(start_pos: number, end_pos: number): void;
     vfunc_do_insert_text(text: string, length: number, position: number): number;
     vfunc_get_delegate(): Editable | null;
-    vfunc_get_selection_bounds(): [boolean, number | null, number | null];
+    vfunc_get_selection_bounds(): [boolean, number, number];
     vfunc_get_text(): string;
     vfunc_insert_text(text: string, length: number, position: number): number;
     vfunc_set_selection_bounds(start_pos: number, end_pos: number): void;
@@ -22001,11 +22160,11 @@ export interface FileChooserPrototype extends GObject.Object {
     add_filter(filter: FileFilter): void;
     add_shortcut_folder(folder: Gio.File): boolean;
     get_action(): FileChooserAction;
-    get_choice(id: string): string;
+    get_choice(id: string): string | null;
     get_create_folders(): boolean;
-    get_current_folder(): Gio.File;
-    get_current_name(): string;
-    get_file(): Gio.File;
+    get_current_folder(): Gio.File | null;
+    get_current_name(): string | null;
+    get_file(): Gio.File | null;
     get_files(): Gio.ListModel;
     get_filter(): FileFilter | null;
     get_filters(): Gio.ListModel;
@@ -22017,7 +22176,7 @@ export interface FileChooserPrototype extends GObject.Object {
     set_action(action: FileChooserAction): void;
     set_choice(id: string, option: string): void;
     set_create_folders(create_folders: boolean): void;
-    set_current_folder(file: Gio.File): boolean;
+    set_current_folder(file?: Gio.File | null): boolean;
     set_current_name(name: string): void;
     set_file(file: Gio.File): boolean;
     set_filter(filter: FileFilter): void;
@@ -22081,7 +22240,7 @@ export interface NativeNamespace {
     $gtype: GObject.GType<Native>;
     prototype: NativePrototype;
 
-    get_for_surface(surface: Gdk.Surface): Native;
+    get_for_surface(surface: Gdk.Surface): Native | null;
 }
 export type Native = NativePrototype;
 export interface NativePrototype extends Widget {
@@ -22165,9 +22324,9 @@ export interface ScrollablePrototype extends GObject.Object {
     // Members
 
     get_border(): [boolean, Border];
-    get_hadjustment(): Adjustment;
+    get_hadjustment(): Adjustment | null;
     get_hscroll_policy(): ScrollablePolicy;
-    get_vadjustment(): Adjustment;
+    get_vadjustment(): Adjustment | null;
     get_vscroll_policy(): ScrollablePolicy;
     set_hadjustment(hadjustment?: Adjustment | null): void;
     set_hscroll_policy(policy: ScrollablePolicy): void;
@@ -22232,6 +22391,20 @@ export type StyleProvider = StyleProviderPrototype;
 export interface StyleProviderPrototype extends GObject.Object {}
 
 export const StyleProvider: StyleProviderNamespace;
+
+export interface SymbolicPaintableNamespace {
+    $gtype: GObject.GType<SymbolicPaintable>;
+    prototype: SymbolicPaintablePrototype;
+}
+export type SymbolicPaintable = SymbolicPaintablePrototype;
+export interface SymbolicPaintablePrototype extends Gdk.Paintable {
+    // Members
+
+    snapshot_symbolic(snapshot: Gdk.Snapshot, width: number, height: number, colors: Gdk.RGBA[]): void;
+    vfunc_snapshot_symbolic(snapshot: Gdk.Snapshot, width: number, height: number, colors: Gdk.RGBA[]): void;
+}
+
+export const SymbolicPaintable: SymbolicPaintableNamespace;
 
 export interface TreeDragDestNamespace {
     $gtype: GObject.GType<TreeDragDest>;

@@ -90,6 +90,7 @@ export class Box {
     static $gtype: GObject.GType<Box>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Box);
 
     // Constructors
@@ -131,10 +132,8 @@ export class Euler {
     static $gtype: GObject.GType<Euler>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Euler);
-
-    // Fields
-    order: EulerOrder;
 
     // Constructors
     static alloc(): Euler;
@@ -166,6 +165,7 @@ export class Frustum {
     static $gtype: GObject.GType<Frustum>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Frustum);
 
     // Constructors
@@ -187,6 +187,7 @@ export class Matrix {
     static $gtype: GObject.GType<Matrix>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Matrix);
 
     // Constructors
@@ -265,15 +266,8 @@ export class Plane {
     static $gtype: GObject.GType<Plane>;
 
     constructor();
-    constructor(
-        properties?: Partial<{
-            constant?: number;
-        }>
-    );
+    constructor(properties?: Partial<{}>);
     constructor(copy: Plane);
-
-    // Fields
-    constant: number;
 
     // Constructors
     static alloc(): Plane;
@@ -314,7 +308,7 @@ export class Point {
     static alloc(): Point;
 
     // Members
-    distance(b: Point): [number, number | null, number | null];
+    distance(b: Point): [number, number, number];
     equal(b: Point): boolean;
     free(): void;
     init(x: number, y: number): Point;
@@ -370,6 +364,7 @@ export class Quad {
     static $gtype: GObject.GType<Quad>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Quad);
 
     // Constructors
@@ -389,21 +384,8 @@ export class Quaternion {
     static $gtype: GObject.GType<Quaternion>;
 
     constructor();
-    constructor(
-        properties?: Partial<{
-            x?: number;
-            y?: number;
-            z?: number;
-            w?: number;
-        }>
-    );
+    constructor(properties?: Partial<{}>);
     constructor(copy: Quaternion);
-
-    // Fields
-    x: number;
-    y: number;
-    z: number;
-    w: number;
 
     // Constructors
     static alloc(): Quaternion;
@@ -428,9 +410,9 @@ export class Quaternion {
     scale(factor: number): Quaternion;
     slerp(b: Quaternion, factor: number): Quaternion;
     to_angle_vec3(): [number, Vec3];
-    to_angles(): [number | null, number | null, number | null];
+    to_angles(): [number, number, number];
     to_matrix(): Matrix;
-    to_radians(): [number | null, number | null, number | null];
+    to_radians(): [number, number, number];
     to_vec4(): Vec4;
 }
 
@@ -438,6 +420,7 @@ export class Ray {
     static $gtype: GObject.GType<Ray>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Ray);
 
     // Constructors
@@ -466,7 +449,17 @@ export class Ray {
 export class Rect {
     static $gtype: GObject.GType<Rect>;
 
+    constructor(
+        properties?: Partial<{
+            origin?: Point;
+            size?: Size;
+        }>
+    );
     constructor(copy: Rect);
+
+    // Fields
+    origin: Point;
+    size: Size;
 
     // Members
     contains_point(p: Point): boolean;
@@ -507,21 +500,7 @@ export class Rect {
 export class Simd4F {
     static $gtype: GObject.GType<Simd4F>;
 
-    constructor(
-        properties?: Partial<{
-            x?: number;
-            y?: number;
-            z?: number;
-            w?: number;
-        }>
-    );
     constructor(copy: Simd4F);
-
-    // Fields
-    x: number;
-    y: number;
-    z: number;
-    w: number;
 }
 
 export class Simd4X4F {
@@ -563,15 +542,8 @@ export class Sphere {
     static $gtype: GObject.GType<Sphere>;
 
     constructor();
-    constructor(
-        properties?: Partial<{
-            radius?: number;
-        }>
-    );
+    constructor(properties?: Partial<{}>);
     constructor(copy: Sphere);
-
-    // Fields
-    radius: number;
 
     // Constructors
     static alloc(): Sphere;
@@ -595,6 +567,7 @@ export class Triangle {
     static $gtype: GObject.GType<Triangle>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Triangle);
 
     // Constructors
@@ -622,6 +595,7 @@ export class Vec2 {
     static $gtype: GObject.GType<Vec2>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Vec2);
 
     // Constructors
@@ -659,6 +633,7 @@ export class Vec3 {
     static $gtype: GObject.GType<Vec3>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Vec3);
 
     // Constructors
@@ -704,6 +679,7 @@ export class Vec4 {
     static $gtype: GObject.GType<Vec4>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Vec4);
 
     // Constructors

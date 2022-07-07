@@ -13,6 +13,10 @@ import * as Pango from "@gi-types/pango1";
 
 export function serialization_error_quark(): GLib.Quark;
 export function transform_parse(string: string): [boolean, Transform];
+export function value_dup_render_node(value: GObject.Value | any): RenderNode | null;
+export function value_get_render_node(value: GObject.Value | any): RenderNode | null;
+export function value_set_render_node(value: GObject.Value | any, node: RenderNode): void;
+export function value_take_render_node(value: GObject.Value | any, node?: RenderNode | null): void;
 export type ParseErrorFunc = (start: ParseLocation, end: ParseLocation, error: GLib.Error) => void;
 
 export namespace BlendMode {
@@ -447,7 +451,7 @@ export class GLShader extends GObject.Object {
     get_args_size(): number;
     get_n_textures(): number;
     get_n_uniforms(): number;
-    get_resource(): string;
+    get_resource(): string | null;
     get_source(): GLib.Bytes;
     get_uniform_name(idx: number): string;
     get_uniform_offset(idx: number): number;
@@ -470,7 +474,7 @@ export class GLShaderNode extends RenderNode {
         shader: GLShader,
         bounds: Graphene.Rect,
         args: GLib.Bytes | Uint8Array,
-        children: RenderNode[]
+        children?: RenderNode[] | null
     ): GLShaderNode;
 
     // Members
@@ -684,7 +688,7 @@ export abstract class Renderer extends GObject.Object {
 
     get_surface(): Gdk.Surface | null;
     is_realized(): boolean;
-    realize(surface: Gdk.Surface): boolean;
+    realize(surface?: Gdk.Surface | null): boolean;
     render(root: RenderNode, region?: cairo.Region | null): void;
     render_texture(root: RenderNode, viewport?: Graphene.Rect | null): Gdk.Texture;
     unrealize(): void;
@@ -856,21 +860,6 @@ export class TransformNode extends RenderNode {
     get_child(): RenderNode;
     get_transform(): Transform;
 }
-export module VulkanRenderer {
-    export interface ConstructorProperties extends Renderer.ConstructorProperties {
-        [key: string]: any;
-    }
-}
-export class VulkanRenderer extends Renderer {
-    static $gtype: GObject.GType<VulkanRenderer>;
-
-    constructor(properties?: Partial<VulkanRenderer.ConstructorProperties>, ...args: any[]);
-    _init(properties?: Partial<VulkanRenderer.ConstructorProperties>, ...args: any[]): void;
-
-    // Constructors
-
-    static ["new"](): VulkanRenderer;
-}
 
 export class ColorStop {
     static $gtype: GObject.GType<ColorStop>;
@@ -878,12 +867,14 @@ export class ColorStop {
     constructor(
         properties?: Partial<{
             offset?: number;
+            color?: Gdk.RGBA;
         }>
     );
     constructor(copy: ColorStop);
 
     // Fields
     offset: number;
+    color: Gdk.RGBA;
 }
 
 export class ParseLocation {
@@ -912,6 +903,10 @@ export class RoundedRect {
     static $gtype: GObject.GType<RoundedRect>;
 
     constructor(copy: RoundedRect);
+
+    // Fields
+    bounds: Graphene.Rect;
+    corner: Graphene.Size[];
 
     // Members
     contains_point(point: Graphene.Point): boolean;
@@ -959,6 +954,7 @@ export class Shadow {
 
     constructor(
         properties?: Partial<{
+            color?: Gdk.RGBA;
             dx?: number;
             dy?: number;
             radius?: number;
@@ -967,6 +963,7 @@ export class Shadow {
     constructor(copy: Shadow);
 
     // Fields
+    color: Gdk.RGBA;
     dx: number;
     dy: number;
     radius: number;
@@ -976,6 +973,7 @@ export class Transform {
     static $gtype: GObject.GType<Transform>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: Transform);
 
     // Constructors
@@ -988,21 +986,23 @@ export class Transform {
     matrix(matrix: Graphene.Matrix): Transform;
     perspective(depth: number): Transform;
     print(string: GLib.String): void;
-    ref(): Transform;
-    rotate(angle: number): Transform;
-    rotate_3d(angle: number, axis: Graphene.Vec3): Transform;
-    scale(factor_x: number, factor_y: number): Transform;
-    scale_3d(factor_x: number, factor_y: number, factor_z: number): Transform;
+    ref(): Transform | null;
+    rotate(angle: number): Transform | null;
+    rotate_3d(angle: number, axis: Graphene.Vec3): Transform | null;
+    scale(factor_x: number, factor_y: number): Transform | null;
+    scale_3d(factor_x: number, factor_y: number, factor_z: number): Transform | null;
+    skew(skew_x: number, skew_y: number): Transform | null;
     to_2d(): [number, number, number, number, number, number];
+    to_2d_components(): [number, number, number, number, number, number, number];
     to_affine(): [number, number, number, number];
     to_matrix(): Graphene.Matrix;
     to_string(): string;
     to_translate(): [number, number];
-    transform(other?: Transform | null): Transform;
+    transform(other?: Transform | null): Transform | null;
     transform_bounds(rect: Graphene.Rect): Graphene.Rect;
     transform_point(point: Graphene.Point): Graphene.Point;
-    translate(point: Graphene.Point): Transform;
-    translate_3d(point: Graphene.Point3D): Transform;
+    translate(point: Graphene.Point): Transform | null;
+    translate_3d(point: Graphene.Point3D): Transform | null;
     unref(): void;
     static parse(string: string): [boolean, Transform];
 }

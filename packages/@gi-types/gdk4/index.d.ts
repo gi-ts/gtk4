@@ -2325,7 +2325,7 @@ export function content_deserialize_async(
     type: GObject.GType,
     io_priority: number,
     cancellable?: Gio.Cancellable | null
-): Promise<boolean>;
+): Promise<[GObject.Value]>;
 export function content_deserialize_async(
     stream: Gio.InputStream,
     mime_type: string,
@@ -2341,8 +2341,9 @@ export function content_deserialize_async(
     io_priority: number,
     cancellable?: Gio.Cancellable | null,
     callback?: Gio.AsyncReadyCallback<Gio.InputStream> | null
-): Promise<boolean> | void;
-export function content_deserialize_finish(result: Gio.AsyncResult, value: GObject.Value | any): boolean;
+): Promise<[GObject.Value]> | void;
+export function content_deserialize_finish(result: Gio.AsyncResult): [boolean, unknown];
+export function content_formats_parse(string: string): ContentFormats | null;
 export function content_register_deserializer(
     mime_type: string,
     type: GObject.GType,
@@ -2382,7 +2383,7 @@ export function events_get_angle(event1: Event, event2: Event): [boolean, number
 export function events_get_center(event1: Event, event2: Event): [boolean, number, number];
 export function events_get_distance(event1: Event, event2: Event): [boolean, number];
 export function gl_error_quark(): GLib.Quark;
-export function intern_mime_type(string: string): string;
+export function intern_mime_type(string: string): string | null;
 export function keyval_convert_case(symbol: number): [number, number];
 export function keyval_from_name(keyval_name: string): number;
 export function keyval_is_lower(keyval: number): boolean;
@@ -2401,12 +2402,12 @@ export function pixbuf_get_from_surface(
 ): GdkPixbuf.Pixbuf | null;
 export function pixbuf_get_from_texture(texture: Texture): GdkPixbuf.Pixbuf | null;
 export function set_allowed_backends(backends: string): void;
+export function texture_error_quark(): GLib.Quark;
 export function toplevel_size_get_type(): GObject.GType;
 export function unicode_to_keyval(wc: number): number;
 export function vulkan_error_quark(): GLib.Quark;
 export type ContentDeserializeFunc = (deserializer: ContentDeserializer) => void;
 export type ContentSerializeFunc = (serializer: ContentSerializer) => void;
-export type FileList = object | null;
 
 export namespace AxisUse {
     export const $gtype: GObject.GType<AxisUse>;
@@ -2512,7 +2513,8 @@ export enum EventType {
     PAD_RING = 25,
     PAD_STRIP = 26,
     PAD_GROUP_MODE = 27,
-    EVENT_LAST = 28,
+    TOUCHPAD_HOLD = 28,
+    EVENT_LAST = 29,
 }
 
 export namespace FullscreenMode {
@@ -2596,7 +2598,16 @@ export enum MemoryFormat {
     A8B8G8R8 = 6,
     R8G8B8 = 7,
     B8G8R8 = 8,
-    N_FORMATS = 9,
+    R16G16B16 = 9,
+    R16G16B16A16_PREMULTIPLIED = 10,
+    R16G16B16A16 = 11,
+    R16G16B16_FLOAT = 12,
+    R16G16B16A16_FLOAT_PREMULTIPLIED = 13,
+    R16G16B16A16_FLOAT = 14,
+    R32G32B32_FLOAT = 15,
+    R32G32B32A32_FLOAT_PREMULTIPLIED = 16,
+    R32G32B32A32_FLOAT = 17,
+    N_FORMATS = 18,
 }
 
 export namespace NotifyType {
@@ -2650,6 +2661,32 @@ export enum SurfaceEdge {
     SOUTH_WEST = 5,
     SOUTH = 6,
     SOUTH_EAST = 7,
+}
+
+export class TextureError extends GLib.Error {
+    static $gtype: GObject.GType<TextureError>;
+
+    constructor(options: { message: string; code: number });
+    constructor(copy: TextureError);
+
+    // Fields
+    static TOO_LARGE: number;
+    static CORRUPT_IMAGE: number;
+    static UNSUPPORTED_CONTENT: number;
+    static UNSUPPORTED_FORMAT: number;
+
+    // Members
+    static quark(): GLib.Quark;
+}
+
+export namespace TitlebarGesture {
+    export const $gtype: GObject.GType<TitlebarGesture>;
+}
+
+export enum TitlebarGesture {
+    DOUBLE_CLICK = 1,
+    RIGHT_CLICK = 2,
+    MIDDLE_CLICK = 3,
 }
 
 export namespace TouchpadGesturePhase {
@@ -2735,6 +2772,15 @@ export enum FrameClockPhase {
     PAINT = 16,
     RESUME_EVENTS = 32,
     AFTER_PAINT = 64,
+}
+
+export namespace GLAPI {
+    export const $gtype: GObject.GType<GLAPI>;
+}
+
+export enum GLAPI {
+    GL = 1,
+    GLES = 2,
 }
 
 export namespace ModifierType {
@@ -2894,23 +2940,23 @@ export class Clipboard extends GObject.Object {
     get_formats(): ContentFormats;
     is_local(): boolean;
     read_async(
-        mime_types: string,
+        mime_types: string[],
         io_priority: number,
         cancellable?: Gio.Cancellable | null
-    ): Promise<[Gio.InputStream | null, string | null]>;
+    ): Promise<[Gio.InputStream | null, string]>;
     read_async(
-        mime_types: string,
+        mime_types: string[],
         io_priority: number,
         cancellable: Gio.Cancellable | null,
         callback: Gio.AsyncReadyCallback<this> | null
     ): void;
     read_async(
-        mime_types: string,
+        mime_types: string[],
         io_priority: number,
         cancellable?: Gio.Cancellable | null,
         callback?: Gio.AsyncReadyCallback<this> | null
-    ): Promise<[Gio.InputStream | null, string | null]> | void;
-    read_finish(result: Gio.AsyncResult): [Gio.InputStream | null, string | null];
+    ): Promise<[Gio.InputStream | null, string]> | void;
+    read_finish(result: Gio.AsyncResult): [Gio.InputStream | null, string];
     read_text_async(cancellable?: Gio.Cancellable | null): Promise<string | null>;
     read_text_async(cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback<this> | null): void;
     read_text_async(
@@ -2973,7 +3019,7 @@ export class ContentDeserializer extends GObject.Object implements Gio.AsyncResu
 
     // Members
 
-    get_cancellable(): Gio.Cancellable;
+    get_cancellable(): Gio.Cancellable | null;
     get_gtype(): GObject.GType;
     get_input_stream(): Gio.InputStream;
     get_mime_type(): string;
@@ -3031,7 +3077,7 @@ export class ContentProvider extends GObject.Object {
     // Members
 
     content_changed(): void;
-    get_value(value: GObject.Value | any): boolean;
+    get_value(): [boolean, unknown];
     ref_formats(): ContentFormats;
     ref_storable_formats(): ContentFormats;
     write_mime_type_async(
@@ -3058,7 +3104,7 @@ export class ContentProvider extends GObject.Object {
     vfunc_attach_clipboard(clipboard: Clipboard): void;
     vfunc_content_changed(): void;
     vfunc_detach_clipboard(clipboard: Clipboard): void;
-    vfunc_get_value(value: GObject.Value | any): boolean;
+    vfunc_get_value(): [boolean, unknown];
     vfunc_ref_formats(): ContentFormats;
     vfunc_ref_storable_formats(): ContentFormats;
     vfunc_write_mime_type_async(
@@ -3096,7 +3142,7 @@ export class ContentSerializer extends GObject.Object implements Gio.AsyncResult
 
     // Members
 
-    get_cancellable(): Gio.Cancellable;
+    get_cancellable(): Gio.Cancellable | null;
     get_gtype(): GObject.GType;
     get_mime_type(): string;
     get_output_stream(): Gio.OutputStream;
@@ -3281,7 +3327,7 @@ export abstract class Device extends GObject.Object {
     // Members
 
     get_caps_lock_state(): boolean;
-    get_device_tool(): DeviceTool;
+    get_device_tool(): DeviceTool | null;
     get_direction(): Pango.Direction;
     get_display(): Display;
     get_has_cursor(): boolean;
@@ -3293,7 +3339,7 @@ export abstract class Device extends GObject.Object {
     get_scroll_lock_state(): boolean;
     get_seat(): Seat;
     get_source(): InputSource;
-    get_surface_at_position(): [Surface | null, number | null, number | null];
+    get_surface_at_position(): [Surface | null, number, number];
     get_timestamp(): number;
     get_vendor_id(): string | null;
 }
@@ -3375,6 +3421,7 @@ export class Display extends GObject.Object {
 
     beep(): void;
     close(): void;
+    create_gl_context(): GLContext;
     device_is_grabbed(device: Device): boolean;
     flush(): void;
     get_app_launch_context(): AppLaunchContext;
@@ -3393,6 +3440,7 @@ export class Display extends GObject.Object {
     map_keycode(keycode: number): [boolean, KeymapKey[] | null, number[] | null];
     map_keyval(keyval: number): [boolean, KeymapKey[]];
     notify_startup_complete(startup_id: string): void;
+    prepare_gl(): boolean;
     put_event(event: Event): void;
     supports_input_shapes(): boolean;
     sync(): void;
@@ -3400,7 +3448,7 @@ export class Display extends GObject.Object {
         keycode: number,
         state: ModifierType,
         group: number
-    ): [boolean, number | null, number | null, number | null, ModifierType | null];
+    ): [boolean, number, number, number, ModifierType | null];
     static get_default(): Display | null;
     static open(display_name: string): Display | null;
 }
@@ -3634,7 +3682,7 @@ export abstract class Event {
     get_pointer_emulated(): boolean;
     get_position(): [boolean, number, number];
     get_seat(): Seat | null;
-    get_surface(): Surface;
+    get_surface(): Surface | null;
     get_time(): number;
     ref(): Event;
     triggers_context_menu(): boolean;
@@ -3702,13 +3750,16 @@ export abstract class FrameClock extends GObject.Object {
     get_frame_counter(): number;
     get_frame_time(): number;
     get_history_start(): number;
-    get_refresh_info(base_time: number): [number | null, number];
+    get_refresh_info(base_time: number): [number, number];
     get_timings(frame_counter: number): FrameTimings | null;
     request_phase(phase: FrameClockPhase): void;
 }
 export module GLContext {
     export interface ConstructorProperties extends DrawContext.ConstructorProperties {
         [key: string]: any;
+        allowed_apis: GLAPI;
+        allowedApis: GLAPI;
+        api: GLAPI;
         shared_context: GLContext;
         sharedContext: GLContext;
     }
@@ -3720,22 +3771,31 @@ export abstract class GLContext extends DrawContext {
     _init(properties?: Partial<GLContext.ConstructorProperties>, ...args: any[]): void;
 
     // Properties
+    get allowed_apis(): GLAPI;
+    set allowed_apis(val: GLAPI);
+    get allowedApis(): GLAPI;
+    set allowedApis(val: GLAPI);
+    get api(): GLAPI;
     get shared_context(): GLContext;
     get sharedContext(): GLContext;
 
     // Members
 
+    get_allowed_apis(): GLAPI;
+    get_api(): GLAPI;
     get_debug_enabled(): boolean;
     get_display(): Display | null;
     get_forward_compatible(): boolean;
-    get_required_version(): [number | null, number | null];
+    get_required_version(): [number, number];
     get_shared_context(): GLContext | null;
     get_surface(): Surface | null;
     get_use_es(): boolean;
     get_version(): [number, number];
     is_legacy(): boolean;
+    is_shared(other: GLContext): boolean;
     make_current(): void;
     realize(): boolean;
+    set_allowed_apis(apis: GLAPI): void;
     set_debug_enabled(enabled: boolean): void;
     set_forward_compatible(compatible: boolean): void;
     set_required_version(major: number, minor: number): void;
@@ -3748,7 +3808,7 @@ export module GLTexture {
         [key: string]: any;
     }
 }
-export class GLTexture extends Texture implements Paintable {
+export class GLTexture extends Texture implements Paintable, Gio.Icon, Gio.LoadableIcon {
     static $gtype: GObject.GType<GLTexture>;
 
     constructor(properties?: Partial<GLTexture.ConstructorProperties>, ...args: any[]);
@@ -3784,6 +3844,34 @@ export class GLTexture extends Texture implements Paintable {
     vfunc_get_intrinsic_height(): number;
     vfunc_get_intrinsic_width(): number;
     vfunc_snapshot(snapshot: Snapshot, width: number, height: number): void;
+    equal(icon2?: Gio.Icon | null): boolean;
+    serialize(): GLib.Variant | null;
+    to_string(): string | null;
+    vfunc_equal(icon2?: Gio.Icon | null): boolean;
+    vfunc_hash(): number;
+    vfunc_serialize(): GLib.Variant | null;
+    load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
+    load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback<this> | null): void;
+    load_async(
+        size: number,
+        cancellable?: Gio.Cancellable | null,
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Gio.InputStream, string]> | void;
+    load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
+    vfunc_load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    vfunc_load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
+    vfunc_load_async(
+        size: number,
+        cancellable: Gio.Cancellable | null,
+        callback: Gio.AsyncReadyCallback<this> | null
+    ): void;
+    vfunc_load_async(
+        size: number,
+        cancellable?: Gio.Cancellable | null,
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Gio.InputStream, string]> | void;
+    vfunc_load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
 }
 export module GrabBrokenEvent {
     export interface ConstructorProperties extends Event.ConstructorProperties {
@@ -3828,7 +3916,7 @@ export module MemoryTexture {
         [key: string]: any;
     }
 }
-export class MemoryTexture extends Texture implements Paintable {
+export class MemoryTexture extends Texture implements Paintable, Gio.Icon, Gio.LoadableIcon {
     static $gtype: GObject.GType<MemoryTexture>;
 
     constructor(properties?: Partial<MemoryTexture.ConstructorProperties>, ...args: any[]);
@@ -3866,6 +3954,34 @@ export class MemoryTexture extends Texture implements Paintable {
     vfunc_get_intrinsic_height(): number;
     vfunc_get_intrinsic_width(): number;
     vfunc_snapshot(snapshot: Snapshot, width: number, height: number): void;
+    equal(icon2?: Gio.Icon | null): boolean;
+    serialize(): GLib.Variant | null;
+    to_string(): string | null;
+    vfunc_equal(icon2?: Gio.Icon | null): boolean;
+    vfunc_hash(): number;
+    vfunc_serialize(): GLib.Variant | null;
+    load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
+    load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback<this> | null): void;
+    load_async(
+        size: number,
+        cancellable?: Gio.Cancellable | null,
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Gio.InputStream, string]> | void;
+    load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
+    vfunc_load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    vfunc_load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
+    vfunc_load_async(
+        size: number,
+        cancellable: Gio.Cancellable | null,
+        callback: Gio.AsyncReadyCallback<this> | null
+    ): void;
+    vfunc_load_async(
+        size: number,
+        cancellable?: Gio.Cancellable | null,
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Gio.InputStream, string]> | void;
+    vfunc_load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
 }
 export module Monitor {
     export interface ConstructorProperties extends GObject.Object.ConstructorProperties {
@@ -4112,7 +4228,7 @@ export abstract class Surface extends GObject.Object {
     destroy(): void;
     get_cursor(): Cursor | null;
     get_device_cursor(device: Device): Cursor | null;
-    get_device_position(device: Device): [boolean, number | null, number | null, ModifierType | null];
+    get_device_position(device: Device): [boolean, number, number, ModifierType | null];
     get_display(): Display;
     get_frame_clock(): FrameClock;
     get_height(): number;
@@ -4136,7 +4252,7 @@ export module Texture {
         width: number;
     }
 }
-export abstract class Texture extends GObject.Object implements Paintable {
+export abstract class Texture extends GObject.Object implements Paintable, Gio.Icon, Gio.LoadableIcon {
     static $gtype: GObject.GType<Texture>;
 
     constructor(properties?: Partial<Texture.ConstructorProperties>, ...args: any[]);
@@ -4149,7 +4265,9 @@ export abstract class Texture extends GObject.Object implements Paintable {
     // Constructors
 
     static new_for_pixbuf(pixbuf: GdkPixbuf.Pixbuf): Texture;
+    static new_from_bytes(bytes: GLib.Bytes | Uint8Array): Texture;
     static new_from_file(file: Gio.File): Texture;
+    static new_from_filename(path: string): Texture;
     static new_from_resource(resource_path: string): Texture;
 
     // Members
@@ -4158,6 +4276,9 @@ export abstract class Texture extends GObject.Object implements Paintable {
     get_height(): number;
     get_width(): number;
     save_to_png(filename: string): boolean;
+    save_to_png_bytes(): GLib.Bytes;
+    save_to_tiff(filename: string): boolean;
+    save_to_tiff_bytes(): GLib.Bytes;
 
     // Implemented Members
 
@@ -4181,6 +4302,34 @@ export abstract class Texture extends GObject.Object implements Paintable {
     vfunc_get_intrinsic_height(): number;
     vfunc_get_intrinsic_width(): number;
     vfunc_snapshot(snapshot: Snapshot, width: number, height: number): void;
+    equal(icon2?: Gio.Icon | null): boolean;
+    serialize(): GLib.Variant | null;
+    to_string(): string | null;
+    vfunc_equal(icon2?: Gio.Icon | null): boolean;
+    vfunc_hash(): number;
+    vfunc_serialize(): GLib.Variant | null;
+    load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
+    load_async(size: number, cancellable: Gio.Cancellable | null, callback: Gio.AsyncReadyCallback<this> | null): void;
+    load_async(
+        size: number,
+        cancellable?: Gio.Cancellable | null,
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Gio.InputStream, string]> | void;
+    load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
+    vfunc_load(size: number, cancellable?: Gio.Cancellable | null): [Gio.InputStream, string];
+    vfunc_load_async(size: number, cancellable?: Gio.Cancellable | null): Promise<[Gio.InputStream, string]>;
+    vfunc_load_async(
+        size: number,
+        cancellable: Gio.Cancellable | null,
+        callback: Gio.AsyncReadyCallback<this> | null
+    ): void;
+    vfunc_load_async(
+        size: number,
+        cancellable?: Gio.Cancellable | null,
+        callback?: Gio.AsyncReadyCallback<this> | null
+    ): Promise<[Gio.InputStream, string]> | void;
+    vfunc_load_finish(res: Gio.AsyncResult): [Gio.InputStream, string];
 }
 export module TouchEvent {
     export interface ConstructorProperties extends Event.ConstructorProperties {
@@ -4269,12 +4418,14 @@ export class ContentFormats {
     union_serialize_gtypes(): ContentFormats;
     union_serialize_mime_types(): ContentFormats;
     unref(): void;
+    static parse(string: string): ContentFormats | null;
 }
 
 export class ContentFormatsBuilder {
     static $gtype: GObject.GType<ContentFormatsBuilder>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: ContentFormatsBuilder);
 
     // Constructors
@@ -4293,6 +4444,15 @@ export class EventSequence {
     static $gtype: GObject.GType<EventSequence>;
 
     constructor(copy: EventSequence);
+}
+
+export class FileList {
+    static $gtype: GObject.GType<FileList>;
+
+    constructor(copy: FileList);
+
+    // Members
+    get_files(): Gio.File[];
 }
 
 export class FrameClockPrivate {
@@ -4427,12 +4587,14 @@ export class TimeCoord {
     // Fields
     time: number;
     flags: AxisFlags;
+    axes: number[];
 }
 
 export class ToplevelLayout {
     static $gtype: GObject.GType<ToplevelLayout>;
 
     constructor();
+    constructor(properties?: Partial<{}>);
     constructor(copy: ToplevelLayout);
 
     // Constructors
@@ -4539,7 +4701,7 @@ export interface PopupPrototype extends Surface {
     // Members
 
     get_autohide(): boolean;
-    get_parent(): Surface;
+    get_parent(): Surface | null;
     get_position_x(): number;
     get_position_y(): number;
     get_rect_anchor(): Gravity;
@@ -4599,6 +4761,7 @@ export interface ToplevelPrototype extends Surface {
     set_transient_for(parent: Surface): void;
     show_window_menu(event: Event): boolean;
     supports_edge_constraints(): boolean;
+    titlebar_gesture(gesture: TitlebarGesture): boolean;
 }
 
 export const Toplevel: ToplevelNamespace;

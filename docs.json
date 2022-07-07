@@ -11,6 +11,9 @@
         "promisify": true
     },
     "libraries": {
+        "Adw": [
+            "1"
+        ],
         "Gdk": [
             "4.0"
         ],
