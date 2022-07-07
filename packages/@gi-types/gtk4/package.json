@@ -4,7 +4,7 @@
         "access": "public",
         "tag": "latest"
     },
-    "version": "4.6.0",
+    "version": "4.6.1",
     "description": "TypeScript definitions for Gtk",
     "license": "MIT",
     "contributors": [
@@ -31,13 +31,13 @@
     "scripts": {},
     "dependencies": {
         "@gi-types/cairo1": "^1.0.0",
-        "@gi-types/gdk4": "^4.0.0",
+        "@gi-types/gdk4": "^4.0.1",
         "@gi-types/gdkpixbuf2": "^2.0.0",
         "@gi-types/gio2": "^2.68.0",
         "@gi-types/glib2": "^2.68.0",
         "@gi-types/gobject2": "^2.68.0",
-        "@gi-types/graphene1": "^1.0.0",
-        "@gi-types/gsk4": "^4.0.0",
+        "@gi-types/graphene1": "^1.0.1",
+        "@gi-types/gsk4": "^4.0.1",
         "@gi-types/pango1": "^1.50.1"
     },
     "typeScriptVersion": "4.1",
